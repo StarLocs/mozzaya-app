@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>MoZZaya Elite</title>
+    <title>MoZZaya Premium</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -11,74 +11,106 @@
         
         <div id="screen-home" class="screen active">
             <header>
-                <h1>MoZZaya ✨</h1>
-                <p class="subtitle">Ваше личное пространство</p>
+                <h1 class="glow-text">MoZZaya</h1>
+                <p class="subtitle">Ваша связь сквозь время</p>
             </header>
-            <div class="glass-card menu-btn" onclick="showScreen('screen-dmb')">
-                <span class="btn-text">🪖 Армейский Штаб</span>
-                <span class="arrow">→</span>
-            </div>
-            <div class="glass-card menu-btn" onclick="showScreen('screen-wish')">
-                <span class="btn-text">🎁 Корзина счастья</span>
-                <span class="arrow">→</span>
+
+            <div class="main-menu">
+                <div class="glass-card menu-btn" onclick="showScreen('screen-dmb')">
+                    <div class="btn-info">
+                        <span class="icon">🎖</span>
+                        <div>
+                            <span class="title">Армейский хаб</span>
+                            <span class="desc">Статус, таймеры, распорядок</span>
+                        </div>
+                    </div>
+                    <span class="arrow">→</span>
+                </div>
+
+                <div class="glass-card menu-btn" onclick="showScreen('screen-wish')">
+                    <div class="btn-info">
+                        <span class="icon">🎁</span>
+                        <div>
+                            <span class="title">Корзина счастья</span>
+                            <span class="desc">Твои желания для него</span>
+                        </div>
+                    </div>
+                    <span class="arrow">→</span>
+                </div>
             </div>
         </div>
 
         <div id="screen-dmb" class="screen">
-            <button class="back-btn" onclick="showScreen('screen-home')">← Назад</button>
+            <div class="header-row">
+                <button class="back-btn" onclick="showScreen('screen-home')">←</button>
+                <h2>ШТАБ СЛУЖБЫ</h2>
+                <button class="settings-btn" onclick="resetDMB()">⚙</button>
+            </div>
             
             <div id="dmb-settings" class="glass-card">
-                <h3>Настройка службы</h3>
-                <input type="date" id="dmb-start-input">
-                <input type="date" id="dmb-end-input">
-                <button class="primary-btn" onclick="saveDMB()">Начать отсчет</button>
+                <h3>УСТАНОВКА ДАННЫХ</h3>
+                <div class="input-block">
+                    <label>Дата призыва</label>
+                    <input type="date" id="dmb-start-input">
+                </div>
+                <div class="input-block">
+                    <label>Дата дембеля</label>
+                    <input type="date" id="dmb-end-input">
+                </div>
+                <div class="input-block">
+                    <label>Род войск</label>
+                    <select id="branch-select">
+                        <option value="vdv">ВДВ (Воздушно-десантные)</option>
+                        <option value="vks">ВКС (Воздушно-космические)</option>
+                        <option value="navy">ВМФ (Флот)</option>
+                        <option value="ground">Сухопутные войска</option>
+                    </select>
+                </div>
+                <button class="action-btn" onclick="saveDMB()">ЗАКРЕПИТЬ ПРИКАЗОМ</button>
             </div>
 
-            <div id="dmb-display" style="display: none; width: 100%;">
-                <div class="glass-card status-box">
-                    <div class="status-top">
-                        <span id="rank-text">ЗАПАХ</span>
-                        <div class="live-dot"></div>
+            <div id="dmb-display" class="hidden">
+                <div class="glass-card status-card">
+                    <div class="status-header">
+                        <span id="rank-name">РЯДОВОЙ</span>
+                        <span id="activity-tag">СЛУЖИТ...</span>
                     </div>
-                    <div id="current-activity">Загрузка распорядка...</div>
-                </div>
-
-                <div class="glass-card">
-                    <div id="countdown">
-                        <span id="d-big">0</span><small>д</small>
-                        <span id="h-big">00</span><small>ч</small>
-                        <span id="m-big">00</span><small>м</small>
-                        <span id="s-big" class="neon-s">00</span>
-                    </div>
-                    <div class="progress-wrap"><div id="bar-fill"></div></div>
-                    <div id="perc-val">0.000000%</div>
-                </div>
-
-                <div class="stats-grid">
-                    <div class="glass-card mini-card">
-                        <small>ЭКВАТОР</small>
-                        <span id="eq-val">0</span>
-                    </div>
-                    <div class="glass-card mini-card">
-                        <small>ПРИКАЗ</small>
-                        <span id="ord-val">0</span>
+                    <div class="current-activity">
+                        <p id="activity-desc">Загрузка распорядка дня...</p>
+                        <div class="pulse-icon"></div>
                     </div>
                 </div>
 
-                <button class="sync-btn" onclick="syncData()">💾 Синхронизировать</button>
-                <p class="reset-link" onclick="resetDMB()">сбросить даты</p>
-            </div>
-        </div>
-
-        <div id="screen-wish" class="screen">
-            <button class="back-btn" onclick="showScreen('screen-home')">← Назад</button>
-            <div class="glass-card">
-                <h2>🎁 Корзина счастья</h2>
-                <div class="wish-row">
-                    <input type="text" id="wish-input" placeholder="Чего бы хотелось?">
-                    <button class="add-btn" onclick="addWish()">+</button>
+                <div class="glass-card main-timer">
+                    <div class="timer-grid">
+                        <div class="t-item"><span id="d-val">0</span><small>дн</small></div>
+                        <div class="t-item"><span id="h-val">00</span><small>час</small></div>
+                        <div class="t-item"><span id="m-val">00</span><small>мин</small></div>
+                        <div class="t-item neon-s"><span id="s-val">00</span><small>сек</small></div>
+                    </div>
+                    <div class="progress-box">
+                        <div class="bar-bg"><div id="bar-fill" class="bar-fill"></div></div>
+                        <span id="perc-val">0.0000%</span>
+                    </div>
                 </div>
-                <div id="wish-list"></div>
+
+                <div class="milestones-scroll">
+                    <div class="m-card">
+                        <span class="m-title">ЭКВАТОР</span>
+                        <span id="eq-days" class="m-days">--</span>
+                        <span class="m-sub">дней до</span>
+                    </div>
+                    <div class="m-card">
+                        <span class="m-title">ПРИКАЗ</span>
+                        <span id="ord-days" class="m-days">--</span>
+                        <span class="m-sub">дней до</span>
+                    </div>
+                    <div class="m-card highlight">
+                        <span class="m-title">БАНЯ</span>
+                        <span id="bath-days" class="m-days">--</span>
+                        <span class="m-sub">дней осталось</span>
+                    </div>
+                </div>
             </div>
         </div>
 
