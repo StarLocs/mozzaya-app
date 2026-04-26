@@ -1,13 +1,12 @@
 let tg = window.Telegram.WebApp;
 tg.expand();
 
-// РАСПОРЯДОК ВДВ
-const vdvTasks = [
+const vdvSchedule = [
     {h: 6, m: 0, t: "ПОДЪЁМ! 🪖"},
     {h: 6, m: 30, t: "Зарядка (ВДВ летает!)"},
-    {h: 7, m: 30, t: "Завтрак десантника"},
-    {h: 9, m: 0, t: "ВДП (Парашюты, укладка)"},
-    {h: 14, m: 0, t: "Обед (По расписанию)"},
+    {h: 7, m: 30, t: "Завтрак"},
+    {h: 9, m: 0, t: "ВДП (Укладка парашютов)"},
+    {h: 14, m: 0, t: "Обед"},
     {h: 15, m: 30, t: "Боевая подготовка"},
     {h: 18, m: 0, t: "Ужин"},
     {h: 21, m: 0, t: "Вечерняя поверка"},
@@ -22,30 +21,45 @@ function showScreen(id) {
 
 function initDMB() {
     const s = localStorage.getItem('dmb_start');
+    const display = document.getElementById('dmb-display');
+    const settings = document.getElementById('dmb-settings');
+
     if (s) {
-        document.getElementById('dmb-settings').style.display = 'none';
-        document.getElementById('dmb-display').style.display = 'block';
+        settings.style.display = 'none';
+        display.style.display = 'block';
         runTimer();
     } else {
-        document.getElementById('dmb-settings').style.display = 'block';
-        document.getElementById('dmb-display').style.display = 'none';
+        settings.style.display = 'block';
+        display.style.display = 'none';
     }
 }
 
 function saveDMB() {
     const start = document.getElementById('dmb-start').value;
     const end = document.getElementById('dmb-end').value;
-    if(!start || !end) return;
+
+    if(!start || !end) {
+        alert("Ошибка: Выбери обе даты!");
+        return;
+    }
+
     localStorage.setItem('dmb_start', start);
     localStorage.setItem('dmb_end', end);
     initDMB();
 }
 
-function resetData() { localStorage.clear(); location.reload(); }
+function resetData() {
+    localStorage.clear();
+    location.reload();
+}
 
 function runTimer() {
-    const start = new Date(localStorage.getItem('dmb_start')).getTime();
-    const end = new Date(localStorage.getItem('dmb_end')).getTime();
+    const startStr = localStorage.getItem('dmb_start');
+    const endStr = localStorage.getItem('dmb_end');
+    if(!startStr || !endStr) return;
+
+    const start = new Date(startStr).getTime();
+    const end = new Date(endStr).getTime();
     const now = new Date();
 
     const total = end - start;
@@ -57,26 +71,26 @@ function runTimer() {
     document.getElementById('progress-fill').style.width = p + '%';
     document.getElementById('percent-display').innerText = p.toFixed(6) + '%';
 
-    // Главные цифры
+    // Таймер
     document.getElementById('val-d').innerText = Math.floor(left / 86400000);
     document.getElementById('val-h').innerText = Math.floor((left % 86400000) / 3600000).toString().padStart(2, '0');
     document.getElementById('val-m').innerText = Math.floor((left % 3600000) / 60000).toString().padStart(2, '0');
     document.getElementById('val-s').innerText = Math.floor((left % 60000) / 1000).toString().padStart(2, '0');
 
     // Звание
-    const daysPassed = Math.floor(passed / 86400000);
+    const days = Math.floor(passed / 86400000);
     let r = "ЗАПАХ";
-    if(daysPassed > 45) r = "ДУХ";
-    if(daysPassed > 100) r = "СЛОН";
-    if(daysPassed > 150) r = "ЧЕРЕП";
-    if(daysPassed > 250) r = "ДЕД";
-    if(daysPassed > 300) r = "ДЕМБЕЛЬ";
+    if(days > 45) r = "ДУХ";
+    if(days > 100) r = "СЛОН";
+    if(days > 150) r = "ЧЕРЕП";
+    if(days > 250) r = "ДЕД";
+    if(days > 300) r = "ДЕМБЕЛЬ";
     document.getElementById('rank-name').innerText = r;
 
     // Распорядок
     const curM = now.getHours() * 60 + now.getMinutes();
     let act = "Сон / Личное время";
-    for(let task of vdvTasks) { if(curM >= (task.h * 60 + task.m)) act = task.t; }
+    for(let task of vdvSchedule) { if(curM >= (task.h * 60 + task.m)) act = task.t; }
     document.getElementById('current-activity').innerText = act;
 
     // Счётчики
@@ -86,20 +100,32 @@ function runTimer() {
 
 // Wishlist
 let wishes = JSON.parse(localStorage.getItem('w_data') || '[]');
+
 function renderW() {
-    document.getElementById('wish-list-container').innerHTML = wishes.map((w, i) => 
+    const container = document.getElementById('wish-list-container');
+    container.innerHTML = wishes.map((w, i) => 
         `<div class="wish-item"><span>${w}</span><span class="del-icon" onclick="delW(${i})">×</span></div>`
     ).join('');
 }
+
 function addWish() {
-    const i = document.getElementById('wish-in');
-    if(!i.value.trim()) return;
-    wishes.push(i.value.trim());
-    i.value = '';
+    const input = document.getElementById('wish-in');
+    const val = input.value.trim();
+    if(!val) return;
+    wishes.push(val);
+    input.value = '';
     saveW();
 }
-function delW(i) { wishes.splice(i, 1); saveW(); }
-function saveW() { localStorage.setItem('w_data', JSON.stringify(wishes)); renderW(); }
+
+function delW(i) {
+    wishes.splice(i, 1);
+    saveW();
+}
+
+function saveW() {
+    localStorage.setItem('w_data', JSON.stringify(wishes));
+    renderW();
+}
 
 renderW();
 setInterval(() => { if(localStorage.getItem('dmb_start')) runTimer(); }, 1000);

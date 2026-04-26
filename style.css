@@ -1,7 +1,7 @@
 :root {
-    --bg: #080808;
+    --bg: #0d0d0d;
     --glass: rgba(255, 255, 255, 0.05);
-    --border: rgba(255, 255, 255, 0.1);
+    --border: rgba(255, 255, 255, 0.08);
     --accent: #bb86fc;
     --mint: #03dac6;
 }
@@ -15,25 +15,23 @@ body {
 }
 
 .app-container { width: 100%; max-width: 400px; padding: 20px; box-sizing: border-box; }
-
 .screen { display: none; width: 100%; flex-direction: column; align-items: center; }
 .screen.active { display: flex; animation: slideUp 0.4s ease-out; }
 
 @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-header h1 { font-size: 36px; color: var(--accent); text-shadow: 0 0 20px rgba(187,134,252,0.3); margin: 0; }
-.subtitle { color: #555; font-size: 13px; letter-spacing: 2px; margin-bottom: 30px; }
+header h1 { font-size: 32px; color: var(--accent); text-shadow: 0 0 15px rgba(187,134,252,0.4); margin: 0; text-align: center; }
+.subtitle { color: #555; font-size: 11px; letter-spacing: 2px; margin-bottom: 30px; text-align: center; }
 
 .glass-card {
     background: var(--glass);
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(15px);
     border: 1px solid var(--border);
     border-radius: 24px;
     padding: 22px; width: 100%; box-sizing: border-box; margin-bottom: 12px;
 }
 
 .menu-btn { display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
-.menu-btn:active { transform: scale(0.97); }
 .btn-content { display: flex; align-items: center; gap: 15px; font-weight: 700; }
 .arrow { color: var(--accent); }
 
@@ -42,32 +40,33 @@ header h1 { font-size: 36px; color: var(--accent); text-shadow: 0 0 20px rgba(18
 .status-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
 #rank-name { color: var(--mint); font-weight: 900; font-size: 12px; letter-spacing: 1px; }
 .live-indicator { background: var(--mint); color: #000; font-size: 9px; font-weight: 900; padding: 2px 6px; border-radius: 4px; }
-#current-activity { font-size: 19px; font-weight: 600; }
+#current-activity { font-size: 18px; font-weight: 600; }
 
-#main-countdown { font-size: 30px; font-weight: 900; display: flex; justify-content: center; align-items: baseline; gap: 5px; margin: 15px 0; }
+#main-countdown { font-size: 28px; font-weight: 900; display: flex; justify-content: center; align-items: baseline; gap: 4px; margin: 15px 0; }
 #main-countdown small { font-size: 14px; color: #555; margin-right: 5px; }
-.neon { color: var(--mint); text-shadow: 0 0 10px var(--mint); width: 42px; display: inline-block; }
+.neon { color: var(--mint); text-shadow: 0 0 10px var(--mint); width: 40px; display: inline-block; text-align: center; }
 
 .progress-container { height: 8px; background: rgba(255,255,255,0.05); border-radius: 10px; overflow: hidden; margin-bottom: 8px; }
 #progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--mint)); transition: 1s ease; }
 #percent-display { text-align: center; font-family: monospace; color: var(--mint); font-size: 12px; }
 
 .milestones-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; }
-.mini { text-align: center; }
+.mini { text-align: center; padding: 15px !important; }
 .mini small { font-size: 9px; color: #555; display: block; margin-bottom: 5px; }
 .mini span { font-size: 22px; font-weight: 800; display: block; }
+.mini p { font-size: 9px; color: var(--accent); margin: 0; }
 
-/* ELEMENTS */
+/* INPUTS */
 input { width: 100%; background: #111; border: 1px solid var(--border); border-radius: 14px; padding: 14px; color: #fff; margin-bottom: 12px; box-sizing: border-box; outline: none; }
-label { display: block; font-size: 10px; color: #555; font-weight: 800; margin-bottom: 5px; text-transform: uppercase; }
+label { display: block; font-size: 10px; color: #555; font-weight: 800; margin-bottom: 5px; }
 .primary-btn { width: 100%; background: var(--accent); border: none; padding: 16px; border-radius: 16px; font-weight: 800; color: #000; cursor: pointer; }
 .sync-btn { width: 100%; background: none; border: 1px solid var(--accent); color: var(--accent); padding: 14px; border-radius: 16px; margin-top: 10px; font-weight: 700; font-size: 12px; }
-.back-btn { align-self: flex-start; background: none; border: none; color: var(--accent); font-weight: bold; margin-bottom: 15px; font-size: 16px; }
+.back-btn { align-self: flex-start; background: none; border: none; color: var(--accent); font-weight: bold; margin-bottom: 15px; cursor: pointer; }
 .reset-link { font-size: 10px; color: #333; text-align: center; width: 100%; display: block; margin-top: 15px; cursor: pointer; }
 .hidden-block { display: none; width: 100%; }
 
 /* WISHLIST */
 .input-row { display: flex; gap: 10px; margin-bottom: 15px; }
 .add-btn { background: var(--accent); border: none; border-radius: 10px; padding: 0 18px; font-weight: 900; }
-.wish-item { background: rgba(255,255,255,0.03); padding: 14px; border-radius: 16px; margin-bottom: 8px; display: flex; justify-content: space-between; border: 1px solid var(--border); font-size: 15px; }
-.del-icon { color: #ff5252; font-weight: 800; cursor: pointer; }
+.wish-item { background: rgba(255,255,255,0.03); padding: 14px; border-radius: 16px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--border); }
+.del-icon { color: #ff5252; font-weight: 800; cursor: pointer; font-size: 18px; }

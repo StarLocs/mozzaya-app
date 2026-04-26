@@ -12,7 +12,7 @@
         <div id="screen-home" class="screen active">
             <header>
                 <h1>MoZZaya ✨</h1>
-                <p class="subtitle">ВДВ: Никто, кроме нас</p>
+                <p class="subtitle">ВДВ: НИКТО, КРОМЕ НАС</p>
             </header>
 
             <div class="glass-card menu-btn" onclick="showScreen('screen-dmb')">
@@ -36,10 +36,10 @@
             <button class="back-btn" onclick="showScreen('screen-home')">← НАЗАД</button>
             
             <div id="dmb-settings" class="glass-card">
-                <h3>УСТАНОВКА ПРИКАЗА</h3>
-                <label>Призыв:</label>
+                <h3 style="margin-top:0">УСТАНОВКА ПРИКАЗА</h3>
+                <label>ДАТА ПРИЗЫВА:</label>
                 <input type="date" id="dmb-start">
-                <label>Дембель:</label>
+                <label>ДАТА ДЕМБЕЛЯ:</label>
                 <input type="date" id="dmb-end">
                 <button class="primary-btn" onclick="saveDMB()">ВСТАТЬ В СТРОЙ</button>
             </div>
@@ -48,7 +48,7 @@
                 <div class="glass-card status-card">
                     <div class="status-row">
                         <span id="rank-name">РЯДОВОЙ</span>
-                        <div class="live-indicator"><span>LIVE</span></div>
+                        <div class="live-indicator">LIVE</div>
                     </div>
                     <span id="current-activity">Служба идет...</span>
                 </div>
@@ -69,12 +69,12 @@
                     <div class="glass-card mini">
                         <small>ЭКВАТОР</small>
                         <span id="val-eq">--</span>
-                        <p>дней</p>
+                        <p>ДНЕЙ</p>
                     </div>
                     <div class="glass-card mini">
                         <small>ПРИКАЗ</small>
                         <span id="val-ord">--</span>
-                        <p>дней</p>
+                        <p>ДНЕЙ</p>
                     </div>
                 </div>
 
@@ -86,9 +86,9 @@
         <div id="screen-wish" class="screen">
             <button class="back-btn" onclick="showScreen('screen-home')">← НАЗАД</button>
             <div class="glass-card">
-                <h2>🎁 Wishlist</h2>
+                <h2 style="margin-top:0">🎁 Wishlist</h2>
                 <div class="input-row">
-                    <input type="text" id="wish-in" placeholder="Твое желание...">
+                    <input type="text" id="wish-in" placeholder="Чего бы хотелось?">
                     <button class="add-btn" onclick="addWish()">+</button>
                 </div>
                 <div id="wish-list-container"></div>
