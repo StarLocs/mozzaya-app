@@ -3,222 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <style>
-        :root {
-            /* Богатая темная палитра */
-            --bg-color: #0d0d0d;
-            --glass-bg: rgba(30, 30, 30, 0.6); /* Прозрачность для стекла */
-            --glass-border: rgba(255, 255, 255, 0.08);
-            
-            /* Яркие, неоновые акценты (твоя фишка) */
-            --main-accent: #bb86fc; /* Неоновый фиолетовый */
-            --secondary-accent: #03dac6; /* Мятный неон */
-            
-            --text-main: #ffffff;
-            --text-sub: #a0a0a0;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center; /* Центрируем всё */
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        /* Контейнер, который делает сайт похожим на приложение */
-        .app-container {
-            width: 100%;
-            max-width: 420px; /* Идеально для телефона */
-            padding: 25px 15px;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        /* Шапка приложения */
-        header {
-            text-align: center;
-            margin-bottom: 30px;
-            width: 100%;
-        }
-
-        header h1 {
-            color: var(--main-accent);
-            font-size: 32px;
-            font-weight: 800;
-            margin: 0 0 5px 0;
-            letter-spacing: -1px;
-            text-shadow: 0 0 15px rgba(187, 134, 252, 0.5); /* Неоновое свечение */
-        }
-
-        header p.subtitle {
-            color: var(--text-sub);
-            margin: 0;
-            font-size: 14px;
-            font-weight: 400;
-        }
-
-        /* Блок аватарок пары (добавляем душу) */
-        .pair-avatars {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 30px;
-            background: var(--glass-bg);
-            padding: 10px 20px;
-            border-radius: 50px;
-            border: 1px solid var(--glass-border);
-            backdrop-filter: blur(10px); /* Размытие стекла */
-        }
-
-        .avatar-circle {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 18px;
-            font-weight: bold;
-            color: #000;
-            box-shadow: 0 0 10px rgba(255,255,255,0.1);
-        }
-
-        /* Стили для твоей аватарки и её */
-        .avatar-v { background-color: var(--secondary-accent); }
-        .avatar-m { background-color: var(--main-accent); }
-        .heart-divider { color: #cf6679; font-size: 16px; }
-
-        /* Стильные карточки */
-        .glass-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 20px;
-            margin-bottom: 20px;
-            width: 100%;
-            box-sizing: border-box;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            transition: transform 0.2s;
-        }
-
-        .glass-card:active {
-            transform: scale(0.98); /* Эффект нажатия */
-        }
-
-        .glass-card h3 {
-            margin: 0 0 12px 0;
-            font-size: 17px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .status-value {
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--secondary-accent);
-            letter-spacing: -0.5px;
-        }
-
-        .sub-info {
-            color: var(--text-sub);
-            font-size: 13px;
-            margin-top: 4px;
-        }
-
-        /* Кнопки как элементы меню */
-        .action-button {
-            background: none;
-            border: none;
-            width: 100%;
-            padding: 0;
-            cursor: pointer;
-            text-align: left;
-        }
-
-        .button-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .button-main-text {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 16px;
-            font-weight: 500;
-            color: var(--text-main);
-        }
-
-        .icon-box {
-            font-size: 20px;
-            color: var(--main-accent);
-        }
-
-        .arrow-icon {
-            color: var(--text-sub);
-            font-size: 18px;
-        }
-    </style>
+    <title>MoZZaya Elite</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <div class="app-container">
         
-        <header>
-            <h1>MoZZaya ✨</h1>
-            <p class="subtitle">Твоё идеальное пространство для двоих</p>
-        </header>
-
-        <div class="pair-avatars">
-            <div class="avatar-circle avatar-v">V</div>
-            <div class="heart-divider">❤</div>
-            <div class="avatar-circle avatar-m">M</div>
+        <div id="screen-home" class="screen active">
+            <header>
+                <h1>MoZZaya ✨</h1>
+                <p class="subtitle">Ваше личное пространство</p>
+            </header>
+            <div class="glass-card menu-btn" onclick="showScreen('screen-dmb')">
+                <span class="btn-text">🪖 Армейский Штаб</span>
+                <span class="arrow">→</span>
+            </div>
+            <div class="glass-card menu-btn" onclick="showScreen('screen-wish')">
+                <span class="btn-text">🎁 Корзина счастья</span>
+                <span class="arrow">→</span>
+            </div>
         </div>
 
-        <div class="glass-card">
-            <h3>🪖 ДМБ Таймер</h3>
-            <span class="status-value">Ожидание лета...</span>
-            <div class="sub-info">Статус службы</div>
+        <div id="screen-dmb" class="screen">
+            <button class="back-btn" onclick="showScreen('screen-home')">← Назад</button>
+            
+            <div id="dmb-settings" class="glass-card">
+                <h3>Настройка службы</h3>
+                <input type="date" id="dmb-start-input">
+                <input type="date" id="dmb-end-input">
+                <button class="primary-btn" onclick="saveDMB()">Начать отсчет</button>
+            </div>
+
+            <div id="dmb-display" style="display: none; width: 100%;">
+                <div class="glass-card status-box">
+                    <div class="status-top">
+                        <span id="rank-text">ЗАПАХ</span>
+                        <div class="live-dot"></div>
+                    </div>
+                    <div id="current-activity">Загрузка распорядка...</div>
+                </div>
+
+                <div class="glass-card">
+                    <div id="countdown">
+                        <span id="d-big">0</span><small>д</small>
+                        <span id="h-big">00</span><small>ч</small>
+                        <span id="m-big">00</span><small>м</small>
+                        <span id="s-big" class="neon-s">00</span>
+                    </div>
+                    <div class="progress-wrap"><div id="bar-fill"></div></div>
+                    <div id="perc-val">0.000000%</div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="glass-card mini-card">
+                        <small>ЭКВАТОР</small>
+                        <span id="eq-val">0</span>
+                    </div>
+                    <div class="glass-card mini-card">
+                        <small>ПРИКАЗ</small>
+                        <span id="ord-val">0</span>
+                    </div>
+                </div>
+
+                <button class="sync-btn" onclick="syncData()">💾 Синхронизировать</button>
+                <p class="reset-link" onclick="resetDMB()">сбросить даты</p>
+            </div>
         </div>
 
-        <button class="action-button glass-card">
-            <div class="button-content">
-                <div class="button-main-text">
-                    <span class="icon-box">🎁</span>
-                    Корзина счастья (Wishlist)
+        <div id="screen-wish" class="screen">
+            <button class="back-btn" onclick="showScreen('screen-home')">← Назад</button>
+            <div class="glass-card">
+                <h2>🎁 Корзина счастья</h2>
+                <div class="wish-row">
+                    <input type="text" id="wish-input" placeholder="Чего бы хотелось?">
+                    <button class="add-btn" onclick="addWish()">+</button>
                 </div>
-                <span class="arrow-icon">→</span>
+                <div id="wish-list"></div>
             </div>
-        </button>
-
-        <button class="action-button glass-card">
-            <div class="button-content">
-                <div class="button-main-text">
-                    <span class="icon-box">💡</span>
-                    Генератор идей
-                </div>
-                <span class="arrow-icon">→</span>
-            </div>
-        </button>
+        </div>
 
     </div>
-
-    <script>
-        let tg = window.Telegram.WebApp;
-        tg.expand();
-        tg.headerColor = '#0d0d0d'; // Задаем цвет шапки Телеге
-    </script>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

@@ -1,0 +1,66 @@
+:root {
+    --bg: #0d0d0d;
+    --glass: rgba(255, 255, 255, 0.05);
+    --border: rgba(255, 255, 255, 0.08);
+    --accent: #bb86fc;
+    --mint: #03dac6;
+}
+
+body {
+    background-color: var(--bg);
+    color: #fff;
+    font-family: -apple-system, system-ui, sans-serif;
+    margin: 0; display: flex; justify-content: center; min-height: 100vh;
+}
+
+.app-container { width: 100%; max-width: 400px; padding: 20px; box-sizing: border-box; }
+.screen { display: none; width: 100%; flex-direction: column; align-items: center; }
+.screen.active { display: flex; animation: fadeIn 0.3s ease; }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+header h1 { font-size: 32px; color: var(--accent); text-shadow: 0 0 15px rgba(187,134,252,0.4); margin: 0; }
+.subtitle { color: #666; font-size: 14px; margin-bottom: 30px; }
+
+.glass-card {
+    background: var(--glass); backdrop-filter: blur(15px); border: 1px solid var(--border);
+    border-radius: 24px; padding: 20px; width: 100%; box-sizing: border-box; margin-bottom: 12px;
+}
+
+.menu-btn { display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-weight: 600; }
+.menu-btn:active { transform: scale(0.98); }
+
+/* АРМЕЙСКИЕ ШТУКИ */
+.status-box { border-left: 4px solid var(--mint); }
+.status-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+#rank-text { font-weight: 900; color: var(--mint); letter-spacing: 2px; font-size: 14px; }
+#current-activity { font-size: 18px; font-weight: 600; }
+
+.live-dot { width: 8px; height: 8px; background: var(--mint); border-radius: 50%; box-shadow: 0 0 10px var(--mint); animation: pulse 1.5s infinite; }
+@keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+
+#countdown { font-size: 26px; font-weight: 800; display: flex; justify-content: center; align-items: baseline; gap: 4px; margin: 15px 0; }
+#countdown small { font-size: 12px; color: #666; margin-right: 5px; }
+.neon-s { color: var(--mint); text-shadow: 0 0 10px var(--mint); width: 35px; display: inline-block; }
+
+.progress-wrap { height: 8px; background: rgba(255,255,255,0.05); border-radius: 10px; overflow: hidden; margin-bottom: 10px; }
+#bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--mint)); transition: 1s ease; }
+#perc-val { text-align: center; font-family: monospace; color: var(--mint); font-size: 12px; }
+
+.stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; }
+.mini-card { text-align: center; }
+.mini-card small { font-size: 9px; color: #666; display: block; margin-bottom: 5px; }
+.mini-card span { font-size: 20px; font-weight: 800; }
+
+/* КНОПКИ */
+input { width: 100%; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 12px; padding: 12px; color: #fff; margin-bottom: 10px; box-sizing: border-box; outline: none; }
+.primary-btn { width: 100%; background: var(--accent); border: none; padding: 15px; border-radius: 15px; font-weight: bold; color: #000; }
+.sync-btn { width: 100%; background: none; border: 1px solid var(--accent); color: var(--accent); padding: 12px; border-radius: 15px; margin-top: 10px; font-weight: bold; }
+.back-btn { align-self: flex-start; background: none; border: none; color: var(--accent); font-weight: bold; margin-bottom: 15px; cursor: pointer; }
+.reset-link { font-size: 10px; color: #444; cursor: pointer; text-align: center; width: 100%; margin-top: 10px; }
+
+/* WISHLIST */
+.wish-row { display: flex; gap: 8px; margin-bottom: 15px; }
+.add-btn { background: var(--accent); border: none; border-radius: 10px; padding: 0 15px; font-weight: bold; }
+.wish-item { background: rgba(255,255,255,0.03); padding: 12px; border-radius: 12px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
+.del-btn { color: #ff5252; font-size: 18px; cursor: pointer; }
