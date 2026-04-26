@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>MoZZaya Premium</title>
+    <title>MoZZaya Elite</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -11,110 +11,92 @@
         
         <div id="screen-home" class="screen active">
             <header>
-                <h1 class="glow-text">MoZZaya</h1>
-                <p class="subtitle">Ваша связь сквозь время</p>
+                <h1>MoZZaya ✨</h1>
+                <p class="subtitle">ВДВ: Никто, кроме нас</p>
             </header>
 
-            <div class="main-menu">
-                <div class="glass-card menu-btn" onclick="showScreen('screen-dmb')">
-                    <div class="btn-info">
-                        <span class="icon">🎖</span>
-                        <div>
-                            <span class="title">Армейский хаб</span>
-                            <span class="desc">Статус, таймеры, распорядок</span>
-                        </div>
-                    </div>
-                    <span class="arrow">→</span>
+            <div class="glass-card menu-btn" onclick="showScreen('screen-dmb')">
+                <div class="btn-content">
+                    <span class="icon">🎖</span>
+                    <span class="btn-text">ШТАБ СЛУЖБЫ</span>
                 </div>
+                <span class="arrow">→</span>
+            </div>
 
-                <div class="glass-card menu-btn" onclick="showScreen('screen-wish')">
-                    <div class="btn-info">
-                        <span class="icon">🎁</span>
-                        <div>
-                            <span class="title">Корзина счастья</span>
-                            <span class="desc">Твои желания для него</span>
-                        </div>
-                    </div>
-                    <span class="arrow">→</span>
+            <div class="glass-card menu-btn" onclick="showScreen('screen-wish')">
+                <div class="btn-content">
+                    <span class="icon">🎁</span>
+                    <span class="btn-text">КОРЗИНА СЧАСТЬЯ</span>
                 </div>
+                <span class="arrow">→</span>
             </div>
         </div>
 
         <div id="screen-dmb" class="screen">
-            <div class="header-row">
-                <button class="back-btn" onclick="showScreen('screen-home')">←</button>
-                <h2>ШТАБ СЛУЖБЫ</h2>
-                <button class="settings-btn" onclick="resetDMB()">⚙</button>
-            </div>
+            <button class="back-btn" onclick="showScreen('screen-home')">← НАЗАД</button>
             
             <div id="dmb-settings" class="glass-card">
-                <h3>УСТАНОВКА ДАННЫХ</h3>
-                <div class="input-block">
-                    <label>Дата призыва</label>
-                    <input type="date" id="dmb-start-input">
-                </div>
-                <div class="input-block">
-                    <label>Дата дембеля</label>
-                    <input type="date" id="dmb-end-input">
-                </div>
-                <div class="input-block">
-                    <label>Род войск</label>
-                    <select id="branch-select">
-                        <option value="vdv">ВДВ (Воздушно-десантные)</option>
-                        <option value="vks">ВКС (Воздушно-космические)</option>
-                        <option value="navy">ВМФ (Флот)</option>
-                        <option value="ground">Сухопутные войска</option>
-                    </select>
-                </div>
-                <button class="action-btn" onclick="saveDMB()">ЗАКРЕПИТЬ ПРИКАЗОМ</button>
+                <h3>УСТАНОВКА ПРИКАЗА</h3>
+                <label>Призыв:</label>
+                <input type="date" id="dmb-start">
+                <label>Дембель:</label>
+                <input type="date" id="dmb-end">
+                <button class="primary-btn" onclick="saveDMB()">ВСТАТЬ В СТРОЙ</button>
             </div>
 
-            <div id="dmb-display" class="hidden">
+            <div id="dmb-display" class="hidden-block">
                 <div class="glass-card status-card">
-                    <div class="status-header">
+                    <div class="status-row">
                         <span id="rank-name">РЯДОВОЙ</span>
-                        <span id="activity-tag">СЛУЖИТ...</span>
+                        <div class="live-indicator"><span>LIVE</span></div>
                     </div>
-                    <div class="current-activity">
-                        <p id="activity-desc">Загрузка распорядка дня...</p>
-                        <div class="pulse-icon"></div>
+                    <span id="current-activity">Служба идет...</span>
+                </div>
+
+                <div class="glass-card timer-card">
+                    <p class="timer-title">ДО ДОМА ОСТАЛОСЬ</p>
+                    <div id="main-countdown">
+                        <span id="val-d">0</span><small>д</small>
+                        <span id="val-h">00</span><small>ч</small>
+                        <span id="val-m">00</span><small>м</small>
+                        <span id="val-s" class="neon">00</span>
+                    </div>
+                    <div class="progress-container"><div id="progress-fill"></div></div>
+                    <div id="percent-display">0.000000%</div>
+                </div>
+
+                <div class="milestones-grid">
+                    <div class="glass-card mini">
+                        <small>ЭКВАТОР</small>
+                        <span id="val-eq">--</span>
+                        <p>дней</p>
+                    </div>
+                    <div class="glass-card mini">
+                        <small>ПРИКАЗ</small>
+                        <span id="val-ord">--</span>
+                        <p>дней</p>
                     </div>
                 </div>
 
-                <div class="glass-card main-timer">
-                    <div class="timer-grid">
-                        <div class="t-item"><span id="d-val">0</span><small>дн</small></div>
-                        <div class="t-item"><span id="h-val">00</span><small>час</small></div>
-                        <div class="t-item"><span id="m-val">00</span><small>мин</small></div>
-                        <div class="t-item neon-s"><span id="s-val">00</span><small>сек</small></div>
-                    </div>
-                    <div class="progress-box">
-                        <div class="bar-bg"><div id="bar-fill" class="bar-fill"></div></div>
-                        <span id="perc-val">0.0000%</span>
-                    </div>
-                </div>
+                <button class="sync-btn" onclick="syncWithBot()">💾 СИНХРОНИЗИРОВАТЬ</button>
+                <span class="reset-link" onclick="resetData()">сбросить данные</span>
+            </div>
+        </div>
 
-                <div class="milestones-scroll">
-                    <div class="m-card">
-                        <span class="m-title">ЭКВАТОР</span>
-                        <span id="eq-days" class="m-days">--</span>
-                        <span class="m-sub">дней до</span>
-                    </div>
-                    <div class="m-card">
-                        <span class="m-title">ПРИКАЗ</span>
-                        <span id="ord-days" class="m-days">--</span>
-                        <span class="m-sub">дней до</span>
-                    </div>
-                    <div class="m-card highlight">
-                        <span class="m-title">БАНЯ</span>
-                        <span id="bath-days" class="m-days">--</span>
-                        <span class="m-sub">дней осталось</span>
-                    </div>
+        <div id="screen-wish" class="screen">
+            <button class="back-btn" onclick="showScreen('screen-home')">← НАЗАД</button>
+            <div class="glass-card">
+                <h2>🎁 Wishlist</h2>
+                <div class="input-row">
+                    <input type="text" id="wish-in" placeholder="Твое желание...">
+                    <button class="add-btn" onclick="addWish()">+</button>
                 </div>
+                <div id="wish-list-container"></div>
             </div>
         </div>
 
     </div>
+
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script src="script.js"></script>
 </body>
