@@ -1,3 +1,18 @@
+// --- 1. ОБЛАЧНОЕ ВОССТАНОВЛЕНИЕ ДАННЫХ ИЗ ССЫЛКИ ---
+function loadFromUrl() {
+    const params = new URLSearchParams(window.location.search);
+    const s = params.get('s');
+    const e = params.get('e');
+    const w = params.get('w');
+
+    if (s) localStorage.setItem('dmb_s', s);
+    if (e) localStorage.setItem('dmb_e', e);
+    if (w) localStorage.setItem('wishes', w);
+}
+// Запускаем сразу до прогрузки остального
+loadFromUrl();
+
+// --- 2. ИНИЦИАЛИЗАЦИЯ TELEGRAM WEBAPP ---
 let tg = window.Telegram.WebApp;
 tg.expand();
 tg.headerColor = '#0a0a0a';
@@ -9,7 +24,7 @@ function nav(id) {
     if (id === 'scr-dmb') checkDMB();
 }
 
-// ----------------- ДМБ ТАЙМЕР -----------------
+// --- 3. ДМБ ТАЙМЕР ---
 let dmbInterval;
 
 function checkDMB() {
@@ -18,7 +33,7 @@ function checkDMB() {
     if (s && e) {
         document.getElementById('dmb-setup').style.display = 'none';
         document.getElementById('dmb-view').style.display = 'block';
-        if (!dmbInterval) dmbInterval = setInterval(updateDMB, 50); // Быстрое обновление для красивых %
+        if (!dmbInterval) dmbInterval = setInterval(updateDMB, 50); 
     } else {
         document.getElementById('dmb-setup').style.display = 'block';
         document.getElementById('dmb-view').style.display = 'none';
@@ -46,8 +61,12 @@ function clearDMB() {
 }
 
 function updateDMB() {
-    const start = new Date(localStorage.getItem('dmb_s')).getTime();
-    const end = new Date(localStorage.getItem('dmb_e')).getTime();
+    const startStr = localStorage.getItem('dmb_s');
+    const endStr = localStorage.getItem('dmb_e');
+    if(!startStr || !endStr) return;
+
+    const start = new Date(startStr).getTime();
+    const end = new Date(endStr).getTime();
     const now = new Date().getTime();
 
     const total = end - start;
@@ -64,18 +83,15 @@ function updateDMB() {
         return;
     }
 
-    // Проценты (Высокая точность)
     const p = (passed / total) * 100;
     document.getElementById('progress-bar').style.width = p + '%';
     document.getElementById('perc-val').innerText = p.toFixed(8) + '%';
 
-    // Обычный таймер
     document.getElementById('t-d').innerText = Math.floor(left / 86400000);
     document.getElementById('t-h').innerText = Math.floor((left % 86400000) / 3600000).toString().padStart(2, '0');
     document.getElementById('t-m').innerText = Math.floor((left % 3600000) / 60000).toString().padStart(2, '0');
     document.getElementById('t-s').innerText = Math.floor((left % 60000) / 1000).toString().padStart(2, '0');
 
-    // Милестоуны
     const eqDays = Math.floor((start + total / 2 - now) / 86400000);
     document.getElementById('m-eq').innerText = eqDays > 0 ? eqDays : "ПРОЙДЕН";
     
@@ -83,7 +99,7 @@ function updateDMB() {
     document.getElementById('m-ord').innerText = ordDays > 0 ? ordDays : "ВЫШЕЛ";
 }
 
-// ----------------- КОРЗИНА -----------------
+// --- 4. КОРЗИНА СЧАСТЬЯ ---
 let wishes = JSON.parse(localStorage.getItem('wishes') || '[]');
 
 function renderWishlist() {
@@ -115,15 +131,21 @@ function delWish(i) {
 
 renderWishlist();
 
-// ----------------- РАЗРЫВ ОТНОШЕНИЙ -----------------
+// --- 5. СИНХРОНИЗАЦИЯ С БОТОМ (ОТПРАВКА ДАННЫХ) ---
+function syncWithBot() {
+    const data = { 
+        s: localStorage.getItem('dmb_s'), 
+        e: localStorage.getItem('dmb_e'), 
+        w: wishes 
+    };
+    tg.sendData(JSON.stringify(data));
+}
+
+// --- 6. РАЗРЫВ СВЯЗИ ---
 function breakPair() {
-    // Встроенное окно подтверждения от Телеграма
-    tg.showConfirm("Вы уверены, что хотите разорвать связь? Все совместные данные будут удалены безвозвратно.", function(confirmed) {
+    tg.showConfirm("Вы уверены, что хотите разорвать связь? Все совместные данные будут удалены.", function(confirmed) {
         if (confirmed) {
-            // Очищаем локальную память
             localStorage.clear();
-            
-            // Отправляем сигнал боту
             const data = { action: "break_pair" };
             tg.sendData(JSON.stringify(data));
         }
