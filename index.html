@@ -5,92 +5,139 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>MoZZaya Premium</title>
     <style>
-        :root { --bg: #0a0a0a; --glass: rgba(255, 255, 255, 0.05); --border: rgba(255, 255, 255, 0.1); --accent: #bb86fc; --mint: #03dac6; --text-main: #fff; --text-sub: #777; }
-        body.theme-girl { --bg: #fff0f5; --glass: rgba(255, 255, 255, 0.6); --border: rgba(255, 182, 193, 0.5); --accent: #ff69b4; --mint: #ff1493; --text-main: #333; --text-sub: #888; }
-        body { background: var(--bg); color: var(--text-main); font-family: -apple-system, sans-serif; margin: 0; display: flex; justify-content: center; transition: 0.5s; overflow-x: hidden; }
-        .app { width: 100%; max-width: 400px; padding: 15px; box-sizing: border-box; }
+        /* БАЗОВАЯ ТЕМА (ТЕМНАЯ - ПАРНИ) */
+        :root { 
+            --bg-color: #0d0e15; 
+            --card-bg: rgba(255, 255, 255, 0.03); 
+            --border: rgba(255, 255, 255, 0.05); 
+            --accent: #bb86fc; 
+            --mint: #03dac6; 
+            --text-main: #ffffff;
+            --text-sub: #8a8d9e;
+            --card-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+        }
+
+        /* ТЕМА ДЛЯ ДЕВУШКИ (СВЕТЛАЯ/РОЗОВАТАЯ) */
+        body.theme-girl {
+            --bg-color: #fff5f8; 
+            --card-bg: rgba(255, 255, 255, 0.7); 
+            --border: rgba(255, 182, 193, 0.6); 
+            --accent: #ff4785; 
+            --mint: #ff1493; 
+            --text-main: #2b2b2b; 
+            --text-sub: #888888;
+            --card-shadow: 0 10px 30px rgba(255, 182, 193, 0.3);
+        }
+
+        body { 
+            background: var(--bg-color); 
+            color: var(--text-main); 
+            font-family: -apple-system, sans-serif; 
+            margin: 0; display: flex; justify-content: center; 
+            min-height: 100vh; overflow-x: hidden;
+        }
+
+        .app { width: 100%; max-width: 400px; padding: 25px 20px; box-sizing: border-box; }
         .screen { display: none; flex-direction: column; }
-        .screen.active { display: flex; animation: fadeIn 0.3s ease; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .screen.active { display: flex; animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         
-        .card { background: var(--glass); backdrop-filter: blur(15px); border: 1px solid var(--border); border-radius: 20px; padding: 15px; margin-bottom: 12px; }
-        .btn { background: var(--accent); color: #fff; border: none; padding: 14px; border-radius: 14px; font-weight: 800; cursor: pointer; width: 100%; margin-top: 8px; }
-        .btn-sync { background: transparent; border: 1px solid var(--mint); color: var(--mint); font-size: 11px; padding: 10px; margin-top: 15px; }
+        .card { 
+            background: var(--card-bg); backdrop-filter: blur(20px); 
+            border: 1px solid var(--border); border-radius: 28px; 
+            padding: 22px; margin-bottom: 15px; box-shadow: var(--card-shadow); 
+        }
 
-        .profile-row { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 20px; }
-        .avatar { width: 45px; height: 45px; border-radius: 50%; border: 2px solid var(--accent); object-fit: cover; background: #222; }
-        .heart-icon { font-size: 20px; color: var(--accent); animation: beat 1.2s infinite; }
-        @keyframes beat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
+        /* АВАТАРКИ */
+        .profile-row { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 10px; }
+        .avatar { 
+            width: 55px; height: 55px; border-radius: 50%; 
+            background: linear-gradient(135deg, var(--accent), var(--mint));
+            display: flex; justify-content: center; align-items: center;
+            font-size: 22px; font-weight: bold; color: #fff;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            background-size: cover; background-position: center;
+        }
+        .heart-icon { font-size: 24px; color: var(--accent); animation: heartbeat 1.5s infinite; }
+        @keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.15); } }
 
-        #countdown { font-size: 26px; font-weight: 900; text-align: center; margin: 10px 0; display: flex; justify-content: center; align-items: baseline; gap: 3px; }
-        .neon { color: var(--mint); text-shadow: 0 0 8px var(--mint); width: 40px; display: inline-block; }
-        .milestones { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
-        .m-card { text-align: center; padding: 10px !important; }
-        .m-card b { font-size: 20px; display: block; color: var(--accent); }
+        .menu-item { display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-weight: 800; font-size: 16px; padding: 20px; }
+        .menu-item:active { transform: scale(0.97); }
 
-        input { width: 100%; background: rgba(0,0,0,0.1); border: 1px solid var(--border); border-radius: 12px; padding: 12px; color: var(--text-main); margin: 5px 0 10px 0; box-sizing: border-box; outline: none; }
-        .wish-item { display: flex; justify-content: space-between; padding: 12px; background: rgba(128,128,128,0.05); border-radius: 12px; margin-bottom: 6px; }
+        .btn { background: var(--accent); color: #fff; border: none; padding: 18px; border-radius: 20px; font-weight: 900; cursor: pointer; width: 100%; font-size: 14px; letter-spacing: 1px; box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
+        .btn-sync { background: transparent; border: 2px solid var(--mint); color: var(--mint); box-shadow: none; margin-top: 10px; }
+        
+        input { width: 100%; background: rgba(128,128,128,0.1); border: 1px solid var(--border); border-radius: 16px; padding: 16px; color: var(--text-main); margin: 5px 0 15px 0; box-sizing: border-box; outline: none; font-size: 15px; font-weight: 600; }
+        label { font-size: 11px; color: var(--text-sub); font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; }
+
+        #countdown { font-size: 32px; font-weight: 900; text-align: center; margin: 15px 0; display: flex; justify-content: center; align-items: baseline; gap: 4px; }
+        #countdown small { font-size: 12px; color: var(--text-sub); margin-right: 6px; }
+        .neon { color: var(--mint); text-shadow: 0 0 15px rgba(3, 218, 198, 0.5); width: 45px; display: inline-block; }
+        
+        .progress { height: 10px; background: rgba(128,128,128,0.15); border-radius: 10px; overflow: hidden; margin-top: 15px; }
+        #bar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--mint)); box-shadow: 0 0 10px var(--accent); transition: 0.5s ease-out; }
+        
+        .milestones { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .m-card { text-align: center; padding: 18px !important; }
+        .m-card b { font-size: 24px; display: block; color: var(--text-main); margin: 5px 0; }
+        .m-card small { font-size: 10px; font-weight: bold; color: var(--text-sub); letter-spacing: 1px; }
+
+        .wish-item { display: flex; justify-content: space-between; align-items: center; padding: 16px; background: rgba(128,128,128,0.06); border: 1px solid var(--border); border-radius: 18px; margin-bottom: 10px; font-weight: 700; }
+        .del-btn { color: #ff4757; cursor: pointer; font-size: 20px; font-weight: bold; padding-left: 15px; }
+        .back-link { cursor: pointer; color: var(--accent); font-weight: 900; margin-bottom: 20px; display: inline-block; font-size: 14px; letter-spacing: 1px; }
     </style>
 </head>
 <body>
     <div class="app">
         <div id="home" class="screen active">
             <div class="profile-row">
-                <img id="my-ava" class="avatar" src="">
+                <div id="my-ava" class="avatar">Я</div>
                 <span class="heart-icon">❤️</span>
-                <img id="p-ava" class="avatar" src="">
+                <div id="p-ava" class="avatar">?</div>
             </div>
-            <h2 id="pair-names" style="text-align:center; margin-top:0;">Мы</h2>
+            <h2 id="pair-names" style="text-align:center; margin: 5px 0 30px 0; font-weight: 900;">Я ❤️ Половинка</h2>
             
-            <div class="card" onclick="nav('dmb')">🎖 ШТАБ СЛУЖБЫ <span style="float:right">→</span></div>
-            <div class="card" onclick="nav('wish')">🎁 КОРЗИНА СЧАСТЬЯ <span style="float:right">→</span></div>
-            <div class="card" onclick="nav('settings')">⚙️ НАСТРОЙКИ ПАРЫ <span style="float:right">→</span></div>
+            <div class="card menu-item" onclick="nav('dmb')"><span>🎖 ШТАБ СЛУЖБЫ</span> <span style="color:var(--accent)">→</span></div>
+            <div class="card menu-item" onclick="nav('wish')"><span>🎁 КОРЗИНА СЧАСТЬЯ</span> <span style="color:var(--accent)">→</span></div>
             
-            <button class="btn btn-sync" onclick="syncAll()">🔄 СИНХРОНИЗИРОВАТЬ ВСЁ</button>
+            <button class="btn btn-sync" onclick="syncAll()">🔄 СИНХРОНИЗИРОВАТЬ ДАННЫЕ</button>
         </div>
 
         <div id="dmb" class="screen">
-            <span onclick="nav('home')" style="cursor:pointer; color:var(--accent)">← НАЗАД</span>
-            <div id="setup" class="card" style="margin-top:10px;">
-                <h3>УСТАНОВКА ДАТ</h3>
-                <input type="date" id="ds"><input type="date" id="de">
+            <span class="back-link" onclick="nav('home')">← НАЗАД</span>
+            <div id="setup" class="card">
+                <h3 style="margin-top:0;">УСТАНОВКА ДАТ</h3>
+                <label>ПРИЗЫВ</label> <input type="date" id="ds">
+                <label>ДЕМБЕЛЬ</label> <input type="date" id="de">
                 <button class="btn" onclick="saveDMB()">СОХРАНИТЬ</button>
             </div>
-            <div id="view" style="display:none; margin-top:10px;">
+            <div id="view" style="display:none;">
                 <div class="card">
-                    <p style="text-align:center; font-size:10px; color:var(--text-sub); margin:0;">ДО ДОМА:</p>
+                    <p style="text-align:center; font-size:11px; color:var(--text-sub); margin:0; font-weight:800; letter-spacing:1px;">ДО ДОМА ОСТАЛОСЬ</p>
                     <div id="countdown">
-                        <span id="vd">0</span>д <span id="vh">00</span>ч <span id="vm">00</span>м <span id="vs" class="neon">00</span>
+                        <span id="vd">0</span><small>д</small> <span id="vh">00</span><small>ч</small> <span id="vm">00</span><small>м</small> <span id="vs" class="neon">00</span>
                     </div>
-                    <div style="height:6px; background:rgba(128,128,128,0.2); border-radius:10px; overflow:hidden;">
-                        <div id="bar" style="height:100%; width:0%; background:var(--mint); transition:1s;"></div>
-                    </div>
-                    <div id="perc" style="text-align:center; font-size:11px; margin-top:5px; color:var(--mint); font-family:monospace;">0%</div>
+                    <div class="progress"><div id="bar"></div></div>
+                    <div id="perc" style="text-align:center; font-size:12px; margin-top:8px; color:var(--mint); font-family:monospace; font-weight:bold;">0%</div>
                 </div>
                 <div class="milestones">
-                    <div class="card m-card"><small>ЭКВАТОР</small><b id="v-eq">0</b>дней</div>
-                    <div class="card m-card"><small>ПРИКАЗ</small><b id="v-ord">0</b>дней</div>
+                    <div class="card m-card"><small>ЭКВАТОР</small><b id="v-eq">0</b></div>
+                    <div class="card m-card"><small>ПРИКАЗ</small><b id="v-ord">0</b></div>
                 </div>
+                <center><p style="font-size:11px; color:var(--text-sub); text-decoration:underline; cursor:pointer; margin-top:15px;" onclick="localStorage.removeItem('s'); localStorage.removeItem('e'); location.reload();">Сбросить даты</p></center>
             </div>
         </div>
 
         <div id="wish" class="screen">
-            <span onclick="nav('home')" style="cursor:pointer; color:var(--accent)">← НАЗАД</span>
-            <div class="card" style="margin-top:10px;">
-                <h3>🎁 Wishlist</h3>
-                <div style="display:flex; gap:8px;"><input type="text" id="wi" placeholder="Что подарить?"><button onclick="addW()" style="width:50px; height:45px; background:var(--accent); border:none; border-radius:12px;">+</button></div>
+            <span class="back-link" onclick="nav('home')">← НАЗАД</span>
+            <div class="card">
+                <h3 style="margin-top:0;">🎁 Wishlist</h3>
+                <div style="display:flex; gap:10px; margin-bottom:20px;">
+                    <input type="text" id="wi" placeholder="Что подарить?" style="margin:0;">
+                    <button class="btn" onclick="addW()" style="width:auto; padding:0 22px; margin:0; font-size:20px;">+</button>
+                </div>
                 <div id="wl"></div>
             </div>
-        </div>
-
-        <div id="settings" class="screen">
-            <span onclick="nav('home')" style="cursor:pointer; color:var(--accent)">← НАЗАД</span>
-            <div class="card" style="margin-top:10px;">
-                <h3>ПЕРСОНАЛИЗАЦИЯ</h3>
-                <label>КАК НАЗЫВАТЬ ПОЛОВИНКУ?</label>
-                <input type="text" id="p-nick" placeholder="Напр: Заичка" oninput="updateNick()">
-            </div>
-            <button class="btn" style="background:#ff4b4b" onclick="breakRel()">💔 РАЗОРВАТЬ СВЯЗЬ</button>
         </div>
     </div>
 
@@ -99,49 +146,55 @@
         let tg = window.Telegram.WebApp; tg.expand();
         const params = new URLSearchParams(window.location.search);
 
-        // 1. ПРОВЕРКА НА РАЗРЫВ (ОЧИСТКА)
-        if (params.get('reset') === '1') {
-            localStorage.clear();
+        // 1. ПРОВЕРКА НА РАЗРЫВ
+        if (params.get('reset') === '1') localStorage.clear();
+
+        // 2. ЗАГРУЗКА ДАННЫХ ИЗ ССЫЛКИ
+        if (params.get('role') === 'girl') {
+            document.body.classList.add('theme-girl');
+            tg.headerColor = '#fff5f8';
+        } else {
+            tg.headerColor = '#0d0e15';
         }
 
-        // 2. ЗАГРУЗКА ДАННЫХ И ТЕМЫ
-        if (params.get('role') === 'girl') document.body.classList.add('theme-girl');
         if (params.get('s')) localStorage.setItem('s', params.get('s'));
         if (params.get('e')) localStorage.setItem('e', params.get('e'));
-        if (params.get('w')) localStorage.setItem('w', decodeURIComponent(params.get('w')));
-        if (params.get('st')) localStorage.setItem('st', decodeURIComponent(params.get('st')));
-
-        // 3. АВАТАРКИ И ИМЕНА
-        const myData = tg.initDataUnsafe?.user;
-        if(myData?.photo_url) document.getElementById('my-ava').src = myData.photo_url;
-        if(params.get('pp')) document.getElementById('p-ava').src = decodeURIComponent(params.get('pp'));
-        
-        function updateNick() {
-            const nick = document.getElementById('p-nick').value || params.get('pn') || "Половинка";
-            document.getElementById('pair-names').innerText = `${myData?.first_name || 'Я'} ❤️ ${nick}`;
+        if (params.get('w')) {
+            try { localStorage.setItem('w', decodeURIComponent(params.get('w'))); } catch(e) {}
         }
+
+        // 3. АВАТАРКИ И ИМЕНА БЕЗ "БИТЫХ" ИКОНОК
+        const myData = tg.initDataUnsafe?.user;
+        const myAva = document.getElementById('my-ava');
+        if(myData?.photo_url) {
+            myAva.style.backgroundImage = `url('${myData.photo_url}')`;
+            myAva.innerText = "";
+        } else {
+            myAva.innerText = myData?.first_name ? myData.first_name[0] : 'Я';
+        }
+
+        const pNick = params.get('pn') || "Половинка";
+        const pAva = document.getElementById('p-ava');
+        pAva.innerText = pNick !== "Половинка" ? pNick[0].toUpperCase() : "❤️";
+        
+        document.getElementById('pair-names').innerText = `${myData?.first_name || 'Я'} ❤️ ${pNick}`;
 
         function nav(id) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             document.getElementById(id).classList.add('active');
             if(id === 'dmb') checkDMB();
             if(id === 'wish') render();
-            if(id === 'settings') {
-                const st = JSON.parse(localStorage.getItem('st') || '{}');
-                document.getElementById('p-nick').value = st.nick || "";
-            }
-            updateNick();
         }
 
         function checkDMB() {
-            const s = localStorage.getItem('s');
-            if(s) { document.getElementById('setup').style.display='none'; document.getElementById('view').style.display='block'; tick(); }
+            if(localStorage.getItem('s')) { document.getElementById('setup').style.display='none'; document.getElementById('view').style.display='block'; tick(); }
             else { document.getElementById('setup').style.display='block'; document.getElementById('view').style.display='none'; }
         }
 
         function saveDMB() {
-            localStorage.setItem('s', document.getElementById('ds').value);
-            localStorage.setItem('e', document.getElementById('de').value);
+            const s = document.getElementById('ds').value; const e = document.getElementById('de').value;
+            if(!s || !e) return tg.showAlert("Выберите обе даты!");
+            localStorage.setItem('s', s); localStorage.setItem('e', e);
             checkDMB();
         }
 
@@ -150,43 +203,41 @@
             const end = new Date(localStorage.getItem('e')).getTime();
             const now = new Date().getTime();
             const left = end - now;
-            const p = Math.min(100, ((now - start) / (end - start)) * 100);
+            
+            if (now < start) { document.getElementById('perc').innerText = "Ожидание..."; return; }
+            if (now > end) { document.getElementById('perc').innerText = "100% ДЕМБЕЛЬ!"; document.getElementById('bar').style.width = '100%'; return; }
+
+            const p = ((now - start) / (end - start)) * 100;
             document.getElementById('bar').style.width = p + '%';
             document.getElementById('perc').innerText = p.toFixed(8) + '%';
             document.getElementById('vd').innerText = Math.floor(left / 86400000);
             document.getElementById('vh').innerText = Math.floor((left % 86400000) / 3600000).toString().padStart(2, '0');
             document.getElementById('vm').innerText = Math.floor((left % 3600000) / 60000).toString().padStart(2, '0');
             document.getElementById('vs').innerText = Math.floor((left % 60000) / 1000).toString().padStart(2, '0');
-            document.getElementById('v-eq').innerText = Math.max(0, Math.floor((start + (end-start)/2 - now)/86400000));
-            document.getElementById('v-ord').innerText = Math.max(0, Math.floor((end - 100*86400000 - now)/86400000));
+            
+            const eq = Math.floor((start + (end-start)/2 - now)/86400000);
+            document.getElementById('v-eq').innerText = eq > 0 ? eq : "0";
+            const ord = Math.floor((end - 100*86400000 - now)/86400000);
+            document.getElementById('v-ord').innerText = ord > 0 ? ord : "0";
         }
 
         let wishes = JSON.parse(localStorage.getItem('w') || '[]');
         function render() {
-            document.getElementById('wl').innerHTML = wishes.length === 0 ? '<p style="text-align:center; color:var(--text-sub);">Пусто...</p>' : 
+            document.getElementById('wl').innerHTML = wishes.length === 0 ? '<p style="text-align:center; color:var(--text-sub);">Пока ничего нет...</p>' : 
             wishes.map((w, i) => `<div class="wish-item"><span>${w}</span><span class="del-btn" onclick="del(${i})">×</span></div>`).join('');
         }
         function addW() {
-            const i = document.getElementById('wi'); if(!i.value) return;
+            const i = document.getElementById('wi'); if(!i.value.trim()) return;
             wishes.push(i.value.trim()); i.value=''; localStorage.setItem('w', JSON.stringify(wishes)); render();
         }
         function del(i) { wishes.splice(i, 1); localStorage.setItem('w', JSON.stringify(wishes)); render(); }
 
         function syncAll() {
-            const st = JSON.parse(localStorage.getItem('st') || '{}');
-            st.nick = document.getElementById('p-nick').value;
-            const data = { s: localStorage.getItem('s'), e: localStorage.getItem('e'), w: wishes, st: st };
+            const data = { s: localStorage.getItem('s'), e: localStorage.getItem('e'), w: wishes };
             tg.sendData(JSON.stringify(data));
         }
 
-        function breakRel() {
-            tg.showConfirm("Точно расстаемся?", (c) => {
-                if(c) { localStorage.clear(); tg.sendData(JSON.stringify({action:"break_pair"})); }
-            });
-        }
-
-        updateNick();
-        setInterval(() => { if(localStorage.getItem('s')) tick(); }, 1000);
+        setInterval(() => { if(localStorage.getItem('s')) tick(); }, 50);
     </script>
 </body>
 </html>
