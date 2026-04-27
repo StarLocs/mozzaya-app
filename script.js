@@ -1,20 +1,17 @@
-// 1. Загрузка из ссылки при старте (Облако)
 function loadFromUrl() {
     const params = new URLSearchParams(window.location.search);
     const s = params.get('s');
     const e = params.get('e');
     const w = params.get('w');
 
-    // Если в ссылке что-то пришло, ПЕРЕЗАПИСЫВАЕМ локальную память
     if (s) localStorage.setItem('dmb_s', s);
     if (e) localStorage.setItem('dmb_e', e);
     if (w) {
         try {
-            // Проверяем, что это валидный JSON массив
             const decodedWishes = decodeURIComponent(w);
             JSON.parse(decodedWishes); 
             localStorage.setItem('wishes', decodedWishes);
-        } catch(e) { console.error("Ошибка wishlist в URL"); }
+        } catch(e) { console.error("Ошибка чтения списка желаний"); }
     }
 }
 loadFromUrl();
@@ -30,7 +27,6 @@ function nav(id) {
     if (id === 'scr-wish') renderWishlist();
 }
 
-// ДМБ ТАЙМЕР
 let dmbInterval;
 function checkDMB() {
     const s = localStorage.getItem('dmb_s');
@@ -86,13 +82,13 @@ function updateDMB() {
     document.getElementById('t-h').innerText = Math.floor((left % 86400000) / 3600000).toString().padStart(2, '0');
     document.getElementById('t-m').innerText = Math.floor((left % 3600000) / 60000).toString().padStart(2, '0');
     document.getElementById('t-s').innerText = Math.floor((left % 60000) / 1000).toString().padStart(2, '0');
+    
     const eq = Math.floor((start + total / 2 - now) / 86400000);
     document.getElementById('m-eq').innerText = eq > 0 ? eq : "ПРОЙДЕН";
     const ord = Math.floor((end - 100 * 86400000 - now) / 86400000);
     document.getElementById('m-ord').innerText = ord > 0 ? ord : "ВЫШЕЛ";
 }
 
-// КОРЗИНА
 let wishes = JSON.parse(localStorage.getItem('wishes') || '[]');
 function renderWishlist() {
     const list = document.getElementById('w-list');
@@ -113,7 +109,6 @@ function delWish(i) {
     renderWishlist();
 }
 
-// СИНХРОНИЗАЦИЯ
 function syncWithBot() {
     const s = localStorage.getItem('dmb_s');
     const e = localStorage.getItem('dmb_e');
