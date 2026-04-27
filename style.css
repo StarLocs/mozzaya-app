@@ -1,72 +1,83 @@
 :root {
-    --bg: #0d0d0d;
-    --glass: rgba(255, 255, 255, 0.05);
+    --bg: #0a0a0a;
+    --glass: rgba(30, 30, 30, 0.7);
     --border: rgba(255, 255, 255, 0.08);
     --accent: #bb86fc;
     --mint: #03dac6;
+    --danger: #ff4b4b;
 }
 
 body {
     background-color: var(--bg);
     color: #fff;
-    font-family: -apple-system, system-ui, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     margin: 0; padding: 0;
     display: flex; justify-content: center;
+    min-height: 100vh;
 }
 
-.app-container { width: 100%; max-width: 400px; padding: 20px; box-sizing: border-box; }
+.app-container { width: 100%; max-width: 420px; padding: 25px 20px; box-sizing: border-box; }
+
 .screen { display: none; width: 100%; flex-direction: column; align-items: center; }
-.screen.active { display: flex; animation: slideUp 0.4s ease-out; }
+.screen.active { display: flex; animation: fadeSlide 0.3s ease-out forwards; }
 
-@keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeSlide {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
 
-header h1 { font-size: 32px; color: var(--accent); text-shadow: 0 0 15px rgba(187,134,252,0.4); margin: 0; text-align: center; }
-.subtitle { color: #555; font-size: 11px; letter-spacing: 2px; margin-bottom: 30px; text-align: center; }
+header { text-align: center; margin-bottom: 30px; }
+h1 { font-size: 34px; color: var(--accent); text-shadow: 0 0 20px rgba(187,134,252,0.4); margin: 0; font-weight: 900; }
+.subtitle { color: #666; font-size: 11px; letter-spacing: 3px; margin-top: 5px; font-weight: bold; }
 
 .glass-card {
     background: var(--glass);
     backdrop-filter: blur(15px);
     border: 1px solid var(--border);
     border-radius: 24px;
-    padding: 22px; width: 100%; box-sizing: border-box; margin-bottom: 12px;
+    padding: 22px; width: 100%; box-sizing: border-box; margin-bottom: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
 
-.menu-btn { display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
-.btn-content { display: flex; align-items: center; gap: 15px; font-weight: 700; }
-.arrow { color: var(--accent); }
+.menu-btn { display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: 0.2s; }
+.menu-btn:active { transform: scale(0.96); background: rgba(255,255,255,0.05); }
+.btn-group { display: flex; align-items: center; gap: 15px; }
+.icon { font-size: 24px; }
+.btn-text { font-weight: 800; font-size: 15px; letter-spacing: 1px; }
+.arrow { color: var(--accent); font-weight: bold; }
 
-/* DMB */
-.status-card { border-left: 4px solid var(--mint); }
-.status-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-#rank-name { color: var(--mint); font-weight: 900; font-size: 12px; letter-spacing: 1px; }
-.live-indicator { background: var(--mint); color: #000; font-size: 9px; font-weight: 900; padding: 2px 6px; border-radius: 4px; }
-#current-activity { font-size: 18px; font-weight: 600; }
+/* ДМБ СТИЛИ */
+.timer-label { text-align: center; font-size: 10px; color: #777; font-weight: bold; letter-spacing: 2px; margin: 0; }
+#main-timer { font-size: 32px; font-weight: 900; display: flex; justify-content: center; align-items: baseline; gap: 4px; margin: 15px 0; }
+#main-timer small { font-size: 13px; color: #666; margin-right: 6px; }
+.neon { color: var(--mint); text-shadow: 0 0 12px rgba(3, 218, 198, 0.6); width: 45px; display: inline-block; text-align: center; }
 
-#main-countdown { font-size: 28px; font-weight: 900; display: flex; justify-content: center; align-items: baseline; gap: 4px; margin: 15px 0; }
-#main-countdown small { font-size: 14px; color: #555; margin-right: 5px; }
-.neon { color: var(--mint); text-shadow: 0 0 10px var(--mint); width: 40px; display: inline-block; text-align: center; }
+.progress-wrap { height: 8px; background: rgba(255,255,255,0.05); border-radius: 10px; overflow: hidden; margin-bottom: 8px; }
+#progress-bar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--mint)); box-shadow: 0 0 10px var(--accent); transition: width 0.1s linear; }
+#perc-val { text-align: center; font-family: 'Courier New', monospace; color: var(--mint); font-size: 13px; font-weight: bold; }
 
-.progress-container { height: 8px; background: rgba(255,255,255,0.05); border-radius: 10px; overflow: hidden; margin-bottom: 8px; }
-#progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--mint)); transition: 1s ease; }
-#percent-display { text-align: center; font-family: monospace; color: var(--mint); font-size: 12px; }
+.milestones { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 100%; }
+.m-card { text-align: center; padding: 18px !important; }
+.m-card small { font-size: 9px; color: #666; display: block; margin-bottom: 5px; font-weight: bold; letter-spacing: 1px; }
+.m-card span { font-size: 24px; font-weight: 900; display: block; }
+.m-card p { font-size: 9px; color: var(--accent); margin: 5px 0 0 0; font-weight: bold; }
 
-.milestones-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; }
-.mini { text-align: center; padding: 15px !important; }
-.mini small { font-size: 9px; color: #555; display: block; margin-bottom: 5px; }
-.mini span { font-size: 22px; font-weight: 800; display: block; }
-.mini p { font-size: 9px; color: var(--accent); margin: 0; }
+/* ЭЛЕМЕНТЫ ВВОДА */
+input { width: 100%; background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 14px; padding: 15px; color: #fff; margin-bottom: 15px; box-sizing: border-box; outline: none; font-size: 14px; }
+label { display: block; font-size: 10px; color: #777; font-weight: 800; margin-bottom: 5px; letter-spacing: 1px; }
 
-/* INPUTS */
-input { width: 100%; background: #111; border: 1px solid var(--border); border-radius: 14px; padding: 14px; color: #fff; margin-bottom: 12px; box-sizing: border-box; outline: none; }
-label { display: block; font-size: 10px; color: #555; font-weight: 800; margin-bottom: 5px; }
-.primary-btn { width: 100%; background: var(--accent); border: none; padding: 16px; border-radius: 16px; font-weight: 800; color: #000; cursor: pointer; }
-.sync-btn { width: 100%; background: none; border: 1px solid var(--accent); color: var(--accent); padding: 14px; border-radius: 16px; margin-top: 10px; font-weight: 700; font-size: 12px; }
-.back-btn { align-self: flex-start; background: none; border: none; color: var(--accent); font-weight: bold; margin-bottom: 15px; cursor: pointer; }
-.reset-link { font-size: 10px; color: #333; text-align: center; width: 100%; display: block; margin-top: 15px; cursor: pointer; }
+/* КНОПКИ */
+.primary-btn { width: 100%; background: var(--accent); border: none; padding: 16px; border-radius: 16px; font-weight: 900; color: #000; cursor: pointer; font-size: 14px; letter-spacing: 1px; }
+.primary-btn:active { opacity: 0.8; }
+.danger-btn { width: 100%; background: rgba(255, 75, 75, 0.1); border: 1px solid var(--danger); color: var(--danger); padding: 16px; border-radius: 16px; font-weight: 900; cursor: pointer; letter-spacing: 1px; }
+.danger-btn:active { background: var(--danger); color: #fff; }
+.back-btn { align-self: flex-start; background: none; border: none; color: var(--accent); font-weight: 900; margin-bottom: 20px; font-size: 14px; cursor: pointer; padding: 0; }
+
 .hidden-block { display: none; width: 100%; }
+.link-text { font-size: 11px; color: #555; text-decoration: underline; cursor: pointer; margin-top: 15px; display: inline-block; }
 
 /* WISHLIST */
-.input-row { display: flex; gap: 10px; margin-bottom: 15px; }
-.add-btn { background: var(--accent); border: none; border-radius: 10px; padding: 0 18px; font-weight: 900; }
-.wish-item { background: rgba(255,255,255,0.03); padding: 14px; border-radius: 16px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--border); }
-.del-icon { color: #ff5252; font-weight: 800; cursor: pointer; font-size: 18px; }
+.input-row { display: flex; gap: 10px; margin-bottom: 20px; }
+.add-btn { background: var(--accent); border: none; border-radius: 14px; padding: 0 22px; font-weight: 900; font-size: 18px; color: #000; }
+.wish-item { background: rgba(255,255,255,0.03); padding: 16px; border-radius: 16px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--border); font-weight: 500; }
+.del-btn { color: var(--danger); font-weight: 900; cursor: pointer; font-size: 18px; padding-left: 15px; }

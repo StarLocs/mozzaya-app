@@ -7,91 +7,103 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
     <div class="app-container">
         
-        <div id="screen-home" class="screen active">
+        <div id="scr-home" class="screen active">
             <header>
                 <h1>MoZZaya ✨</h1>
-                <p class="subtitle">ВДВ: НИКТО, КРОМЕ НАС</p>
+                <p class="subtitle">ВАШЕ ЛИЧНОЕ ПРОСТРАНСТВО</p>
             </header>
 
-            <div class="glass-card menu-btn" onclick="showScreen('screen-dmb')">
-                <div class="btn-content">
+            <div class="glass-card menu-btn" onclick="nav('scr-dmb')">
+                <div class="btn-group">
                     <span class="icon">🎖</span>
                     <span class="btn-text">ШТАБ СЛУЖБЫ</span>
                 </div>
                 <span class="arrow">→</span>
             </div>
 
-            <div class="glass-card menu-btn" onclick="showScreen('screen-wish')">
-                <div class="btn-content">
+            <div class="glass-card menu-btn" onclick="nav('scr-wish')">
+                <div class="btn-group">
                     <span class="icon">🎁</span>
                     <span class="btn-text">КОРЗИНА СЧАСТЬЯ</span>
                 </div>
                 <span class="arrow">→</span>
             </div>
+
+            <div class="glass-card menu-btn" onclick="nav('scr-settings')" style="margin-top: 20px; border-color: rgba(255, 255, 255, 0.05);">
+                <div class="btn-group">
+                    <span class="icon">⚙️</span>
+                    <span class="btn-text" style="color: #888;">Настройки пары</span>
+                </div>
+                <span class="arrow" style="color: #888;">→</span>
+            </div>
         </div>
 
-        <div id="screen-dmb" class="screen">
-            <button class="back-btn" onclick="showScreen('screen-home')">← НАЗАД</button>
+        <div id="scr-dmb" class="screen">
+            <button class="back-btn" onclick="nav('scr-home')">← НАЗАД</button>
             
-            <div id="dmb-settings" class="glass-card">
-                <h3 style="margin-top:0">УСТАНОВКА ПРИКАЗА</h3>
+            <div id="dmb-setup" class="glass-card">
+                <h3>УСТАНОВКА ПРИКАЗА</h3>
                 <label>ДАТА ПРИЗЫВА:</label>
-                <input type="date" id="dmb-start">
+                <input type="date" id="in-start">
                 <label>ДАТА ДЕМБЕЛЯ:</label>
-                <input type="date" id="dmb-end">
-                <button class="primary-btn" onclick="saveDMB()">ВСТАТЬ В СТРОЙ</button>
+                <input type="date" id="in-end">
+                <button class="primary-btn" onclick="saveDMB()">НАЧАТЬ ОТСЧЕТ</button>
             </div>
 
-            <div id="dmb-display" class="hidden-block">
-                <div class="glass-card status-card">
-                    <div class="status-row">
-                        <span id="rank-name">РЯДОВОЙ</span>
-                        <div class="live-indicator">LIVE</div>
+            <div id="dmb-view" class="hidden-block">
+                <div class="glass-card">
+                    <p class="timer-label">ДО ДОМА ОСТАЛОСЬ:</p>
+                    <div id="main-timer">
+                        <span id="t-d">0</span><small>д</small>
+                        <span id="t-h">00</span><small>ч</small>
+                        <span id="t-m">00</span><small>м</small>
+                        <span id="t-s" class="neon">00</span>
                     </div>
-                    <span id="current-activity">Служба идет...</span>
+                    <div class="progress-wrap">
+                        <div id="progress-bar"></div>
+                    </div>
+                    <div id="perc-val">0.00000000%</div>
                 </div>
 
-                <div class="glass-card timer-card">
-                    <p class="timer-title">ДО ДОМА ОСТАЛОСЬ</p>
-                    <div id="main-countdown">
-                        <span id="val-d">0</span><small>д</small>
-                        <span id="val-h">00</span><small>ч</small>
-                        <span id="val-m">00</span><small>м</small>
-                        <span id="val-s" class="neon">00</span>
-                    </div>
-                    <div class="progress-container"><div id="progress-fill"></div></div>
-                    <div id="percent-display">0.000000%</div>
-                </div>
-
-                <div class="milestones-grid">
-                    <div class="glass-card mini">
+                <div class="milestones">
+                    <div class="glass-card m-card">
                         <small>ЭКВАТОР</small>
-                        <span id="val-eq">--</span>
+                        <span id="m-eq">--</span>
                         <p>ДНЕЙ</p>
                     </div>
-                    <div class="glass-card mini">
+                    <div class="glass-card m-card">
                         <small>ПРИКАЗ</small>
-                        <span id="val-ord">--</span>
+                        <span id="m-ord">--</span>
                         <p>ДНЕЙ</p>
                     </div>
                 </div>
-
-                <button class="sync-btn" onclick="syncWithBot()">💾 СИНХРОНИЗИРОВАТЬ</button>
-                <span class="reset-link" onclick="resetData()">сбросить данные</span>
+                <center><span class="link-text" onclick="clearDMB()">Сбросить даты таймера</span></center>
             </div>
         </div>
 
-        <div id="screen-wish" class="screen">
-            <button class="back-btn" onclick="showScreen('screen-home')">← НАЗАД</button>
+        <div id="scr-wish" class="screen">
+            <button class="back-btn" onclick="nav('scr-home')">← НАЗАД</button>
             <div class="glass-card">
-                <h2 style="margin-top:0">🎁 Wishlist</h2>
+                <h3 style="margin-top: 0;">🎁 Wishlist</h3>
                 <div class="input-row">
-                    <input type="text" id="wish-in" placeholder="Чего бы хотелось?">
+                    <input type="text" id="w-input" placeholder="Добавь желание...">
                     <button class="add-btn" onclick="addWish()">+</button>
                 </div>
-                <div id="wish-list-container"></div>
+                <div id="w-list"></div>
+            </div>
+        </div>
+
+        <div id="scr-settings" class="screen">
+            <button class="back-btn" onclick="nav('scr-home')">← НАЗАД</button>
+            <div class="glass-card">
+                <h3 style="margin-top: 0;">Управление связью</h3>
+                <p style="font-size: 12px; color: #888; margin-bottom: 20px;">
+                    Если вы хотите привязать другой аккаунт, вам нужно разорвать текущую связь. Это действие удалит все ваши совместные данные из базы.
+                </p>
+                <button class="danger-btn" onclick="breakPair()">💔 РАЗОРВАТЬ СВЯЗЬ</button>
             </div>
         </div>
 
