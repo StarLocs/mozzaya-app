@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>MoZZaya Premium</title>
     <style>
-        /* БАЗОВАЯ ТЕМА (ПАРНИ) */
+        /* БАЗОВАЯ ТЕМА */
         :root { 
             --bg-fallback: #0d0e15; 
             --card-bg: rgba(15, 15, 20, 0.65); 
@@ -17,7 +17,6 @@
             --card-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.6);
         }
 
-        /* ТЕМА ДЛЯ ДЕВУШКИ */
         body.theme-girl {
             --bg-fallback: #fff5f8; 
             --card-bg: rgba(255, 255, 255, 0.75); 
@@ -72,12 +71,12 @@
 
         .btn { background: var(--accent); color: #fff; border: none; padding: 16px; border-radius: 18px; font-weight: 900; cursor: pointer; width: 100%; font-size: 14px; letter-spacing: 1px; box-shadow: 0 8px 20px rgba(0,0,0,0.2); transition: 0.2s; }
         .btn:active { transform: scale(0.96); }
-        .btn:disabled { opacity: 0.7; cursor: not-allowed; }
         
         .sync-wrapper { text-align: center; margin-top: auto; padding-top: 25px; padding-bottom: 10px; }
         .btn-sync-small { 
             background: var(--card-bg); 
-            backdrop-filter: blur(10px); border: 1px solid var(--mint); color: var(--mint); 
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--mint); color: var(--mint); 
             padding: 10px 24px; border-radius: 30px; 
             font-size: 12px; font-weight: 800; letter-spacing: 1px;
             cursor: pointer; display: inline-flex; align-items: center; gap: 8px;
@@ -110,13 +109,24 @@
         .bg-thumb:active { transform: scale(0.9); }
         .btn-reset-bg { background: transparent; border: 1px solid var(--text-sub); color: var(--text-sub); margin-top: 15px; font-size: 11px; }
 
-        /* АНИМАЦИЯ РАДАРА */
-        .radar-container { width: 140px; height: 140px; margin: 30px auto; position: relative; display: flex; align-items: center; justify-content: center; }
-        .radar-core { font-size: 55px; z-index: 2; animation: spin-globe 6s linear infinite; filter: drop-shadow(0 0 10px var(--mint)); }
-        .radar-pulse { position: absolute; width: 100%; height: 100%; border-radius: 50%; border: 2px solid var(--mint); background: radial-gradient(circle, var(--mint) 0%, transparent 60%); opacity: 0; animation: radar-ping 2s ease-out infinite; }
-        .radar-pulse:nth-child(2) { animation-delay: 1s; }
-        @keyframes spin-globe { 100% { transform: rotate(360deg); } }
-        @keyframes radar-ping { 0% { transform: scale(0.3); opacity: 0.8; } 100% { transform: scale(1.5); opacity: 0; } }
+        /* КРАСИВЫЙ РАДАР */
+        .planet-wrap { position: relative; width: 140px; height: 140px; margin: 20px auto 30px auto; display: flex; justify-content: center; align-items: center; }
+        .planet {
+            width: 90px; height: 90px;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            border-radius: 50%;
+            box-shadow: inset -10px -10px 20px rgba(0,0,0,0.5), 0 0 20px var(--mint);
+            animation: pulse-planet 3s ease-in-out infinite;
+            z-index: 2; position: relative;
+        }
+        @keyframes pulse-planet { 
+            0%, 100% { transform: scale(1); box-shadow: 0 0 15px var(--mint); } 
+            50% { transform: scale(1.05); box-shadow: 0 0 30px var(--mint); } 
+        }
+        .radar-ring { position: absolute; border: 1px solid var(--mint); border-radius: 50%; opacity: 0; animation: radarPing 3s ease-out infinite; }
+        .r1 { width: 120px; height: 120px; animation-delay: 0s; }
+        .r2 { width: 160px; height: 160px; animation-delay: 1.5s; }
+        @keyframes radarPing { 0% { transform: scale(0.5); opacity: 0.8; } 100% { transform: scale(1.5); opacity: 0; } }
     </style>
 </head>
 <body>
@@ -131,7 +141,11 @@
             
             <div class="card menu-item" onclick="nav('dmb')"><span>🎖 ШТАБ СЛУЖБЫ</span> <span style="color:var(--accent)">→</span></div>
             <div class="card menu-item" onclick="nav('wish')"><span>🎁 КОРЗИНА СЧАСТЬЯ</span> <span style="color:var(--accent)">→</span></div>
-            <div class="card menu-item" onclick="nav('locator')" style="border-color: var(--mint);"><span>📍 РАДАР СВЯЗИ</span> <span style="color:var(--mint)">→</span></div>
+            
+            <div class="card menu-item" onclick="nav('locator')" style="border-color: var(--mint);">
+                <span>📍 РАДАР СВЯЗИ</span> <span style="color:var(--mint)">→</span>
+            </div>
+
             <div class="card menu-item" onclick="nav('settings')"><span>⚙️ НАСТРОЙКИ ФОНА</span> <span style="color:var(--accent)">→</span></div>
             
             <div class="sync-wrapper">
@@ -142,18 +156,23 @@
         <div id="locator" class="screen">
             <span class="back-link" onclick="nav('home')">← НАЗАД</span>
             <div class="card" style="text-align:center;">
-                <h3 style="margin-top:0; color:var(--mint);">ГЛОБАЛЬНЫЙ ПОИСК</h3>
-                <p style="font-size:11px; color:var(--text-sub); line-height:1.4;">Отправь текущие координаты своей половинке, чтобы она знала, где ты находишься.</p>
+                <h3 style="margin-top:0; color:var(--mint); margin-bottom: 5px;">ГЛОБАЛЬНЫЙ ПОИСК</h3>
+                <p style="font-size:10px; color:var(--text-sub); margin-top:0; line-height:1.4;">Отправь координаты или узнай, где сейчас твоя половинка.</p>
 
-                <div class="radar-container">
-                    <div class="radar-pulse"></div>
-                    <div class="radar-pulse"></div>
-                    <div class="radar-core">🌍</div>
+                <div class="planet-wrap">
+                    <div class="radar-ring r1"></div>
+                    <div class="radar-ring r2"></div>
+                    <div class="planet"></div>
                 </div>
 
-                <div id="loc-status" style="margin: 15px 0; font-size:12px; font-weight:800; color:var(--accent); min-height:15px;"></div>
-
-                <button class="btn" style="background:var(--mint); color:#000;" id="btn-loc" onclick="sendLocation()">📍 ОТПРАВИТЬ ГЕОМЕТКУ</button>
+                <p id="loc-status" style="font-size:11px; color:var(--accent); font-weight:bold; margin: 15px 0; text-transform:uppercase; min-height: 15px;"></p>
+                
+                <button class="btn" id="btn-loc" onclick="sendLocation()" style="background: var(--mint); color: #000; margin-bottom: 10px;">
+                    📍 ОТПРАВИТЬ ГЕОМЕТКУ
+                </button>
+                <button class="btn" onclick="viewPartnerLocation()" style="background: rgba(255,255,255,0.1); border: 1px solid var(--accent); color: #fff;">
+                    👀 ГДЕ МОЯ ПОЛОВИНКА?
+                </button>
             </div>
         </div>
 
@@ -219,9 +238,12 @@
 
         if (params.get('reset') === '1') localStorage.clear();
 
+        // СОХРАНЯЕМ В КЭШ ДЛЯ ЛЕВОЙ КНОПКИ ТГ
         if (params.has('role')) localStorage.setItem('role', params.get('role'));
         if (params.has('pn')) localStorage.setItem('pn', params.get('pn'));
         if (params.has('pp')) localStorage.setItem('pp', params.get('pp'));
+        if (params.has('plat')) localStorage.setItem('plat', params.get('plat'));
+        if (params.has('plon')) localStorage.setItem('plon', params.get('plon'));
         if (params.get('s')) localStorage.setItem('s', params.get('s'));
         if (params.get('e')) localStorage.setItem('e', params.get('e'));
         if (params.get('w')) { try { localStorage.setItem('w', decodeURIComponent(params.get('w'))); } catch(e) {} }
@@ -249,7 +271,6 @@
             applyBackground();
             tg.HapticFeedback.impactOccurred('light');
         }
-
         function resetBg() {
             localStorage.removeItem('custom_bg');
             applyBackground();
@@ -281,52 +302,37 @@
             document.getElementById(id).classList.add('active');
             if(id === 'dmb') checkDMB();
             if(id === 'wish') render();
-            // Сбрасываем статус локатора при заходе
             if(id === 'locator') document.getElementById('loc-status').innerText = ""; 
         }
 
-        // === НОВАЯ ФУНКЦИЯ ЛОКАТОРА ===
+        // ЛОКАТОР
         function sendLocation() {
             const btn = document.getElementById('btn-loc');
             const status = document.getElementById('loc-status');
-            
-            btn.innerText = "⏳ ПОИСК СПУТНИКОВ...";
-            btn.disabled = true;
-            status.innerText = "";
-
-            if (!navigator.geolocation) {
-                status.innerText = "❌ Твой телефон не поддерживает геолокацию";
-                status.style.color = "#ff4757";
-                btn.innerText = "📍 ОТПРАВИТЬ ГЕОМЕТКУ";
-                btn.disabled = false;
-                return;
-            }
+            btn.disabled = true; status.innerText = "ПОИСК СПУТНИКОВ...";
 
             navigator.geolocation.getCurrentPosition(
                 (pos) => {
-                    const data = {
-                        action: "checkin",
-                        lat: pos.coords.latitude,
-                        lon: pos.coords.longitude
-                    };
-                    tg.sendData(JSON.stringify(data));
-                    tg.HapticFeedback.notificationOccurred('success');
-                    
-                    status.innerText = "✅ КООРДИНАТЫ ОТПРАВЛЕНЫ!";
-                    status.style.color = "var(--mint)";
-                    btn.innerText = "📍 ОТПРАВИТЬ ГЕОМЕТКУ";
-                    btn.disabled = false;
+                    tg.sendData(JSON.stringify({action: "checkin", lat: pos.coords.latitude, lon: pos.coords.longitude}));
+                    status.innerText = "СИГНАЛ ОТПРАВЛЕН!";
+                    setTimeout(() => { btn.disabled = false; }, 3000);
                 },
-                (err) => {
-                    status.innerText = "❌ ОШИБКА: Разреши доступ к геопозиции!";
-                    status.style.color = "#ff4757";
-                    btn.innerText = "📍 ОТПРАВИТЬ ГЕОМЕТКУ";
-                    btn.disabled = false;
-                },
-                { enableHighAccuracy: true, timeout: 10000 }
+                () => { status.innerText = "ОШИБКА ГЕОПОЗИЦИИ!"; btn.disabled = false; },
+                { enableHighAccuracy: true }
             );
         }
 
+        function viewPartnerLocation() {
+            const plat = localStorage.getItem('plat');
+            const plon = localStorage.getItem('plon');
+            if(!plat || !plon) {
+                tg.showAlert("Твоя половинка еще не отправляла геометку! 💔");
+            } else {
+                window.open(`https://yandex.ru/maps/?pt=${plon},${plat}&z=16&l=map`, '_blank');
+            }
+        }
+
+        // ТАЙМЕР
         function checkDMB() {
             if(localStorage.getItem('s')) { document.getElementById('setup').style.display='none'; document.getElementById('view').style.display='block'; tick(); }
             else { document.getElementById('setup').style.display='block'; document.getElementById('view').style.display='none'; }
@@ -362,6 +368,7 @@
             document.getElementById('v-ord').innerText = ord > 0 ? ord : "0";
         }
 
+        // КОРЗИНА
         let wishes = JSON.parse(localStorage.getItem('w') || '[]');
         function render() {
             document.getElementById('wl').innerHTML = wishes.length === 0 ? '<p style="text-align:center; color:var(--text-sub);">Пока ничего нет...</p>' : 
@@ -373,6 +380,7 @@
         }
         function del(i) { wishes.splice(i, 1); localStorage.setItem('w', JSON.stringify(wishes)); render(); }
 
+        // СИНХРОНИЗАЦИЯ
         function syncAll() {
             const data = { s: localStorage.getItem('s'), e: localStorage.getItem('e'), w: wishes };
             tg.sendData(JSON.stringify(data));
