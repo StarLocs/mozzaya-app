@@ -49,7 +49,7 @@
         .card { 
             background: var(--card-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
             border: 1px solid var(--border); border-radius: 28px; 
-            padding: 22px; margin-bottom: 15px; box-shadow: var(--card-shadow); 
+            padding: 18px 22px; margin-bottom: 15px; box-shadow: var(--card-shadow); 
         }
 
         /* --- ШАПКА --- */
@@ -88,10 +88,20 @@
         }
         body.theme-girl #pair-names { background: linear-gradient(90deg, #222, var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-        /* --- КНОПКИ ГЛАВНОГО МЕНЮ --- */
-        .menu-item { display: flex; justify-content: space-between; align-items: center; font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 14px; padding: 20px; text-transform: uppercase; letter-spacing: 1px;}
-        .menu-item:active { transform: scale(0.97); }
-        .sortable-ghost { opacity: 0.5; transform: scale(0.95); background: rgba(255,255,255,0.1); border: 1px dashed var(--accent); } /* Эффект перетаскивания */
+        /* --- КНОПКИ ГЛАВНОГО МЕНЮ И ПЕРЕТАСКИВАНИЕ --- */
+        .menu-item { display: flex; align-items: center; padding: 0; overflow: hidden; }
+        .menu-content { 
+            flex-grow: 1; padding: 22px; cursor: pointer; 
+            font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 14px; text-transform: uppercase; letter-spacing: 1px;
+        }
+        .menu-content:active { background: rgba(255,255,255,0.05); }
+        .drag-handle {
+            padding: 22px 25px; font-size: 22px; color: var(--text-sub); cursor: grab; 
+            touch-action: none; /* ЖИЗНЕННО ВАЖНО ДЛЯ МОБИЛОК: отключает скролл на ручке */
+            display: flex; align-items: center; justify-content: center;
+        }
+        .drag-handle:active { cursor: grabbing; color: var(--accent); }
+        .sortable-ghost { opacity: 0.4; transform: scale(0.95); background: rgba(255,255,255,0.05); border: 1px dashed var(--text-sub); } 
 
         .btn { font-family: 'Montserrat', sans-serif; background: var(--accent); color: #fff; border: none; padding: 18px; border-radius: 20px; font-weight: 900; cursor: pointer; width: 100%; font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; box-shadow: 0 10px 25px rgba(0,0,0,0.3); transition: 0.2s; }
         .btn:active { transform: scale(0.96); }
@@ -153,16 +163,26 @@
                     <div id="p-ava" class="avatar">?</div>
                 </div>
                 <h2 id="pair-names">Я ❤️ Половинка</h2>
-                <p style="margin: 5px 0 0 0; font-size: 9px; color: var(--text-sub); text-transform: uppercase; font-family: 'Montserrat', sans-serif; letter-spacing: 1px;">Зажми кнопку, чтобы изменить порядок</p>
+                <p style="margin: 5px 0 0 0; font-size: 9px; color: var(--text-sub); text-transform: uppercase; font-family: 'Montserrat', sans-serif; letter-spacing: 1px;">Тяни за ≡ для сортировки</p>
             </div>
             
             <div id="sortable-menu">
-                <div class="card menu-item" data-id="dmb" onclick="nav('dmb')"><span>🎖 Штаб службы</span> <span style="color:var(--accent)">→</span></div>
-                <div class="card menu-item" data-id="wish" onclick="nav('wish')"><span>🎁 Корзина счастья</span> <span style="color:var(--accent)">→</span></div>
-                <div class="card menu-item" data-id="locator" onclick="nav('locator')" style="border-color: var(--mint); box-shadow: 0 0 15px rgba(3, 218, 198, 0.2);">
-                    <span>📍 Радар связи</span> <span style="color:var(--mint)">→</span>
+                <div class="card menu-item" data-id="dmb">
+                    <div class="menu-content" onclick="nav('dmb')">🎖 Штаб службы</div>
+                    <div class="drag-handle">≡</div>
                 </div>
-                <div class="card menu-item" data-id="settings" onclick="nav('settings')"><span>⚙️ Настройки фона</span> <span style="color:var(--accent)">→</span></div>
+                <div class="card menu-item" data-id="wish">
+                    <div class="menu-content" onclick="nav('wish')">🎁 Корзина счастья</div>
+                    <div class="drag-handle">≡</div>
+                </div>
+                <div class="card menu-item" data-id="locator">
+                    <div class="menu-content" onclick="nav('locator')">📍 Радар связи</div>
+                    <div class="drag-handle">≡</div>
+                </div>
+                <div class="card menu-item" data-id="settings">
+                    <div class="menu-content" onclick="nav('settings')">⚙️ Настройки фона</div>
+                    <div class="drag-handle">≡</div>
+                </div>
             </div>
             
             <div class="sync-wrapper">
@@ -287,10 +307,9 @@
         else { pAva.innerText = pNick !== "Половинка" ? pNick[0].toUpperCase() : "❤️"; }
         document.getElementById('pair-names').innerText = `${myData?.first_name || 'Я'} \u00A0❤️\u00A0 ${pNick}`;
 
-        // === ИДЕАЛЬНОЕ ПЕРЕТАСКИВАНИЕ КНОПОК ===
+        // === ИДЕАЛЬНОЕ ПЕРЕТАСКИВАНИЕ С РУЧКАМИ ===
         const menuContainer = document.getElementById('sortable-menu');
         
-        // Загружаем сохраненный порядок
         try {
             const savedOrder = JSON.parse(localStorage.getItem('menuOrder'));
             if (savedOrder && Array.isArray(savedOrder)) {
@@ -301,16 +320,12 @@
             }
         } catch(e) {}
 
-        // Включаем умную библиотеку (зажатие 400мс)
         if (typeof Sortable !== 'undefined') {
             new Sortable(menuContainer, {
+                handle: '.drag-handle', // <--- ВОТ ГЛАВНЫЙ СЕКРЕТ. ТЯНЕТСЯ ТОЛЬКО ЗА РУЧКУ
                 animation: 250,
-                delay: 400, // Нужно зажать на полсекунды
-                delayOnTouchOnly: true, // Только для сенсорных экранов
-                touchStartThreshold: 5, // Не реагирует на случайные свайпы
                 ghostClass: 'sortable-ghost',
                 onEnd: function () {
-                    // Сохраняет порядок АВТОМАТИЧЕСКИ, когда отпускаешь палец
                     const newOrder = Array.from(menuContainer.children).map(el => el.getAttribute('data-id'));
                     localStorage.setItem('menuOrder', JSON.stringify(newOrder));
                     tg.HapticFeedback.notificationOccurred('success');
@@ -318,7 +333,7 @@
             });
         }
 
-        // Навигация
+        // Навигация (теперь кнопка нажимается только по тексту, а тащится только за ручку)
         function nav(id) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             document.getElementById(id).classList.add('active');
