@@ -192,12 +192,19 @@
         let tg = window.Telegram.WebApp; tg.expand();
         const params = new URLSearchParams(window.location.search);
 
+        // 1. ПРОВЕРКА НА РАЗРЫВ
         if (params.get('reset') === '1') localStorage.clear();
 
-        // УСТАНОВКА ТЕМЫ И ФОНА
-        const role = params.get('role');
-        const customBg = localStorage.getItem('custom_bg');
+        // 2. СОХРАНЯЕМ ДАННЫЕ В КЭШ ДЛЯ ЛЕВОЙ КНОПКИ
+        if (params.has('role')) localStorage.setItem('role', params.get('role'));
+        if (params.has('pn')) localStorage.setItem('pn', params.get('pn'));
+        if (params.has('pp')) localStorage.setItem('pp', params.get('pp'));
+        if (params.get('s')) localStorage.setItem('s', params.get('s'));
+        if (params.get('e')) localStorage.setItem('e', params.get('e'));
+        if (params.get('w')) { try { localStorage.setItem('w', decodeURIComponent(params.get('w'))); } catch(e) {} }
 
+        // 3. УСТАНОВКА ТЕМЫ
+        const role = localStorage.getItem('role') || 'boy';
         if (role === 'girl') {
             document.body.classList.add('theme-girl');
             tg.headerColor = '#fff5f8';
@@ -205,7 +212,6 @@
             tg.headerColor = '#0d0e15';
         }
 
-        // Применяем фон
         function applyBackground() {
             const currentBg = localStorage.getItem('custom_bg');
             if (currentBg) {
@@ -214,12 +220,12 @@
                 document.body.style.backgroundImage = role === 'girl' ? `url('img/bg_girl_default.jpg')` : `url('img/bg_boy_default.jpg')`;
             }
         }
-        applyBackground(); // Запускаем при старте
+        applyBackground();
 
         function setBg(filename) {
             localStorage.setItem('custom_bg', filename);
             applyBackground();
-            tg.HapticFeedback.impactOccurred('light'); // Легкая вибрация при клике
+            tg.HapticFeedback.impactOccurred('light');
         }
 
         function resetBg() {
@@ -227,14 +233,7 @@
             applyBackground();
         }
 
-        // ЗАГРУЗКА ДАННЫХ
-        if (params.get('s')) localStorage.setItem('s', params.get('s'));
-        if (params.get('e')) localStorage.setItem('e', params.get('e'));
-        if (params.get('w')) {
-            try { localStorage.setItem('w', decodeURIComponent(params.get('w'))); } catch(e) {}
-        }
-
-        // АВАТАРКИ И ИМЕНА
+        // 4. АВАТАРКИ И ИМЕНА ИЗ КЭША
         const myData = tg.initDataUnsafe?.user;
         const myAva = document.getElementById('my-ava');
         if(myData?.photo_url) {
@@ -244,9 +243,16 @@
             myAva.innerText = myData?.first_name ? myData.first_name[0] : 'Я';
         }
 
-        const pNick = params.get('pn') || "Половинка";
+        const pNick = localStorage.getItem('pn') || "Половинка";
+        const pPhoto = localStorage.getItem('pp');
         const pAva = document.getElementById('p-ava');
-        pAva.innerText = pNick !== "Половинка" ? pNick[0].toUpperCase() : "❤️";
+        
+        if (pPhoto && pPhoto !== "") {
+            pAva.style.backgroundImage = `url('${pPhoto}')`;
+            pAva.innerText = "";
+        } else {
+            pAva.innerText = pNick !== "Половинка" ? pNick[0].toUpperCase() : "❤️";
+        }
         document.getElementById('pair-names').innerText = `${myData?.first_name || 'Я'} ❤️ ${pNick}`;
 
         function nav(id) {
