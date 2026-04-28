@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>MoZZaya Premium</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
     
     <style>
         :root { 
@@ -38,7 +38,7 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
             margin: 0; display: flex; justify-content: center; 
             min-height: 100vh; overflow-x: hidden; transition: background-image 0.4s ease-in-out;
-            user-select: none; /* Запрет выделения текста при долгом нажатии */
+            user-select: none; -webkit-user-select: none;
         }
 
         .app { width: 100%; max-width: 400px; padding: 20px 20px 30px 20px; box-sizing: border-box; display: flex; flex-direction: column; }
@@ -52,7 +52,7 @@
             padding: 22px; margin-bottom: 15px; box-shadow: var(--card-shadow); 
         }
 
-        /* --- КРУТАЯ ШАПКА ПРОФИЛЯ --- */
+        /* --- ШАПКА --- */
         .header-badge {
             background: var(--card-bg);
             backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
@@ -88,11 +88,14 @@
         }
         body.theme-girl #pair-names { background: linear-gradient(90deg, #222, var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-        .menu-item { display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 14px; padding: 20px; text-transform: uppercase; letter-spacing: 1px;}
+        /* --- КНОПКИ ГЛАВНОГО МЕНЮ --- */
+        .menu-item { display: flex; justify-content: space-between; align-items: center; font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 14px; padding: 20px; text-transform: uppercase; letter-spacing: 1px;}
         .menu-item:active { transform: scale(0.97); }
+        .sortable-ghost { opacity: 0.5; transform: scale(0.95); background: rgba(255,255,255,0.1); border: 1px dashed var(--accent); } /* Эффект перетаскивания */
 
         .btn { font-family: 'Montserrat', sans-serif; background: var(--accent); color: #fff; border: none; padding: 18px; border-radius: 20px; font-weight: 900; cursor: pointer; width: 100%; font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; box-shadow: 0 10px 25px rgba(0,0,0,0.3); transition: 0.2s; }
         .btn:active { transform: scale(0.96); }
+        .btn:disabled { opacity: 0.6; cursor: not-allowed; }
         
         .sync-wrapper { text-align: center; margin-top: auto; padding-top: 25px; padding-bottom: 10px; }
         .btn-sync-small { 
@@ -129,6 +132,7 @@
         .bg-thumb:active { transform: scale(0.9); }
         .btn-reset-bg { font-family: 'Montserrat', sans-serif; background: transparent; border: 1px solid var(--text-sub); color: var(--text-sub); margin-top: 20px; font-size: 11px; }
 
+        /* --- ПЛАНЕТА --- */
         .planet-wrap { position: relative; width: 160px; height: 160px; margin: 20px auto 40px auto; display: flex; justify-content: center; align-items: center; }
         .planet { font-size: 90px; line-height: 1; display: flex; justify-content: center; align-items: center; animation: float-spin 6s ease-in-out infinite; filter: drop-shadow(0 0 25px var(--mint)); z-index: 2; position: relative; }
         .planet::after { content: '🌍'; } 
@@ -137,26 +141,6 @@
         .r1 { width: 140px; height: 140px; animation-delay: 0s; }
         .r2 { width: 190px; height: 190px; animation-delay: 1.5s; }
         @keyframes radarPing { 0% { transform: scale(0.5); opacity: 0.8; } 100% { transform: scale(1.5); opacity: 0; } }
-
-        /* --- РЕЖИМ РЕДАКТИРОВАНИЯ (ДРОЖАНИЕ КНОПОК) --- */
-        @keyframes wiggle {
-            0% { transform: rotate(0deg); }
-            25% { transform: rotate(-1.5deg); }
-            50% { transform: rotate(0deg); }
-            75% { transform: rotate(1.5deg); }
-            100% { transform: rotate(0deg); }
-        }
-        .edit-mode .menu-item {
-            animation: wiggle 0.3s infinite;
-            cursor: grab;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
-        }
-        .edit-mode .menu-item:active { cursor: grabbing; }
-        .sortable-ghost { opacity: 0.4; transform: scale(0.95); } /* Эффект полупрозрачности при перетаскивании */
-        
-        #save-order-btn { display: none; margin-top: 20px; background: #fff; color: #000; border-color: #fff; }
-        body.theme-girl #save-order-btn { background: #222; color: #fff; border-color: #222; }
-
     </style>
 </head>
 <body>
@@ -169,7 +153,7 @@
                     <div id="p-ava" class="avatar">?</div>
                 </div>
                 <h2 id="pair-names">Я ❤️ Половинка</h2>
-                <p style="margin: 5px 0 0 0; font-size: 9px; color: var(--text-sub); text-transform: uppercase; font-family: 'Montserrat', sans-serif; letter-spacing: 1px;">Зажми кнопку, чтобы переместить</p>
+                <p style="margin: 5px 0 0 0; font-size: 9px; color: var(--text-sub); text-transform: uppercase; font-family: 'Montserrat', sans-serif; letter-spacing: 1px;">Зажми кнопку, чтобы изменить порядок</p>
             </div>
             
             <div id="sortable-menu">
@@ -182,8 +166,7 @@
             </div>
             
             <div class="sync-wrapper">
-                <button class="btn-sync-small" id="save-order-btn" onclick="saveMenuOrder()">✅ Сохранить порядок</button>
-                <div class="btn-sync-small" id="sync-btn" onclick="syncAll()">🔄 Синхронизировать данные</div>
+                <div class="btn-sync-small" onclick="syncAll()">🔄 Синхронизировать данные</div>
             </div>
         </div>
 
@@ -271,7 +254,7 @@
 
         if (params.get('reset') === '1') localStorage.clear();
 
-        // СОХРАНЯЕМ В КЭШ
+        // СОХРАНЯЕМ ДАННЫЕ ИЗ БОТА В ПАМЯТЬ ТЕЛЕФОНА
         ['role', 'pn', 'pp', 'plat', 'plon', 's', 'e'].forEach(p => {
             if (params.has(p)) localStorage.setItem(p, params.get(p));
         });
@@ -304,63 +287,39 @@
         else { pAva.innerText = pNick !== "Половинка" ? pNick[0].toUpperCase() : "❤️"; }
         document.getElementById('pair-names').innerText = `${myData?.first_name || 'Я'} \u00A0❤️\u00A0 ${pNick}`;
 
-        // === ЛОГИКА ПЕРЕТАСКИВАНИЯ КНОПОК ===
-        let isEditMode = false;
-        let sortableInstance = null;
-        let pressTimer;
+        // === ИДЕАЛЬНОЕ ПЕРЕТАСКИВАНИЕ КНОПОК ===
         const menuContainer = document.getElementById('sortable-menu');
-
-        // Восстановление порядка при запуске
-        const savedOrder = JSON.parse(localStorage.getItem('menuOrder'));
-        if (savedOrder) {
-            savedOrder.forEach(id => {
-                const el = menuContainer.querySelector(`[data-id="${id}"]`);
-                if (el) menuContainer.appendChild(el);
-            });
-        }
-
-        // Долгое нажатие (зажатие пальцем)
-        menuContainer.addEventListener('touchstart', (e) => {
-            if (e.target.closest('.menu-item') && !isEditMode) {
-                pressTimer = setTimeout(() => {
-                    enableEditMode();
-                }, 700); // 700 миллисекунд для срабатывания
+        
+        // Загружаем сохраненный порядок
+        try {
+            const savedOrder = JSON.parse(localStorage.getItem('menuOrder'));
+            if (savedOrder && Array.isArray(savedOrder)) {
+                savedOrder.forEach(id => {
+                    const el = menuContainer.querySelector(`[data-id="${id}"]`);
+                    if (el) menuContainer.appendChild(el);
+                });
             }
-        });
-        menuContainer.addEventListener('touchend', () => clearTimeout(pressTimer));
-        menuContainer.addEventListener('touchmove', () => clearTimeout(pressTimer));
+        } catch(e) {}
 
-        function enableEditMode() {
-            isEditMode = true;
-            tg.HapticFeedback.impactOccurred('heavy'); // Вибрация
-            menuContainer.classList.add('edit-mode');
-            document.getElementById('save-order-btn').style.display = 'inline-flex';
-            document.getElementById('sync-btn').style.display = 'none';
-
-            sortableInstance = new Sortable(menuContainer, {
-                animation: 200,
-                delay: 100, // Минимальная задержка чтобы не конфликтовать со скроллом
-                delayOnTouchOnly: true
+        // Включаем умную библиотеку (зажатие 400мс)
+        if (typeof Sortable !== 'undefined') {
+            new Sortable(menuContainer, {
+                animation: 250,
+                delay: 400, // Нужно зажать на полсекунды
+                delayOnTouchOnly: true, // Только для сенсорных экранов
+                touchStartThreshold: 5, // Не реагирует на случайные свайпы
+                ghostClass: 'sortable-ghost',
+                onEnd: function () {
+                    // Сохраняет порядок АВТОМАТИЧЕСКИ, когда отпускаешь палец
+                    const newOrder = Array.from(menuContainer.children).map(el => el.getAttribute('data-id'));
+                    localStorage.setItem('menuOrder', JSON.stringify(newOrder));
+                    tg.HapticFeedback.notificationOccurred('success');
+                }
             });
-        }
-
-        function saveMenuOrder() {
-            if (sortableInstance) {
-                const newOrder = sortableInstance.toArray();
-                localStorage.setItem('menuOrder', JSON.stringify(newOrder));
-                sortableInstance.destroy();
-                sortableInstance = null;
-            }
-            isEditMode = false;
-            menuContainer.classList.remove('edit-mode');
-            document.getElementById('save-order-btn').style.display = 'none';
-            document.getElementById('sync-btn').style.display = 'inline-flex';
-            tg.HapticFeedback.notificationOccurred('success');
         }
 
         // Навигация
         function nav(id) {
-            if (isEditMode) return; // Если трясется (режим ред.), то клик не открывает меню
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             document.getElementById(id).classList.add('active');
             if(id === 'dmb') checkDMB();
@@ -368,7 +327,7 @@
             if(id === 'locator') document.getElementById('loc-status').innerText = ""; 
         }
 
-        // ЛОКАТОР
+        // === УМНЫЙ ЛОКАТОР ===
         function sendLocation() {
             const btn = document.getElementById('btn-loc');
             const status = document.getElementById('loc-status');
@@ -376,28 +335,38 @@
             status.innerText = "ПОИСК СПУТНИКОВ...";
             status.style.color = "var(--mint)";
 
+            if (!navigator.geolocation) {
+                status.innerText = "❌ ГЕОЛОКАЦИЯ НЕ ПОДДЕРЖИВАЕТСЯ ТЕЛЕФОНОМ";
+                status.style.color = "#ff4757";
+                btn.disabled = false;
+                return;
+            }
+
             navigator.geolocation.getCurrentPosition(
                 (pos) => {
                     try {
                         tg.sendData(JSON.stringify({action: "checkin", lat: pos.coords.latitude, lon: pos.coords.longitude}));
-                        status.innerText = "✅ ОТПРАВЛЕНО!";
+                        status.innerText = "✅ ОТПРАВЛЕНО БОТУ!";
                         
+                        // Если ТГ не закрыл апп за 1.5 сек - значит зашел не через ту кнопку
                         setTimeout(() => {
-                            status.innerText = "❌ ОШИБКА: ОТКРОЙ ЧЕРЕЗ ГЛАВНУЮ КНОПКУ В ЧАТЕ!";
+                            status.innerText = "❌ ТЕЛЕГРАМ ЗАБЛОКИРОВАЛ ОТПРАВКУ!\nЗайди через большую фиолетовую кнопку «Открыть MoZZaya ✨» в чате бота!";
                             status.style.color = "#ff4757";
                             btn.disabled = false;
-                        }, 800);
+                        }, 1500);
+                        
                     } catch (e) {
                         status.innerText = "❌ ОШИБКА. Открой через меню бота.";
                         btn.disabled = false;
                     }
                 },
-                () => { 
-                    status.innerText = "❌ РАЗРЕШИ ДОСТУП В НАСТРОЙКАХ ТЕЛЕФОНА!"; 
+                (error) => { 
+                    if(error.code === 1) status.innerText = "❌ ТЫ ЗАПРЕТИЛ ДОСТУП К ГЕОПОЗИЦИИ!"; 
+                    else status.innerText = "❌ ОШИБКА ПОЛУЧЕНИЯ КООРДИНАТ!";
                     status.style.color = "#ff4757";
                     btn.disabled = false; 
                 },
-                { enableHighAccuracy: true }
+                { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
             );
         }
 
