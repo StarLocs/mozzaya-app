@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>MoZZaya Premium</title>
     <style>
-        /* БАЗОВАЯ ТЕМА */
         :root { 
             --bg-fallback: #0d0e15; 
             --card-bg: rgba(15, 15, 20, 0.65); 
@@ -30,15 +29,11 @@
 
         body { 
             background-color: var(--bg-fallback);
-            background-size: cover; 
-            background-position: center;
-            background-attachment: fixed;
-            background-repeat: no-repeat;
-            color: var(--text-main); 
-            font-family: -apple-system, sans-serif; 
+            background-size: cover; background-position: center;
+            background-attachment: fixed; background-repeat: no-repeat;
+            color: var(--text-main); font-family: -apple-system, sans-serif; 
             margin: 0; display: flex; justify-content: center; 
-            min-height: 100vh; overflow-x: hidden;
-            transition: background-image 0.4s ease-in-out;
+            min-height: 100vh; overflow-x: hidden; transition: background-image 0.4s ease-in-out;
         }
 
         .app { width: 100%; max-width: 400px; padding: 25px 20px; box-sizing: border-box; display: flex; flex-direction: column; }
@@ -47,13 +42,11 @@
         @keyframes slideFade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         
         .card { 
-            background: var(--card-bg); 
-            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            background: var(--card-bg); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
             border: 1px solid var(--border); border-radius: 24px; 
             padding: 22px; margin-bottom: 15px; box-shadow: var(--card-shadow); 
         }
 
-        /* АВАТАРКИ */
         .profile-row { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 5px; margin-top: 10px; }
         .avatar { 
             width: 50px; height: 50px; border-radius: 50%; 
@@ -74,8 +67,7 @@
         
         .sync-wrapper { text-align: center; margin-top: auto; padding-top: 25px; padding-bottom: 10px; }
         .btn-sync-small { 
-            background: var(--card-bg); 
-            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            background: var(--card-bg); backdrop-filter: blur(10px); 
             border: 1px solid var(--mint); color: var(--mint); 
             padding: 10px 24px; border-radius: 30px; 
             font-size: 12px; font-weight: 800; letter-spacing: 1px;
@@ -103,29 +95,27 @@
         .del-btn { color: #ff4757; cursor: pointer; font-size: 20px; font-weight: bold; padding-left: 15px; }
         .back-link { cursor: pointer; color: var(--accent); font-weight: 900; margin-bottom: 20px; display: inline-block; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; }
 
-        /* ГАЛЕРЕЯ ФОНОВ */
         .bg-gallery { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 10px; }
         .bg-thumb { width: 100%; height: 80px; border-radius: 12px; background-size: cover; background-position: center; cursor: pointer; border: 2px solid transparent; transition: 0.2s; }
         .bg-thumb:active { transform: scale(0.9); }
         .btn-reset-bg { background: transparent; border: 1px solid var(--text-sub); color: var(--text-sub); margin-top: 15px; font-size: 11px; }
 
-        /* КРАСИВЫЙ РАДАР */
+        /* НАСТОЯЩАЯ 3D ПЛАНЕТА ЗЕМЛЯ */
         .planet-wrap { position: relative; width: 140px; height: 140px; margin: 20px auto 30px auto; display: flex; justify-content: center; align-items: center; }
         .planet {
-            width: 90px; height: 90px;
-            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            width: 100px; height: 100px;
+            background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Land_ocean_ice_2048.jpg/640px-Land_ocean_ice_2048.jpg');
+            background-size: 200px 100px;
             border-radius: 50%;
-            box-shadow: inset -10px -10px 20px rgba(0,0,0,0.5), 0 0 20px var(--mint);
-            animation: pulse-planet 3s ease-in-out infinite;
+            box-shadow: inset -15px -15px 25px rgba(0,0,0,0.7), 0 0 20px var(--mint);
+            animation: spin-planet 15s linear infinite;
             z-index: 2; position: relative;
         }
-        @keyframes pulse-planet { 
-            0%, 100% { transform: scale(1); box-shadow: 0 0 15px var(--mint); } 
-            50% { transform: scale(1.05); box-shadow: 0 0 30px var(--mint); } 
-        }
+        @keyframes spin-planet { from { background-position: 0 0; } to { background-position: 200px 0; } }
+        
         .radar-ring { position: absolute; border: 1px solid var(--mint); border-radius: 50%; opacity: 0; animation: radarPing 3s ease-out infinite; }
-        .r1 { width: 120px; height: 120px; animation-delay: 0s; }
-        .r2 { width: 160px; height: 160px; animation-delay: 1.5s; }
+        .r1 { width: 130px; height: 130px; animation-delay: 0s; }
+        .r2 { width: 170px; height: 170px; animation-delay: 1.5s; }
         @keyframes radarPing { 0% { transform: scale(0.5); opacity: 0.8; } 100% { transform: scale(1.5); opacity: 0; } }
     </style>
 </head>
@@ -141,11 +131,9 @@
             
             <div class="card menu-item" onclick="nav('dmb')"><span>🎖 ШТАБ СЛУЖБЫ</span> <span style="color:var(--accent)">→</span></div>
             <div class="card menu-item" onclick="nav('wish')"><span>🎁 КОРЗИНА СЧАСТЬЯ</span> <span style="color:var(--accent)">→</span></div>
-            
             <div class="card menu-item" onclick="nav('locator')" style="border-color: var(--mint);">
                 <span>📍 РАДАР СВЯЗИ</span> <span style="color:var(--mint)">→</span>
             </div>
-
             <div class="card menu-item" onclick="nav('settings')"><span>⚙️ НАСТРОЙКИ ФОНА</span> <span style="color:var(--accent)">→</span></div>
             
             <div class="sync-wrapper">
@@ -157,7 +145,7 @@
             <span class="back-link" onclick="nav('home')">← НАЗАД</span>
             <div class="card" style="text-align:center;">
                 <h3 style="margin-top:0; color:var(--mint); margin-bottom: 5px;">ГЛОБАЛЬНЫЙ ПОИСК</h3>
-                <p style="font-size:10px; color:var(--text-sub); margin-top:0; line-height:1.4;">Отправь координаты или узнай, где сейчас твоя половинка.</p>
+                <p style="font-size:10px; color:var(--text-sub); margin-top:0; line-height:1.4;">Обменяйтесь геометками, чтобы всегда быть рядом.</p>
 
                 <div class="planet-wrap">
                     <div class="radar-ring r1"></div>
@@ -165,7 +153,7 @@
                     <div class="planet"></div>
                 </div>
 
-                <p id="loc-status" style="font-size:11px; color:var(--accent); font-weight:bold; margin: 15px 0; text-transform:uppercase; min-height: 15px;"></p>
+                <p id="loc-status" style="font-size:11px; font-weight:bold; margin: 15px 0; min-height: 25px;"></p>
                 
                 <button class="btn" id="btn-loc" onclick="sendLocation()" style="background: var(--mint); color: #000; margin-bottom: 10px;">
                     📍 ОТПРАВИТЬ ГЕОМЕТКУ
@@ -238,7 +226,6 @@
 
         if (params.get('reset') === '1') localStorage.clear();
 
-        // СОХРАНЯЕМ В КЭШ ДЛЯ ЛЕВОЙ КНОПКИ ТГ
         if (params.has('role')) localStorage.setItem('role', params.get('role'));
         if (params.has('pn')) localStorage.setItem('pn', params.get('pn'));
         if (params.has('pp')) localStorage.setItem('pp', params.get('pp'));
@@ -249,52 +236,30 @@
         if (params.get('w')) { try { localStorage.setItem('w', decodeURIComponent(params.get('w'))); } catch(e) {} }
 
         const role = localStorage.getItem('role') || 'boy';
-        if (role === 'girl') {
-            document.body.classList.add('theme-girl');
-            tg.headerColor = '#fff5f8';
-        } else {
-            tg.headerColor = '#0d0e15';
-        }
+        if (role === 'girl') { document.body.classList.add('theme-girl'); tg.headerColor = '#fff5f8'; } 
+        else { tg.headerColor = '#0d0e15'; }
 
         function applyBackground() {
             const currentBg = localStorage.getItem('custom_bg');
-            if (currentBg) {
-                document.body.style.backgroundImage = `url('img/${currentBg}')`;
-            } else {
-                document.body.style.backgroundImage = role === 'girl' ? `url('img/bg_girl_default.jpg')` : `url('img/bg_boy_default.jpg')`;
-            }
+            if (currentBg) { document.body.style.backgroundImage = `url('img/${currentBg}')`; } 
+            else { document.body.style.backgroundImage = role === 'girl' ? `url('img/bg_girl_default.jpg')` : `url('img/bg_boy_default.jpg')`; }
         }
         applyBackground();
 
-        function setBg(filename) {
-            localStorage.setItem('custom_bg', filename);
-            applyBackground();
-            tg.HapticFeedback.impactOccurred('light');
-        }
-        function resetBg() {
-            localStorage.removeItem('custom_bg');
-            applyBackground();
-        }
+        function setBg(filename) { localStorage.setItem('custom_bg', filename); applyBackground(); tg.HapticFeedback.impactOccurred('light'); }
+        function resetBg() { localStorage.removeItem('custom_bg'); applyBackground(); }
 
         const myData = tg.initDataUnsafe?.user;
         const myAva = document.getElementById('my-ava');
-        if(myData?.photo_url) {
-            myAva.style.backgroundImage = `url('${myData.photo_url}')`;
-            myAva.innerText = "";
-        } else {
-            myAva.innerText = myData?.first_name ? myData.first_name[0] : 'Я';
-        }
+        if(myData?.photo_url) { myAva.style.backgroundImage = `url('${myData.photo_url}')`; myAva.innerText = ""; } 
+        else { myAva.innerText = myData?.first_name ? myData.first_name[0] : 'Я'; }
 
         const pNick = localStorage.getItem('pn') || "Половинка";
         const pPhoto = localStorage.getItem('pp');
         const pAva = document.getElementById('p-ava');
         
-        if (pPhoto && pPhoto !== "") {
-            pAva.style.backgroundImage = `url('${pPhoto}')`;
-            pAva.innerText = "";
-        } else {
-            pAva.innerText = pNick !== "Половинка" ? pNick[0].toUpperCase() : "❤️";
-        }
+        if (pPhoto && pPhoto !== "") { pAva.style.backgroundImage = `url('${pPhoto}')`; pAva.innerText = ""; } 
+        else { pAva.innerText = pNick !== "Половинка" ? pNick[0].toUpperCase() : "❤️"; }
         document.getElementById('pair-names').innerText = `${myData?.first_name || 'Я'} ❤️ ${pNick}`;
 
         function nav(id) {
@@ -305,19 +270,37 @@
             if(id === 'locator') document.getElementById('loc-status').innerText = ""; 
         }
 
-        // ЛОКАТОР
+        // ЗАЩИЩЕННЫЙ ЛОКАТОР
         function sendLocation() {
             const btn = document.getElementById('btn-loc');
             const status = document.getElementById('loc-status');
-            btn.disabled = true; status.innerText = "ПОИСК СПУТНИКОВ...";
+            btn.disabled = true; 
+            status.innerText = "ПОИСК СПУТНИКОВ...";
+            status.style.color = "var(--mint)";
 
             navigator.geolocation.getCurrentPosition(
                 (pos) => {
-                    tg.sendData(JSON.stringify({action: "checkin", lat: pos.coords.latitude, lon: pos.coords.longitude}));
-                    status.innerText = "СИГНАЛ ОТПРАВЛЕН!";
-                    setTimeout(() => { btn.disabled = false; }, 3000);
+                    try {
+                        tg.sendData(JSON.stringify({action: "checkin", lat: pos.coords.latitude, lon: pos.coords.longitude}));
+                        status.innerText = "✅ ОТПРАВЛЕНО!";
+                        
+                        // Если приложение через 1 сек не закрылось - значит Телеграм заблокировал отправку из-за левой кнопки
+                        setTimeout(() => {
+                            status.innerText = "❌ ОШИБКА: ТЕЛЕГРАМ БЛОКИРУЕТ ОТПРАВКУ!\nЗакрой это окно и открой приложение через большую кнопку «💜 Открыть MoZZaya ✨» в чате бота!";
+                            status.style.color = "#ff4757";
+                            btn.disabled = false;
+                        }, 800);
+                        
+                    } catch (e) {
+                        status.innerText = "❌ ОШИБКА ДОСТУПА. Открой через меню бота.";
+                        btn.disabled = false;
+                    }
                 },
-                () => { status.innerText = "ОШИБКА ГЕОПОЗИЦИИ!"; btn.disabled = false; },
+                () => { 
+                    status.innerText = "❌ РАЗРЕШИ ДОСТУП К ГЕОПОЗИЦИИ В НАСТРОЙКАХ ТЕЛЕФОНА!"; 
+                    status.style.color = "#ff4757";
+                    btn.disabled = false; 
+                },
                 { enableHighAccuracy: true }
             );
         }
@@ -332,7 +315,6 @@
             }
         }
 
-        // ТАЙМЕР
         function checkDMB() {
             if(localStorage.getItem('s')) { document.getElementById('setup').style.display='none'; document.getElementById('view').style.display='block'; tick(); }
             else { document.getElementById('setup').style.display='block'; document.getElementById('view').style.display='none'; }
@@ -368,7 +350,6 @@
             document.getElementById('v-ord').innerText = ord > 0 ? ord : "0";
         }
 
-        // КОРЗИНА
         let wishes = JSON.parse(localStorage.getItem('w') || '[]');
         function render() {
             document.getElementById('wl').innerHTML = wishes.length === 0 ? '<p style="text-align:center; color:var(--text-sub);">Пока ничего нет...</p>' : 
@@ -380,11 +361,14 @@
         }
         function del(i) { wishes.splice(i, 1); localStorage.setItem('w', JSON.stringify(wishes)); render(); }
 
-        // СИНХРОНИЗАЦИЯ
         function syncAll() {
-            const data = { s: localStorage.getItem('s'), e: localStorage.getItem('e'), w: wishes };
-            tg.sendData(JSON.stringify(data));
-            tg.HapticFeedback.notificationOccurred('success');
+            try {
+                const data = { s: localStorage.getItem('s'), e: localStorage.getItem('e'), w: wishes };
+                tg.sendData(JSON.stringify(data));
+                tg.HapticFeedback.notificationOccurred('success');
+            } catch (e) {
+                tg.showAlert("Телеграм блокирует сохранение! Открой приложение через фиолетовую кнопку «Открыть MoZZaya» в чате бота.");
+            }
         }
 
         setInterval(() => { if(localStorage.getItem('s')) tick(); }, 50);
