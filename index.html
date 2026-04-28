@@ -72,13 +72,12 @@
 
         .btn { background: var(--accent); color: #fff; border: none; padding: 16px; border-radius: 18px; font-weight: 900; cursor: pointer; width: 100%; font-size: 14px; letter-spacing: 1px; box-shadow: 0 8px 20px rgba(0,0,0,0.2); transition: 0.2s; }
         .btn:active { transform: scale(0.96); }
+        .btn:disabled { opacity: 0.7; cursor: not-allowed; }
         
-        /* СИНХРОНИЗАЦИЯ */
         .sync-wrapper { text-align: center; margin-top: auto; padding-top: 25px; padding-bottom: 10px; }
         .btn-sync-small { 
             background: var(--card-bg); 
-            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-            border: 1px solid var(--mint); color: var(--mint); 
+            backdrop-filter: blur(10px); border: 1px solid var(--mint); color: var(--mint); 
             padding: 10px 24px; border-radius: 30px; 
             font-size: 12px; font-weight: 800; letter-spacing: 1px;
             cursor: pointer; display: inline-flex; align-items: center; gap: 8px;
@@ -109,8 +108,15 @@
         .bg-gallery { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 10px; }
         .bg-thumb { width: 100%; height: 80px; border-radius: 12px; background-size: cover; background-position: center; cursor: pointer; border: 2px solid transparent; transition: 0.2s; }
         .bg-thumb:active { transform: scale(0.9); }
-        .bg-thumb.selected { border-color: var(--mint); box-shadow: 0 0 15px var(--mint); }
         .btn-reset-bg { background: transparent; border: 1px solid var(--text-sub); color: var(--text-sub); margin-top: 15px; font-size: 11px; }
+
+        /* АНИМАЦИЯ РАДАРА */
+        .radar-container { width: 140px; height: 140px; margin: 30px auto; position: relative; display: flex; align-items: center; justify-content: center; }
+        .radar-core { font-size: 55px; z-index: 2; animation: spin-globe 6s linear infinite; filter: drop-shadow(0 0 10px var(--mint)); }
+        .radar-pulse { position: absolute; width: 100%; height: 100%; border-radius: 50%; border: 2px solid var(--mint); background: radial-gradient(circle, var(--mint) 0%, transparent 60%); opacity: 0; animation: radar-ping 2s ease-out infinite; }
+        .radar-pulse:nth-child(2) { animation-delay: 1s; }
+        @keyframes spin-globe { 100% { transform: rotate(360deg); } }
+        @keyframes radar-ping { 0% { transform: scale(0.3); opacity: 0.8; } 100% { transform: scale(1.5); opacity: 0; } }
     </style>
 </head>
 <body>
@@ -125,10 +131,29 @@
             
             <div class="card menu-item" onclick="nav('dmb')"><span>🎖 ШТАБ СЛУЖБЫ</span> <span style="color:var(--accent)">→</span></div>
             <div class="card menu-item" onclick="nav('wish')"><span>🎁 КОРЗИНА СЧАСТЬЯ</span> <span style="color:var(--accent)">→</span></div>
+            <div class="card menu-item" onclick="nav('locator')" style="border-color: var(--mint);"><span>📍 РАДАР СВЯЗИ</span> <span style="color:var(--mint)">→</span></div>
             <div class="card menu-item" onclick="nav('settings')"><span>⚙️ НАСТРОЙКИ ФОНА</span> <span style="color:var(--accent)">→</span></div>
             
             <div class="sync-wrapper">
                 <div class="btn-sync-small" onclick="syncAll()">🔄 Синхронизировать данные</div>
+            </div>
+        </div>
+
+        <div id="locator" class="screen">
+            <span class="back-link" onclick="nav('home')">← НАЗАД</span>
+            <div class="card" style="text-align:center;">
+                <h3 style="margin-top:0; color:var(--mint);">ГЛОБАЛЬНЫЙ ПОИСК</h3>
+                <p style="font-size:11px; color:var(--text-sub); line-height:1.4;">Отправь текущие координаты своей половинке, чтобы она знала, где ты находишься.</p>
+
+                <div class="radar-container">
+                    <div class="radar-pulse"></div>
+                    <div class="radar-pulse"></div>
+                    <div class="radar-core">🌍</div>
+                </div>
+
+                <div id="loc-status" style="margin: 15px 0; font-size:12px; font-weight:800; color:var(--accent); min-height:15px;"></div>
+
+                <button class="btn" style="background:var(--mint); color:#000;" id="btn-loc" onclick="sendLocation()">📍 ОТПРАВИТЬ ГЕОМЕТКУ</button>
             </div>
         </div>
 
@@ -192,10 +217,8 @@
         let tg = window.Telegram.WebApp; tg.expand();
         const params = new URLSearchParams(window.location.search);
 
-        // 1. ПРОВЕРКА НА РАЗРЫВ
         if (params.get('reset') === '1') localStorage.clear();
 
-        // 2. СОХРАНЯЕМ ДАННЫЕ В КЭШ ДЛЯ ЛЕВОЙ КНОПКИ
         if (params.has('role')) localStorage.setItem('role', params.get('role'));
         if (params.has('pn')) localStorage.setItem('pn', params.get('pn'));
         if (params.has('pp')) localStorage.setItem('pp', params.get('pp'));
@@ -203,7 +226,6 @@
         if (params.get('e')) localStorage.setItem('e', params.get('e'));
         if (params.get('w')) { try { localStorage.setItem('w', decodeURIComponent(params.get('w'))); } catch(e) {} }
 
-        // 3. УСТАНОВКА ТЕМЫ
         const role = localStorage.getItem('role') || 'boy';
         if (role === 'girl') {
             document.body.classList.add('theme-girl');
@@ -233,7 +255,6 @@
             applyBackground();
         }
 
-        // 4. АВАТАРКИ И ИМЕНА ИЗ КЭША
         const myData = tg.initDataUnsafe?.user;
         const myAva = document.getElementById('my-ava');
         if(myData?.photo_url) {
@@ -260,9 +281,52 @@
             document.getElementById(id).classList.add('active');
             if(id === 'dmb') checkDMB();
             if(id === 'wish') render();
+            // Сбрасываем статус локатора при заходе
+            if(id === 'locator') document.getElementById('loc-status').innerText = ""; 
         }
 
-        // ТАЙМЕР ДМБ
+        // === НОВАЯ ФУНКЦИЯ ЛОКАТОРА ===
+        function sendLocation() {
+            const btn = document.getElementById('btn-loc');
+            const status = document.getElementById('loc-status');
+            
+            btn.innerText = "⏳ ПОИСК СПУТНИКОВ...";
+            btn.disabled = true;
+            status.innerText = "";
+
+            if (!navigator.geolocation) {
+                status.innerText = "❌ Твой телефон не поддерживает геолокацию";
+                status.style.color = "#ff4757";
+                btn.innerText = "📍 ОТПРАВИТЬ ГЕОМЕТКУ";
+                btn.disabled = false;
+                return;
+            }
+
+            navigator.geolocation.getCurrentPosition(
+                (pos) => {
+                    const data = {
+                        action: "checkin",
+                        lat: pos.coords.latitude,
+                        lon: pos.coords.longitude
+                    };
+                    tg.sendData(JSON.stringify(data));
+                    tg.HapticFeedback.notificationOccurred('success');
+                    
+                    status.innerText = "✅ КООРДИНАТЫ ОТПРАВЛЕНЫ!";
+                    status.style.color = "var(--mint)";
+                    btn.innerText = "📍 ОТПРАВИТЬ ГЕОМЕТКУ";
+                    btn.disabled = false;
+                },
+                (err) => {
+                    status.innerText = "❌ ОШИБКА: Разреши доступ к геопозиции!";
+                    status.style.color = "#ff4757";
+                    btn.innerText = "📍 ОТПРАВИТЬ ГЕОМЕТКУ";
+                    btn.disabled = false;
+                },
+                { enableHighAccuracy: true, timeout: 10000 }
+            );
+        }
+
         function checkDMB() {
             if(localStorage.getItem('s')) { document.getElementById('setup').style.display='none'; document.getElementById('view').style.display='block'; tick(); }
             else { document.getElementById('setup').style.display='block'; document.getElementById('view').style.display='none'; }
@@ -298,7 +362,6 @@
             document.getElementById('v-ord').innerText = ord > 0 ? ord : "0";
         }
 
-        // КОРЗИНА
         let wishes = JSON.parse(localStorage.getItem('w') || '[]');
         function render() {
             document.getElementById('wl').innerHTML = wishes.length === 0 ? '<p style="text-align:center; color:var(--text-sub);">Пока ничего нет...</p>' : 
@@ -310,7 +373,6 @@
         }
         function del(i) { wishes.splice(i, 1); localStorage.setItem('w', JSON.stringify(wishes)); render(); }
 
-        // СИНХРОНИЗАЦИЯ
         function syncAll() {
             const data = { s: localStorage.getItem('s'), e: localStorage.getItem('e'), w: wishes };
             tg.sendData(JSON.stringify(data));
