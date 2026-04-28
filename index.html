@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>MoZZaya Premium</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
+    
     <style>
         :root { 
             --bg-fallback: #0d0e15; 
@@ -36,6 +38,7 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
             margin: 0; display: flex; justify-content: center; 
             min-height: 100vh; overflow-x: hidden; transition: background-image 0.4s ease-in-out;
+            user-select: none; /* Запрет выделения текста при долгом нажатии */
         }
 
         .app { width: 100%; max-width: 400px; padding: 20px 20px 30px 20px; box-sizing: border-box; display: flex; flex-direction: column; }
@@ -57,15 +60,9 @@
             border-radius: 35px;
             padding: 25px 15px;
             margin-bottom: 25px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            box-shadow: var(--card-shadow);
-            position: relative;
-            overflow: hidden;
+            display: flex; flex-direction: column; align-items: center;
+            box-shadow: var(--card-shadow); position: relative; overflow: hidden;
         }
-        
-        /* Блик на стекле */
         .header-badge::before {
             content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
             background: linear-gradient(to right, transparent, rgba(255,255,255,0.1), transparent);
@@ -86,17 +83,8 @@
         @keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.25); } }
 
         #pair-names {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 19px;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin: 0;
-            text-align: center;
-            background: linear-gradient(90deg, #fff, var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            z-index: 2;
+            font-family: 'Montserrat', sans-serif; font-size: 19px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; margin: 0; text-align: center;
+            background: linear-gradient(90deg, #fff, var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; z-index: 2;
         }
         body.theme-girl #pair-names { background: linear-gradient(90deg, #222, var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
@@ -141,33 +129,39 @@
         .bg-thumb:active { transform: scale(0.9); }
         .btn-reset-bg { font-family: 'Montserrat', sans-serif; background: transparent; border: 1px solid var(--text-sub); color: var(--text-sub); margin-top: 20px; font-size: 11px; }
 
-        /* --- НОВАЯ СВЕТЯЩАЯСЯ ПЛАНЕТА --- */
         .planet-wrap { position: relative; width: 160px; height: 160px; margin: 20px auto 40px auto; display: flex; justify-content: center; align-items: center; }
-        .planet {
-            font-size: 90px; /* Размер эмодзи */
-            line-height: 1;
-            display: flex; justify-content: center; align-items: center;
-            animation: float-spin 6s ease-in-out infinite;
-            filter: drop-shadow(0 0 25px var(--mint));
-            z-index: 2; position: relative;
-        }
-        .planet::after { content: '🌍'; } /* Безопасный символ, который всегда загрузится */
-        
-        @keyframes float-spin { 
-            0%, 100% { transform: translateY(0) rotate(-5deg) scale(1); filter: drop-shadow(0 0 20px var(--mint)); } 
-            50% { transform: translateY(-12px) rotate(5deg) scale(1.08); filter: drop-shadow(0 0 40px var(--mint)); } 
-        }
-        
+        .planet { font-size: 90px; line-height: 1; display: flex; justify-content: center; align-items: center; animation: float-spin 6s ease-in-out infinite; filter: drop-shadow(0 0 25px var(--mint)); z-index: 2; position: relative; }
+        .planet::after { content: '🌍'; } 
+        @keyframes float-spin { 0%, 100% { transform: translateY(0) rotate(-5deg) scale(1); filter: drop-shadow(0 0 20px var(--mint)); } 50% { transform: translateY(-12px) rotate(5deg) scale(1.08); filter: drop-shadow(0 0 40px var(--mint)); } }
         .radar-ring { position: absolute; border: 2px solid var(--mint); border-radius: 50%; opacity: 0; animation: radarPing 3s ease-out infinite; }
         .r1 { width: 140px; height: 140px; animation-delay: 0s; }
         .r2 { width: 190px; height: 190px; animation-delay: 1.5s; }
         @keyframes radarPing { 0% { transform: scale(0.5); opacity: 0.8; } 100% { transform: scale(1.5); opacity: 0; } }
+
+        /* --- РЕЖИМ РЕДАКТИРОВАНИЯ (ДРОЖАНИЕ КНОПОК) --- */
+        @keyframes wiggle {
+            0% { transform: rotate(0deg); }
+            25% { transform: rotate(-1.5deg); }
+            50% { transform: rotate(0deg); }
+            75% { transform: rotate(1.5deg); }
+            100% { transform: rotate(0deg); }
+        }
+        .edit-mode .menu-item {
+            animation: wiggle 0.3s infinite;
+            cursor: grab;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+        }
+        .edit-mode .menu-item:active { cursor: grabbing; }
+        .sortable-ghost { opacity: 0.4; transform: scale(0.95); } /* Эффект полупрозрачности при перетаскивании */
+        
+        #save-order-btn { display: none; margin-top: 20px; background: #fff; color: #000; border-color: #fff; }
+        body.theme-girl #save-order-btn { background: #222; color: #fff; border-color: #222; }
+
     </style>
 </head>
 <body>
     <div class="app">
         <div id="home" class="screen active">
-            
             <div class="header-badge">
                 <div class="profile-row">
                     <div id="my-ava" class="avatar">Я</div>
@@ -175,17 +169,21 @@
                     <div id="p-ava" class="avatar">?</div>
                 </div>
                 <h2 id="pair-names">Я ❤️ Половинка</h2>
+                <p style="margin: 5px 0 0 0; font-size: 9px; color: var(--text-sub); text-transform: uppercase; font-family: 'Montserrat', sans-serif; letter-spacing: 1px;">Зажми кнопку, чтобы переместить</p>
             </div>
             
-            <div class="card menu-item" onclick="nav('dmb')"><span>🎖 Штаб службы</span> <span style="color:var(--accent)">→</span></div>
-            <div class="card menu-item" onclick="nav('wish')"><span>🎁 Корзина счастья</span> <span style="color:var(--accent)">→</span></div>
-            <div class="card menu-item" onclick="nav('locator')" style="border-color: var(--mint); box-shadow: 0 0 15px rgba(3, 218, 198, 0.2);">
-                <span>📍 Радар связи</span> <span style="color:var(--mint)">→</span>
+            <div id="sortable-menu">
+                <div class="card menu-item" data-id="dmb" onclick="nav('dmb')"><span>🎖 Штаб службы</span> <span style="color:var(--accent)">→</span></div>
+                <div class="card menu-item" data-id="wish" onclick="nav('wish')"><span>🎁 Корзина счастья</span> <span style="color:var(--accent)">→</span></div>
+                <div class="card menu-item" data-id="locator" onclick="nav('locator')" style="border-color: var(--mint); box-shadow: 0 0 15px rgba(3, 218, 198, 0.2);">
+                    <span>📍 Радар связи</span> <span style="color:var(--mint)">→</span>
+                </div>
+                <div class="card menu-item" data-id="settings" onclick="nav('settings')"><span>⚙️ Настройки фона</span> <span style="color:var(--accent)">→</span></div>
             </div>
-            <div class="card menu-item" onclick="nav('settings')"><span>⚙️ Настройки фона</span> <span style="color:var(--accent)">→</span></div>
             
             <div class="sync-wrapper">
-                <div class="btn-sync-small" onclick="syncAll()">🔄 Синхронизировать данные</div>
+                <button class="btn-sync-small" id="save-order-btn" onclick="saveMenuOrder()">✅ Сохранить порядок</button>
+                <div class="btn-sync-small" id="sync-btn" onclick="syncAll()">🔄 Синхронизировать данные</div>
             </div>
         </div>
 
@@ -267,7 +265,6 @@
         </div>
     </div>
 
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
         let tg = window.Telegram.WebApp; tg.expand();
         const params = new URLSearchParams(window.location.search);
@@ -275,13 +272,9 @@
         if (params.get('reset') === '1') localStorage.clear();
 
         // СОХРАНЯЕМ В КЭШ
-        if (params.has('role')) localStorage.setItem('role', params.get('role'));
-        if (params.has('pn')) localStorage.setItem('pn', params.get('pn'));
-        if (params.has('pp')) localStorage.setItem('pp', params.get('pp'));
-        if (params.has('plat')) localStorage.setItem('plat', params.get('plat'));
-        if (params.has('plon')) localStorage.setItem('plon', params.get('plon'));
-        if (params.get('s')) localStorage.setItem('s', params.get('s'));
-        if (params.get('e')) localStorage.setItem('e', params.get('e'));
+        ['role', 'pn', 'pp', 'plat', 'plon', 's', 'e'].forEach(p => {
+            if (params.has(p)) localStorage.setItem(p, params.get(p));
+        });
         if (params.get('w')) { try { localStorage.setItem('w', decodeURIComponent(params.get('w'))); } catch(e) {} }
 
         const role = localStorage.getItem('role') || 'boy';
@@ -311,7 +304,63 @@
         else { pAva.innerText = pNick !== "Половинка" ? pNick[0].toUpperCase() : "❤️"; }
         document.getElementById('pair-names').innerText = `${myData?.first_name || 'Я'} \u00A0❤️\u00A0 ${pNick}`;
 
+        // === ЛОГИКА ПЕРЕТАСКИВАНИЯ КНОПОК ===
+        let isEditMode = false;
+        let sortableInstance = null;
+        let pressTimer;
+        const menuContainer = document.getElementById('sortable-menu');
+
+        // Восстановление порядка при запуске
+        const savedOrder = JSON.parse(localStorage.getItem('menuOrder'));
+        if (savedOrder) {
+            savedOrder.forEach(id => {
+                const el = menuContainer.querySelector(`[data-id="${id}"]`);
+                if (el) menuContainer.appendChild(el);
+            });
+        }
+
+        // Долгое нажатие (зажатие пальцем)
+        menuContainer.addEventListener('touchstart', (e) => {
+            if (e.target.closest('.menu-item') && !isEditMode) {
+                pressTimer = setTimeout(() => {
+                    enableEditMode();
+                }, 700); // 700 миллисекунд для срабатывания
+            }
+        });
+        menuContainer.addEventListener('touchend', () => clearTimeout(pressTimer));
+        menuContainer.addEventListener('touchmove', () => clearTimeout(pressTimer));
+
+        function enableEditMode() {
+            isEditMode = true;
+            tg.HapticFeedback.impactOccurred('heavy'); // Вибрация
+            menuContainer.classList.add('edit-mode');
+            document.getElementById('save-order-btn').style.display = 'inline-flex';
+            document.getElementById('sync-btn').style.display = 'none';
+
+            sortableInstance = new Sortable(menuContainer, {
+                animation: 200,
+                delay: 100, // Минимальная задержка чтобы не конфликтовать со скроллом
+                delayOnTouchOnly: true
+            });
+        }
+
+        function saveMenuOrder() {
+            if (sortableInstance) {
+                const newOrder = sortableInstance.toArray();
+                localStorage.setItem('menuOrder', JSON.stringify(newOrder));
+                sortableInstance.destroy();
+                sortableInstance = null;
+            }
+            isEditMode = false;
+            menuContainer.classList.remove('edit-mode');
+            document.getElementById('save-order-btn').style.display = 'none';
+            document.getElementById('sync-btn').style.display = 'inline-flex';
+            tg.HapticFeedback.notificationOccurred('success');
+        }
+
+        // Навигация
         function nav(id) {
+            if (isEditMode) return; // Если трясется (режим ред.), то клик не открывает меню
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             document.getElementById(id).classList.add('active');
             if(id === 'dmb') checkDMB();
@@ -319,7 +368,7 @@
             if(id === 'locator') document.getElementById('loc-status').innerText = ""; 
         }
 
-        // ЗАЩИЩЕННЫЙ ЛОКАТОР
+        // ЛОКАТОР
         function sendLocation() {
             const btn = document.getElementById('btn-loc');
             const status = document.getElementById('loc-status');
@@ -338,7 +387,6 @@
                             status.style.color = "#ff4757";
                             btn.disabled = false;
                         }, 800);
-                        
                     } catch (e) {
                         status.innerText = "❌ ОШИБКА. Открой через меню бота.";
                         btn.disabled = false;
@@ -363,6 +411,7 @@
             }
         }
 
+        // ТАЙМЕР
         function checkDMB() {
             if(localStorage.getItem('s')) { document.getElementById('setup').style.display='none'; document.getElementById('view').style.display='block'; tick(); }
             else { document.getElementById('setup').style.display='block'; document.getElementById('view').style.display='none'; }
