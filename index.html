@@ -3,31 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    
     <title>MoZZaya Premium</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
     
     <style>
+        /* --- ПРЕМИУМ ТЕМНЫЙ СТИЛЬ (ОБЩИЙ ДЛЯ ВСЕХ) --- */
         :root { 
             --bg-fallback: #0d0e15; 
-            --card-bg: rgba(20, 20, 25, 0.7); 
+            --card-bg: rgba(20, 20, 25, 0.75); /* Темное стекло */
             --border: rgba(255, 255, 255, 0.15); 
-            --accent: #bb86fc; 
-            --mint: #03dac6; 
             --text-main: #ffffff;
             --text-sub: #b0b3c6;
-            --card-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
+            --card-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+            
+            /* Цвета для парня по умолчанию */
+            --accent: #bb86fc; 
+            --mint: #03dac6; 
         }
 
+        /* ТЕМА ДЕВУШКИ (ТОЖЕ ТЕМНАЯ, НО С РОЗОВЫМ НЕОНОМ) */
         body.theme-girl {
-            --bg-fallback: #fff5f8; 
-            --card-bg: rgba(255, 255, 255, 0.85); 
-            --border: rgba(255, 182, 193, 0.6); 
             --accent: #ff4785; 
             --mint: #ff1493; 
-            --text-main: #2b2b2b; 
-            --text-sub: #666666;
-            --card-shadow: 0 10px 40px rgba(255, 182, 193, 0.4);
+            /* Заметь: фон и карточки остаются темными! */
         }
 
         body { 
@@ -53,7 +56,7 @@
             transition: transform 0.2s;
         }
 
-        /* --- КНОПКА РЕДАКТИРОВАНИЯ --- */
+        /* --- КНОПКА РЕДАКТИРОВАНИЯ (КАРАНДАШ) --- */
         .edit-toggle {
             position: absolute; top: 25px; left: 25px; z-index: 10;
             width: 40px; height: 40px; border-radius: 12px;
@@ -62,25 +65,20 @@
             font-size: 18px; cursor: pointer; backdrop-filter: blur(10px);
         }
 
-        /* --- ШАПКА --- */
+        /* --- ШАПКА ПРОФИЛЯ --- */
         .header-badge {
-            background: var(--card-bg);
-            backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
-            border: 1px solid var(--border);
-            border-radius: 35px;
-            padding: 25px 15px;
-            margin-bottom: 25px;
-            display: flex; flex-direction: column; align-items: center;
+            background: var(--card-bg); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+            border: 1px solid var(--border); border-radius: 35px;
+            padding: 25px 15px; margin-bottom: 25px; display: flex; flex-direction: column; align-items: center;
             box-shadow: var(--card-shadow); position: relative; overflow: hidden;
         }
-        
         .profile-row { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 12px; z-index: 2;}
         .avatar { 
             width: 70px; height: 70px; border-radius: 50%; 
             background: linear-gradient(135deg, var(--accent), var(--mint));
             display: flex; justify-content: center; align-items: center;
             font-size: 26px; font-weight: bold; color: #fff;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.6);
             background-size: cover; background-position: center; border: 3px solid var(--border);
         }
         .heart-icon { font-size: 30px; filter: drop-shadow(0 0 10px var(--accent)); animation: heartbeat 1.2s infinite; z-index: 2;}
@@ -90,59 +88,54 @@
             font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; margin: 0; text-align: center;
             background: linear-gradient(90deg, #fff, var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; z-index: 2;
         }
-        body.theme-girl #pair-names { background: linear-gradient(90deg, #222, var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-
-        /* --- МЕНЮ --- */
-        .menu-item { 
-            display: flex; justify-content: space-between; align-items: center; 
-            font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 14px; 
-            padding: 22px; text-transform: uppercase; letter-spacing: 1px; cursor: pointer;
-        }
+        
+        /* --- МЕНЮ СОРТИРОВКИ --- */
+        .menu-item { display: flex; justify-content: space-between; align-items: center; font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 14px; padding: 22px; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; }
         .menu-item:active { transform: scale(0.98); }
-
-        /* АНИМАЦИЯ ТРЯСКИ */
-        @keyframes shake {
-            0% { transform: rotate(0deg); }
-            25% { transform: rotate(-1deg); }
-            75% { transform: rotate(1deg); }
-            100% { transform: rotate(0deg); }
-        }
-        .edit-mode .menu-item { animation: shake 0.3s infinite; border-style: dashed; border-color: var(--accent); }
+        @keyframes shake { 0%, 100% { transform: rotate(0deg); } 25% { transform: rotate(-1deg); } 75% { transform: rotate(1deg); } }
+        .edit-mode .menu-item { animation: shake 0.3s infinite; border-style: dashed; border-color: var(--accent); background: rgba(0,0,0,0.4); }
         .sortable-ghost { opacity: 0.3; }
 
-        .btn { font-family: 'Montserrat', sans-serif; background: var(--accent); color: #fff; border: none; padding: 18px; border-radius: 20px; font-weight: 900; cursor: pointer; width: 100%; font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; box-shadow: 0 10px 25px rgba(0,0,0,0.3); transition: 0.2s; }
+        .btn { font-family: 'Montserrat', sans-serif; background: var(--accent); color: #fff; border: none; padding: 18px; border-radius: 20px; font-weight: 900; cursor: pointer; width: 100%; font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; box-shadow: 0 10px 25px rgba(0,0,0,0.5); transition: 0.2s; }
         .btn:active { transform: scale(0.96); }
         
         .sync-wrapper { text-align: center; margin-top: auto; padding-top: 25px; padding-bottom: 10px; }
-        .btn-sync-small { 
-            background: var(--card-bg); backdrop-filter: blur(10px); 
-            border: 1px solid var(--mint); color: var(--mint); 
-            padding: 12px 26px; border-radius: 30px; 
-            font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase;
-            cursor: pointer; display: inline-flex; align-items: center; gap: 8px;
-            box-shadow: var(--card-shadow); transition: 0.2s;
-        }
-
-        input { width: 100%; background: rgba(0,0,0,0.25); border: 1px solid var(--border); border-radius: 16px; padding: 18px; color: var(--text-main); margin: 5px 0 15px 0; box-sizing: border-box; outline: none; font-size: 15px; font-weight: 600; font-family: inherit;}
+        .btn-sync-small { background: var(--card-bg); backdrop-filter: blur(10px); border: 1px solid var(--mint); color: var(--mint); padding: 12px 26px; border-radius: 30px; font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; box-shadow: var(--card-shadow); transition: 0.2s; }
+        .btn-sync-small:active { background: var(--mint); color: #000; transform: scale(0.95); }
+        
+        input { width: 100%; background: rgba(0,0,0,0.4); border: 1px solid var(--border); border-radius: 16px; padding: 18px; color: var(--text-main); margin: 5px 0 15px 0; box-sizing: border-box; outline: none; font-size: 15px; font-weight: 600; font-family: inherit;}
         label { font-size: 10px; color: var(--text-sub); font-weight: 800; letter-spacing: 2px; text-transform: uppercase; display: block; margin-bottom: 5px; font-family: 'Montserrat', sans-serif;}
 
+        /* --- КОРЗИНА СЧАСТЬЯ (ВКЛАДКИ И ССЫЛКИ) --- */
+        .wish-tabs { display: flex; background: rgba(0,0,0,0.5); border-radius: 20px; padding: 6px; margin-bottom: 20px; box-shadow: inset 0 4px 10px rgba(0,0,0,0.5); }
+        .w-tab { flex: 1; text-align: center; padding: 14px; font-size: 11px; font-weight: 900; color: var(--text-sub); border-radius: 16px; cursor: pointer; transition: 0.3s; font-family: 'Montserrat', sans-serif; text-transform: uppercase; letter-spacing: 1px; }
+        .w-tab.active { background: var(--accent); color: #fff; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+        
+        .wish-input-group { display: flex; gap: 10px; margin-bottom: 20px; }
+        .wish-item { display: flex; flex-direction: column; padding: 18px; background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 18px; margin-bottom: 12px; font-weight: 700; font-size: 14px; backdrop-filter: blur(5px); transition: 0.3s;}
+        .wish-header { display: flex; justify-content: space-between; align-items: flex-start; width: 100%; gap: 15px;}
+        .wish-text { word-break: break-word; line-height: 1.5; color: var(--text-main); }
+        
+        .wish-link { display: inline-flex; align-items: center; margin-top: 10px; color: #000; text-decoration: none; background: var(--mint); padding: 8px 16px; border-radius: 12px; font-size: 11px; font-family: 'Montserrat', sans-serif; font-weight: 900; letter-spacing: 1px; box-shadow: 0 4px 15px rgba(3, 218, 198, 0.4); }
+        .wish-link:active { transform: scale(0.95); }
+        
+        .del-btn { color: #ff4757; cursor: pointer; font-size: 24px; font-weight: bold; background: rgba(255, 71, 87, 0.15); width: 35px; height: 35px; border-radius: 10px; display: flex; align-items: center; justify-content: center; transition: 0.2s;}
+        .del-btn:active { background: #ff4757; color: #fff; transform: scale(0.9);}
+
+        /* --- ДМБ ТАЙМЕР --- */
         #countdown { font-family: 'Montserrat', sans-serif; font-size: 34px; font-weight: 900; text-align: center; margin: 15px 0; display: flex; justify-content: center; align-items: baseline; gap: 4px; }
         #countdown small { font-size: 12px; color: var(--text-sub); margin-right: 6px; font-weight: 700;}
         .neon { color: var(--mint); text-shadow: 0 0 15px rgba(3, 218, 198, 0.7); width: 50px; display: inline-block; }
-        
-        .progress { height: 10px; background: rgba(0,0,0,0.4); border-radius: 10px; overflow: hidden; margin-top: 15px; }
+        .progress { height: 10px; background: rgba(0,0,0,0.5); border-radius: 10px; overflow: hidden; margin-top: 15px; }
         #bar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--mint)); box-shadow: 0 0 15px var(--accent); transition: 0.5s ease-out; }
-        
         .milestones { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        .m-card { text-align: center; padding: 18px !important; }
+        .m-card { text-align: center; padding: 18px !important; background: rgba(0,0,0,0.3); }
         .m-card b { font-family: 'Montserrat', sans-serif; font-size: 26px; display: block; color: var(--text-main); margin: 5px 0; }
-        
-        .wish-item { display: flex; justify-content: space-between; align-items: center; padding: 16px; background: rgba(0,0,0,0.2); border: 1px solid var(--border); border-radius: 18px; margin-bottom: 10px; font-weight: 700; font-size: 15px; }
-        .del-btn { color: #ff4757; cursor: pointer; font-size: 24px; font-weight: bold; padding-left: 15px; }
+
         .back-link { cursor: pointer; color: var(--accent); font-family: 'Montserrat', sans-serif; font-weight: 900; margin-bottom: 20px; display: inline-block; font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; }
 
         .bg-gallery { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 10px; }
-        .bg-thumb { width: 100%; height: 85px; border-radius: 16px; background-size: cover; background-position: center; cursor: pointer; border: 2px solid transparent; transition: 0.2s; box-shadow: 0 4px 10px rgba(0,0,0,0.3);}
+        .bg-thumb { width: 100%; height: 85px; border-radius: 16px; background-size: cover; background-position: center; cursor: pointer; border: 2px solid transparent; transition: 0.2s; box-shadow: 0 4px 10px rgba(0,0,0,0.5);}
         .bg-thumb.active { border-color: var(--mint); transform: scale(0.95); }
 
         .planet-wrap { position: relative; width: 160px; height: 160px; margin: 20px auto 40px auto; display: flex; justify-content: center; align-items: center; }
@@ -223,10 +216,15 @@
 
         <div id="wish" class="screen">
             <span class="back-link" onclick="nav('home')">← НАЗАД</span>
+            
+            <div class="wish-tabs">
+                <div class="w-tab active" id="tab-partner" onclick="switchW('partner')">Хочет половинка</div>
+                <div class="w-tab" id="tab-me" onclick="switchW('me')">Мои желания</div>
+            </div>
+
             <div class="card">
-                <h3 style="margin:0;">🎁 Wishlist</h3>
-                <div style="display:flex; gap:10px; margin-bottom:20px; margin-top:15px;">
-                    <input type="text" id="wi" placeholder="Что подарить?" style="margin:0;">
+                <div id="wish-input-group" class="wish-input-group" style="display:none;">
+                    <input type="text" id="wi" placeholder="Что подарить? (Можно с ссылкой)" style="margin:0;">
                     <button class="btn" onclick="addW()" style="width:auto; padding:0 25px; margin:0; font-size:22px;">+</button>
                 </div>
                 <div id="wl"></div>
@@ -258,13 +256,26 @@
 
         // 1. ПЕРЕМЕННЫЕ И ПАМЯТЬ
         ['role', 'pn', 'pp', 'plat', 'plon', 's', 'e'].forEach(p => { if (params.has(p)) localStorage.setItem(p, params.get(p)); });
-        if (params.get('w')) { try { localStorage.setItem('w', decodeURIComponent(params.get('w'))); } catch(e) {} }
+        
+        let wishesData = { boy: [], girl: [] };
+        if (params.get('w')) { 
+            try { 
+                let parsed = JSON.parse(decodeURIComponent(params.get('w'))); 
+                if(Array.isArray(parsed)) { wishesData[localStorage.getItem('role') || 'boy'] = parsed; } 
+                else { wishesData = parsed; }
+                localStorage.setItem('w', JSON.stringify(wishesData));
+            } catch(e) {} 
+        } else {
+            try { wishesData = JSON.parse(localStorage.getItem('w')) || { boy: [], girl: [] }; } catch(e) {}
+        }
 
         const role = localStorage.getItem('role') || 'boy';
+        
+        // ВКЛЮЧАЕМ ТЕМУ ДЛЯ ДЕВУШКИ (НО ТЕПЕРЬ ОНА ТОЖЕ ТЕМНАЯ!)
         document.body.classList.toggle('theme-girl', role === 'girl');
-        tg.headerColor = (role === 'girl') ? '#fff5f8' : '#0d0e15';
+        tg.headerColor = '#0d0e15'; // Единый темный цвет шапки ТГ для всех
 
-        // 2. ФОН (ФИКС СБРОСА)
+        // 2. ФОН
         function applyBackground() {
             const savedBg = localStorage.getItem('custom_bg');
             if (savedBg) {
@@ -276,41 +287,30 @@
         applyBackground();
 
         function setBg(file, el) {
-            localStorage.setItem('custom_bg', file);
-            applyBackground();
+            localStorage.setItem('custom_bg', file); applyBackground();
             document.querySelectorAll('.bg-thumb').forEach(t => t.classList.remove('active'));
-            el.classList.add('active');
-            tg.HapticFeedback.impactOccurred('medium');
+            el.classList.add('active'); tg.HapticFeedback.impactOccurred('medium');
         }
 
         function resetBg() {
-            localStorage.removeItem('custom_bg');
-            applyBackground();
+            localStorage.removeItem('custom_bg'); applyBackground();
             document.querySelectorAll('.bg-thumb').forEach(t => t.classList.remove('active'));
         }
 
-        // 3. АВАТАРКИ (ФИКС)
+        // 3. АВАТАРКИ
         const myData = tg.initDataUnsafe?.user;
         const myAva = document.getElementById('my-ava');
-        if(myData?.photo_url) {
-            myAva.style.backgroundImage = `url('${myData.photo_url}')`;
-            myAva.innerText = "";
-        } else {
-            myAva.innerText = myData?.first_name ? myData.first_name[0] : 'Я';
-        }
+        if(myData?.photo_url) { myAva.style.backgroundImage = `url('${myData.photo_url}')`; myAva.innerText = ""; } 
+        else { myAva.innerText = myData?.first_name ? myData.first_name[0] : 'Я'; }
 
         const pNick = localStorage.getItem('pn') || "Половинка";
         const pPhoto = localStorage.getItem('pp');
         const pAva = document.getElementById('p-ava');
-        if (pPhoto && pPhoto !== "" && pPhoto !== "None") {
-            pAva.style.backgroundImage = `url('${pPhoto}')`;
-            pAva.innerText = "";
-        } else {
-            pAva.innerText = pNick !== "Половинка" ? pNick[0].toUpperCase() : "❤️";
-        }
-        document.getElementById('pair-names').innerText = `${myData?.first_name || 'Я'} ❤️ ${pNick}`;
+        if (pPhoto && pPhoto !== "" && pPhoto !== "None") { pAva.style.backgroundImage = `url('${pPhoto}')`; pAva.innerText = ""; } 
+        else { pAva.innerText = pNick !== "Половинка" ? pNick[0].toUpperCase() : "❤️"; }
+        document.getElementById('pair-names').innerText = `${myData?.first_name || 'Я'} \u00A0❤️\u00A0 ${pNick}`;
 
-        // 4. СОРТИРОВКА (ФИКС ЗАВИСАНИЯ)
+        // 4. СОРТИРОВКА
         const menuContainer = document.getElementById('sortable-menu');
         let sortableInstance = null;
         let isEditMode = false;
@@ -323,8 +323,7 @@
                 btn.innerText = "✅";
                 menuContainer.classList.add('edit-mode');
                 sortableInstance = new Sortable(menuContainer, {
-                    animation: 250,
-                    ghostClass: 'sortable-ghost',
+                    animation: 250, ghostClass: 'sortable-ghost',
                     onEnd: function() {
                         const order = Array.from(menuContainer.children).map(el => el.getAttribute('data-id'));
                         localStorage.setItem('menuOrder', JSON.stringify(order));
@@ -334,22 +333,13 @@
             } else {
                 btn.innerText = "✏️";
                 menuContainer.classList.remove('edit-mode');
-                if (sortableInstance) {
-                    sortableInstance.destroy();
-                    sortableInstance = null;
-                }
+                if (sortableInstance) { sortableInstance.destroy(); sortableInstance = null; }
                 tg.HapticFeedback.notificationOccurred('success');
             }
         }
 
-        // Загрузка порядка
         const savedOrder = JSON.parse(localStorage.getItem('menuOrder'));
-        if (savedOrder) {
-            savedOrder.forEach(id => {
-                const el = menuContainer.querySelector(`[data-id="${id}"]`);
-                if (el) menuContainer.appendChild(el);
-            });
-        }
+        if (savedOrder) { savedOrder.forEach(id => { const el = menuContainer.querySelector(`[data-id="${id}"]`); if (el) menuContainer.appendChild(el); }); }
 
         function nav(id) {
             if (isEditMode) return;
@@ -357,10 +347,64 @@
             document.getElementById(id).classList.add('active');
             document.getElementById('edit-btn').style.display = (id === 'home') ? 'flex' : 'none';
             if(id === 'dmb') checkDMB();
-            if(id === 'wish') render();
+            if(id === 'wish') renderW();
         }
 
-        // 5. ЛОГИКА ОСТАЛЬНОГО (ЛОКАТОР, ТАЙМЕР, СИНК)
+        // 5. КОРЗИНА
+        let currentWTab = 'partner';
+
+        function switchW(tab) {
+            currentWTab = tab;
+            document.getElementById('tab-partner').classList.toggle('active', tab === 'partner');
+            document.getElementById('tab-me').classList.toggle('active', tab === 'me');
+            document.getElementById('wish-input-group').style.display = tab === 'me' ? 'flex' : 'none';
+            renderW();
+        }
+
+        function parseLinks(text) {
+            const urlRegex = /(https?:\/\/[^\s]+)/g;
+            return text.replace(urlRegex, function(url) {
+                return `<br><a href="${url}" target="_blank" class="wish-link">🔗 ОТКРЫТЬ ССЫЛКУ</a>`;
+            });
+        }
+
+        function renderW() {
+            const listEl = document.getElementById('wl');
+            const partnerRole = role === 'girl' ? 'boy' : 'girl';
+            const activeList = currentWTab === 'me' ? wishesData[role] : wishesData[partnerRole];
+            
+            if (!activeList || activeList.length === 0) {
+                listEl.innerHTML = `<p style="text-align:center; color:var(--text-sub); margin-top:30px; font-size:12px;">${currentWTab === 'me' ? 'Ты еще ничего не добавил...' : 'Половинка еще ничего не добавила...'}</p>`;
+                return;
+            }
+
+            listEl.innerHTML = activeList.map((w, i) => `
+                <div class="wish-item">
+                    <div class="wish-header">
+                        <span class="wish-text">${parseLinks(w)}</span>
+                        ${currentWTab === 'me' ? `<span class="del-btn" onclick="delW(${i})">×</span>` : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function addW() {
+            const i = document.getElementById('wi'); 
+            if(!i.value.trim()) return;
+            if(!wishesData[role]) wishesData[role] = [];
+            wishesData[role].push(i.value.trim()); 
+            i.value=''; 
+            localStorage.setItem('w', JSON.stringify(wishesData)); 
+            renderW();
+        }
+
+        function delW(i) { 
+            wishesData[role].splice(i, 1); 
+            localStorage.setItem('w', JSON.stringify(wishesData)); 
+            renderW(); 
+        }
+
+        // 6. ОСТАЛЬНОЕ
         function sendLocation() {
             const btn = document.getElementById('btn-loc');
             btn.disabled = true;
@@ -368,7 +412,7 @@
                 try {
                     tg.sendData(JSON.stringify({action: "checkin", lat: pos.coords.latitude, lon: pos.coords.longitude}));
                     document.getElementById('loc-status').innerText = "✅ ОТПРАВЛЕНО!";
-                } catch(e) { document.getElementById('loc-status').innerText = "❌ ОШИБКА МЕНЮ БОТА!"; btn.disabled = false; }
+                } catch(e) { document.getElementById('loc-status').innerText = "❌ ОШИБКА! Открой через кнопку бота."; btn.disabled = false; }
             }, () => { btn.disabled = false; }, { enableHighAccuracy: true });
         }
 
@@ -403,18 +447,8 @@
             document.getElementById('v-ord').innerText = Math.max(0, Math.floor((end - 100*86400000 - now)/86400000));
         }
 
-        let wishes = JSON.parse(localStorage.getItem('w') || '[]');
-        function render() {
-            document.getElementById('wl').innerHTML = wishes.length ? wishes.map((w, i) => `<div class="wish-item"><span>${w}</span><span class="del-btn" onclick="del(${i})">×</span></div>`).join('') : '<p style="text-align:center;">Пусто...</p>';
-        }
-        function addW() {
-            const i = document.getElementById('wi'); if(!i.value.trim()) return;
-            wishes.push(i.value.trim()); i.value=''; localStorage.setItem('w', JSON.stringify(wishes)); render();
-        }
-        function del(i) { wishes.splice(i, 1); localStorage.setItem('w', JSON.stringify(wishes)); render(); }
-
         function syncAll() {
-            try { tg.sendData(JSON.stringify({ s: localStorage.getItem('s'), e: localStorage.getItem('e'), w: wishes })); tg.HapticFeedback.notificationOccurred('success'); }
+            try { tg.sendData(JSON.stringify({ s: localStorage.getItem('s'), e: localStorage.getItem('e'), w: wishesData })); tg.HapticFeedback.notificationOccurred('success'); }
             catch(e) { tg.showAlert("Открой через кнопку бота!"); }
         }
 
