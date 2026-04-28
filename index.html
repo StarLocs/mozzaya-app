@@ -12,35 +12,27 @@
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
     
     <style>
-        /* --- ПРЕМИУМ ТЕМНЫЙ СТИЛЬ (ОБЩИЙ ДЛЯ ВСЕХ) --- */
         :root { 
             --bg-fallback: #0d0e15; 
-            --card-bg: rgba(20, 20, 25, 0.75); /* Темное стекло */
+            --card-bg: rgba(20, 20, 25, 0.75); 
             --border: rgba(255, 255, 255, 0.15); 
             --text-main: #ffffff;
             --text-sub: #b0b3c6;
             --card-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
-            
-            /* Цвета для парня по умолчанию */
             --accent: #bb86fc; 
             --mint: #03dac6; 
         }
 
-        /* ТЕМА ДЕВУШКИ (ТОЖЕ ТЕМНАЯ, НО С РОЗОВЫМ НЕОНОМ) */
         body.theme-girl {
             --accent: #ff4785; 
             --mint: #ff1493; 
-            /* Заметь: фон и карточки остаются темными! */
         }
 
         body { 
-            background-color: var(--bg-fallback);
-            background-size: cover; background-position: center;
-            background-attachment: fixed; background-repeat: no-repeat;
-            color: var(--text-main); 
+            background-color: var(--bg-fallback); background-size: cover; background-position: center;
+            background-attachment: fixed; background-repeat: no-repeat; color: var(--text-main); 
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
-            margin: 0; display: flex; justify-content: center; 
-            min-height: 100vh; overflow-x: hidden; transition: background-image 0.4s ease-in-out;
+            margin: 0; display: flex; justify-content: center; min-height: 100vh; overflow-x: hidden; transition: background-image 0.4s ease-in-out;
             user-select: none; -webkit-user-select: none;
         }
 
@@ -51,53 +43,49 @@
         
         .card { 
             background: var(--card-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--border); border-radius: 28px; 
-            padding: 22px; margin-bottom: 15px; box-shadow: var(--card-shadow); 
+            border: 1px solid var(--border); border-radius: 28px; padding: 18px 22px; margin-bottom: 15px; box-shadow: var(--card-shadow); 
             transition: transform 0.2s;
         }
 
-        /* --- КНОПКА РЕДАКТИРОВАНИЯ (КАРАНДАШ) --- */
         .edit-toggle {
-            position: absolute; top: 25px; left: 25px; z-index: 10;
-            width: 40px; height: 40px; border-radius: 12px;
-            background: var(--card-bg); border: 1px solid var(--border);
-            display: flex; align-items: center; justify-content: center;
+            position: absolute; top: 25px; left: 25px; z-index: 10; width: 40px; height: 40px; border-radius: 12px;
+            background: var(--card-bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center;
             font-size: 18px; cursor: pointer; backdrop-filter: blur(10px);
         }
 
-        /* --- ШАПКА ПРОФИЛЯ --- */
         .header-badge {
             background: var(--card-bg); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
-            border: 1px solid var(--border); border-radius: 35px;
-            padding: 25px 15px; margin-bottom: 25px; display: flex; flex-direction: column; align-items: center;
+            border: 1px solid var(--border); border-radius: 35px; padding: 25px 15px; margin-bottom: 25px; display: flex; flex-direction: column; align-items: center;
             box-shadow: var(--card-shadow); position: relative; overflow: hidden;
         }
+        .header-badge::before {
+            content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.1), transparent);
+            transform: skewX(-20deg); animation: shine 6s infinite;
+        }
+        @keyframes shine { 0% { left: -100%; } 20%, 100% { left: 200%; } }
+
         .profile-row { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 12px; z-index: 2;}
         .avatar { 
-            width: 70px; height: 70px; border-radius: 50%; 
-            background: linear-gradient(135deg, var(--accent), var(--mint));
-            display: flex; justify-content: center; align-items: center;
-            font-size: 26px; font-weight: bold; color: #fff;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.6);
-            background-size: cover; background-position: center; border: 3px solid var(--border);
+            width: 70px; height: 70px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--mint));
+            display: flex; justify-content: center; align-items: center; font-size: 26px; font-weight: bold; color: #fff;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.6); background-size: cover; background-position: center; border: 3px solid var(--border);
         }
         .heart-icon { font-size: 30px; filter: drop-shadow(0 0 10px var(--accent)); animation: heartbeat 1.2s infinite; z-index: 2;}
         @keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
 
-        #pair-names {
-            font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; margin: 0; text-align: center;
-            background: linear-gradient(90deg, #fff, var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; z-index: 2;
-        }
+        #pair-names { font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; margin: 0; text-align: center; background: linear-gradient(90deg, #fff, var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; z-index: 2; }
         
-        /* --- МЕНЮ СОРТИРОВКИ --- */
-        .menu-item { display: flex; justify-content: space-between; align-items: center; font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 14px; padding: 22px; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; }
-        .menu-item:active { transform: scale(0.98); }
-        @keyframes shake { 0%, 100% { transform: rotate(0deg); } 25% { transform: rotate(-1deg); } 75% { transform: rotate(1deg); } }
-        .edit-mode .menu-item { animation: shake 0.3s infinite; border-style: dashed; border-color: var(--accent); background: rgba(0,0,0,0.4); }
-        .sortable-ghost { opacity: 0.3; }
+        .menu-item { display: flex; align-items: center; padding: 0; overflow: hidden; }
+        .menu-content { flex-grow: 1; padding: 22px; cursor: pointer; font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; }
+        .menu-content:active { background: rgba(255,255,255,0.05); }
+        .drag-handle { padding: 22px 25px; font-size: 22px; color: var(--text-sub); cursor: grab; touch-action: none; display: flex; align-items: center; justify-content: center; }
+        .drag-handle:active { cursor: grabbing; color: var(--accent); }
+        .sortable-ghost { opacity: 0.4; transform: scale(0.95); background: rgba(255,255,255,0.05); border: 1px dashed var(--text-sub); } 
 
         .btn { font-family: 'Montserrat', sans-serif; background: var(--accent); color: #fff; border: none; padding: 18px; border-radius: 20px; font-weight: 900; cursor: pointer; width: 100%; font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; box-shadow: 0 10px 25px rgba(0,0,0,0.5); transition: 0.2s; }
         .btn:active { transform: scale(0.96); }
+        .btn:disabled { opacity: 0.6; cursor: not-allowed; }
         
         .sync-wrapper { text-align: center; margin-top: auto; padding-top: 25px; padding-bottom: 10px; }
         .btn-sync-small { background: var(--card-bg); backdrop-filter: blur(10px); border: 1px solid var(--mint); color: var(--mint); padding: 12px 26px; border-radius: 30px; font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; box-shadow: var(--card-shadow); transition: 0.2s; }
@@ -106,7 +94,6 @@
         input { width: 100%; background: rgba(0,0,0,0.4); border: 1px solid var(--border); border-radius: 16px; padding: 18px; color: var(--text-main); margin: 5px 0 15px 0; box-sizing: border-box; outline: none; font-size: 15px; font-weight: 600; font-family: inherit;}
         label { font-size: 10px; color: var(--text-sub); font-weight: 800; letter-spacing: 2px; text-transform: uppercase; display: block; margin-bottom: 5px; font-family: 'Montserrat', sans-serif;}
 
-        /* --- КОРЗИНА СЧАСТЬЯ (ВКЛАДКИ И ССЫЛКИ) --- */
         .wish-tabs { display: flex; background: rgba(0,0,0,0.5); border-radius: 20px; padding: 6px; margin-bottom: 20px; box-shadow: inset 0 4px 10px rgba(0,0,0,0.5); }
         .w-tab { flex: 1; text-align: center; padding: 14px; font-size: 11px; font-weight: 900; color: var(--text-sub); border-radius: 16px; cursor: pointer; transition: 0.3s; font-family: 'Montserrat', sans-serif; text-transform: uppercase; letter-spacing: 1px; }
         .w-tab.active { background: var(--accent); color: #fff; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
@@ -115,14 +102,11 @@
         .wish-item { display: flex; flex-direction: column; padding: 18px; background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 18px; margin-bottom: 12px; font-weight: 700; font-size: 14px; backdrop-filter: blur(5px); transition: 0.3s;}
         .wish-header { display: flex; justify-content: space-between; align-items: flex-start; width: 100%; gap: 15px;}
         .wish-text { word-break: break-word; line-height: 1.5; color: var(--text-main); }
-        
         .wish-link { display: inline-flex; align-items: center; margin-top: 10px; color: #000; text-decoration: none; background: var(--mint); padding: 8px 16px; border-radius: 12px; font-size: 11px; font-family: 'Montserrat', sans-serif; font-weight: 900; letter-spacing: 1px; box-shadow: 0 4px 15px rgba(3, 218, 198, 0.4); }
         .wish-link:active { transform: scale(0.95); }
-        
         .del-btn { color: #ff4757; cursor: pointer; font-size: 24px; font-weight: bold; background: rgba(255, 71, 87, 0.15); width: 35px; height: 35px; border-radius: 10px; display: flex; align-items: center; justify-content: center; transition: 0.2s;}
         .del-btn:active { background: #ff4757; color: #fff; transform: scale(0.9);}
 
-        /* --- ДМБ ТАЙМЕР --- */
         #countdown { font-family: 'Montserrat', sans-serif; font-size: 34px; font-weight: 900; text-align: center; margin: 15px 0; display: flex; justify-content: center; align-items: baseline; gap: 4px; }
         #countdown small { font-size: 12px; color: var(--text-sub); margin-right: 6px; font-weight: 700;}
         .neon { color: var(--mint); text-shadow: 0 0 15px rgba(3, 218, 198, 0.7); width: 50px; display: inline-block; }
@@ -163,10 +147,22 @@
             </div>
             
             <div id="sortable-menu">
-                <div class="card menu-item" data-id="dmb" onclick="nav('dmb')"><span>🎖 Штаб службы</span> <span style="color:var(--accent)">→</span></div>
-                <div class="card menu-item" data-id="wish" onclick="nav('wish')"><span>🎁 Корзина счастья</span> <span style="color:var(--accent)">→</span></div>
-                <div class="card menu-item" data-id="locator" onclick="nav('locator')"><span>📍 Радар связи</span> <span style="color:var(--accent)">→</span></div>
-                <div class="card menu-item" data-id="settings" onclick="nav('settings')"><span>⚙️ Настройки фона</span> <span style="color:var(--accent)">→</span></div>
+                <div class="card menu-item" data-id="dmb">
+                    <div class="menu-content" onclick="nav('dmb')">🎖 Штаб службы</div>
+                    <div class="drag-handle">≡</div>
+                </div>
+                <div class="card menu-item" data-id="wish">
+                    <div class="menu-content" onclick="nav('wish')">🎁 Корзина счастья</div>
+                    <div class="drag-handle">≡</div>
+                </div>
+                <div class="card menu-item" data-id="locator">
+                    <div class="menu-content" onclick="nav('locator')">📍 Радар связи</div>
+                    <div class="drag-handle">≡</div>
+                </div>
+                <div class="card menu-item" data-id="settings">
+                    <div class="menu-content" onclick="nav('settings')">⚙️ Настройки фона</div>
+                    <div class="drag-handle">≡</div>
+                </div>
             </div>
             
             <div class="sync-wrapper">
@@ -257,23 +253,28 @@
         // 1. ПЕРЕМЕННЫЕ И ПАМЯТЬ
         ['role', 'pn', 'pp', 'plat', 'plon', 's', 'e'].forEach(p => { if (params.has(p)) localStorage.setItem(p, params.get(p)); });
         
+        // УМНЫЙ ПАРСИНГ ВИШЛИСТА ДЛЯ СИНХРОНИЗАЦИИ
         let wishesData = { boy: [], girl: [] };
         if (params.get('w')) { 
             try { 
                 let parsed = JSON.parse(decodeURIComponent(params.get('w'))); 
-                if(Array.isArray(parsed)) { wishesData[localStorage.getItem('role') || 'boy'] = parsed; } 
-                else { wishesData = parsed; }
+                // Если данные пришли в старом формате, обновляем структуру
+                if (Array.isArray(parsed)) { wishesData[localStorage.getItem('role') || 'boy'] = parsed; } 
+                else if (typeof parsed === 'object' && parsed !== null) { wishesData = Object.assign(wishesData, parsed); }
                 localStorage.setItem('w', JSON.stringify(wishesData));
-            } catch(e) {} 
+            } catch(e) { console.error("Ошибка парсинга вишлиста", e); } 
         } else {
-            try { wishesData = JSON.parse(localStorage.getItem('w')) || { boy: [], girl: [] }; } catch(e) {}
+            try { 
+                let localW = JSON.parse(localStorage.getItem('w')); 
+                if (localW && !Array.isArray(localW)) { wishesData = Object.assign(wishesData, localW); }
+            } catch(e) {}
         }
 
         const role = localStorage.getItem('role') || 'boy';
         
-        // ВКЛЮЧАЕМ ТЕМУ ДЛЯ ДЕВУШКИ (НО ТЕПЕРЬ ОНА ТОЖЕ ТЕМНАЯ!)
+        // ВКЛЮЧАЕМ ТЕМУ ДЛЯ ДЕВУШКИ
         document.body.classList.toggle('theme-girl', role === 'girl');
-        tg.headerColor = '#0d0e15'; // Единый темный цвет шапки ТГ для всех
+        tg.headerColor = '#0d0e15';
 
         // 2. ФОН
         function applyBackground() {
@@ -323,6 +324,7 @@
                 btn.innerText = "✅";
                 menuContainer.classList.add('edit-mode');
                 sortableInstance = new Sortable(menuContainer, {
+                    handle: '.drag-handle',
                     animation: 250, ghostClass: 'sortable-ghost',
                     onEnd: function() {
                         const order = Array.from(menuContainer.children).map(el => el.getAttribute('data-id'));
@@ -338,8 +340,12 @@
             }
         }
 
-        const savedOrder = JSON.parse(localStorage.getItem('menuOrder'));
-        if (savedOrder) { savedOrder.forEach(id => { const el = menuContainer.querySelector(`[data-id="${id}"]`); if (el) menuContainer.appendChild(el); }); }
+        try {
+            const savedOrder = JSON.parse(localStorage.getItem('menuOrder'));
+            if (savedOrder && Array.isArray(savedOrder)) { 
+                savedOrder.forEach(id => { const el = menuContainer.querySelector(`[data-id="${id}"]`); if (el) menuContainer.appendChild(el); }); 
+            }
+        } catch(e) {}
 
         function nav(id) {
             if (isEditMode) return;
@@ -412,6 +418,7 @@
                 try {
                     tg.sendData(JSON.stringify({action: "checkin", lat: pos.coords.latitude, lon: pos.coords.longitude}));
                     document.getElementById('loc-status').innerText = "✅ ОТПРАВЛЕНО!";
+                    setTimeout(() => { btn.disabled = false; document.getElementById('loc-status').innerText = ""; }, 3000);
                 } catch(e) { document.getElementById('loc-status').innerText = "❌ ОШИБКА! Открой через кнопку бота."; btn.disabled = false; }
             }, () => { btn.disabled = false; }, { enableHighAccuracy: true });
         }
