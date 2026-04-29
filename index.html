@@ -42,7 +42,7 @@
             justify-content: center; 
             min-height: 100vh; 
             overflow-x: hidden; 
-            transition: background-image 0.4s ease-in-out;
+            transition: background-image 0.5s ease-in-out;
             user-select: none; 
             -webkit-user-select: none;
         }
@@ -59,12 +59,15 @@
         
         .screen { display: none; flex-direction: column; flex-grow: 1; }
         .screen.active { display: flex; animation: slideFade 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
-        @keyframes slideFade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        @keyframes slideFade { 
+            from { opacity: 0; transform: translateY(10px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
         
         .card { 
             background: var(--card-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
             border: 1px solid var(--border); border-radius: 28px; padding: 22px; margin-bottom: 15px; box-shadow: var(--card-shadow); 
-            transition: transform 0.2s;
         }
 
         .edit-toggle {
@@ -72,7 +75,6 @@
             background: var(--card-bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center;
             font-size: 20px; cursor: pointer; backdrop-filter: blur(10px); transition: 0.2s;
         }
-        .edit-toggle:active { transform: scale(0.9); }
 
         .header-badge {
             background: var(--card-bg); border: 1px solid var(--border); border-radius: 35px; padding: 25px 15px; margin-bottom: 25px; display: flex; flex-direction: column; align-items: center; box-shadow: var(--card-shadow);
@@ -90,46 +92,77 @@
         
         .menu-item { display: flex; justify-content: space-between; align-items: center; font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 14px; padding: 22px; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: 0.1s; }
         .menu-item:active { transform: scale(0.98); }
+        
         @keyframes shake { 0%, 100% { transform: rotate(0deg); } 25% { transform: rotate(-1.5deg); } 75% { transform: rotate(1.5deg); } }
         .edit-mode .menu-item { animation: shake 0.35s infinite; border: 1px dashed var(--accent); background: rgba(0,0,0,0.3); }
         .sortable-ghost { opacity: 0.2; transform: scale(0.95); }
 
         .btn { font-family: 'Montserrat', sans-serif; background: var(--accent); color: #fff; border: none; padding: 18px; border-radius: 20px; font-weight: 900; width: 100%; font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; box-shadow: 0 10px 25px rgba(0,0,0,0.5); transition: 0.2s; }
         .btn:active { transform: scale(0.96); }
-        .btn:disabled { opacity: 0.6; cursor: not-allowed; }
-        
-        .wish-tabs { display: flex; background: rgba(0,0,0,0.5); border-radius: 20px; padding: 6px; margin-bottom: 20px; }
-        .w-tab { flex: 1; text-align: center; padding: 14px; font-size: 11px; font-weight: 900; color: var(--text-sub); border-radius: 16px; cursor: pointer; font-family: 'Montserrat', sans-serif; text-transform: uppercase; }
-        .w-tab.active { background: var(--accent); color: #fff; }
-        .wish-item { display: flex; flex-direction: column; padding: 18px; background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 18px; margin-bottom: 12px; font-weight: 700; font-size: 14px; }
-        .wish-link { display: inline-flex; align-items: center; margin-top: 10px; color: #000; text-decoration: none; background: var(--mint); padding: 8px 16px; border-radius: 12px; font-size: 11px; font-weight: 900; }
-        .del-btn { color: #ff4757; font-size: 24px; font-weight: bold; background: rgba(255, 71, 87, 0.15); width: 35px; height: 35px; border-radius: 10px; display: flex; align-items: center; justify-content: center; }
 
-        #countdown { font-family: 'Montserrat', sans-serif; font-size: 34px; font-weight: 900; text-align: center; margin: 15px 0; display: flex; justify-content: center; align-items: baseline; gap: 4px; }
-        .neon { color: var(--mint); text-shadow: 0 0 15px var(--mint); width: 50px; display: inline-block; }
-        .progress { height: 10px; background: rgba(0,0,0,0.5); border-radius: 10px; overflow: hidden; margin-top: 15px; }
-        #bar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--mint)); box-shadow: 0 0 15px var(--accent); transition: 0.5s; }
-
-        .planet-wrap { position: relative; width: 160px; height: 160px; margin: 20px auto 40px auto; display: flex; justify-content: center; align-items: center; }
-        .planet { font-size: 90px; line-height: 1; animation: float-spin 6s ease-in-out infinite; filter: drop-shadow(0 0 25px var(--mint)); position: relative; z-index: 2; }
+        /* === УЛУЧШЕННАЯ ПЛАНЕТА === */
+        .planet-wrap { 
+            position: relative; 
+            width: 180px; height: 180px; 
+            margin: 10px auto 30px auto; 
+            display: flex; justify-content: center; align-items: center; 
+        }
+        .planet { 
+            font-size: 100px; line-height: 1; 
+            animation: float-spin 8s ease-in-out infinite; 
+            filter: drop-shadow(0 0 30px var(--mint)); 
+            position: relative; z-index: 2;
+        }
         .planet::after { content: '🌍'; } 
-        @keyframes float-spin { 0%, 100% { transform: translateY(0) rotate(-5deg); } 50% { transform: translateY(-12px) rotate(5deg) scale(1.08); } }
-        .radar-ring { position: absolute; border: 2px solid var(--mint); border-radius: 50%; opacity: 0; animation: radarPing 3s ease-out infinite; }
+        
+        /* Спутники вокруг планеты */
+        .satellite {
+            position: absolute; width: 6px; height: 6px; background: var(--accent); border-radius: 50%;
+            filter: blur(1px) drop-shadow(0 0 5px var(--accent));
+            animation: orbit 4s linear infinite;
+        }
+        .s1 { animation-duration: 5s; }
+        .s2 { animation-duration: 7s; animation-delay: -2s; }
+        
+        @keyframes orbit {
+            from { transform: rotate(0deg) translateX(90px) rotate(0deg); }
+            to { transform: rotate(360deg) translateX(90px) rotate(-360deg); }
+        }
+        @keyframes float-spin { 
+            0%, 100% { transform: translateY(0) rotate(-5deg); filter: drop-shadow(0 0 20px var(--mint)); } 
+            50% { transform: translateY(-15px) rotate(5deg) scale(1.05); filter: drop-shadow(0 0 45px var(--mint)); } 
+        }
+        
+        .radar-ring { 
+            position: absolute; border: 2px solid var(--mint); border-radius: 50%; 
+            opacity: 0; animation: radarPing 3s ease-out infinite; 
+        }
         .r1 { width: 140px; height: 140px; animation-delay: 0s; } 
-        .r2 { width: 190px; height: 190px; animation-delay: 1.5s; }
-        @keyframes radarPing { 0% { transform: scale(0.5); opacity: 0.8; } 100% { transform: scale(1.5); opacity: 0; } }
+        .r2 { width: 200px; height: 190px; animation-delay: 1.5s; }
+        @keyframes radarPing { 
+            0% { transform: scale(0.5); opacity: 0.8; } 
+            100% { transform: scale(1.6); opacity: 0; } 
+        }
         
         .loc-time-info { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 800; color: var(--text-sub); text-transform: uppercase; letter-spacing: 1px; margin-top: 8px; opacity: 0.9; }
 
-        .bg-thumb { width: 100%; height: 85px; border-radius: 16px; background-size: cover; background-position: center; border: 2px solid transparent; }
+        /* ТАЙМЕР */
+        #countdown { font-family: 'Montserrat', sans-serif; font-size: 34px; font-weight: 900; text-align: center; margin: 15px 0; display: flex; justify-content: center; align-items: baseline; gap: 4px; }
+        .neon { color: var(--mint); text-shadow: 0 0 15px var(--mint); width: 50px; display: inline-block; }
+        .progress { height: 12px; background: rgba(0,0,0,0.5); border-radius: 10px; overflow: hidden; margin-top: 15px; border: 1px solid var(--border); }
+        #bar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--mint)); box-shadow: 0 0 15px var(--accent); transition: 0.8s cubic-bezier(0.1, 0, 0.3, 1); }
+
+        /* ВИШЛИСТ */
+        .wish-tabs { display: flex; background: rgba(0,0,0,0.5); border-radius: 20px; padding: 6px; margin-bottom: 20px; }
+        .w-tab { flex: 1; text-align: center; padding: 14px; font-size: 11px; font-weight: 900; color: var(--text-sub); border-radius: 16px; cursor: pointer; font-family: 'Montserrat', sans-serif; text-transform: uppercase; transition: 0.3s; }
+        .w-tab.active { background: var(--accent); color: #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+
+        .bg-thumb { width: 100%; height: 85px; border-radius: 16px; background-size: cover; background-position: center; border: 2px solid transparent; transition: 0.2s; }
         .bg-thumb.active { border-color: var(--mint); transform: scale(0.95); }
         .bg-gallery { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
         
         input { width: 100%; background: rgba(0,0,0,0.4); border: 1px solid var(--border); border-radius: 16px; padding: 18px; color: var(--text-main); margin: 5px 0 15px 0; box-sizing: border-box; outline: none; font-size: 15px; font-weight: 600; font-family: inherit;}
         label { font-size: 10px; color: var(--text-sub); font-weight: 800; letter-spacing: 2px; text-transform: uppercase; display: block; margin-bottom: 5px; font-family: 'Montserrat', sans-serif;}
-        
-        .sync-wrapper { text-align: center; margin-top: auto; padding-top: 25px; padding-bottom: 10px; }
-        .btn-sync-small { background: var(--card-bg); backdrop-filter: blur(10px); border: 1px solid var(--mint); color: var(--mint); padding: 12px 26px; border-radius: 30px; font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; box-shadow: var(--card-shadow); transition: 0.2s; }
     </style>
 </head>
 <body>
@@ -147,49 +180,43 @@
             </div>
             
             <div id="sortable-menu">
-                <div class="card menu-item" data-id="dmb" onclick="nav('dmb')">
-                    <span>🎖 Штаб службы</span> <span style="color:var(--accent)">→</span>
-                </div>
-                <div class="card menu-item" data-id="wish" onclick="nav('wish')">
-                    <span>🎁 Корзина счастья</span> <span style="color:var(--accent)">→</span>
-                </div>
-                <div class="card menu-item" data-id="locator" onclick="nav('locator')">
-                    <span>📍 Радар связи</span> <span style="color:var(--accent)">→</span>
-                </div>
-                <div class="card menu-item" data-id="settings" onclick="nav('settings')">
-                    <span>⚙️ Настройки фона</span> <span style="color:var(--accent)">→</span>
-                </div>
+                <div class="card menu-item" data-id="dmb" onclick="nav('dmb')"><span>🎖 Штаб службы</span> <span style="color:var(--accent)">→</span></div>
+                <div class="card menu-item" data-id="wish" onclick="nav('wish')"><span>🎁 Корзина счастья</span> <span style="color:var(--accent)">→</span></div>
+                <div class="card menu-item" data-id="locator" onclick="nav('locator')"><span>📍 Локация половинки</span> <span style="color:var(--accent)">→</span></div>
+                <div class="card menu-item" data-id="settings" onclick="nav('settings')"><span>⚙️ Настройки фона</span> <span style="color:var(--accent)">→</span></div>
             </div>
             
-            <div class="sync-wrapper">
-                <div class="btn-sync-small" onclick="syncAll()">🔄 Синхронизировать</div>
+            <div style="text-align: center; margin-top: auto; padding-top: 20px;">
+                <button class="btn" onclick="syncAll()" style="width: auto; padding: 12px 30px; font-size: 11px; background: rgba(0,0,0,0.3); border: 1px solid var(--mint); color: var(--mint);">🔄 СИНХРОНИЗИРОВАТЬ</button>
             </div>
         </div>
 
         <div id="locator" class="screen">
-            <span onclick="nav('home')" style="cursor:pointer; color:var(--accent); font-weight:900; margin-bottom:20px; display:inline-block; font-family: 'Montserrat', sans-serif;">← НАЗАД</span>
+            <span onclick="nav('home')" style="cursor:pointer; color:var(--accent); font-weight:900; margin-bottom:20px; display:inline-block;">← НАЗАД</span>
             
             <div class="card" style="text-align:center;">
-                <h3 style="margin:0; color:var(--mint); font-family: 'Montserrat', sans-serif;">МЕСТОПОЛОЖЕНИЕ ПОЛОВИНКИ 💜</h3>
+                <h3 style="margin:0; color:var(--mint); font-family: 'Montserrat', sans-serif;">ГЕО-РАДАР СВЯЗИ ❤️</h3>
                 
                 <div class="planet-wrap">
                     <div class="radar-ring r1"></div>
                     <div class="radar-ring r2"></div>
+                    <div class="satellite s1"></div>
+                    <div class="satellite s2"></div>
                     <div class="planet"></div>
                 </div>
                 
-                <p id="loc-status" style="font-size:12px; font-weight:900; margin: 15px 0; min-height:25px; font-family: 'Montserrat', sans-serif;"></p>
+                <p id="loc-status" style="font-size:12px; font-weight:900; margin: 15px 0; min-height:25px; font-family: 'Montserrat', sans-serif; color: var(--mint); text-transform: uppercase;"></p>
                 
                 <button class="btn" id="btn-loc" onclick="sendLocation()" style="background:var(--mint); color:#000; margin-bottom:12px;">
-                    📍 Отправить геометку
+                    📍 ОТПРАВИТЬ ГЕОМЕТКУ
                 </button>
                 
                 <div style="display:flex; flex-direction:column; align-items:center;">
                     <button class="btn" onclick="calculateDistance()" style="background:rgba(255,255,255,0.1); border:1px solid var(--accent); color:#fff; margin-bottom:12px;">
-                        📡 Просканировать дистанцию
+                        📡 СКАНЕР ДИСТАНЦИИ
                     </button>
                     <button class="btn" onclick="viewPartnerLocation()" style="background:transparent; border:1px dashed var(--text-sub); color:var(--text-sub); margin-bottom:15px;">
-                        👀 Открыть карту
+                        👀 ОТКРЫТЬ КАРТУ
                     </button>
                     <div id="p-last-time" class="loc-time-info"></div>
                 </div>
@@ -197,10 +224,9 @@
         </div>
 
         <div id="dmb" class="screen">
-            <span onclick="nav('home')" style="cursor:pointer; color:var(--accent); font-weight:900; margin-bottom:20px; display:inline-block; font-family: 'Montserrat', sans-serif;">← НАЗАД</span>
-            
+            <span onclick="nav('home')" style="cursor:pointer; color:var(--accent); font-weight:900; margin-bottom:20px; display:inline-block;">← НАЗАД</span>
             <div id="setup" class="card">
-                <h3 style="margin:0; font-family: 'Montserrat', sans-serif;">УСТАНОВКА ДАТ</h3>
+                <h3>УСТАНОВКА ДАТ</h3>
                 <label>ПРИЗЫВ</label> <input type="date" id="ds">
                 <label>ДЕМБЕЛЬ</label> <input type="date" id="de">
                 <button class="btn" onclick="saveDMB()">СОХРАНИТЬ</button>
@@ -208,7 +234,7 @@
             
             <div id="view" style="display:none;">
                 <div class="card">
-                    <p style="text-align:center; font-size:10px; color:var(--text-sub); margin:0; font-weight:900; font-family: 'Montserrat', sans-serif;">ДО ДОМА ОСТАЛОСЬ</p>
+                    <p style="text-align:center; font-size:10px; color:var(--text-sub); margin:0; font-weight:900; letter-spacing:1px;">ДО ДОМА ОСТАЛОСЬ</p>
                     <div id="countdown">
                         <span id="vd">0</span><small>д</small> 
                         <span id="vh">00</span><small>ч</small> 
@@ -218,24 +244,20 @@
                     <div class="progress"><div id="bar"></div></div>
                     <div id="perc" style="text-align:center; font-size:12px; margin-top:8px; color:var(--mint); font-family:monospace; font-weight:bold;">0%</div>
                 </div>
-                <div class="milestones">
-                    <div class="card m-card"><small>ЭКВАТОР</small><b id="v-eq">0</b></div>
-                    <div class="card m-card"><small>ПРИКАЗ</small><b id="v-ord">0</b></div>
+                <div style="display:flex; gap:10px;">
+                    <div class="card" style="text-align:center; flex:1;"><small style="font-size:9px; font-weight:900; color:var(--text-sub);">ЭКВАТОР</small><b id="v-eq" style="display:block; font-size:22px;">0</b></div>
+                    <div class="card" style="text-align:center; flex:1;"><small style="font-size:9px; font-weight:900; color:var(--text-sub);">ПРИКАЗ</small><b id="v-ord" style="display:block; font-size:22px;">0</b></div>
                 </div>
-                <center>
-                    <p style="font-size:11px; color:var(--text-sub); text-decoration:underline; cursor:pointer; margin-top: 20px;" onclick="localStorage.removeItem('s'); localStorage.removeItem('e'); location.reload();">Сбросить даты</p>
-                </center>
+                <center><p style="font-size:11px; color:var(--text-sub); text-decoration:underline; cursor:pointer;" onclick="localStorage.removeItem('s'); localStorage.removeItem('e'); location.reload();">Сбросить даты</p></center>
             </div>
         </div>
 
         <div id="wish" class="screen">
-            <span onclick="nav('home')" style="cursor:pointer; color:var(--accent); font-weight:900; margin-bottom:20px; display:inline-block; font-family: 'Montserrat', sans-serif;">← НАЗАД</span>
-            
+            <span onclick="nav('home')" style="cursor:pointer; color:var(--accent); font-weight:900; margin-bottom:20px; display:inline-block;">← НАЗАД</span>
             <div class="wish-tabs">
                 <div class="w-tab active" id="tab-partner" onclick="switchW('partner')">Хочет половинка</div>
                 <div class="w-tab" id="tab-me" onclick="switchW('me')">Мои желания</div>
             </div>
-            
             <div class="card">
                 <div id="wish-input-group" style="display:none; gap:10px; margin-bottom:20px;">
                     <input type="text" id="wi" placeholder="Что подарить?" style="margin:0;">
@@ -246,10 +268,9 @@
         </div>
 
         <div id="settings" class="screen">
-            <span onclick="nav('home')" style="cursor:pointer; color:var(--accent); font-weight:900; margin-bottom:20px; display:inline-block; font-family: 'Montserrat', sans-serif;">← НАЗАД</span>
-            
+            <span onclick="nav('home')" style="cursor:pointer; color:var(--accent); font-weight:900; margin-bottom:20px; display:inline-block;">← НАЗАД</span>
             <div class="card">
-                <h3 style="margin:0; margin-bottom: 15px; font-family: 'Montserrat', sans-serif;">🎨 ВЫБОР ФОНА</h3>
+                <h3 style="margin:0; margin-bottom: 15px;">🎨 ВЫБОР ФОНА</h3>
                 <div class="bg-gallery">
                     <div class="bg-thumb" onclick="setBg('bg_1.jpg', this)" style="background-image:url('img/bg_1.jpg')"></div>
                     <div class="bg-thumb" onclick="setBg('bg_2.jpg', this)" style="background-image:url('img/bg_2.jpg')"></div>
@@ -258,332 +279,138 @@
                     <div class="bg-thumb" onclick="setBg('bg_boy_default.jpg', this)" style="background-image:url('img/bg_boy_default.jpg')"></div>
                     <div class="bg-thumb" onclick="setBg('bg_girl_default.jpg', this)" style="background-image:url('img/bg_girl_default.jpg')"></div>
                 </div>
-                <button class="btn" onclick="resetBg()" style="background:transparent; border:1px solid var(--text-sub); color:var(--text-sub); margin-top:20px; font-size:11px;">Сбросить на стандарт</button>
+                <button class="btn" onclick="resetBg()" style="background:transparent; border:1px solid var(--text-sub); color:var(--text-sub); margin-top:20px; font-size:11px;">СБРОСИТЬ ФОН</button>
             </div>
         </div>
     </div>
 
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
-        let tg = window.Telegram.WebApp; 
-        tg.expand();
-        
+        let tg = window.Telegram.WebApp; tg.expand();
         const params = new URLSearchParams(window.location.search);
         
-        // Жесткая зачистка при разрыве связи
         if (params.get('reset') === '1') {
-            let savedBg = localStorage.getItem('custom_bg');
-            let savedOrder = localStorage.getItem('menuOrder');
-            localStorage.clear();
-            if(savedBg) localStorage.setItem('custom_bg', savedBg);
-            if(savedOrder) localStorage.setItem('menuOrder', savedOrder);
-            
-            document.getElementById('ds').value = '';
-            document.getElementById('de').value = '';
-            document.getElementById('wl').innerHTML = '';
-            document.getElementById('p-last-time').innerText = '';
+            let bg = localStorage.getItem('custom_bg'), ord = localStorage.getItem('menuOrder');
+            localStorage.clear(); if(bg) localStorage.setItem('custom_bg', bg); if(ord) localStorage.setItem('menuOrder', ord);
         }
 
-        ['role', 'pn', 'pp', 'plat', 'plon', 'pt', 's', 'e'].forEach(p => { 
-            if (params.has(p)) localStorage.setItem(p, params.get(p)); 
-        });
+        ['role', 'pn', 'pp', 'plat', 'plon', 'pt', 's', 'e'].forEach(p => { if (params.has(p)) localStorage.setItem(p, params.get(p)); });
         
         let wishesData = { boy: [], girl: [] };
-        try { 
-            let parsed = JSON.parse(decodeURIComponent(params.get('w') || '{}')); 
-            wishesData = Object.assign(wishesData, parsed); 
-        } catch(e) {}
+        try { let p = JSON.parse(decodeURIComponent(params.get('w') || '{}')); wishesData = Object.assign(wishesData, p); } catch(e) {}
 
         const role = localStorage.getItem('role') || 'boy';
         document.body.classList.toggle('theme-girl', role === 'girl');
         tg.headerColor = '#0d0e15';
 
-        applyBackground();
-        
-        const myData = tg.initDataUnsafe?.user;
-        const myAva = document.getElementById('my-ava');
-        if(myData?.photo_url) { 
-            myAva.style.backgroundImage = `url('${myData.photo_url}')`; 
-            myAva.innerText = ""; 
-        } else { 
-            myAva.innerText = myData?.first_name ? myData.first_name[0] : 'Я'; 
-        }
-        
-        const pNick = localStorage.getItem('pn') || "Половинка";
-        const pPhoto = localStorage.getItem('pp');
-        const pAva = document.getElementById('p-ava');
-        
-        if (pPhoto && pPhoto !== "" && pPhoto !== "None") { 
-            pAva.style.backgroundImage = `url('${pPhoto}')`; 
-            pAva.innerText = ""; 
-        } else { 
-            pAva.innerText = "❤️"; 
-        }
-        document.getElementById('pair-names').innerText = `${myData?.first_name || 'Я'} ❤️ ${pNick}`;
-
-        const savedOrder = JSON.parse(localStorage.getItem('menuOrder'));
-        if (savedOrder) {
-            savedOrder.forEach(id => { 
-                const el = document.getElementById('sortable-menu').querySelector(`[data-id="${id}"]`); 
-                if (el) document.getElementById('sortable-menu').appendChild(el); 
-            });
-        }
-
-        setInterval(() => { if(localStorage.getItem('s')) tick(); }, 100);
-
-        // === ФУНКЦИИ ===
         function applyBackground() { 
-            const role = localStorage.getItem('role') || 'boy';
             const b = localStorage.getItem('custom_bg'); 
             document.body.style.backgroundImage = b ? `url('img/${b}')` : (role === 'girl' ? `url('img/bg_girl_default.jpg')` : `url('img/bg_boy_default.jpg')`); 
         }
+        applyBackground();
         
-        function setBg(file, el) { 
-            localStorage.setItem('custom_bg', file); 
-            applyBackground(); 
-            document.querySelectorAll('.bg-thumb').forEach(t => t.classList.remove('active')); 
-            el.classList.add('active'); 
-            tg.HapticFeedback.impactOccurred('medium'); 
-        }
-        
-        function resetBg() { 
-            localStorage.removeItem('custom_bg'); 
-            applyBackground(); 
-            document.querySelectorAll('.bg-thumb').forEach(t => t.classList.remove('active')); 
-        }
+        function setBg(f, el) { localStorage.setItem('custom_bg', f); applyBackground(); document.querySelectorAll('.bg-thumb').forEach(t => t.classList.remove('active')); el.classList.add('active'); tg.HapticFeedback.impactOccurred('medium'); }
+        function resetBg() { localStorage.removeItem('custom_bg'); applyBackground(); document.querySelectorAll('.bg-thumb').forEach(t => t.classList.remove('active')); }
 
-        let sortableInstance = null;
-        let isEditMode = false;
-        
+        const myData = tg.initDataUnsafe?.user, myAva = document.getElementById('my-ava');
+        if(myData?.photo_url) { myAva.style.backgroundImage = `url('${myData.photo_url}')`; myAva.innerText = ""; } else { myAva.innerText = 'Я'; }
+        const pNick = localStorage.getItem('pn') || "Половинка", pPhoto = localStorage.getItem('pp'), pAva = document.getElementById('p-ava');
+        if (pPhoto && pPhoto !== "" && pPhoto !== "None") { pAva.style.backgroundImage = `url('${pPhoto}')`; pAva.innerText = ""; } else { pAva.innerText = "❤️"; }
+        document.getElementById('pair-names').innerText = `${myData?.first_name || 'Я'} ❤️ ${pNick}`;
+
+        const menuContainer = document.getElementById('sortable-menu');
+        let sortableInstance = null, isEditMode = false;
         function toggleEdit() {
-            const btn = document.getElementById('edit-btn'); 
-            const menuContainer = document.getElementById('sortable-menu');
-            isEditMode = !isEditMode;
-            
+            const btn = document.getElementById('edit-btn'); isEditMode = !isEditMode;
             if (isEditMode) {
-                btn.innerText = "✅"; 
-                menuContainer.classList.add('edit-mode');
-                sortableInstance = new Sortable(menuContainer, { 
-                    animation: 250, 
-                    onEnd: () => { 
-                        const order = Array.from(menuContainer.children).map(el => el.getAttribute('data-id')); 
-                        localStorage.setItem('menuOrder', JSON.stringify(order)); 
-                    } 
-                });
+                btn.innerText = "✅"; menuContainer.classList.add('edit-mode');
+                sortableInstance = new Sortable(menuContainer, { animation: 250, onEnd: () => { const order = Array.from(menuContainer.children).map(el => el.getAttribute('data-id')); localStorage.setItem('menuOrder', JSON.stringify(order)); } });
                 tg.HapticFeedback.impactOccurred('heavy');
             } else {
-                btn.innerText = "✏️"; 
-                menuContainer.classList.remove('edit-mode'); 
-                if (sortableInstance) { 
-                    sortableInstance.destroy(); 
-                    sortableInstance = null; 
-                } 
-                tg.HapticFeedback.notificationOccurred('success');
+                btn.innerText = "✏️"; menuContainer.classList.remove('edit-mode'); if (sortableInstance) sortableInstance.destroy(); tg.HapticFeedback.notificationOccurred('success');
             }
         }
+        const savedOrder = JSON.parse(localStorage.getItem('menuOrder'));
+        if (savedOrder) savedOrder.forEach(id => { const el = menuContainer.querySelector(`[data-id="${id}"]`); if (el) menuContainer.appendChild(el); });
 
-        function nav(id) { 
-            if (isEditMode) return; 
-            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active')); 
-            document.getElementById(id).classList.add('active'); 
-            document.getElementById('edit-btn').style.display = (id === 'home') ? 'flex' : 'none'; 
-            if(id === 'locator') updatePartnerTime(); 
-            if(id === 'dmb') checkDMB(); 
-            if(id === 'wish') renderW(); 
-        }
+        function nav(id) { if (isEditMode) return; document.querySelectorAll('.screen').forEach(s => s.classList.remove('active')); document.getElementById(id).classList.add('active'); document.getElementById('edit-btn').style.display = (id === 'home') ? 'flex' : 'none'; if(id === 'locator') updatePartnerTime(); if(id === 'dmb') checkDMB(); if(id === 'wish') renderW(); }
 
         function updatePartnerTime() {
-            const pt = parseInt(localStorage.getItem('pt'));
-            const el = document.getElementById('p-last-time');
-            if(!pt || isNaN(pt)) { 
-                el.innerText = "Локацией еще не делились 💔"; 
-                return; 
-            }
+            const pt = parseInt(localStorage.getItem('pt')), el = document.getElementById('p-last-time');
+            if(!pt || isNaN(pt)) { el.innerText = "Локацией еще не делились 💔"; return; }
             const diff = Math.floor((Date.now() / 1000) - pt);
-            
-            if(diff < 60) {
-                el.innerText = "Обновлено только что 📍";
-            } else if(diff < 3600) {
-                el.innerText = `Последняя локация: ${Math.floor(diff/60)} мин. назад`;
-            } else {
-                el.innerText = `Последняя локация: ${Math.floor(diff/3600)} ч. назад`;
-            }
-        }
-
-        function getDistance(lat1, lon1, lat2, lon2) {
-            const R = 6371; 
-            const dLat = (lat2 - lat1) * Math.PI / 180;
-            const dLon = (lon2 - lon1) * Math.PI / 180;
-            const a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon/2) * Math.sin(dLon/2);
-            return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-        }
-
-        function calculateDistance() {
-            const status = document.getElementById('loc-status');
-            const plat = parseFloat(localStorage.getItem('plat'));
-            const plon = parseFloat(localStorage.getItem('plon'));
-            const pNick = localStorage.getItem('pn') || "Половинка";
-            
-            if(!plat || !plon || isNaN(plat)) {
-                status.innerText = "Сначала половинка должна отправить геометку!";
-                status.style.color = "#ff4757";
-                return;
-            }
-            
-            status.innerText = "📡 СКАНИРОВАНИЕ...";
-            status.style.color = "var(--mint)";
-            
-            navigator.geolocation.getCurrentPosition((pos) => { 
-                const dist = getDistance(pos.coords.latitude, pos.coords.longitude, plat, plon);
-                let textDist = dist < 1 ? `${Math.round(dist * 1000)} метров` : `${dist.toFixed(1)} км`;
-                status.innerText = `${pNick} находится в ${textDist} от тебя! 💜`;
-                tg.HapticFeedback.notificationOccurred('success');
-            }, () => { 
-                status.innerText = "❌ Разреши доступ к своей геопозиции!";
-                status.style.color = "#ff4757";
-            }, { enableHighAccuracy: true }); 
-        }
-
-        let currentWTab = 'partner';
-        function switchW(tab) { 
-            currentWTab = tab; 
-            document.getElementById('tab-partner').classList.toggle('active', tab === 'partner'); 
-            document.getElementById('tab-me').classList.toggle('active', tab === 'me'); 
-            document.getElementById('wish-input-group').style.display = tab === 'me' ? 'flex' : 'none'; 
-            renderW(); 
-        }
-        
-        function renderW() {
-            const list = document.getElementById('wl');
-            const role = localStorage.getItem('role') || 'boy';
-            const pr = role === 'girl' ? 'boy' : 'girl';
-            
-            let wData = { boy: [], girl: [] };
-            try { wData = JSON.parse(localStorage.getItem('w')); } catch(e) {}
-            
-            const activeList = currentWTab === 'me' ? wData[role] : wData[pr];
-            
-            if (!activeList || activeList.length === 0) { 
-                list.innerHTML = `<p style="text-align:center; color:var(--text-sub); margin-top:30px; font-size:12px;">Пусто...</p>`; 
-                return; 
-            }
-            list.innerHTML = activeList.map((w, i) => `
-                <div class="wish-item">
-                    <div style="display:flex; justify-content:space-between; align-items:flex-start;">
-                        <span style="word-break: break-word; line-height: 1.5;">${w.replace(/(https?:\/\/[^\s]+)/g, '<br><a href="$1" target="_blank" class="wish-link">🔗 ОТКРЫТЬ ССЫЛКУ</a>')}</span>
-                        ${currentWTab === 'me' ? `<span class="del-btn" onclick="delW(${i})">×</span>` : ''}
-                    </div>
-                </div>
-            `).join('');
-        }
-        
-        function addW() { 
-            const i = document.getElementById('wi'); 
-            if(!i.value.trim()) return; 
-            
-            const role = localStorage.getItem('role') || 'boy';
-            let wData = { boy: [], girl: [] };
-            try { wData = JSON.parse(localStorage.getItem('w')) || { boy: [], girl: [] }; } catch(e) {}
-            
-            if(!wData[role]) wData[role] = []; 
-            wData[role].push(i.value.trim()); 
-            i.value=''; 
-            localStorage.setItem('w', JSON.stringify(wData)); 
-            renderW(); 
-        }
-        
-        function delW(i) { 
-            const role = localStorage.getItem('role') || 'boy';
-            let wData = { boy: [], girl: [] };
-            try { wData = JSON.parse(localStorage.getItem('w')) || { boy: [], girl: [] }; } catch(e) {}
-            
-            wData[role].splice(i, 1); 
-            localStorage.setItem('w', JSON.stringify(wData)); 
-            renderW(); 
+            if(diff < 60) el.innerText = "ОБНОВЛЕНО ТОЛЬКО ЧТО 📍";
+            else if(diff < 3600) el.innerText = `БЫЛ(А) В СЕТИ ${Math.floor(diff/60)} МИН. НАЗАД`;
+            else el.innerText = `БЫЛ(А) В СЕТИ ${Math.floor(diff/3600)} Ч. НАЗАД`;
         }
 
         function sendLocation() { 
-            const btn = document.getElementById('btn-loc'); 
-            const status = document.getElementById('loc-status');
-            btn.disabled = true; 
+            const btn = document.getElementById('btn-loc'), status = document.getElementById('loc-status');
+            btn.disabled = true; status.innerText = "📡 СВЯЗЬ СО СПУТНИКОМ...";
             
             navigator.geolocation.getCurrentPosition((pos) => { 
-                try { 
-                    tg.sendData(JSON.stringify({action: "checkin", lat: pos.coords.latitude, lon: pos.coords.longitude})); 
-                    status.innerText = "✅ ОТПРАВЛЕНО!"; 
-                    setTimeout(() => { tg.close(); }, 1500);
-                } catch(e) { 
-                    // Если зашли через левую кнопку и sendData заблочен
-                    btn.disabled = false; 
-                    tg.showAlert("📍 Чтобы отправить геометку в базу, пожалуйста, открой приложение через главную фиолетовую кнопку «💜 Открыть MoZZaya ✨» в чате бота!");
-                } 
-            }, () => { 
-                btn.disabled = false; 
-                status.innerText = "❌ Включи GPS!";
-            }, { enableHighAccuracy: true }); 
+                status.innerText = "🛰 КООРДИНАТЫ ПОЛУЧЕНЫ!";
+                setTimeout(() => {
+                    status.innerText = "💖 ПЕРЕДАЮ ПОЛОВИНКЕ...";
+                    try { 
+                        tg.sendData(JSON.stringify({action: "checkin", lat: pos.coords.latitude, lon: pos.coords.longitude})); 
+                        status.innerText = "✅ УСПЕШНО ДОСТАВЛЕНО!"; 
+                        setTimeout(() => { tg.close(); }, 1000);
+                    } catch(e) { btn.disabled = false; status.innerText = "❌ ОШИБКА ОТПРАВКИ!"; }
+                }, 800);
+            }, () => { btn.disabled = false; status.innerText = "❌ ВКЛЮЧИ GPS В ТЕЛЕФОНЕ!"; }, { enableHighAccuracy: true }); 
         }
         
-        function viewPartnerLocation() { 
-            const lat = localStorage.getItem('plat'), lon = localStorage.getItem('plon'); 
-            if(!lat || !lon) {
-                tg.showAlert("Геометки нет! 💔"); 
-            } else {
-                window.open(`https://yandex.ru/maps/?pt=${lon},${lat}&z=16&l=map`, '_blank');
-            }
+        function calculateDistance() {
+            const status = document.getElementById('loc-status'), plat = parseFloat(localStorage.getItem('plat')), plon = parseFloat(localStorage.getItem('plon'));
+            if(!plat) { status.innerText = "ОНА ЕЩЕ НЕ ДЕЛИЛАСЬ МЕТКОЙ!"; return; }
+            status.innerText = "📡 СКАНИРУЮ ДИСТАНЦИЮ...";
+            navigator.geolocation.getCurrentPosition((pos) => { 
+                const R = 6371; 
+                const dLat = (pos.coords.latitude - plat) * Math.PI / 180;
+                const dLon = (pos.coords.longitude - plon) * Math.PI / 180;
+                const a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(plat * Math.PI / 180) * Math.cos(pos.coords.latitude * Math.PI / 180) * Math.sin(dLon/2) * Math.sin(dLon/2);
+                const d = R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+                status.innerText = `МЕЖДУ ВАМИ ${d < 1 ? Math.round(d*1000)+' МЕТРОВ' : d.toFixed(1)+' КМ'} 💜`;
+                tg.HapticFeedback.notificationOccurred('success');
+            }); 
         }
 
-        function checkDMB() { 
-            if(localStorage.getItem('s')) { 
-                document.getElementById('setup').style.display='none'; 
-                document.getElementById('view').style.display='block'; 
-                tick(); 
-            } else { 
-                document.getElementById('setup').style.display='block'; 
-                document.getElementById('view').style.display='none'; 
-            } 
-        }
-        
-        function saveDMB() { 
-            const s = document.getElementById('ds').value;
-            const e = document.getElementById('de').value; 
-            if(!s || !e) return; 
-            localStorage.setItem('s', s); 
-            localStorage.setItem('e', e); 
-            checkDMB(); 
-        }
-        
+        function viewPartnerLocation() { const lat = localStorage.getItem('plat'), lon = localStorage.getItem('plon'); if(!lat) { tg.showAlert("Геометки нет!"); } else { window.open(`https://yandex.ru/maps/?pt=${lon},${lat}&z=16&l=map`, '_blank'); } }
+
+        function checkDMB() { if(localStorage.getItem('s')) { document.getElementById('setup').style.display='none'; document.getElementById('view').style.display='block'; tick(); } else { document.getElementById('setup').style.display='block'; document.getElementById('view').style.display='none'; } }
+        function saveDMB() { const s = document.getElementById('ds').value, e = document.getElementById('de').value; if(!s || !e) return; localStorage.setItem('s', s); localStorage.setItem('e', e); checkDMB(); }
         function tick() {
-            const start = new Date(localStorage.getItem('s')).getTime();
-            const end = new Date(localStorage.getItem('e')).getTime();
-            const now = new Date().getTime();
-            const left = end - now;
-            
+            const start = new Date(localStorage.getItem('s')).getTime(), end = new Date(localStorage.getItem('e')).getTime(), now = new Date().getTime(), left = end - now;
             if (now < start || now > end) return;
-            
             const p = ((now - start) / (end - start)) * 100;
             document.getElementById('bar').style.width = p + '%';
             document.getElementById('perc').innerText = p.toFixed(8) + '%';
-            
             document.getElementById('vd').innerText = Math.floor(left / 86400000);
             document.getElementById('vh').innerText = Math.floor((left % 86400000) / 3600000).toString().padStart(2, '0');
             document.getElementById('vm').innerText = Math.floor((left % 3600000) / 60000).toString().padStart(2, '0');
             document.getElementById('vs').innerText = Math.floor((left % 60000) / 1000).toString().padStart(2, '0');
-            
             document.getElementById('v-eq').innerText = Math.max(0, Math.floor((start + (end-start)/2 - now)/86400000));
             document.getElementById('v-ord').innerText = Math.max(0, Math.floor((end - 100*86400000 - now)/86400000));
         }
 
-        function syncAll() { 
-            let wData = { boy: [], girl: [] };
-            try { wData = JSON.parse(localStorage.getItem('w')) || { boy: [], girl: [] }; } catch(e) {}
-            
-            try { 
-                tg.sendData(JSON.stringify({ s: localStorage.getItem('s'), e: localStorage.getItem('e'), w: wData })); 
-                tg.HapticFeedback.notificationOccurred('success'); 
-            } catch(e) { 
-                tg.showAlert("📍 Для сохранения в облако, пожалуйста, открой приложение через главную фиолетовую кнопку в чате бота!"); 
-            } 
+        let currentWTab = 'partner';
+        function switchW(t) { currentWTab = t; document.getElementById('tab-partner').classList.toggle('active', t === 'partner'); document.getElementById('tab-me').classList.toggle('active', t === 'me'); document.getElementById('wish-input-group').style.display = t === 'me' ? 'flex' : 'none'; renderW(); }
+        function renderW() {
+            const list = document.getElementById('wl'), role = localStorage.getItem('role') || 'boy', pr = role === 'girl' ? 'boy' : 'girl';
+            let wData = { boy: [], girl: [] }; try { wData = JSON.parse(localStorage.getItem('w')); } catch(e) {}
+            const activeList = currentWTab === 'me' ? wData[role] : wData[pr];
+            if (!activeList || activeList.length === 0) { list.innerHTML = `<p style="text-align:center; color:var(--text-sub); margin-top:30px; font-size:12px;">ПУСТО...</p>`; return; }
+            list.innerHTML = activeList.map((w, i) => `<div class="wish-item"><div style="display:flex; justify-content:space-between; align-items:flex-start;"><span style="word-break: break-word; line-height: 1.5;">${w.replace(/(https?:\/\/[^\s]+)/g, '<br><a href="$1" target="_blank" class="wish-link">🔗 ОТКРЫТЬ ССЫЛКУ</a>')}</span>${currentWTab === 'me' ? `<span class="del-btn" onclick="delW(${i})">×</span>` : ''}</div></div>`).join('');
         }
+        function addW() { const i = document.getElementById('wi'); if(!i.value.trim()) return; const role = localStorage.getItem('role') || 'boy'; let wData = { boy: [], girl: [] }; try { wData = JSON.parse(localStorage.getItem('w')) || { boy: [], girl: [] }; } catch(e) {} if(!wData[role]) wData[role] = []; wData[role].push(i.value.trim()); i.value=''; localStorage.setItem('w', JSON.stringify(wData)); renderW(); }
+        function delW(i) { const role = localStorage.getItem('role') || 'boy'; let wData = { boy: [], girl: [] }; try { wData = JSON.parse(localStorage.getItem('w')) || { boy: [], girl: [] }; } catch(e) {} wData[role].splice(i, 1); localStorage.setItem('w', JSON.stringify(wData)); renderW(); }
+
+        function syncAll() { 
+            let wData = { boy: [], girl: [] }; try { wData = JSON.parse(localStorage.getItem('w')) || { boy: [], girl: [] }; } catch(e) {}
+            try { tg.sendData(JSON.stringify({ s: localStorage.getItem('s'), e: localStorage.getItem('e'), w: wData })); tg.HapticFeedback.notificationOccurred('success'); } catch(e) { tg.showAlert("ОТКРОЙ ЧЕРЕЗ ФИОЛЕТОВУЮ КНОПКУ!"); } 
+        }
+        setInterval(() => { if(localStorage.getItem('s')) tick(); }, 100);
     </script>
 </body>
 </html>
