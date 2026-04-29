@@ -47,21 +47,6 @@
             -webkit-user-select: none;
         }
 
-        /* === БЛОКИРОВКА ЛЕВОЙ КНОПКИ === */
-        #kill-screen {
-            display: none; 
-            flex-direction: column; 
-            justify-content: center; 
-            align-items: center; 
-            height: 100vh; 
-            text-align: center; 
-            padding: 30px; 
-            background: var(--bg-fallback); 
-            z-index: 9999;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
         .app { 
             width: 100%; 
             max-width: 400px; 
@@ -148,16 +133,6 @@
     </style>
 </head>
 <body>
-    <div id="kill-screen">
-        <div class="avatar" style="width: 100px; height: 100px; font-size: 45px; margin-bottom: 25px; box-shadow: none; background: rgba(255, 71, 87, 0.2); border-color: #ff4757;">🚫</div>
-        <h2 style="color: #ff4757; font-family: 'Montserrat', sans-serif; text-transform: uppercase;">Доступ закрыт</h2>
-        <p style="color: var(--text-main); font-weight: 600; line-height: 1.6; font-size: 14px;">
-            Левая кнопка меню отключена, так как Телеграм блокирует отправку данных через неё.<br><br>
-            Пожалуйста, закрой это окно и открой приложение через <b>главную фиолетовую кнопку «💜 Открыть MoZZaya ✨»</b> в чате бота!
-        </p>
-        <button class="btn" onclick="tg.close()" style="margin-top: 30px; max-width: 250px;">ПОНЯТНО, ЗАКРЫТЬ</button>
-    </div>
-
     <div class="app" id="main-app">
         <div id="edit-btn" class="edit-toggle" onclick="toggleEdit()">✏️</div>
 
@@ -295,74 +270,66 @@
         
         const params = new URLSearchParams(window.location.search);
         
-        // === ЛОВУШКА ДЛЯ ЛЕВОЙ КНОПКИ ===
-        // Если в URL нет параметра source=chat, значит зашли со старой левой кнопки
-        if (params.get('source') !== 'chat') {
-            document.getElementById('main-app').style.display = 'none';
-            document.getElementById('kill-screen').style.display = 'flex';
-        } else {
-            // Обычная инициализация приложения
+        // Жесткая зачистка при разрыве связи
+        if (params.get('reset') === '1') {
+            let savedBg = localStorage.getItem('custom_bg');
+            let savedOrder = localStorage.getItem('menuOrder');
+            localStorage.clear();
+            if(savedBg) localStorage.setItem('custom_bg', savedBg);
+            if(savedOrder) localStorage.setItem('menuOrder', savedOrder);
             
-            if (params.get('reset') === '1') {
-                let savedBg = localStorage.getItem('custom_bg');
-                let savedOrder = localStorage.getItem('menuOrder');
-                localStorage.clear();
-                if(savedBg) localStorage.setItem('custom_bg', savedBg);
-                if(savedOrder) localStorage.setItem('menuOrder', savedOrder);
-                
-                document.getElementById('ds').value = '';
-                document.getElementById('de').value = '';
-                document.getElementById('wl').innerHTML = '';
-                document.getElementById('p-last-time').innerText = '';
-            }
-
-            ['role', 'pn', 'pp', 'plat', 'plon', 'pt', 's', 'e'].forEach(p => { 
-                if (params.has(p)) localStorage.setItem(p, params.get(p)); 
-            });
-            
-            let wishesData = { boy: [], girl: [] };
-            try { 
-                let parsed = JSON.parse(decodeURIComponent(params.get('w') || '{}')); 
-                wishesData = Object.assign(wishesData, parsed); 
-            } catch(e) {}
-
-            const role = localStorage.getItem('role') || 'boy';
-            document.body.classList.toggle('theme-girl', role === 'girl');
-            tg.headerColor = '#0d0e15';
-
-            applyBackground();
-            
-            const myData = tg.initDataUnsafe?.user;
-            const myAva = document.getElementById('my-ava');
-            if(myData?.photo_url) { 
-                myAva.style.backgroundImage = `url('${myData.photo_url}')`; 
-                myAva.innerText = ""; 
-            } else { 
-                myAva.innerText = myData?.first_name ? myData.first_name[0] : 'Я'; 
-            }
-            
-            const pNick = localStorage.getItem('pn') || "Половинка";
-            const pPhoto = localStorage.getItem('pp');
-            const pAva = document.getElementById('p-ava');
-            
-            if (pPhoto && pPhoto !== "" && pPhoto !== "None") { 
-                pAva.style.backgroundImage = `url('${pPhoto}')`; 
-                pAva.innerText = ""; 
-            } else { 
-                pAva.innerText = "❤️"; 
-            }
-            document.getElementById('pair-names').innerText = `${myData?.first_name || 'Я'} ❤️ ${pNick}`;
-
-            const savedOrder = JSON.parse(localStorage.getItem('menuOrder'));
-            if (savedOrder) {
-                savedOrder.forEach(id => { 
-                    const el = document.getElementById('sortable-menu').querySelector(`[data-id="${id}"]`); 
-                    if (el) document.getElementById('sortable-menu').appendChild(el); 
-                });
-            }
-
-            setInterval(() => { if(localStorage.getItem('s')) tick(); }, 100);
+            document.getElementById('ds').value = '';
+            document.getElementById('de').value = '';
+            document.getElementById('wl').innerHTML = '';
+            document.getElementById('p-last-time').innerText = '';
         }
+
+        ['role', 'pn', 'pp', 'plat', 'plon', 'pt', 's', 'e'].forEach(p => { 
+            if (params.has(p)) localStorage.setItem(p, params.get(p)); 
+        });
+        
+        let wishesData = { boy: [], girl: [] };
+        try { 
+            let parsed = JSON.parse(decodeURIComponent(params.get('w') || '{}')); 
+            wishesData = Object.assign(wishesData, parsed); 
+        } catch(e) {}
+
+        const role = localStorage.getItem('role') || 'boy';
+        document.body.classList.toggle('theme-girl', role === 'girl');
+        tg.headerColor = '#0d0e15';
+
+        applyBackground();
+        
+        const myData = tg.initDataUnsafe?.user;
+        const myAva = document.getElementById('my-ava');
+        if(myData?.photo_url) { 
+            myAva.style.backgroundImage = `url('${myData.photo_url}')`; 
+            myAva.innerText = ""; 
+        } else { 
+            myAva.innerText = myData?.first_name ? myData.first_name[0] : 'Я'; 
+        }
+        
+        const pNick = localStorage.getItem('pn') || "Половинка";
+        const pPhoto = localStorage.getItem('pp');
+        const pAva = document.getElementById('p-ava');
+        
+        if (pPhoto && pPhoto !== "" && pPhoto !== "None") { 
+            pAva.style.backgroundImage = `url('${pPhoto}')`; 
+            pAva.innerText = ""; 
+        } else { 
+            pAva.innerText = "❤️"; 
+        }
+        document.getElementById('pair-names').innerText = `${myData?.first_name || 'Я'} ❤️ ${pNick}`;
+
+        const savedOrder = JSON.parse(localStorage.getItem('menuOrder'));
+        if (savedOrder) {
+            savedOrder.forEach(id => { 
+                const el = document.getElementById('sortable-menu').querySelector(`[data-id="${id}"]`); 
+                if (el) document.getElementById('sortable-menu').appendChild(el); 
+            });
+        }
+
+        setInterval(() => { if(localStorage.getItem('s')) tick(); }, 100);
 
         // === ФУНКЦИИ ===
         function applyBackground() { 
@@ -546,8 +513,9 @@
                     status.innerText = "✅ ОТПРАВЛЕНО!"; 
                     setTimeout(() => { tg.close(); }, 1500);
                 } catch(e) { 
+                    // Если зашли через левую кнопку и sendData заблочен
                     btn.disabled = false; 
-                    status.innerText = "Ошибка!";
+                    tg.showAlert("📍 Чтобы отправить геометку в базу, пожалуйста, открой приложение через главную фиолетовую кнопку «💜 Открыть MoZZaya ✨» в чате бота!");
                 } 
             }, () => { 
                 btn.disabled = false; 
@@ -613,7 +581,7 @@
                 tg.sendData(JSON.stringify({ s: localStorage.getItem('s'), e: localStorage.getItem('e'), w: wData })); 
                 tg.HapticFeedback.notificationOccurred('success'); 
             } catch(e) { 
-                tg.showAlert("Ошибка синхронизации!"); 
+                tg.showAlert("📍 Для сохранения в облако, пожалуйста, открой приложение через главную фиолетовую кнопку в чате бота!"); 
             } 
         }
     </script>
