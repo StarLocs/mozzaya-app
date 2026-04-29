@@ -43,93 +43,74 @@
         
         .card { 
             background: var(--card-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--border); border-radius: 28px; padding: 18px 22px; margin-bottom: 15px; box-shadow: var(--card-shadow); 
-            transition: transform 0.2s;
+            border: 1px solid var(--border); border-radius: 28px; padding: 22px; margin-bottom: 15px; box-shadow: var(--card-shadow); 
         }
 
+        /* --- КНОПКА КАРАНДАША --- */
         .edit-toggle {
-            position: absolute; top: 25px; left: 25px; z-index: 10; width: 40px; height: 40px; border-radius: 12px;
+            position: absolute; top: 25px; left: 25px; z-index: 10; width: 42px; height: 42px; border-radius: 14px;
             background: var(--card-bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center;
-            font-size: 18px; cursor: pointer; backdrop-filter: blur(10px);
+            font-size: 20px; cursor: pointer; backdrop-filter: blur(10px); transition: 0.2s;
         }
+        .edit-toggle:active { transform: scale(0.9); }
 
         .header-badge {
-            background: var(--card-bg); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
-            border: 1px solid var(--border); border-radius: 35px; padding: 25px 15px; margin-bottom: 25px; display: flex; flex-direction: column; align-items: center;
-            box-shadow: var(--card-shadow); position: relative; overflow: hidden;
+            background: var(--card-bg); border: 1px solid var(--border); border-radius: 35px; padding: 25px 15px; margin-bottom: 25px; display: flex; flex-direction: column; align-items: center; box-shadow: var(--card-shadow);
         }
-        .header-badge::before {
-            content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
-            background: linear-gradient(to right, transparent, rgba(255,255,255,0.1), transparent);
-            transform: skewX(-20deg); animation: shine 6s infinite;
-        }
-        @keyframes shine { 0% { left: -100%; } 20%, 100% { left: 200%; } }
-
-        .profile-row { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 12px; z-index: 2;}
+        .profile-row { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 12px; }
         .avatar { 
             width: 70px; height: 70px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--mint));
             display: flex; justify-content: center; align-items: center; font-size: 26px; font-weight: bold; color: #fff;
             box-shadow: 0 8px 25px rgba(0,0,0,0.6); background-size: cover; background-position: center; border: 3px solid var(--border);
         }
-        .heart-icon { font-size: 30px; filter: drop-shadow(0 0 10px var(--accent)); animation: heartbeat 1.2s infinite; z-index: 2;}
+        .heart-icon { font-size: 30px; animation: heartbeat 1.2s infinite; }
         @keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
 
-        #pair-names { font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; margin: 0; text-align: center; background: linear-gradient(90deg, #fff, var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; z-index: 2; }
+        #pair-names { font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; text-align: center; background: linear-gradient(90deg, #fff, var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 0; }
         
-        .menu-item { display: flex; align-items: center; padding: 0; overflow: hidden; }
-        .menu-content { flex-grow: 1; padding: 22px; cursor: pointer; font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; }
-        .menu-content:active { background: rgba(255,255,255,0.05); }
-        .drag-handle { padding: 22px 25px; font-size: 22px; color: var(--text-sub); cursor: grab; touch-action: none; display: flex; align-items: center; justify-content: center; }
-        .drag-handle:active { cursor: grabbing; color: var(--accent); }
-        .sortable-ghost { opacity: 0.4; transform: scale(0.95); background: rgba(255,255,255,0.05); border: 1px dashed var(--text-sub); } 
+        /* --- ИДЕАЛЬНОЕ МЕНЮ С ТРЯСКОЙ --- */
+        .menu-item { 
+            display: flex; justify-content: space-between; align-items: center; 
+            font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 14px; 
+            padding: 22px; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: 0.1s;
+        }
+        .menu-item:active { transform: scale(0.98); }
+        
+        @keyframes shake { 0%, 100% { transform: rotate(0deg); } 25% { transform: rotate(-1.5deg); } 75% { transform: rotate(1.5deg); } }
+        .edit-mode .menu-item { animation: shake 0.35s infinite; border: 1px dashed var(--accent); background: rgba(0,0,0,0.3); }
+        .sortable-ghost { opacity: 0.2; transform: scale(0.95); }
 
-        .btn { font-family: 'Montserrat', sans-serif; background: var(--accent); color: #fff; border: none; padding: 18px; border-radius: 20px; font-weight: 900; cursor: pointer; width: 100%; font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; box-shadow: 0 10px 25px rgba(0,0,0,0.5); transition: 0.2s; }
+        .btn { font-family: 'Montserrat', sans-serif; background: var(--accent); color: #fff; border: none; padding: 18px; border-radius: 20px; font-weight: 900; width: 100%; font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; box-shadow: 0 10px 25px rgba(0,0,0,0.5); transition: 0.2s; }
         .btn:active { transform: scale(0.96); }
         .btn:disabled { opacity: 0.6; cursor: not-allowed; }
         
-        .sync-wrapper { text-align: center; margin-top: auto; padding-top: 25px; padding-bottom: 10px; }
-        .btn-sync-small { background: var(--card-bg); backdrop-filter: blur(10px); border: 1px solid var(--mint); color: var(--mint); padding: 12px 26px; border-radius: 30px; font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; box-shadow: var(--card-shadow); transition: 0.2s; }
-        .btn-sync-small:active { background: var(--mint); color: #000; transform: scale(0.95); }
+        .wish-tabs { display: flex; background: rgba(0,0,0,0.5); border-radius: 20px; padding: 6px; margin-bottom: 20px; }
+        .w-tab { flex: 1; text-align: center; padding: 14px; font-size: 11px; font-weight: 900; color: var(--text-sub); border-radius: 16px; cursor: pointer; font-family: 'Montserrat', sans-serif; text-transform: uppercase; }
+        .w-tab.active { background: var(--accent); color: #fff; }
+        .wish-item { display: flex; flex-direction: column; padding: 18px; background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 18px; margin-bottom: 12px; font-weight: 700; font-size: 14px; }
+        .wish-link { display: inline-flex; align-items: center; margin-top: 10px; color: #000; text-decoration: none; background: var(--mint); padding: 8px 16px; border-radius: 12px; font-size: 11px; font-weight: 900; }
+        .del-btn { color: #ff4757; font-size: 24px; font-weight: bold; background: rgba(255, 71, 87, 0.15); width: 35px; height: 35px; border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+
+        #countdown { font-family: 'Montserrat', sans-serif; font-size: 34px; font-weight: 900; text-align: center; margin: 15px 0; display: flex; justify-content: center; align-items: baseline; gap: 4px; }
+        .neon { color: var(--mint); text-shadow: 0 0 15px var(--mint); width: 50px; display: inline-block; }
+        .progress { height: 10px; background: rgba(0,0,0,0.5); border-radius: 10px; overflow: hidden; margin-top: 15px; }
+        #bar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--mint)); box-shadow: 0 0 15px var(--accent); transition: 0.5s; }
+
+        .planet-wrap { position: relative; width: 160px; height: 160px; margin: 20px auto 40px auto; display: flex; justify-content: center; align-items: center; }
+        .planet { font-size: 90px; line-height: 1; animation: float-spin 6s ease-in-out infinite; filter: drop-shadow(0 0 25px var(--mint)); position: relative; }
+        .planet::after { content: '🌍'; } 
+        @keyframes float-spin { 0%, 100% { transform: translateY(0) rotate(-5deg); } 50% { transform: translateY(-12px) rotate(5deg); } }
+        .radar-ring { position: absolute; border: 2px solid var(--mint); border-radius: 50%; opacity: 0; animation: radarPing 3s ease-out infinite; }
+        .r1 { width: 140px; height: 140px; } .r2 { width: 190px; height: 190px; animation-delay: 1.5s; }
+        @keyframes radarPing { 0% { transform: scale(0.5); opacity: 0.8; } 100% { transform: scale(1.5); opacity: 0; } }
+        .bg-thumb { width: 100%; height: 85px; border-radius: 16px; background-size: cover; background-position: center; border: 2px solid transparent; }
+        .bg-thumb.active { border-color: var(--mint); transform: scale(0.95); }
+        .bg-gallery { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
         
         input { width: 100%; background: rgba(0,0,0,0.4); border: 1px solid var(--border); border-radius: 16px; padding: 18px; color: var(--text-main); margin: 5px 0 15px 0; box-sizing: border-box; outline: none; font-size: 15px; font-weight: 600; font-family: inherit;}
         label { font-size: 10px; color: var(--text-sub); font-weight: 800; letter-spacing: 2px; text-transform: uppercase; display: block; margin-bottom: 5px; font-family: 'Montserrat', sans-serif;}
-
-        .wish-tabs { display: flex; background: rgba(0,0,0,0.5); border-radius: 20px; padding: 6px; margin-bottom: 20px; box-shadow: inset 0 4px 10px rgba(0,0,0,0.5); }
-        .w-tab { flex: 1; text-align: center; padding: 14px; font-size: 11px; font-weight: 900; color: var(--text-sub); border-radius: 16px; cursor: pointer; transition: 0.3s; font-family: 'Montserrat', sans-serif; text-transform: uppercase; letter-spacing: 1px; }
-        .w-tab.active { background: var(--accent); color: #fff; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
-        
-        .wish-input-group { display: flex; gap: 10px; margin-bottom: 20px; }
-        .wish-item { display: flex; flex-direction: column; padding: 18px; background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 18px; margin-bottom: 12px; font-weight: 700; font-size: 14px; backdrop-filter: blur(5px); transition: 0.3s;}
-        .wish-header { display: flex; justify-content: space-between; align-items: flex-start; width: 100%; gap: 15px;}
-        .wish-text { word-break: break-word; line-height: 1.5; color: var(--text-main); }
-        .wish-link { display: inline-flex; align-items: center; margin-top: 10px; color: #000; text-decoration: none; background: var(--mint); padding: 8px 16px; border-radius: 12px; font-size: 11px; font-family: 'Montserrat', sans-serif; font-weight: 900; letter-spacing: 1px; box-shadow: 0 4px 15px rgba(3, 218, 198, 0.4); }
-        .wish-link:active { transform: scale(0.95); }
-        .del-btn { color: #ff4757; cursor: pointer; font-size: 24px; font-weight: bold; background: rgba(255, 71, 87, 0.15); width: 35px; height: 35px; border-radius: 10px; display: flex; align-items: center; justify-content: center; transition: 0.2s;}
-        .del-btn:active { background: #ff4757; color: #fff; transform: scale(0.9);}
-
-        #countdown { font-family: 'Montserrat', sans-serif; font-size: 34px; font-weight: 900; text-align: center; margin: 15px 0; display: flex; justify-content: center; align-items: baseline; gap: 4px; }
-        #countdown small { font-size: 12px; color: var(--text-sub); margin-right: 6px; font-weight: 700;}
-        .neon { color: var(--mint); text-shadow: 0 0 15px rgba(3, 218, 198, 0.7); width: 50px; display: inline-block; }
-        .progress { height: 10px; background: rgba(0,0,0,0.5); border-radius: 10px; overflow: hidden; margin-top: 15px; }
-        #bar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--mint)); box-shadow: 0 0 15px var(--accent); transition: 0.5s ease-out; }
-        .milestones { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        .m-card { text-align: center; padding: 18px !important; background: rgba(0,0,0,0.3); }
-        .m-card b { font-family: 'Montserrat', sans-serif; font-size: 26px; display: block; color: var(--text-main); margin: 5px 0; }
-
-        .back-link { cursor: pointer; color: var(--accent); font-family: 'Montserrat', sans-serif; font-weight: 900; margin-bottom: 20px; display: inline-block; font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; }
-
-        .bg-gallery { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 10px; }
-        .bg-thumb { width: 100%; height: 85px; border-radius: 16px; background-size: cover; background-position: center; cursor: pointer; border: 2px solid transparent; transition: 0.2s; box-shadow: 0 4px 10px rgba(0,0,0,0.5);}
-        .bg-thumb.active { border-color: var(--mint); transform: scale(0.95); }
-
-        .planet-wrap { position: relative; width: 160px; height: 160px; margin: 20px auto 40px auto; display: flex; justify-content: center; align-items: center; }
-        .planet { font-size: 90px; line-height: 1; display: flex; justify-content: center; align-items: center; animation: float-spin 6s ease-in-out infinite; filter: drop-shadow(0 0 25px var(--mint)); z-index: 2; position: relative; }
-        .planet::after { content: '🌍'; } 
-        @keyframes float-spin { 0%, 100% { transform: translateY(0) rotate(-5deg) scale(1); } 50% { transform: translateY(-12px) rotate(5deg) scale(1.08); } }
-        .radar-ring { position: absolute; border: 2px solid var(--mint); border-radius: 50%; opacity: 0; animation: radarPing 3s ease-out infinite; }
-        .r1 { width: 140px; height: 140px; animation-delay: 0s; }
-        .r2 { width: 190px; height: 190px; animation-delay: 1.5s; }
-        @keyframes radarPing { 0% { transform: scale(0.5); opacity: 0.8; } 100% { transform: scale(1.5); opacity: 0; } }
+        .sync-wrapper { text-align: center; margin-top: auto; padding-top: 25px; padding-bottom: 10px; }
+        .btn-sync-small { background: var(--card-bg); backdrop-filter: blur(10px); border: 1px solid var(--mint); color: var(--mint); padding: 12px 26px; border-radius: 30px; font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; box-shadow: var(--card-shadow); transition: 0.2s; }
     </style>
 </head>
 <body>
@@ -147,99 +128,68 @@
             </div>
             
             <div id="sortable-menu">
-                <div class="card menu-item" data-id="dmb">
-                    <div class="menu-content" onclick="nav('dmb')">🎖 Штаб службы</div>
-                    <div class="drag-handle">≡</div>
-                </div>
-                <div class="card menu-item" data-id="wish">
-                    <div class="menu-content" onclick="nav('wish')">🎁 Корзина счастья</div>
-                    <div class="drag-handle">≡</div>
-                </div>
-                <div class="card menu-item" data-id="locator">
-                    <div class="menu-content" onclick="nav('locator')">📍 Радар связи</div>
-                    <div class="drag-handle">≡</div>
-                </div>
-                <div class="card menu-item" data-id="settings">
-                    <div class="menu-content" onclick="nav('settings')">⚙️ Настройки фона</div>
-                    <div class="drag-handle">≡</div>
-                </div>
+                <div class="card menu-item" data-id="dmb" onclick="nav('dmb')"><span>🎖 Штаб службы</span> <span style="color:var(--accent)">→</span></div>
+                <div class="card menu-item" data-id="wish" onclick="nav('wish')"><span>🎁 Корзина счастья</span> <span style="color:var(--accent)">→</span></div>
+                <div class="card menu-item" data-id="locator" onclick="nav('locator')"><span>📍 Радар связи</span> <span style="color:var(--accent)">→</span></div>
+                <div class="card menu-item" data-id="settings" onclick="nav('settings')"><span>⚙️ Настройки фона</span> <span style="color:var(--accent)">→</span></div>
             </div>
             
-            <div class="sync-wrapper">
-                <div class="btn-sync-small" onclick="syncAll()">🔄 Синхронизировать данные</div>
-            </div>
+            <div class="sync-wrapper"><div class="btn-sync-small" onclick="syncAll()">🔄 Синхронизировать данные</div></div>
         </div>
 
         <div id="locator" class="screen">
-            <span class="back-link" onclick="nav('home')">← НАЗАД</span>
+            <span onclick="nav('home')" style="cursor:pointer; color:var(--accent); font-weight:900; margin-bottom:20px; display:inline-block; font-family: 'Montserrat', sans-serif;">← НАЗАД</span>
             <div class="card" style="text-align:center;">
-                <h3 style="margin:0; color:var(--mint); font-family:'Montserrat', sans-serif;">ГЛОБАЛЬНЫЙ ПОИСК</h3>
-                <div class="planet-wrap">
-                    <div class="radar-ring r1"></div>
-                    <div class="radar-ring r2"></div>
-                    <div class="planet"></div>
-                </div>
-                <p id="loc-status" style="font-family:'Montserrat', sans-serif; font-size:12px; font-weight:900; margin: 15px 0; min-height: 25px;"></p>
-                <button class="btn" id="btn-loc" onclick="sendLocation()" style="background: var(--mint); color: #000; margin-bottom: 12px;">📍 Отправить геометку</button>
-                <button class="btn" onclick="viewPartnerLocation()" style="background: rgba(255,255,255,0.1); border: 1px solid var(--accent); color: #fff;">👀 Где моя половинка?</button>
+                <h3 style="margin:0; color:var(--mint); font-family: 'Montserrat', sans-serif;">ГЛОБАЛЬНЫЙ ПОИСК</h3>
+                <div class="planet-wrap"><div class="radar-ring r1"></div><div class="radar-ring r2"></div><div class="planet"></div></div>
+                <p id="loc-status" style="font-size:12px; font-weight:900; margin: 15px 0; min-height:25px; font-family: 'Montserrat', sans-serif;"></p>
+                <button class="btn" id="btn-loc" onclick="sendLocation()" style="background:var(--mint); color:#000; margin-bottom:12px;">📍 Отправить геометку</button>
+                <button class="btn" onclick="viewPartnerLocation()" style="background:rgba(255,255,255,0.1); border:1px solid var(--accent); color:#fff;">👀 Где моя половинка?</button>
             </div>
         </div>
 
         <div id="dmb" class="screen">
-            <span class="back-link" onclick="nav('home')">← НАЗАД</span>
+            <span onclick="nav('home')" style="cursor:pointer; color:var(--accent); font-weight:900; margin-bottom:20px; display:inline-block; font-family: 'Montserrat', sans-serif;">← НАЗАД</span>
             <div id="setup" class="card">
-                <h3 style="margin:0;">УСТАНОВКА ДАТ</h3>
+                <h3 style="margin:0; font-family: 'Montserrat', sans-serif;">УСТАНОВКА ДАТ</h3>
                 <label>ПРИЗЫВ</label> <input type="date" id="ds">
                 <label>ДЕМБЕЛЬ</label> <input type="date" id="de">
                 <button class="btn" onclick="saveDMB()">СОХРАНИТЬ</button>
             </div>
             <div id="view" style="display:none;">
                 <div class="card">
-                    <p style="text-align:center; font-size:10px; color:var(--text-sub); margin:0; font-weight:900; letter-spacing:1px;">ДО ДОМА ОСТАЛОСЬ</p>
-                    <div id="countdown">
-                        <span id="vd">0</span><small>д</small> <span id="vh">00</span><small>ч</small> <span id="vm">00</span><small>м</small> <span id="vs" class="neon">00</span>
-                    </div>
+                    <p style="text-align:center; font-size:10px; color:var(--text-sub); margin:0; font-weight:900; font-family: 'Montserrat', sans-serif;">ДО ДОМА ОСТАЛОСЬ</p>
+                    <div id="countdown"><span id="vd">0</span><small>д</small> <span id="vh">00</span><small>ч</small> <span id="vm">00</span><small>м</small> <span id="vs" class="neon">00</span></div>
                     <div class="progress"><div id="bar"></div></div>
                     <div id="perc" style="text-align:center; font-size:12px; margin-top:8px; color:var(--mint); font-family:monospace; font-weight:bold;">0%</div>
                 </div>
-                <div class="milestones">
-                    <div class="card m-card"><small>ЭКВАТОР</small><b id="v-eq">0</b></div>
-                    <div class="card m-card"><small>ПРИКАЗ</small><b id="v-ord">0</b></div>
-                </div>
-                <center><p style="font-size:11px; color:var(--text-sub); text-decoration:underline; cursor:pointer; margin-top:20px;" onclick="localStorage.removeItem('s'); localStorage.removeItem('e'); location.reload();">Сбросить даты</p></center>
+                <div class="milestones"><div class="card m-card"><small>ЭКВАТОР</small><b id="v-eq">0</b></div><div class="card m-card"><small>ПРИКАЗ</small><b id="v-ord">0</b></div></div>
+                <center><p style="font-size:11px; color:var(--text-sub); text-decoration:underline; cursor:pointer; margin-top: 20px;" onclick="localStorage.removeItem('s'); localStorage.removeItem('e'); location.reload();">Сбросить даты</p></center>
             </div>
         </div>
 
         <div id="wish" class="screen">
-            <span class="back-link" onclick="nav('home')">← НАЗАД</span>
-            
-            <div class="wish-tabs">
-                <div class="w-tab active" id="tab-partner" onclick="switchW('partner')">Хочет половинка</div>
-                <div class="w-tab" id="tab-me" onclick="switchW('me')">Мои желания</div>
-            </div>
-
+            <span onclick="nav('home')" style="cursor:pointer; color:var(--accent); font-weight:900; margin-bottom:20px; display:inline-block; font-family: 'Montserrat', sans-serif;">← НАЗАД</span>
+            <div class="wish-tabs"><div class="w-tab active" id="tab-partner" onclick="switchW('partner')">Хочет половинка</div><div class="w-tab" id="tab-me" onclick="switchW('me')">Мои желания</div></div>
             <div class="card">
-                <div id="wish-input-group" class="wish-input-group" style="display:none;">
-                    <input type="text" id="wi" placeholder="Что подарить? (Можно с ссылкой)" style="margin:0;">
-                    <button class="btn" onclick="addW()" style="width:auto; padding:0 25px; margin:0; font-size:22px;">+</button>
-                </div>
+                <div id="wish-input-group" style="display:none; gap:10px; margin-bottom:20px;"><input type="text" id="wi" placeholder="Что подарить?" style="margin:0;"><button class="btn" onclick="addW()" style="width:auto; padding:0 25px; margin:0;">+</button></div>
                 <div id="wl"></div>
             </div>
         </div>
 
         <div id="settings" class="screen">
-            <span class="back-link" onclick="nav('home')">← НАЗАД</span>
+            <span onclick="nav('home')" style="cursor:pointer; color:var(--accent); font-weight:900; margin-bottom:20px; display:inline-block; font-family: 'Montserrat', sans-serif;">← НАЗАД</span>
             <div class="card">
-                <h3 style="margin:0; margin-bottom: 15px;">🎨 ВЫБОР ФОНА</h3>
+                <h3 style="margin:0; margin-bottom: 15px; font-family: 'Montserrat', sans-serif;">🎨 ВЫБОР ФОНА</h3>
                 <div class="bg-gallery">
-                    <div class="bg-thumb" data-bg="bg_1.jpg" style="background-image: url('img/bg_1.jpg');" onclick="setBg('bg_1.jpg', this)"></div>
-                    <div class="bg-thumb" data-bg="bg_2.jpg" style="background-image: url('img/bg_2.jpg');" onclick="setBg('bg_2.jpg', this)"></div>
-                    <div class="bg-thumb" data-bg="bg_3.jpg" style="background-image: url('img/bg_3.jpg');" onclick="setBg('bg_3.jpg', this)"></div>
-                    <div class="bg-thumb" data-bg="bg_4.jpg" style="background-image: url('img/bg_4.jpg');" onclick="setBg('bg_4.jpg', this)"></div>
-                    <div class="bg-thumb" data-bg="bg_boy_default.jpg" style="background-image: url('img/bg_boy_default.jpg');" onclick="setBg('bg_boy_default.jpg', this)"></div>
-                    <div class="bg-thumb" data-bg="bg_girl_default.jpg" style="background-image: url('img/bg_girl_default.jpg');" onclick="setBg('bg_girl_default.jpg', this)"></div>
+                    <div class="bg-thumb" onclick="setBg('bg_1.jpg', this)" style="background-image:url('img/bg_1.jpg')"></div>
+                    <div class="bg-thumb" onclick="setBg('bg_2.jpg', this)" style="background-image:url('img/bg_2.jpg')"></div>
+                    <div class="bg-thumb" onclick="setBg('bg_3.jpg', this)" style="background-image:url('img/bg_3.jpg')"></div>
+                    <div class="bg-thumb" onclick="setBg('bg_4.jpg', this)" style="background-image:url('img/bg_4.jpg')"></div>
+                    <div class="bg-thumb" onclick="setBg('bg_boy_default.jpg', this)" style="background-image:url('img/bg_boy_default.jpg')"></div>
+                    <div class="bg-thumb" onclick="setBg('bg_girl_default.jpg', this)" style="background-image:url('img/bg_girl_default.jpg')"></div>
                 </div>
-                <button class="btn" onclick="resetBg()" style="background: transparent; border: 1px solid var(--text-sub); color: var(--text-sub); margin-top: 20px; font-size: 11px;">Сбросить на стандарт</button>
+                <button class="btn" onclick="resetBg()" style="background:transparent; border:1px solid var(--text-sub); color:var(--text-sub); margin-top:20px; font-size:11px;">Сбросить на стандарт</button>
             </div>
         </div>
     </div>
@@ -248,98 +198,74 @@
     <script>
         let tg = window.Telegram.WebApp; tg.expand();
         const params = new URLSearchParams(window.location.search);
-        if (params.get('reset') === '1') localStorage.clear();
-
-        // 1. ПЕРЕМЕННЫЕ И ПАМЯТЬ
-        ['role', 'pn', 'pp', 'plat', 'plon', 's', 'e'].forEach(p => { if (params.has(p)) localStorage.setItem(p, params.get(p)); });
         
-        // УМНЫЙ ПАРСИНГ ВИШЛИСТА ДЛЯ СИНХРОНИЗАЦИИ
-        let wishesData = { boy: [], girl: [] };
-        if (params.get('w')) { 
-            try { 
-                let parsed = JSON.parse(decodeURIComponent(params.get('w'))); 
-                // Если данные пришли в старом формате, обновляем структуру
-                if (Array.isArray(parsed)) { wishesData[localStorage.getItem('role') || 'boy'] = parsed; } 
-                else if (typeof parsed === 'object' && parsed !== null) { wishesData = Object.assign(wishesData, parsed); }
-                localStorage.setItem('w', JSON.stringify(wishesData));
-            } catch(e) { console.error("Ошибка парсинга вишлиста", e); } 
-        } else {
-            try { 
-                let localW = JSON.parse(localStorage.getItem('w')); 
-                if (localW && !Array.isArray(localW)) { wishesData = Object.assign(wishesData, localW); }
-            } catch(e) {}
+        // ФИКС СБРОСА ФОНА: если есть команда сброса (reset=1), мы чистим всё, КРОМЕ фона и сортировки
+        if (params.get('reset') === '1') {
+            let savedBg = localStorage.getItem('custom_bg');
+            let savedOrder = localStorage.getItem('menuOrder');
+            localStorage.clear();
+            if(savedBg) localStorage.setItem('custom_bg', savedBg);
+            if(savedOrder) localStorage.setItem('menuOrder', savedOrder);
         }
 
-        const role = localStorage.getItem('role') || 'boy';
+        ['role', 'pn', 'pp', 'plat', 'plon', 's', 'e'].forEach(p => { if (params.has(p)) localStorage.setItem(p, params.get(p)); });
         
-        // ВКЛЮЧАЕМ ТЕМУ ДЛЯ ДЕВУШКИ
+        let wishesData = { boy: [], girl: [] };
+        if (params.get('w')) { try { let p = JSON.parse(decodeURIComponent(params.get('w'))); if(Array.isArray(p)) { wishesData[localStorage.getItem('role')||'boy']=p; } else { wishesData = Object.assign(wishesData, p); } localStorage.setItem('w', JSON.stringify(wishesData)); } catch(e) {} }
+        else { try { let l = JSON.parse(localStorage.getItem('w')); if(l && !Array.isArray(l)) wishesData = Object.assign(wishesData, l); } catch(e) {} }
+
+        const role = localStorage.getItem('role') || 'boy';
         document.body.classList.toggle('theme-girl', role === 'girl');
         tg.headerColor = '#0d0e15';
 
-        // 2. ФОН
+        // ПРИМЕНЕНИЕ ФОНА (Железобетонно)
         function applyBackground() {
-            const savedBg = localStorage.getItem('custom_bg');
-            if (savedBg) {
-                document.body.style.backgroundImage = `url('img/${savedBg}')`;
-            } else {
-                document.body.style.backgroundImage = role === 'girl' ? `url('img/bg_girl_default.jpg')` : `url('img/bg_boy_default.jpg')`;
-            }
+            const b = localStorage.getItem('custom_bg');
+            document.body.style.backgroundImage = b ? `url('img/${b}')` : (role === 'girl' ? `url('img/bg_girl_default.jpg')` : `url('img/bg_boy_default.jpg')`);
         }
         applyBackground();
+        function setBg(f, e) { localStorage.setItem('custom_bg', f); applyBackground(); document.querySelectorAll('.bg-thumb').forEach(t => t.classList.remove('active')); e.classList.add('active'); tg.HapticFeedback.impactOccurred('medium'); }
+        function resetBg() { localStorage.removeItem('custom_bg'); applyBackground(); document.querySelectorAll('.bg-thumb').forEach(t => t.classList.remove('active')); }
 
-        function setBg(file, el) {
-            localStorage.setItem('custom_bg', file); applyBackground();
-            document.querySelectorAll('.bg-thumb').forEach(t => t.classList.remove('active'));
-            el.classList.add('active'); tg.HapticFeedback.impactOccurred('medium');
-        }
-
-        function resetBg() {
-            localStorage.removeItem('custom_bg'); applyBackground();
-            document.querySelectorAll('.bg-thumb').forEach(t => t.classList.remove('active'));
-        }
-
-        // 3. АВАТАРКИ
+        // АВАТАРКИ
         const myData = tg.initDataUnsafe?.user;
         const myAva = document.getElementById('my-ava');
         if(myData?.photo_url) { myAva.style.backgroundImage = `url('${myData.photo_url}')`; myAva.innerText = ""; } 
         else { myAva.innerText = myData?.first_name ? myData.first_name[0] : 'Я'; }
 
-        const pNick = localStorage.getItem('pn') || "Половинка";
-        const pPhoto = localStorage.getItem('pp');
-        const pAva = document.getElementById('p-ava');
+        const pNick = localStorage.getItem('pn') || "Половинка", pPhoto = localStorage.getItem('pp'), pAva = document.getElementById('p-ava');
         if (pPhoto && pPhoto !== "" && pPhoto !== "None") { pAva.style.backgroundImage = `url('${pPhoto}')`; pAva.innerText = ""; } 
         else { pAva.innerText = pNick !== "Половинка" ? pNick[0].toUpperCase() : "❤️"; }
-        document.getElementById('pair-names').innerText = `${myData?.first_name || 'Я'} \u00A0❤️\u00A0 ${pNick}`;
+        document.getElementById('pair-names').innerText = `${myData?.first_name || 'Я'} ❤️ ${pNick}`;
 
-        // 4. СОРТИРОВКА
+        // СОРТИРОВКА (ТОЛЬКО КЛИК ПО КАРАНДАШУ, УБРАНЫ ПОЛОСКИ)
         const menuContainer = document.getElementById('sortable-menu');
-        let sortableInstance = null;
-        let isEditMode = false;
+        let sortableInstance = null, isEditMode = false;
 
         function toggleEdit() {
-            const btn = document.getElementById('edit-btn');
+            const btn = document.getElementById('edit-btn'); 
             isEditMode = !isEditMode;
-            
             if (isEditMode) {
-                btn.innerText = "✅";
+                btn.innerText = "✅"; 
                 menuContainer.classList.add('edit-mode');
-                sortableInstance = new Sortable(menuContainer, {
-                    handle: '.drag-handle',
-                    animation: 250, ghostClass: 'sortable-ghost',
-                    onEnd: function() {
-                        const order = Array.from(menuContainer.children).map(el => el.getAttribute('data-id'));
-                        localStorage.setItem('menuOrder', JSON.stringify(order));
-                    }
+                sortableInstance = new Sortable(menuContainer, { 
+                    animation: 250, 
+                    ghostClass: 'sortable-ghost', 
+                    onEnd: () => { 
+                        const o = Array.from(menuContainer.children).map(el => el.getAttribute('data-id')); 
+                        localStorage.setItem('menuOrder', JSON.stringify(o)); 
+                    } 
                 });
                 tg.HapticFeedback.impactOccurred('heavy');
             } else {
-                btn.innerText = "✏️";
-                menuContainer.classList.remove('edit-mode');
-                if (sortableInstance) { sortableInstance.destroy(); sortableInstance = null; }
+                btn.innerText = "✏️"; 
+                menuContainer.classList.remove('edit-mode'); 
+                if (sortableInstance) { sortableInstance.destroy(); sortableInstance = null; } 
                 tg.HapticFeedback.notificationOccurred('success');
             }
         }
-
+        
+        // Загружаем порядок меню
         try {
             const savedOrder = JSON.parse(localStorage.getItem('menuOrder'));
             if (savedOrder && Array.isArray(savedOrder)) { 
@@ -347,99 +273,52 @@
             }
         } catch(e) {}
 
-        function nav(id) {
-            if (isEditMode) return;
-            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
-            document.getElementById('edit-btn').style.display = (id === 'home') ? 'flex' : 'none';
-            if(id === 'dmb') checkDMB();
-            if(id === 'wish') renderW();
+        function nav(id) { 
+            if (isEditMode) return; // В режиме тряски кнопки не нажимаются
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active')); 
+            document.getElementById(id).classList.add('active'); 
+            document.getElementById('edit-btn').style.display = (id === 'home') ? 'flex' : 'none'; 
+            if(id === 'dmb') checkDMB(); 
+            if(id === 'wish') renderW(); 
         }
 
-        // 5. КОРЗИНА
+        // КОРЗИНА
         let currentWTab = 'partner';
-
-        function switchW(tab) {
-            currentWTab = tab;
-            document.getElementById('tab-partner').classList.toggle('active', tab === 'partner');
-            document.getElementById('tab-me').classList.toggle('active', tab === 'me');
-            document.getElementById('wish-input-group').style.display = tab === 'me' ? 'flex' : 'none';
-            renderW();
-        }
-
-        function parseLinks(text) {
-            const urlRegex = /(https?:\/\/[^\s]+)/g;
-            return text.replace(urlRegex, function(url) {
-                return `<br><a href="${url}" target="_blank" class="wish-link">🔗 ОТКРЫТЬ ССЫЛКУ</a>`;
-            });
-        }
-
+        function switchW(t) { currentWTab = t; document.getElementById('tab-partner').classList.toggle('active', t === 'partner'); document.getElementById('tab-me').classList.toggle('active', t === 'me'); document.getElementById('wish-input-group').style.display = t === 'me' ? 'flex' : 'none'; renderW(); }
         function renderW() {
-            const listEl = document.getElementById('wl');
-            const partnerRole = role === 'girl' ? 'boy' : 'girl';
-            const activeList = currentWTab === 'me' ? wishesData[role] : wishesData[partnerRole];
+            const list = document.getElementById('wl'), pr = role === 'girl' ? 'boy' : 'girl', active = currentWTab === 'me' ? wishesData[role] : wishesData[pr];
+            if (!active || active.length === 0) { list.innerHTML = `<p style="text-align:center; color:var(--text-sub); margin-top:30px; font-size:12px;">Пусто...</p>`; return; }
+            list.innerHTML = active.map((w, i) => `<div class="wish-item"><div style="display:flex; justify-content:space-between; align-items:flex-start;"><span style="word-break: break-word; line-height: 1.5;">${w.replace(/(https?:\/\/[^\s]+)/g, '<br><a href="$1" target="_blank" class="wish-link">🔗 ОТКРЫТЬ ССЫЛКУ</a>')}</span>${currentWTab === 'me' ? `<span class="del-btn" onclick="delW(${i})">×</span>` : ''}</div></div>`).join('');
+        }
+        function addW() { const i = document.getElementById('wi'); if(!i.value.trim()) return; if(!wishesData[role]) wishesData[role] = []; wishesData[role].push(i.value.trim()); i.value=''; localStorage.setItem('w', JSON.stringify(wishesData)); renderW(); }
+        function delW(i) { wishesData[role].splice(i, 1); localStorage.setItem('w', JSON.stringify(wishesData)); renderW(); }
+
+        // ИСПРАВЛЕННАЯ ЛОКАЦИЯ (Работает без блокировок)
+        function sendLocation() { 
+            const btn = document.getElementById('btn-loc'); 
+            const status = document.getElementById('loc-status');
+            btn.disabled = true; 
+            status.innerText = "ПОИСК СПУТНИКОВ...";
             
-            if (!activeList || activeList.length === 0) {
-                listEl.innerHTML = `<p style="text-align:center; color:var(--text-sub); margin-top:30px; font-size:12px;">${currentWTab === 'me' ? 'Ты еще ничего не добавил...' : 'Половинка еще ничего не добавила...'}</p>`;
-                return;
-            }
-
-            listEl.innerHTML = activeList.map((w, i) => `
-                <div class="wish-item">
-                    <div class="wish-header">
-                        <span class="wish-text">${parseLinks(w)}</span>
-                        ${currentWTab === 'me' ? `<span class="del-btn" onclick="delW(${i})">×</span>` : ''}
-                    </div>
-                </div>
-            `).join('');
+            navigator.geolocation.getCurrentPosition((pos) => { 
+                try { 
+                    tg.sendData(JSON.stringify({action: "checkin", lat: pos.coords.latitude, lon: pos.coords.longitude})); 
+                    status.innerText = "✅ ОТПРАВЛЕНО!"; 
+                    setTimeout(() => { tg.close(); }, 1000); // Закрываем окно после отправки
+                } catch(e) { 
+                    status.innerText = "❌ ОШИБКА ОТПРАВКИ!"; 
+                    btn.disabled = false; 
+                } 
+            }, () => { 
+                status.innerText = "❌ ДОСТУП К ГЕО ЗАПРЕЩЕН!";
+                btn.disabled = false; 
+            }, { enableHighAccuracy: true }); 
         }
+        function viewPartnerLocation() { const lat = localStorage.getItem('plat'), lon = localStorage.getItem('plon'); if(!lat || !lon) tg.showAlert("Геометки нет! 💔"); else window.open(`https://yandex.ru/maps/?pt=${lon},${lat}&z=16&l=map`, '_blank'); }
 
-        function addW() {
-            const i = document.getElementById('wi'); 
-            if(!i.value.trim()) return;
-            if(!wishesData[role]) wishesData[role] = [];
-            wishesData[role].push(i.value.trim()); 
-            i.value=''; 
-            localStorage.setItem('w', JSON.stringify(wishesData)); 
-            renderW();
-        }
-
-        function delW(i) { 
-            wishesData[role].splice(i, 1); 
-            localStorage.setItem('w', JSON.stringify(wishesData)); 
-            renderW(); 
-        }
-
-        // 6. ОСТАЛЬНОЕ
-        function sendLocation() {
-            const btn = document.getElementById('btn-loc');
-            btn.disabled = true;
-            navigator.geolocation.getCurrentPosition((pos) => {
-                try {
-                    tg.sendData(JSON.stringify({action: "checkin", lat: pos.coords.latitude, lon: pos.coords.longitude}));
-                    document.getElementById('loc-status').innerText = "✅ ОТПРАВЛЕНО!";
-                    setTimeout(() => { btn.disabled = false; document.getElementById('loc-status').innerText = ""; }, 3000);
-                } catch(e) { document.getElementById('loc-status').innerText = "❌ ОШИБКА! Открой через кнопку бота."; btn.disabled = false; }
-            }, () => { btn.disabled = false; }, { enableHighAccuracy: true });
-        }
-
-        function viewPartnerLocation() {
-            const plat = localStorage.getItem('plat'), plon = localStorage.getItem('plon');
-            if(!plat || !plon) tg.showAlert("Геометки пока нет! 💔");
-            else window.open(`https://yandex.ru/maps/?pt=${plon},${plat}&z=16&l=map`, '_blank');
-        }
-
-        function checkDMB() {
-            if(localStorage.getItem('s')) { document.getElementById('setup').style.display='none'; document.getElementById('view').style.display='block'; tick(); }
-            else { document.getElementById('setup').style.display='block'; document.getElementById('view').style.display='none'; }
-        }
-
-        function saveDMB() {
-            const s = document.getElementById('ds').value, e = document.getElementById('de').value;
-            if(!s || !e) return tg.showAlert("Даты!");
-            localStorage.setItem('s', s); localStorage.setItem('e', e); checkDMB();
-        }
-
+        // ТАЙМЕР
+        function checkDMB() { if(localStorage.getItem('s')) { document.getElementById('setup').style.display='none'; document.getElementById('view').style.display='block'; tick(); } else { document.getElementById('setup').style.display='block'; document.getElementById('view').style.display='none'; } }
+        function saveDMB() { const s = document.getElementById('ds').value, e = document.getElementById('de').value; if(!s || !e) return; localStorage.setItem('s', s); localStorage.setItem('e', e); checkDMB(); }
         function tick() {
             const start = new Date(localStorage.getItem('s')).getTime(), end = new Date(localStorage.getItem('e')).getTime(), now = new Date().getTime(), left = end - now;
             if (now < start || now > end) return;
@@ -453,12 +332,7 @@
             document.getElementById('v-eq').innerText = Math.max(0, Math.floor((start + (end-start)/2 - now)/86400000));
             document.getElementById('v-ord').innerText = Math.max(0, Math.floor((end - 100*86400000 - now)/86400000));
         }
-
-        function syncAll() {
-            try { tg.sendData(JSON.stringify({ s: localStorage.getItem('s'), e: localStorage.getItem('e'), w: wishesData })); tg.HapticFeedback.notificationOccurred('success'); }
-            catch(e) { tg.showAlert("Открой через кнопку бота!"); }
-        }
-
+        function syncAll() { try { tg.sendData(JSON.stringify({ s: localStorage.getItem('s'), e: localStorage.getItem('e'), w: wishesData })); tg.HapticFeedback.notificationOccurred('success'); } catch(e) { tg.showAlert("Открой через кнопку бота!"); } }
         setInterval(() => { if(localStorage.getItem('s')) tick(); }, 100);
     </script>
 </body>
