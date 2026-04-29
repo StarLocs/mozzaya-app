@@ -100,59 +100,43 @@
         .btn { font-family: 'Montserrat', sans-serif; background: var(--accent); color: #fff; border: none; padding: 18px; border-radius: 20px; font-weight: 900; width: 100%; font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; box-shadow: 0 10px 25px rgba(0,0,0,0.5); transition: 0.2s; }
         .btn:active { transform: scale(0.96); }
 
-        /* === УЛУЧШЕННАЯ ПЛАНЕТА === */
-        .planet-wrap { 
-            position: relative; 
-            width: 180px; height: 180px; 
-            margin: 10px auto 30px auto; 
-            display: flex; justify-content: center; align-items: center; 
-        }
-        .planet { 
-            font-size: 100px; line-height: 1; 
-            animation: float-spin 8s ease-in-out infinite; 
-            filter: drop-shadow(0 0 30px var(--mint)); 
-            position: relative; z-index: 2;
-        }
+        /* === DMB TIMER СТИЛИ === */
+        .dmb-hero { text-align: center; margin-bottom: 20px; }
+        .dmb-percent { font-family: 'Montserrat', sans-serif; font-size: 38px; font-weight: 900; color: #fff; text-shadow: 0 0 20px rgba(255,255,255,0.4); margin: 10px 0; letter-spacing: 1px;}
+        
+        .dmb-progress-wrap { position: relative; margin: 20px 0; }
+        .dmb-ticks { display: flex; justify-content: space-between; height: 15px; opacity: 0.3; margin-bottom: 5px; }
+        .dmb-tick { width: 2px; height: 100%; background: #fff; border-radius: 1px; }
+        .dmb-bar-bg { height: 6px; background: rgba(0,0,0,0.5); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
+        #dmb-bar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--mint)); box-shadow: 0 0 15px var(--accent); transition: 0.2s linear; }
+
+        .dmb-stats { display: flex; justify-content: space-between; gap: 15px; margin-top: 20px; }
+        .dmb-col { flex: 1; background: rgba(0,0,0,0.3); border-radius: 18px; padding: 15px; border: 1px solid rgba(255,255,255,0.05); }
+        .dmb-col-title { font-size: 10px; font-weight: 900; color: var(--text-sub); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 12px; text-align: center; }
+        .dmb-value-row { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 6px; border-bottom: 1px dashed rgba(255,255,255,0.1); padding-bottom: 4px;}
+        .dmb-val { font-family: 'Montserrat', sans-serif; font-size: 15px; font-weight: 800; color: var(--text-main); }
+        .dmb-label { font-size: 10px; color: var(--text-sub); font-weight: 600; text-transform: uppercase;}
+
+        .milestones { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px;}
+        .m-card { background: rgba(0,0,0,0.3); text-align: center; padding: 15px 10px; border-radius: 18px; border: 1px solid var(--border);}
+        .m-card b { font-family: 'Montserrat', sans-serif; font-size: 18px; display: block; color: var(--mint); margin: 5px 0; }
+        .m-card small { font-size: 9px; font-weight: 900; color: var(--text-sub); letter-spacing: 1px; text-transform: uppercase; }
+
+        /* === ПЛАНЕТА === */
+        .planet-wrap { position: relative; width: 180px; height: 180px; margin: 10px auto 30px auto; display: flex; justify-content: center; align-items: center; }
+        .planet { font-size: 100px; line-height: 1; animation: float-spin 8s ease-in-out infinite; filter: drop-shadow(0 0 30px var(--mint)); position: relative; z-index: 2;}
         .planet::after { content: '🌍'; } 
-        
-        /* Спутники вокруг планеты */
-        .satellite {
-            position: absolute; width: 6px; height: 6px; background: var(--accent); border-radius: 50%;
-            filter: blur(1px) drop-shadow(0 0 5px var(--accent));
-            animation: orbit 4s linear infinite;
-        }
-        .s1 { animation-duration: 5s; }
-        .s2 { animation-duration: 7s; animation-delay: -2s; }
-        
-        @keyframes orbit {
-            from { transform: rotate(0deg) translateX(90px) rotate(0deg); }
-            to { transform: rotate(360deg) translateX(90px) rotate(-360deg); }
-        }
-        @keyframes float-spin { 
-            0%, 100% { transform: translateY(0) rotate(-5deg); filter: drop-shadow(0 0 20px var(--mint)); } 
-            50% { transform: translateY(-15px) rotate(5deg) scale(1.05); filter: drop-shadow(0 0 45px var(--mint)); } 
-        }
-        
-        .radar-ring { 
-            position: absolute; border: 2px solid var(--mint); border-radius: 50%; 
-            opacity: 0; animation: radarPing 3s ease-out infinite; 
-        }
-        .r1 { width: 140px; height: 140px; animation-delay: 0s; } 
-        .r2 { width: 200px; height: 190px; animation-delay: 1.5s; }
-        @keyframes radarPing { 
-            0% { transform: scale(0.5); opacity: 0.8; } 
-            100% { transform: scale(1.6); opacity: 0; } 
-        }
+        .satellite { position: absolute; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; filter: blur(1px) drop-shadow(0 0 5px var(--accent)); animation: orbit 4s linear infinite;}
+        .s1 { animation-duration: 5s; } .s2 { animation-duration: 7s; animation-delay: -2s; }
+        @keyframes orbit { from { transform: rotate(0deg) translateX(90px) rotate(0deg); } to { transform: rotate(360deg) translateX(90px) rotate(-360deg); } }
+        @keyframes float-spin { 0%, 100% { transform: translateY(0) rotate(-5deg); filter: drop-shadow(0 0 20px var(--mint)); } 50% { transform: translateY(-15px) rotate(5deg) scale(1.05); filter: drop-shadow(0 0 45px var(--mint)); } }
+        .radar-ring { position: absolute; border: 2px solid var(--mint); border-radius: 50%; opacity: 0; animation: radarPing 3s ease-out infinite; }
+        .r1 { width: 140px; height: 140px; animation-delay: 0s; } .r2 { width: 200px; height: 190px; animation-delay: 1.5s; }
+        @keyframes radarPing { 0% { transform: scale(0.5); opacity: 0.8; } 100% { transform: scale(1.6); opacity: 0; } }
         
         .loc-time-info { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 800; color: var(--text-sub); text-transform: uppercase; letter-spacing: 1px; margin-top: 8px; opacity: 0.9; }
 
-        /* ТАЙМЕР */
-        #countdown { font-family: 'Montserrat', sans-serif; font-size: 34px; font-weight: 900; text-align: center; margin: 15px 0; display: flex; justify-content: center; align-items: baseline; gap: 4px; }
-        .neon { color: var(--mint); text-shadow: 0 0 15px var(--mint); width: 50px; display: inline-block; }
-        .progress { height: 12px; background: rgba(0,0,0,0.5); border-radius: 10px; overflow: hidden; margin-top: 15px; border: 1px solid var(--border); }
-        #bar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--mint)); box-shadow: 0 0 15px var(--accent); transition: 0.8s cubic-bezier(0.1, 0, 0.3, 1); }
-
-        /* ВИШЛИСТ */
+        /* === ВИШЛИСТ === */
         .wish-tabs { display: flex; background: rgba(0,0,0,0.5); border-radius: 20px; padding: 6px; margin-bottom: 20px; }
         .w-tab { flex: 1; text-align: center; padding: 14px; font-size: 11px; font-weight: 900; color: var(--text-sub); border-radius: 16px; cursor: pointer; font-family: 'Montserrat', sans-serif; text-transform: uppercase; transition: 0.3s; }
         .w-tab.active { background: var(--accent); color: #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
@@ -193,31 +177,18 @@
 
         <div id="locator" class="screen">
             <span onclick="nav('home')" style="cursor:pointer; color:var(--accent); font-weight:900; margin-bottom:20px; display:inline-block;">← НАЗАД</span>
-            
             <div class="card" style="text-align:center;">
                 <h3 style="margin:0; color:var(--mint); font-family: 'Montserrat', sans-serif;">ГЕО-РАДАР СВЯЗИ ❤️</h3>
-                
                 <div class="planet-wrap">
-                    <div class="radar-ring r1"></div>
-                    <div class="radar-ring r2"></div>
-                    <div class="satellite s1"></div>
-                    <div class="satellite s2"></div>
+                    <div class="radar-ring r1"></div><div class="radar-ring r2"></div>
+                    <div class="satellite s1"></div><div class="satellite s2"></div>
                     <div class="planet"></div>
                 </div>
-                
                 <p id="loc-status" style="font-size:12px; font-weight:900; margin: 15px 0; min-height:25px; font-family: 'Montserrat', sans-serif; color: var(--mint); text-transform: uppercase;"></p>
-                
-                <button class="btn" id="btn-loc" onclick="sendLocation()" style="background:var(--mint); color:#000; margin-bottom:12px;">
-                    📍 ОТПРАВИТЬ ГЕОМЕТКУ
-                </button>
-                
+                <button class="btn" id="btn-loc" onclick="sendLocation()" style="background:var(--mint); color:#000; margin-bottom:12px;">📍 ОТПРАВИТЬ ГЕОМЕТКУ</button>
                 <div style="display:flex; flex-direction:column; align-items:center;">
-                    <button class="btn" onclick="calculateDistance()" style="background:rgba(255,255,255,0.1); border:1px solid var(--accent); color:#fff; margin-bottom:12px;">
-                        📡 СКАНЕР ДИСТАНЦИИ
-                    </button>
-                    <button class="btn" onclick="viewPartnerLocation()" style="background:transparent; border:1px dashed var(--text-sub); color:var(--text-sub); margin-bottom:15px;">
-                        👀 ОТКРЫТЬ КАРТУ
-                    </button>
+                    <button class="btn" onclick="calculateDistance()" style="background:rgba(255,255,255,0.1); border:1px solid var(--accent); color:#fff; margin-bottom:12px;">📡 СКАНЕР ДИСТАНЦИИ</button>
+                    <button class="btn" onclick="viewPartnerLocation()" style="background:transparent; border:1px dashed var(--text-sub); color:var(--text-sub); margin-bottom:15px;">👀 ОТКРЫТЬ КАРТУ</button>
                     <div id="p-last-time" class="loc-time-info"></div>
                 </div>
             </div>
@@ -225,39 +196,71 @@
 
         <div id="dmb" class="screen">
             <span onclick="nav('home')" style="cursor:pointer; color:var(--accent); font-weight:900; margin-bottom:20px; display:inline-block;">← НАЗАД</span>
+            
             <div id="setup" class="card">
-                <h3>УСТАНОВКА ДАТ</h3>
-                <label>ПРИЗЫВ</label> <input type="date" id="ds">
-                <label>ДЕМБЕЛЬ</label> <input type="date" id="de">
-                <button class="btn" onclick="saveDMB()">СОХРАНИТЬ</button>
+                <h3 style="margin:0 0 15px 0; font-family: 'Montserrat', sans-serif; text-align: center;">УСТАНОВКА ДАТ</h3>
+                <label>Дата призыва</label> <input type="date" id="ds">
+                <label>Дата дембеля</label> <input type="date" id="de">
+                <label>Дата присяги (необязательно)</label> <input type="date" id="dp">
+                <button class="btn" onclick="saveDMB()">ПОГНАЛИ</button>
             </div>
             
             <div id="view" style="display:none;">
                 <div class="card">
-                    <p style="text-align:center; font-size:10px; color:var(--text-sub); margin:0; font-weight:900; letter-spacing:1px;">ДО ДОМА ОСТАЛОСЬ</p>
-                    <div id="countdown">
-                        <span id="vd">0</span><small>д</small> 
-                        <span id="vh">00</span><small>ч</small> 
-                        <span id="vm">00</span><small>м</small> 
-                        <span id="vs" class="neon">00</span>
+                    <div class="dmb-hero">
+                        <div style="font-size: 10px; font-weight: 900; color: var(--text-sub); letter-spacing: 2px;">ПРОЙДЕНО СЛУЖБЫ</div>
+                        <div id="dmb-main-percent" class="dmb-percent">0.000000%</div>
                     </div>
-                    <div class="progress"><div id="bar"></div></div>
-                    <div id="perc" style="text-align:center; font-size:12px; margin-top:8px; color:var(--mint); font-family:monospace; font-weight:bold;">0%</div>
+                    
+                    <div class="dmb-progress-wrap">
+                        <div class="dmb-ticks" id="dmb-ticks"></div>
+                        <div class="dmb-bar-bg"><div id="dmb-bar"></div></div>
+                    </div>
+
+                    <div class="dmb-stats">
+                        <div class="dmb-col">
+                            <div class="dmb-col-title">ПРОШЛО</div>
+                            <div class="dmb-value-row"><span id="p-mo" class="dmb-val">0</span><span class="dmb-label">мес</span></div>
+                            <div class="dmb-value-row"><span id="p-we" class="dmb-val">0</span><span class="dmb-label">нед</span></div>
+                            <div class="dmb-value-row"><span id="p-da" class="dmb-val">0</span><span class="dmb-label">дн</span></div>
+                            <div class="dmb-value-row" style="border:none; padding-top: 10px;">
+                                <span id="p-time" style="font-size: 11px; font-weight: bold; color: var(--text-sub);">0ч 0м 0с</span>
+                            </div>
+                        </div>
+                        <div class="dmb-col">
+                            <div class="dmb-col-title">ОСТАЛОСЬ</div>
+                            <div class="dmb-value-row"><span id="l-mo" class="dmb-val">0</span><span class="dmb-label">мес</span></div>
+                            <div class="dmb-value-row"><span id="l-we" class="dmb-val">0</span><span class="dmb-label">нед</span></div>
+                            <div class="dmb-value-row"><span id="l-da" class="dmb-val">0</span><span class="dmb-label">дн</span></div>
+                            <div class="dmb-value-row" style="border:none; padding-top: 10px;">
+                                <span id="l-time" style="font-size: 11px; font-weight: bold; color: var(--text-sub);">0ч 0м 0с</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div style="display:flex; gap:10px;">
-                    <div class="card" style="text-align:center; flex:1;"><small style="font-size:9px; font-weight:900; color:var(--text-sub);">ЭКВАТОР</small><b id="v-eq" style="display:block; font-size:22px;">0</b></div>
-                    <div class="card" style="text-align:center; flex:1;"><small style="font-size:9px; font-weight:900; color:var(--text-sub);">ПРИКАЗ</small><b id="v-ord" style="display:block; font-size:22px;">0</b></div>
+
+                <div class="milestones">
+                    <div class="m-card" id="card-oath" style="display:none; grid-column: span 2;">
+                        <small>ПРИСЯГА</small>
+                        <b id="v-oath">0 дней</b>
+                    </div>
+                    <div class="m-card">
+                        <small>ЭКВАТОР</small>
+                        <b id="v-eq">0 дней</b>
+                    </div>
+                    <div class="m-card">
+                        <small>ДО ПРИКАЗА</small>
+                        <b id="v-ord">0 дней</b>
+                    </div>
                 </div>
-                <center><p style="font-size:11px; color:var(--text-sub); text-decoration:underline; cursor:pointer;" onclick="localStorage.removeItem('s'); localStorage.removeItem('e'); location.reload();">Сбросить даты</p></center>
+
+                <center><p style="font-size:11px; color:var(--text-sub); text-decoration:underline; cursor:pointer; margin-top: 25px;" onclick="localStorage.removeItem('s'); localStorage.removeItem('e'); localStorage.removeItem('p'); location.reload();">Изменить даты</p></center>
             </div>
         </div>
 
         <div id="wish" class="screen">
             <span onclick="nav('home')" style="cursor:pointer; color:var(--accent); font-weight:900; margin-bottom:20px; display:inline-block;">← НАЗАД</span>
-            <div class="wish-tabs">
-                <div class="w-tab active" id="tab-partner" onclick="switchW('partner')">Хочет половинка</div>
-                <div class="w-tab" id="tab-me" onclick="switchW('me')">Мои желания</div>
-            </div>
+            <div class="wish-tabs"><div class="w-tab active" id="tab-partner" onclick="switchW('partner')">Хочет половинка</div><div class="w-tab" id="tab-me" onclick="switchW('me')">Мои желания</div></div>
             <div class="card">
                 <div id="wish-input-group" style="display:none; gap:10px; margin-bottom:20px;">
                     <input type="text" id="wi" placeholder="Что подарить?" style="margin:0;">
@@ -279,7 +282,7 @@
                     <div class="bg-thumb" onclick="setBg('bg_boy_default.jpg', this)" style="background-image:url('img/bg_boy_default.jpg')"></div>
                     <div class="bg-thumb" onclick="setBg('bg_girl_default.jpg', this)" style="background-image:url('img/bg_girl_default.jpg')"></div>
                 </div>
-                <button class="btn" onclick="resetBg()" style="background:transparent; border:1px solid var(--text-sub); color:var(--text-sub); margin-top:20px; font-size:11px;">СБРОСИТЬ ФОН</button>
+                <button class="btn" onclick="resetBg()" style="background:transparent; border:1px solid var(--text-sub); color:var(--text-sub); margin-top:20px; font-size:11px;">Сбросить на стандарт</button>
             </div>
         </div>
     </div>
@@ -292,23 +295,24 @@
         if (params.get('reset') === '1') {
             let bg = localStorage.getItem('custom_bg'), ord = localStorage.getItem('menuOrder');
             localStorage.clear(); if(bg) localStorage.setItem('custom_bg', bg); if(ord) localStorage.setItem('menuOrder', ord);
+            document.getElementById('ds').value = ''; document.getElementById('de').value = ''; document.getElementById('dp').value = '';
         }
 
-        ['role', 'pn', 'pp', 'plat', 'plon', 'pt', 's', 'e'].forEach(p => { if (params.has(p)) localStorage.setItem(p, params.get(p)); });
+        ['role', 'pn', 'pp', 'plat', 'plon', 'pt', 's', 'e', 'p'].forEach(p => { if (params.has(p)) localStorage.setItem(p, params.get(p)); });
         
         let wishesData = { boy: [], girl: [] };
-        try { let p = JSON.parse(decodeURIComponent(params.get('w') || '{}')); wishesData = Object.assign(wishesData, p); } catch(e) {}
+        try { let pd = JSON.parse(decodeURIComponent(params.get('w') || '{}')); wishesData = Object.assign(wishesData, pd); } catch(e) {}
 
         const role = localStorage.getItem('role') || 'boy';
         document.body.classList.toggle('theme-girl', role === 'girl');
         tg.headerColor = '#0d0e15';
 
-        function applyBackground() { 
-            const b = localStorage.getItem('custom_bg'); 
-            document.body.style.backgroundImage = b ? `url('img/${b}')` : (role === 'girl' ? `url('img/bg_girl_default.jpg')` : `url('img/bg_boy_default.jpg')`); 
-        }
+        // Генерируем "засечки" для прогресс бара
+        const ticksContainer = document.getElementById('dmb-ticks');
+        for(let i=0; i<40; i++) { const t = document.createElement('div'); t.className = 'dmb-tick'; ticksContainer.appendChild(t); }
+
+        function applyBackground() { const b = localStorage.getItem('custom_bg'); document.body.style.backgroundImage = b ? `url('img/${b}')` : (role === 'girl' ? `url('img/bg_girl_default.jpg')` : `url('img/bg_boy_default.jpg')`); }
         applyBackground();
-        
         function setBg(f, el) { localStorage.setItem('custom_bg', f); applyBackground(); document.querySelectorAll('.bg-thumb').forEach(t => t.classList.remove('active')); el.classList.add('active'); tg.HapticFeedback.impactOccurred('medium'); }
         function resetBg() { localStorage.removeItem('custom_bg'); applyBackground(); document.querySelectorAll('.bg-thumb').forEach(t => t.classList.remove('active')); }
 
@@ -378,20 +382,85 @@
 
         function viewPartnerLocation() { const lat = localStorage.getItem('plat'), lon = localStorage.getItem('plon'); if(!lat) { tg.showAlert("Геометки нет!"); } else { window.open(`https://yandex.ru/maps/?pt=${lon},${lat}&z=16&l=map`, '_blank'); } }
 
-        function checkDMB() { if(localStorage.getItem('s')) { document.getElementById('setup').style.display='none'; document.getElementById('view').style.display='block'; tick(); } else { document.getElementById('setup').style.display='block'; document.getElementById('view').style.display='none'; } }
-        function saveDMB() { const s = document.getElementById('ds').value, e = document.getElementById('de').value; if(!s || !e) return; localStorage.setItem('s', s); localStorage.setItem('e', e); checkDMB(); }
+        // === МОЩНЫЙ DMB ТАЙМЕР ===
+        function checkDMB() { 
+            if(localStorage.getItem('s')) { 
+                document.getElementById('setup').style.display='none'; document.getElementById('view').style.display='block'; tick(); 
+            } else { 
+                document.getElementById('setup').style.display='block'; document.getElementById('view').style.display='none'; 
+            } 
+        }
+        
+        function saveDMB() { 
+            const s = document.getElementById('ds').value, e = document.getElementById('de').value, p = document.getElementById('dp').value; 
+            if(!s || !e) return tg.showAlert("Выберите даты призыва и дембеля!"); 
+            localStorage.setItem('s', s); localStorage.setItem('e', e); if(p) localStorage.setItem('p', p);
+            checkDMB(); 
+        }
+        
+        function getDetailedTime(ms) {
+            if(ms < 0) ms = 0;
+            const days = Math.floor(ms / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((ms % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const mins = Math.floor((ms % (1000 * 60 * 60)) / (1000 * 60));
+            const secs = Math.floor((ms % (1000 * 60)) / 1000);
+            
+            const mo = Math.floor(days / 30.44); // Примерно
+            const we = Math.floor((days % 30.44) / 7);
+            const da = Math.floor((days % 30.44) % 7);
+            
+            return { mo, we, da, hours, mins, secs, totalDays: days };
+        }
+
         function tick() {
-            const start = new Date(localStorage.getItem('s')).getTime(), end = new Date(localStorage.getItem('e')).getTime(), now = new Date().getTime(), left = end - now;
-            if (now < start || now > end) return;
-            const p = ((now - start) / (end - start)) * 100;
-            document.getElementById('bar').style.width = p + '%';
-            document.getElementById('perc').innerText = p.toFixed(8) + '%';
-            document.getElementById('vd').innerText = Math.floor(left / 86400000);
-            document.getElementById('vh').innerText = Math.floor((left % 86400000) / 3600000).toString().padStart(2, '0');
-            document.getElementById('vm').innerText = Math.floor((left % 3600000) / 60000).toString().padStart(2, '0');
-            document.getElementById('vs').innerText = Math.floor((left % 60000) / 1000).toString().padStart(2, '0');
-            document.getElementById('v-eq').innerText = Math.max(0, Math.floor((start + (end-start)/2 - now)/86400000));
-            document.getElementById('v-ord').innerText = Math.max(0, Math.floor((end - 100*86400000 - now)/86400000));
+            const start = new Date(localStorage.getItem('s')).getTime();
+            const end = new Date(localStorage.getItem('e')).getTime();
+            const oath = localStorage.getItem('p') ? new Date(localStorage.getItem('p')).getTime() : null;
+            const now = new Date().getTime();
+            
+            if (now < start || start >= end) return;
+            
+            const totalMs = end - start;
+            let passedMs = now - start;
+            if (passedMs > totalMs) passedMs = totalMs;
+            let leftMs = end - now;
+            if (leftMs < 0) leftMs = 0;
+            
+            // Основной процент
+            const percent = (passedMs / totalMs) * 100;
+            document.getElementById('dmb-main-percent').innerText = percent.toFixed(6) + '%';
+            document.getElementById('dmb-bar').style.width = percent + '%';
+            
+            // Детализация ПРОШЛО
+            const passed = getDetailedTime(passedMs);
+            document.getElementById('p-mo').innerText = passed.mo;
+            document.getElementById('p-we').innerText = passed.we;
+            document.getElementById('p-da').innerText = passed.da;
+            document.getElementById('p-time').innerText = `${passed.hours}ч ${passed.mins}м ${passed.secs}с`;
+            
+            // Детализация ОСТАЛОСЬ
+            const left = getDetailedTime(leftMs);
+            document.getElementById('l-mo').innerText = left.mo;
+            document.getElementById('l-we').innerText = left.we;
+            document.getElementById('l-da').innerText = left.da;
+            document.getElementById('l-time').innerText = `${left.hours}ч ${left.mins}м ${left.secs}с`;
+
+            // События
+            const eqDays = Math.max(0, Math.floor((start + totalMs/2 - now) / 86400000));
+            document.getElementById('v-eq').innerText = eqDays > 0 ? eqDays + ' дн' : 'Пройден!';
+            
+            const ordDays = Math.max(0, Math.floor((end - (100 * 86400000) - now) / 86400000));
+            document.getElementById('v-ord').innerText = ordDays > 0 ? ordDays + ' дн' : 'Вышел!';
+
+            if (oath) {
+                document.getElementById('card-oath').style.display = 'block';
+                const oathLeft = oath - now;
+                if (oathLeft > 0) {
+                    document.getElementById('v-oath').innerText = Math.floor(oathLeft / 86400000) + ' дн';
+                } else {
+                    document.getElementById('v-oath').innerText = 'Пройдена!';
+                }
+            }
         }
 
         let currentWTab = 'partner';
@@ -407,10 +476,16 @@
         function delW(i) { const role = localStorage.getItem('role') || 'boy'; let wData = { boy: [], girl: [] }; try { wData = JSON.parse(localStorage.getItem('w')) || { boy: [], girl: [] }; } catch(e) {} wData[role].splice(i, 1); localStorage.setItem('w', JSON.stringify(wData)); renderW(); }
 
         function syncAll() { 
+            let pDate = localStorage.getItem('p') || '';
             let wData = { boy: [], girl: [] }; try { wData = JSON.parse(localStorage.getItem('w')) || { boy: [], girl: [] }; } catch(e) {}
-            try { tg.sendData(JSON.stringify({ s: localStorage.getItem('s'), e: localStorage.getItem('e'), w: wData })); tg.HapticFeedback.notificationOccurred('success'); } catch(e) { tg.showAlert("ОТКРОЙ ЧЕРЕЗ ФИОЛЕТОВУЮ КНОПКУ!"); } 
+            try { 
+                // Отправляем дату присяги тоже, объединив её со стартом для упрощения (в реальном проекте лучше добавить колонку в БД, но пока обойдемся локалом)
+                tg.sendData(JSON.stringify({ s: localStorage.getItem('s'), e: localStorage.getItem('e'), w: wData })); 
+                tg.HapticFeedback.notificationOccurred('success'); 
+            } catch(e) { tg.showAlert("ОТКРОЙ ЧЕРЕЗ ФИОЛЕТОВУЮ КНОПКУ!"); } 
         }
-        setInterval(() => { if(localStorage.getItem('s')) tick(); }, 100);
+        
+        setInterval(() => { if(localStorage.getItem('s')) tick(); }, 50); // Ускорили интервал для плавности процентов
     </script>
 </body>
 </html>
