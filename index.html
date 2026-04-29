@@ -47,6 +47,21 @@
             -webkit-user-select: none;
         }
 
+        /* === БЛОКИРОВКА ЛЕВОЙ КНОПКИ === */
+        #kill-screen {
+            display: none; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            text-align: center; 
+            padding: 30px; 
+            background: var(--bg-fallback); 
+            z-index: 9999;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
         .app { 
             width: 100%; 
             max-width: 400px; 
@@ -57,330 +72,93 @@
             position: relative;
         }
         
-        .screen { 
-            display: none; 
-            flex-direction: column; 
-            flex-grow: 1; 
-        }
-        
-        .screen.active { 
-            display: flex; 
-            animation: slideFade 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
-        }
-        
-        @keyframes slideFade { 
-            from { opacity: 0; transform: translateY(10px); } 
-            to { opacity: 1; transform: translateY(0); } 
-        }
+        .screen { display: none; flex-direction: column; flex-grow: 1; }
+        .screen.active { display: flex; animation: slideFade 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        @keyframes slideFade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         
         .card { 
-            background: var(--card-bg); 
-            backdrop-filter: blur(20px); 
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--border); 
-            border-radius: 28px; 
-            padding: 22px; 
-            margin-bottom: 15px; 
-            box-shadow: var(--card-shadow); 
+            background: var(--card-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border); border-radius: 28px; padding: 22px; margin-bottom: 15px; box-shadow: var(--card-shadow); 
             transition: transform 0.2s;
         }
 
         .edit-toggle {
-            position: absolute; 
-            top: 25px; 
-            left: 25px; 
-            z-index: 10; 
-            width: 42px; 
-            height: 42px; 
-            border-radius: 14px;
-            background: var(--card-bg); 
-            border: 1px solid var(--border); 
-            display: flex; 
-            align-items: center; 
-            justify-content: center;
-            font-size: 20px; 
-            cursor: pointer; 
-            backdrop-filter: blur(10px); 
-            transition: 0.2s;
+            position: absolute; top: 25px; left: 25px; z-index: 10; width: 42px; height: 42px; border-radius: 14px;
+            background: var(--card-bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center;
+            font-size: 20px; cursor: pointer; backdrop-filter: blur(10px); transition: 0.2s;
         }
         .edit-toggle:active { transform: scale(0.9); }
 
         .header-badge {
-            background: var(--card-bg); 
-            border: 1px solid var(--border); 
-            border-radius: 35px; 
-            padding: 25px 15px; 
-            margin-bottom: 25px; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            box-shadow: var(--card-shadow);
+            background: var(--card-bg); border: 1px solid var(--border); border-radius: 35px; padding: 25px 15px; margin-bottom: 25px; display: flex; flex-direction: column; align-items: center; box-shadow: var(--card-shadow);
         }
-        .profile-row { 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            gap: 15px; 
-            margin-bottom: 12px; 
-        }
+        .profile-row { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 12px; }
         .avatar { 
-            width: 70px; 
-            height: 70px; 
-            border-radius: 50%; 
-            background: linear-gradient(135deg, var(--accent), var(--mint));
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            font-size: 26px; 
-            font-weight: bold; 
-            color: #fff;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.6); 
-            background-size: cover; 
-            background-position: center; 
-            border: 3px solid var(--border);
+            width: 70px; height: 70px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--mint));
+            display: flex; justify-content: center; align-items: center; font-size: 26px; font-weight: bold; color: #fff;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.6); background-size: cover; background-position: center; border: 3px solid var(--border);
         }
-        .heart-icon { 
-            font-size: 30px; 
-            animation: heartbeat 1.2s infinite; 
-        }
-        @keyframes heartbeat { 
-            0%, 100% { transform: scale(1); } 
-            50% { transform: scale(1.2); } 
-        }
+        .heart-icon { font-size: 30px; animation: heartbeat 1.2s infinite; }
+        @keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
 
-        #pair-names { 
-            font-family: 'Montserrat', sans-serif; 
-            font-size: 20px; 
-            font-weight: 900; 
-            text-transform: uppercase; 
-            letter-spacing: 1px; 
-            text-align: center; 
-            background: linear-gradient(90deg, #fff, var(--accent)); 
-            -webkit-background-clip: text; 
-            -webkit-text-fill-color: transparent; 
-            margin: 0; 
-        }
+        #pair-names { font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; text-align: center; background: linear-gradient(90deg, #fff, var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 0; }
         
-        .menu-item { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            font-family: 'Montserrat', sans-serif; 
-            font-weight: 800; 
-            font-size: 14px; 
-            padding: 22px; 
-            text-transform: uppercase; 
-            letter-spacing: 1px; 
-            cursor: pointer; 
-            transition: 0.1s;
-        }
+        .menu-item { display: flex; justify-content: space-between; align-items: center; font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 14px; padding: 22px; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: 0.1s; }
         .menu-item:active { transform: scale(0.98); }
-        
-        @keyframes shake { 
-            0%, 100% { transform: rotate(0deg); } 
-            25% { transform: rotate(-1.5deg); } 
-            75% { transform: rotate(1.5deg); } 
-        }
-        .edit-mode .menu-item { 
-            animation: shake 0.35s infinite; 
-            border: 1px dashed var(--accent); 
-            background: rgba(0,0,0,0.3); 
-        }
-        .sortable-ghost { 
-            opacity: 0.2; 
-            transform: scale(0.95); 
-        }
+        @keyframes shake { 0%, 100% { transform: rotate(0deg); } 25% { transform: rotate(-1.5deg); } 75% { transform: rotate(1.5deg); } }
+        .edit-mode .menu-item { animation: shake 0.35s infinite; border: 1px dashed var(--accent); background: rgba(0,0,0,0.3); }
+        .sortable-ghost { opacity: 0.2; transform: scale(0.95); }
 
-        .btn { 
-            font-family: 'Montserrat', sans-serif; 
-            background: var(--accent); 
-            color: #fff; 
-            border: none; 
-            padding: 18px; 
-            border-radius: 20px; 
-            font-weight: 900; 
-            width: 100%; 
-            font-size: 13px; 
-            letter-spacing: 1.5px; 
-            text-transform: uppercase; 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5); 
-            transition: 0.2s; 
-        }
+        .btn { font-family: 'Montserrat', sans-serif; background: var(--accent); color: #fff; border: none; padding: 18px; border-radius: 20px; font-weight: 900; width: 100%; font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; box-shadow: 0 10px 25px rgba(0,0,0,0.5); transition: 0.2s; }
         .btn:active { transform: scale(0.96); }
         .btn:disabled { opacity: 0.6; cursor: not-allowed; }
         
-        .wish-tabs { 
-            display: flex; 
-            background: rgba(0,0,0,0.5); 
-            border-radius: 20px; 
-            padding: 6px; 
-            margin-bottom: 20px; 
-        }
-        .w-tab { 
-            flex: 1; 
-            text-align: center; 
-            padding: 14px; 
-            font-size: 11px; 
-            font-weight: 900; 
-            color: var(--text-sub); 
-            border-radius: 16px; 
-            cursor: pointer; 
-            font-family: 'Montserrat', sans-serif; 
-            text-transform: uppercase; 
-        }
+        .wish-tabs { display: flex; background: rgba(0,0,0,0.5); border-radius: 20px; padding: 6px; margin-bottom: 20px; }
+        .w-tab { flex: 1; text-align: center; padding: 14px; font-size: 11px; font-weight: 900; color: var(--text-sub); border-radius: 16px; cursor: pointer; font-family: 'Montserrat', sans-serif; text-transform: uppercase; }
         .w-tab.active { background: var(--accent); color: #fff; }
-        .wish-item { 
-            display: flex; 
-            flex-direction: column; 
-            padding: 18px; 
-            background: rgba(0,0,0,0.3); 
-            border: 1px solid var(--border); 
-            border-radius: 18px; 
-            margin-bottom: 12px; 
-            font-weight: 700; 
-            font-size: 14px; 
-        }
-        .wish-link { 
-            display: inline-flex; 
-            align-items: center; 
-            margin-top: 10px; 
-            color: #000; 
-            text-decoration: none; 
-            background: var(--mint); 
-            padding: 8px 16px; 
-            border-radius: 12px; 
-            font-size: 11px; 
-            font-weight: 900; 
-        }
-        .del-btn { 
-            color: #ff4757; 
-            font-size: 24px; 
-            font-weight: bold; 
-            background: rgba(255, 71, 87, 0.15); 
-            width: 35px; 
-            height: 35px; 
-            border-radius: 10px; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-        }
+        .wish-item { display: flex; flex-direction: column; padding: 18px; background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 18px; margin-bottom: 12px; font-weight: 700; font-size: 14px; }
+        .wish-link { display: inline-flex; align-items: center; margin-top: 10px; color: #000; text-decoration: none; background: var(--mint); padding: 8px 16px; border-radius: 12px; font-size: 11px; font-weight: 900; }
+        .del-btn { color: #ff4757; font-size: 24px; font-weight: bold; background: rgba(255, 71, 87, 0.15); width: 35px; height: 35px; border-radius: 10px; display: flex; align-items: center; justify-content: center; }
 
-        #countdown { 
-            font-family: 'Montserrat', sans-serif; 
-            font-size: 34px; 
-            font-weight: 900; 
-            text-align: center; 
-            margin: 15px 0; 
-            display: flex; 
-            justify-content: center; 
-            align-items: baseline; 
-            gap: 4px; 
-        }
+        #countdown { font-family: 'Montserrat', sans-serif; font-size: 34px; font-weight: 900; text-align: center; margin: 15px 0; display: flex; justify-content: center; align-items: baseline; gap: 4px; }
         .neon { color: var(--mint); text-shadow: 0 0 15px var(--mint); width: 50px; display: inline-block; }
         .progress { height: 10px; background: rgba(0,0,0,0.5); border-radius: 10px; overflow: hidden; margin-top: 15px; }
         #bar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--mint)); box-shadow: 0 0 15px var(--accent); transition: 0.5s; }
 
-        /* === ВЕРНУЛИ КРАСИВУЮ ПЛАНЕТУ === */
-        .planet-wrap { 
-            position: relative; 
-            width: 160px; 
-            height: 160px; 
-            margin: 20px auto 40px auto; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-        }
-        .planet { 
-            font-size: 90px; 
-            line-height: 1; 
-            animation: float-spin 6s ease-in-out infinite; 
-            filter: drop-shadow(0 0 25px var(--mint)); 
-            position: relative; 
-            z-index: 2;
-        }
+        .planet-wrap { position: relative; width: 160px; height: 160px; margin: 20px auto 40px auto; display: flex; justify-content: center; align-items: center; }
+        .planet { font-size: 90px; line-height: 1; animation: float-spin 6s ease-in-out infinite; filter: drop-shadow(0 0 25px var(--mint)); position: relative; z-index: 2; }
         .planet::after { content: '🌍'; } 
-        @keyframes float-spin { 
-            0%, 100% { transform: translateY(0) rotate(-5deg); } 
-            50% { transform: translateY(-12px) rotate(5deg) scale(1.08); } 
-        }
-        .radar-ring { 
-            position: absolute; 
-            border: 2px solid var(--mint); 
-            border-radius: 50%; 
-            opacity: 0; 
-            animation: radarPing 3s ease-out infinite; 
-        }
+        @keyframes float-spin { 0%, 100% { transform: translateY(0) rotate(-5deg); } 50% { transform: translateY(-12px) rotate(5deg) scale(1.08); } }
+        .radar-ring { position: absolute; border: 2px solid var(--mint); border-radius: 50%; opacity: 0; animation: radarPing 3s ease-out infinite; }
         .r1 { width: 140px; height: 140px; animation-delay: 0s; } 
         .r2 { width: 190px; height: 190px; animation-delay: 1.5s; }
-        @keyframes radarPing { 
-            0% { transform: scale(0.5); opacity: 0.8; } 
-            100% { transform: scale(1.5); opacity: 0; } 
-        }
+        @keyframes radarPing { 0% { transform: scale(0.5); opacity: 0.8; } 100% { transform: scale(1.5); opacity: 0; } }
         
-        .loc-time-info {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 10px;
-            font-weight: 800;
-            color: var(--text-sub);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 8px;
-            opacity: 0.9;
-        }
+        .loc-time-info { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 800; color: var(--text-sub); text-transform: uppercase; letter-spacing: 1px; margin-top: 8px; opacity: 0.9; }
 
         .bg-thumb { width: 100%; height: 85px; border-radius: 16px; background-size: cover; background-position: center; border: 2px solid transparent; }
         .bg-thumb.active { border-color: var(--mint); transform: scale(0.95); }
         .bg-gallery { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
         
-        input { 
-            width: 100%; 
-            background: rgba(0,0,0,0.4); 
-            border: 1px solid var(--border); 
-            border-radius: 16px; 
-            padding: 18px; 
-            color: var(--text-main); 
-            margin: 5px 0 15px 0; 
-            box-sizing: border-box; 
-            outline: none; 
-            font-size: 15px; 
-            font-weight: 600; 
-            font-family: inherit;
-        }
-        label { 
-            font-size: 10px; 
-            color: var(--text-sub); 
-            font-weight: 800; 
-            letter-spacing: 2px; 
-            text-transform: uppercase; 
-            display: block; 
-            margin-bottom: 5px; 
-            font-family: 'Montserrat', sans-serif;
-        }
+        input { width: 100%; background: rgba(0,0,0,0.4); border: 1px solid var(--border); border-radius: 16px; padding: 18px; color: var(--text-main); margin: 5px 0 15px 0; box-sizing: border-box; outline: none; font-size: 15px; font-weight: 600; font-family: inherit;}
+        label { font-size: 10px; color: var(--text-sub); font-weight: 800; letter-spacing: 2px; text-transform: uppercase; display: block; margin-bottom: 5px; font-family: 'Montserrat', sans-serif;}
         
         .sync-wrapper { text-align: center; margin-top: auto; padding-top: 25px; padding-bottom: 10px; }
-        .btn-sync-small { 
-            background: var(--card-bg); 
-            backdrop-filter: blur(10px); 
-            border: 1px solid var(--mint); 
-            color: var(--mint); 
-            padding: 12px 26px; 
-            border-radius: 30px; 
-            font-family: 'Montserrat', sans-serif; 
-            font-size: 11px; 
-            font-weight: 900; 
-            letter-spacing: 1px; 
-            text-transform: uppercase; 
-            cursor: pointer; 
-            display: inline-flex; 
-            align-items: center; 
-            gap: 8px; 
-            box-shadow: var(--card-shadow); 
-            transition: 0.2s; 
-        }
+        .btn-sync-small { background: var(--card-bg); backdrop-filter: blur(10px); border: 1px solid var(--mint); color: var(--mint); padding: 12px 26px; border-radius: 30px; font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; box-shadow: var(--card-shadow); transition: 0.2s; }
     </style>
 </head>
 <body>
-    <div class="app">
+    <div id="kill-screen">
+        <div class="avatar" style="width: 100px; height: 100px; font-size: 45px; margin-bottom: 25px; box-shadow: none; background: rgba(255, 71, 87, 0.2); border-color: #ff4757;">🚫</div>
+        <h2 style="color: #ff4757; font-family: 'Montserrat', sans-serif; text-transform: uppercase;">Доступ закрыт</h2>
+        <p style="color: var(--text-main); font-weight: 600; line-height: 1.6; font-size: 14px;">
+            Левая кнопка меню отключена, так как Телеграм блокирует отправку данных через неё.<br><br>
+            Пожалуйста, закрой это окно и открой приложение через <b>главную фиолетовую кнопку «💜 Открыть MoZZaya ✨»</b> в чате бота!
+        </p>
+        <button class="btn" onclick="tg.close()" style="margin-top: 30px; max-width: 250px;">ПОНЯТНО, ЗАКРЫТЬ</button>
+    </div>
+
+    <div class="app" id="main-app">
         <div id="edit-btn" class="edit-toggle" onclick="toggleEdit()">✏️</div>
 
         <div id="home" class="screen active">
@@ -517,38 +295,81 @@
         
         const params = new URLSearchParams(window.location.search);
         
-        if (params.get('reset') === '1') {
-            let savedBg = localStorage.getItem('custom_bg');
-            let savedOrder = localStorage.getItem('menuOrder');
-            localStorage.clear();
-            if(savedBg) localStorage.setItem('custom_bg', savedBg);
-            if(savedOrder) localStorage.setItem('menuOrder', savedOrder);
+        // === ЛОВУШКА ДЛЯ ЛЕВОЙ КНОПКИ ===
+        // Если в URL нет параметра source=chat, значит зашли со старой левой кнопки
+        if (params.get('source') !== 'chat') {
+            document.getElementById('main-app').style.display = 'none';
+            document.getElementById('kill-screen').style.display = 'flex';
+        } else {
+            // Обычная инициализация приложения
             
-            document.getElementById('ds').value = '';
-            document.getElementById('de').value = '';
-            document.getElementById('wl').innerHTML = '';
-            document.getElementById('p-last-time').innerText = '';
+            if (params.get('reset') === '1') {
+                let savedBg = localStorage.getItem('custom_bg');
+                let savedOrder = localStorage.getItem('menuOrder');
+                localStorage.clear();
+                if(savedBg) localStorage.setItem('custom_bg', savedBg);
+                if(savedOrder) localStorage.setItem('menuOrder', savedOrder);
+                
+                document.getElementById('ds').value = '';
+                document.getElementById('de').value = '';
+                document.getElementById('wl').innerHTML = '';
+                document.getElementById('p-last-time').innerText = '';
+            }
+
+            ['role', 'pn', 'pp', 'plat', 'plon', 'pt', 's', 'e'].forEach(p => { 
+                if (params.has(p)) localStorage.setItem(p, params.get(p)); 
+            });
+            
+            let wishesData = { boy: [], girl: [] };
+            try { 
+                let parsed = JSON.parse(decodeURIComponent(params.get('w') || '{}')); 
+                wishesData = Object.assign(wishesData, parsed); 
+            } catch(e) {}
+
+            const role = localStorage.getItem('role') || 'boy';
+            document.body.classList.toggle('theme-girl', role === 'girl');
+            tg.headerColor = '#0d0e15';
+
+            applyBackground();
+            
+            const myData = tg.initDataUnsafe?.user;
+            const myAva = document.getElementById('my-ava');
+            if(myData?.photo_url) { 
+                myAva.style.backgroundImage = `url('${myData.photo_url}')`; 
+                myAva.innerText = ""; 
+            } else { 
+                myAva.innerText = myData?.first_name ? myData.first_name[0] : 'Я'; 
+            }
+            
+            const pNick = localStorage.getItem('pn') || "Половинка";
+            const pPhoto = localStorage.getItem('pp');
+            const pAva = document.getElementById('p-ava');
+            
+            if (pPhoto && pPhoto !== "" && pPhoto !== "None") { 
+                pAva.style.backgroundImage = `url('${pPhoto}')`; 
+                pAva.innerText = ""; 
+            } else { 
+                pAva.innerText = "❤️"; 
+            }
+            document.getElementById('pair-names').innerText = `${myData?.first_name || 'Я'} ❤️ ${pNick}`;
+
+            const savedOrder = JSON.parse(localStorage.getItem('menuOrder'));
+            if (savedOrder) {
+                savedOrder.forEach(id => { 
+                    const el = document.getElementById('sortable-menu').querySelector(`[data-id="${id}"]`); 
+                    if (el) document.getElementById('sortable-menu').appendChild(el); 
+                });
+            }
+
+            setInterval(() => { if(localStorage.getItem('s')) tick(); }, 100);
         }
 
-        ['role', 'pn', 'pp', 'plat', 'plon', 'pt', 's', 'e'].forEach(p => { 
-            if (params.has(p)) localStorage.setItem(p, params.get(p)); 
-        });
-        
-        let wishesData = { boy: [], girl: [] };
-        try { 
-            let parsed = JSON.parse(decodeURIComponent(params.get('w') || '{}')); 
-            wishesData = Object.assign(wishesData, parsed); 
-        } catch(e) {}
-
-        const role = localStorage.getItem('role') || 'boy';
-        document.body.classList.toggle('theme-girl', role === 'girl');
-        tg.headerColor = '#0d0e15';
-
+        // === ФУНКЦИИ ===
         function applyBackground() { 
+            const role = localStorage.getItem('role') || 'boy';
             const b = localStorage.getItem('custom_bg'); 
             document.body.style.backgroundImage = b ? `url('img/${b}')` : (role === 'girl' ? `url('img/bg_girl_default.jpg')` : `url('img/bg_boy_default.jpg')`); 
         }
-        applyBackground();
         
         function setBg(file, el) { 
             localStorage.setItem('custom_bg', file); 
@@ -564,33 +385,12 @@
             document.querySelectorAll('.bg-thumb').forEach(t => t.classList.remove('active')); 
         }
 
-        const myData = tg.initDataUnsafe?.user;
-        const myAva = document.getElementById('my-ava');
-        if(myData?.photo_url) { 
-            myAva.style.backgroundImage = `url('${myData.photo_url}')`; 
-            myAva.innerText = ""; 
-        } else { 
-            myAva.innerText = myData?.first_name ? myData.first_name[0] : 'Я'; 
-        }
-        
-        const pNick = localStorage.getItem('pn') || "Половинка";
-        const pPhoto = localStorage.getItem('pp');
-        const pAva = document.getElementById('p-ava');
-        
-        if (pPhoto && pPhoto !== "" && pPhoto !== "None") { 
-            pAva.style.backgroundImage = `url('${pPhoto}')`; 
-            pAva.innerText = ""; 
-        } else { 
-            pAva.innerText = "❤️"; 
-        }
-        document.getElementById('pair-names').innerText = `${myData?.first_name || 'Я'} ❤️ ${pNick}`;
-
-        const menuContainer = document.getElementById('sortable-menu');
         let sortableInstance = null;
         let isEditMode = false;
         
         function toggleEdit() {
             const btn = document.getElementById('edit-btn'); 
+            const menuContainer = document.getElementById('sortable-menu');
             isEditMode = !isEditMode;
             
             if (isEditMode) {
@@ -613,14 +413,6 @@
                 } 
                 tg.HapticFeedback.notificationOccurred('success');
             }
-        }
-        
-        const savedOrder = JSON.parse(localStorage.getItem('menuOrder'));
-        if (savedOrder) {
-            savedOrder.forEach(id => { 
-                const el = menuContainer.querySelector(`[data-id="${id}"]`); 
-                if (el) menuContainer.appendChild(el); 
-            });
         }
 
         function nav(id) { 
@@ -663,6 +455,7 @@
             const status = document.getElementById('loc-status');
             const plat = parseFloat(localStorage.getItem('plat'));
             const plon = parseFloat(localStorage.getItem('plon'));
+            const pNick = localStorage.getItem('pn') || "Половинка";
             
             if(!plat || !plon || isNaN(plat)) {
                 status.innerText = "Сначала половинка должна отправить геометку!";
@@ -695,8 +488,13 @@
         
         function renderW() {
             const list = document.getElementById('wl');
+            const role = localStorage.getItem('role') || 'boy';
             const pr = role === 'girl' ? 'boy' : 'girl';
-            const activeList = currentWTab === 'me' ? wishesData[role] : wishesData[pr];
+            
+            let wData = { boy: [], girl: [] };
+            try { wData = JSON.parse(localStorage.getItem('w')); } catch(e) {}
+            
+            const activeList = currentWTab === 'me' ? wData[role] : wData[pr];
             
             if (!activeList || activeList.length === 0) { 
                 list.innerHTML = `<p style="text-align:center; color:var(--text-sub); margin-top:30px; font-size:12px;">Пусто...</p>`; 
@@ -715,16 +513,25 @@
         function addW() { 
             const i = document.getElementById('wi'); 
             if(!i.value.trim()) return; 
-            if(!wishesData[role]) wishesData[role] = []; 
-            wishesData[role].push(i.value.trim()); 
+            
+            const role = localStorage.getItem('role') || 'boy';
+            let wData = { boy: [], girl: [] };
+            try { wData = JSON.parse(localStorage.getItem('w')) || { boy: [], girl: [] }; } catch(e) {}
+            
+            if(!wData[role]) wData[role] = []; 
+            wData[role].push(i.value.trim()); 
             i.value=''; 
-            localStorage.setItem('w', JSON.stringify(wishesData)); 
+            localStorage.setItem('w', JSON.stringify(wData)); 
             renderW(); 
         }
         
         function delW(i) { 
-            wishesData[role].splice(i, 1); 
-            localStorage.setItem('w', JSON.stringify(wishesData)); 
+            const role = localStorage.getItem('role') || 'boy';
+            let wData = { boy: [], girl: [] };
+            try { wData = JSON.parse(localStorage.getItem('w')) || { boy: [], girl: [] }; } catch(e) {}
+            
+            wData[role].splice(i, 1); 
+            localStorage.setItem('w', JSON.stringify(wData)); 
             renderW(); 
         }
 
@@ -739,8 +546,6 @@
                     status.innerText = "✅ ОТПРАВЛЕНО!"; 
                     setTimeout(() => { tg.close(); }, 1500);
                 } catch(e) { 
-                    // === ВОТ НАШ КАПКАН ДЛЯ ЛЕВОЙ КНОПКИ ===
-                    tg.showAlert("❌ ЭТА КНОПКА ОТКЛЮЧЕНА!\n\nПожалуйста, закрой это окно и открой приложение через большую фиолетовую кнопку «💜 Открыть MoZZaya ✨» прямо в чате бота!");
                     btn.disabled = false; 
                     status.innerText = "Ошибка!";
                 } 
@@ -801,16 +606,16 @@
         }
 
         function syncAll() { 
+            let wData = { boy: [], girl: [] };
+            try { wData = JSON.parse(localStorage.getItem('w')) || { boy: [], girl: [] }; } catch(e) {}
+            
             try { 
-                tg.sendData(JSON.stringify({ s: localStorage.getItem('s'), e: localStorage.getItem('e'), w: wishesData })); 
+                tg.sendData(JSON.stringify({ s: localStorage.getItem('s'), e: localStorage.getItem('e'), w: wData })); 
                 tg.HapticFeedback.notificationOccurred('success'); 
             } catch(e) { 
-                // === КАПКАН ДЛЯ СИНХРОНИЗАЦИИ ИЗ ЛЕВОЙ КНОПКИ ===
-                tg.showAlert("❌ ОШИБКА СОХРАНЕНИЯ!\n\nЛевая кнопка больше не поддерживается. Закрой окно и зайди через фиолетовую кнопку «💜 Открыть MoZZaya ✨» в чате!"); 
+                tg.showAlert("Ошибка синхронизации!"); 
             } 
         }
-        
-        setInterval(() => { if(localStorage.getItem('s')) tick(); }, 100);
     </script>
 </body>
 </html>
