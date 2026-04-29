@@ -8,91 +8,44 @@
     <meta http-equiv="Expires" content="0" />
     
     <title>MoZZaya Premium</title>
-    
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
     
     <style>
         :root { 
-            --bg-fallback: #0d0e15; 
-            --card-bg: rgba(20, 20, 25, 0.75); 
-            --border: rgba(255, 255, 255, 0.15); 
-            --text-main: #ffffff;
-            --text-sub: #b0b3c6;
-            --card-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
-            --accent: #bb86fc; 
-            --mint: #03dac6; 
+            --bg-fallback: #0d0e15; --card-bg: rgba(20, 20, 25, 0.75); --border: rgba(255, 255, 255, 0.15); 
+            --text-main: #ffffff; --text-sub: #b0b3c6; --card-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+            --accent: #bb86fc; --mint: #03dac6; 
         }
-
-        body.theme-girl {
-            --accent: #ff4785; 
-            --mint: #ff1493; 
-        }
+        body.theme-girl { --accent: #ff4785; --mint: #ff1493; }
 
         body { 
-            background-color: var(--bg-fallback); 
-            background-size: cover; 
-            background-position: center;
-            background-attachment: fixed; 
-            background-repeat: no-repeat; 
-            color: var(--text-main); 
+            background-color: var(--bg-fallback); background-size: cover; background-position: center;
+            background-attachment: fixed; background-repeat: no-repeat; color: var(--text-main); 
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
-            margin: 0; 
-            display: flex; 
-            justify-content: center; 
-            min-height: 100vh; 
-            overflow-x: hidden; 
-            transition: background-image 0.5s ease-in-out;
-            user-select: none; 
-            -webkit-user-select: none;
+            margin: 0; display: flex; justify-content: center; min-height: 100vh; overflow-x: hidden; transition: 0.4s;
+            user-select: none; -webkit-user-select: none;
         }
 
-        .app { 
-            width: 100%; 
-            max-width: 400px; 
-            padding: 20px 20px 30px 20px; 
-            box-sizing: border-box; 
-            display: flex; 
-            flex-direction: column; 
-            position: relative;
-        }
-        
+        .app { width: 100%; max-width: 400px; padding: 20px 20px 30px 20px; box-sizing: border-box; display: flex; flex-direction: column; position: relative;}
         .screen { display: none; flex-direction: column; flex-grow: 1; }
         .screen.active { display: flex; animation: slideFade 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        @keyframes slideFade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         
-        @keyframes slideFade { 
-            from { opacity: 0; transform: translateY(10px); } 
-            to { opacity: 1; transform: translateY(0); } 
-        }
-        
-        .card { 
-            background: var(--card-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--border); border-radius: 28px; padding: 22px; margin-bottom: 15px; box-shadow: var(--card-shadow); 
-        }
+        .card { background: var(--card-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid var(--border); border-radius: 28px; padding: 22px; margin-bottom: 15px; box-shadow: var(--card-shadow); }
 
-        .edit-toggle {
-            position: absolute; top: 25px; left: 25px; z-index: 10; width: 42px; height: 42px; border-radius: 14px;
-            background: var(--card-bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center;
-            font-size: 20px; cursor: pointer; backdrop-filter: blur(10px); transition: 0.2s;
-        }
+        .edit-toggle { position: absolute; top: 25px; left: 25px; z-index: 10; width: 42px; height: 42px; border-radius: 14px; background: var(--card-bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 20px; cursor: pointer; backdrop-filter: blur(10px); transition: 0.2s; }
+        .edit-toggle:active { transform: scale(0.9); }
 
-        .header-badge {
-            background: var(--card-bg); border: 1px solid var(--border); border-radius: 35px; padding: 25px 15px; margin-bottom: 25px; display: flex; flex-direction: column; align-items: center; box-shadow: var(--card-shadow);
-        }
+        .header-badge { background: var(--card-bg); border: 1px solid var(--border); border-radius: 35px; padding: 25px 15px; margin-bottom: 25px; display: flex; flex-direction: column; align-items: center; box-shadow: var(--card-shadow); }
         .profile-row { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 12px; }
-        .avatar { 
-            width: 70px; height: 70px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--mint));
-            display: flex; justify-content: center; align-items: center; font-size: 26px; font-weight: bold; color: #fff;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.6); background-size: cover; background-position: center; border: 3px solid var(--border);
-        }
+        .avatar { width: 70px; height: 70px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--mint)); display: flex; justify-content: center; align-items: center; font-size: 26px; font-weight: bold; color: #fff; box-shadow: 0 8px 25px rgba(0,0,0,0.6); background-size: cover; background-position: center; border: 3px solid var(--border); }
         .heart-icon { font-size: 30px; animation: heartbeat 1.2s infinite; }
         @keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
 
         #pair-names { font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; text-align: center; background: linear-gradient(90deg, #fff, var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 0; }
         
         .menu-item { display: flex; justify-content: space-between; align-items: center; font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 14px; padding: 22px; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: 0.1s; }
-        .menu-item:active { transform: scale(0.98); }
-        
         @keyframes shake { 0%, 100% { transform: rotate(0deg); } 25% { transform: rotate(-1.5deg); } 75% { transform: rotate(1.5deg); } }
         .edit-mode .menu-item { animation: shake 0.35s infinite; border: 1px dashed var(--accent); background: rgba(0,0,0,0.3); }
         .sortable-ghost { opacity: 0.2; transform: scale(0.95); }
@@ -100,46 +53,53 @@
         .btn { font-family: 'Montserrat', sans-serif; background: var(--accent); color: #fff; border: none; padding: 18px; border-radius: 20px; font-weight: 900; width: 100%; font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; box-shadow: 0 10px 25px rgba(0,0,0,0.5); transition: 0.2s; }
         .btn:active { transform: scale(0.96); }
 
-        /* === DMB TIMER СТИЛИ === */
-        .dmb-hero { text-align: center; margin-bottom: 20px; }
-        .dmb-percent { font-family: 'Montserrat', sans-serif; font-size: 38px; font-weight: 900; color: #fff; text-shadow: 0 0 20px rgba(255,255,255,0.4); margin: 10px 0; letter-spacing: 1px;}
+        /* === DMB ИМБА СТИЛИ === */
+        #countdown { font-family: 'Montserrat', sans-serif; font-size: 38px; font-weight: 900; text-align: center; margin: 10px 0; display: flex; justify-content: center; align-items: baseline; gap: 4px; text-shadow: 0 0 20px rgba(255,255,255,0.3); }
+        #countdown small { font-size: 12px; color: var(--text-sub); margin-right: 6px; font-weight: 700;}
+        .neon { color: var(--mint); text-shadow: 0 0 15px var(--mint); display: inline-block; }
         
-        .dmb-progress-wrap { position: relative; margin: 20px 0; }
-        .dmb-ticks { display: flex; justify-content: space-between; height: 15px; opacity: 0.3; margin-bottom: 5px; }
-        .dmb-tick { width: 2px; height: 100%; background: #fff; border-radius: 1px; }
-        .dmb-bar-bg { height: 6px; background: rgba(0,0,0,0.5); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
-        #dmb-bar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--mint)); box-shadow: 0 0 15px var(--accent); transition: 0.2s linear; }
+        .progress { height: 8px; background: rgba(0,0,0,0.6); border-radius: 10px; overflow: hidden; margin-top: 15px; border: 1px solid var(--border);}
+        #bar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--mint)); box-shadow: 0 0 15px var(--accent); transition: 0.5s; }
 
-        .dmb-stats { display: flex; justify-content: space-between; gap: 15px; margin-top: 20px; }
-        .dmb-col { flex: 1; background: rgba(0,0,0,0.3); border-radius: 18px; padding: 15px; border: 1px solid rgba(255,255,255,0.05); }
-        .dmb-col-title { font-size: 10px; font-weight: 900; color: var(--text-sub); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 12px; text-align: center; }
-        .dmb-value-row { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 6px; border-bottom: 1px dashed rgba(255,255,255,0.1); padding-bottom: 4px;}
-        .dmb-val { font-family: 'Montserrat', sans-serif; font-size: 15px; font-weight: 800; color: var(--text-main); }
-        .dmb-label { font-size: 10px; color: var(--text-sub); font-weight: 600; text-transform: uppercase;}
+        /* Сетка 52 недель */
+        .weeks-container { margin-top: 25px; padding: 15px; background: rgba(0,0,0,0.4); border-radius: 20px; border: 1px solid rgba(255,255,255,0.05); }
+        .weeks-title { font-size: 10px; font-family: 'Montserrat', sans-serif; font-weight: 900; text-align: center; color: var(--text-sub); letter-spacing: 2px; margin-bottom: 15px; text-transform: uppercase; }
+        .weeks-grid { display: grid; grid-template-columns: repeat(13, 1fr); gap: 6px; }
+        .week-box { aspect-ratio: 1; border-radius: 4px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); transition: 0.3s; }
+        .week-box.filled { background: var(--accent); box-shadow: 0 0 8px var(--accent); border-color: transparent; }
+        .week-box.current { background: var(--mint); box-shadow: 0 0 12px var(--mint); animation: pulse 1.5s infinite; border-color: transparent; }
+        @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.9); } }
+        
+        .weeks-stats { display: flex; justify-content: space-between; margin-top: 15px; font-size: 11px; font-weight: 700; font-family: 'Montserrat', sans-serif; }
+        .w-passed { color: var(--mint); } .w-left { color: var(--accent); }
+
+        /* Армейский статус */
+        .army-status-card { text-align: center; padding: 15px; background: linear-gradient(135deg, rgba(187, 134, 252, 0.1), rgba(3, 218, 198, 0.1)); border-radius: 20px; border: 1px dashed var(--accent); margin-top: 15px; position: relative; overflow: hidden; }
+        .army-rank { font-family: 'Montserrat', sans-serif; font-size: 22px; font-weight: 900; color: var(--text-main); margin-bottom: 5px; text-transform: uppercase; letter-spacing: 2px;}
+        .army-msg { font-size: 11px; color: var(--text-sub); font-weight: 600; line-height: 1.4; }
 
         .milestones { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px;}
         .m-card { background: rgba(0,0,0,0.3); text-align: center; padding: 15px 10px; border-radius: 18px; border: 1px solid var(--border);}
         .m-card b { font-family: 'Montserrat', sans-serif; font-size: 18px; display: block; color: var(--mint); margin: 5px 0; }
         .m-card small { font-size: 9px; font-weight: 900; color: var(--text-sub); letter-spacing: 1px; text-transform: uppercase; }
 
-        /* === ПЛАНЕТА === */
-        .planet-wrap { position: relative; width: 180px; height: 180px; margin: 10px auto 30px auto; display: flex; justify-content: center; align-items: center; }
-        .planet { font-size: 100px; line-height: 1; animation: float-spin 8s ease-in-out infinite; filter: drop-shadow(0 0 30px var(--mint)); position: relative; z-index: 2;}
+        /* === РАДАР === */
+        .planet-wrap { position: relative; width: 160px; height: 160px; margin: 20px auto 40px auto; display: flex; justify-content: center; align-items: center; }
+        .planet { font-size: 90px; line-height: 1; animation: float-spin 6s ease-in-out infinite; filter: drop-shadow(0 0 25px var(--mint)); position: relative; z-index: 2; }
         .planet::after { content: '🌍'; } 
-        .satellite { position: absolute; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; filter: blur(1px) drop-shadow(0 0 5px var(--accent)); animation: orbit 4s linear infinite;}
-        .s1 { animation-duration: 5s; } .s2 { animation-duration: 7s; animation-delay: -2s; }
-        @keyframes orbit { from { transform: rotate(0deg) translateX(90px) rotate(0deg); } to { transform: rotate(360deg) translateX(90px) rotate(-360deg); } }
-        @keyframes float-spin { 0%, 100% { transform: translateY(0) rotate(-5deg); filter: drop-shadow(0 0 20px var(--mint)); } 50% { transform: translateY(-15px) rotate(5deg) scale(1.05); filter: drop-shadow(0 0 45px var(--mint)); } }
+        @keyframes float-spin { 0%, 100% { transform: translateY(0) rotate(-5deg); } 50% { transform: translateY(-12px) rotate(5deg) scale(1.08); } }
         .radar-ring { position: absolute; border: 2px solid var(--mint); border-radius: 50%; opacity: 0; animation: radarPing 3s ease-out infinite; }
-        .r1 { width: 140px; height: 140px; animation-delay: 0s; } .r2 { width: 200px; height: 190px; animation-delay: 1.5s; }
-        @keyframes radarPing { 0% { transform: scale(0.5); opacity: 0.8; } 100% { transform: scale(1.6); opacity: 0; } }
-        
+        .r1 { width: 140px; height: 140px; animation-delay: 0s; } .r2 { width: 190px; height: 190px; animation-delay: 1.5s; }
+        @keyframes radarPing { 0% { transform: scale(0.5); opacity: 0.8; } 100% { transform: scale(1.5); opacity: 0; } }
         .loc-time-info { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 800; color: var(--text-sub); text-transform: uppercase; letter-spacing: 1px; margin-top: 8px; opacity: 0.9; }
 
-        /* === ВИШЛИСТ === */
+        /* === КОРЗИНА И ОСТАЛЬНОЕ === */
         .wish-tabs { display: flex; background: rgba(0,0,0,0.5); border-radius: 20px; padding: 6px; margin-bottom: 20px; }
         .w-tab { flex: 1; text-align: center; padding: 14px; font-size: 11px; font-weight: 900; color: var(--text-sub); border-radius: 16px; cursor: pointer; font-family: 'Montserrat', sans-serif; text-transform: uppercase; transition: 0.3s; }
-        .w-tab.active { background: var(--accent); color: #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        .w-tab.active { background: var(--accent); color: #fff; }
+        .wish-item { display: flex; flex-direction: column; padding: 18px; background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 18px; margin-bottom: 12px; font-weight: 700; font-size: 14px; }
+        .wish-link { display: inline-flex; align-items: center; margin-top: 10px; color: #000; text-decoration: none; background: var(--mint); padding: 8px 16px; border-radius: 12px; font-size: 11px; font-weight: 900; }
+        .del-btn { color: #ff4757; font-size: 24px; font-weight: bold; background: rgba(255, 71, 87, 0.15); width: 35px; height: 35px; border-radius: 10px; display: flex; align-items: center; justify-content: center; }
 
         .bg-thumb { width: 100%; height: 85px; border-radius: 16px; background-size: cover; background-position: center; border: 2px solid transparent; transition: 0.2s; }
         .bg-thumb.active { border-color: var(--mint); transform: scale(0.95); }
@@ -147,6 +107,9 @@
         
         input { width: 100%; background: rgba(0,0,0,0.4); border: 1px solid var(--border); border-radius: 16px; padding: 18px; color: var(--text-main); margin: 5px 0 15px 0; box-sizing: border-box; outline: none; font-size: 15px; font-weight: 600; font-family: inherit;}
         label { font-size: 10px; color: var(--text-sub); font-weight: 800; letter-spacing: 2px; text-transform: uppercase; display: block; margin-bottom: 5px; font-family: 'Montserrat', sans-serif;}
+        
+        .sync-wrapper { text-align: center; margin-top: auto; padding-top: 25px; padding-bottom: 10px; }
+        .btn-sync-small { background: var(--card-bg); backdrop-filter: blur(10px); border: 1px solid var(--mint); color: var(--mint); padding: 12px 26px; border-radius: 30px; font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; box-shadow: var(--card-shadow); transition: 0.2s; }
     </style>
 </head>
 <body>
@@ -164,103 +127,118 @@
             </div>
             
             <div id="sortable-menu">
-                <div class="card menu-item" data-id="dmb" onclick="nav('dmb')"><span>🎖 Штаб службы</span> <span style="color:var(--accent)">→</span></div>
-                <div class="card menu-item" data-id="wish" onclick="nav('wish')"><span>🎁 Корзина счастья</span> <span style="color:var(--accent)">→</span></div>
-                <div class="card menu-item" data-id="locator" onclick="nav('locator')"><span>📍 Локация половинки</span> <span style="color:var(--accent)">→</span></div>
-                <div class="card menu-item" data-id="settings" onclick="nav('settings')"><span>⚙️ Настройки фона</span> <span style="color:var(--accent)">→</span></div>
+                <div class="card menu-item" data-id="dmb" onclick="nav('dmb')">
+                    <span>🎖 Штаб службы</span> <span style="color:var(--accent)">→</span>
+                </div>
+                <div class="card menu-item" data-id="wish" onclick="nav('wish')">
+                    <span>🎁 Корзина счастья</span> <span style="color:var(--accent)">→</span>
+                </div>
+                <div class="card menu-item" data-id="locator" onclick="nav('locator')">
+                    <span>📍 Локация половинки</span> <span style="color:var(--accent)">→</span>
+                </div>
+                <div class="card menu-item" data-id="settings" onclick="nav('settings')">
+                    <span>⚙️ Настройки фона</span> <span style="color:var(--accent)">→</span>
+                </div>
             </div>
             
-            <div style="text-align: center; margin-top: auto; padding-top: 20px;">
-                <button class="btn" onclick="syncAll()" style="width: auto; padding: 12px 30px; font-size: 11px; background: rgba(0,0,0,0.3); border: 1px solid var(--mint); color: var(--mint);">🔄 СИНХРОНИЗИРОВАТЬ</button>
+            <div class="sync-wrapper">
+                <div class="btn-sync-small" onclick="syncAll()">🔄 Синхронизировать</div>
             </div>
         </div>
 
         <div id="locator" class="screen">
-            <span onclick="nav('home')" style="cursor:pointer; color:var(--accent); font-weight:900; margin-bottom:20px; display:inline-block;">← НАЗАД</span>
+            <span onclick="nav('home')" style="cursor:pointer; color:var(--accent); font-weight:900; margin-bottom:20px; display:inline-block; font-family: 'Montserrat', sans-serif;">← НАЗАД</span>
+            
             <div class="card" style="text-align:center;">
-                <h3 style="margin:0; color:var(--mint); font-family: 'Montserrat', sans-serif;">ГЕО-РАДАР СВЯЗИ ❤️</h3>
+                <h3 style="margin:0; color:var(--mint); font-family: 'Montserrat', sans-serif;">МЕСТОПОЛОЖЕНИЕ ПОЛОВИНКИ 💜</h3>
+                
                 <div class="planet-wrap">
-                    <div class="radar-ring r1"></div><div class="radar-ring r2"></div>
-                    <div class="satellite s1"></div><div class="satellite s2"></div>
+                    <div class="radar-ring r1"></div>
+                    <div class="radar-ring r2"></div>
                     <div class="planet"></div>
                 </div>
-                <p id="loc-status" style="font-size:12px; font-weight:900; margin: 15px 0; min-height:25px; font-family: 'Montserrat', sans-serif; color: var(--mint); text-transform: uppercase;"></p>
-                <button class="btn" id="btn-loc" onclick="sendLocation()" style="background:var(--mint); color:#000; margin-bottom:12px;">📍 ОТПРАВИТЬ ГЕОМЕТКУ</button>
+                
+                <p id="loc-status" style="font-size:12px; font-weight:900; margin: 15px 0; min-height:25px; font-family: 'Montserrat', sans-serif; text-transform: uppercase; color: var(--accent);"></p>
+                
+                <button class="btn" id="btn-loc" onclick="sendLocation()" style="background:var(--mint); color:#000; margin-bottom:12px;">
+                    📍 Отправить геометку
+                </button>
+                
                 <div style="display:flex; flex-direction:column; align-items:center;">
-                    <button class="btn" onclick="calculateDistance()" style="background:rgba(255,255,255,0.1); border:1px solid var(--accent); color:#fff; margin-bottom:12px;">📡 СКАНЕР ДИСТАНЦИИ</button>
-                    <button class="btn" onclick="viewPartnerLocation()" style="background:transparent; border:1px dashed var(--text-sub); color:var(--text-sub); margin-bottom:15px;">👀 ОТКРЫТЬ КАРТУ</button>
+                    <button class="btn" onclick="calculateDistance()" style="background:rgba(255,255,255,0.1); border:1px solid var(--accent); color:#fff; margin-bottom:12px;">
+                        📡 Просканировать дистанцию
+                    </button>
+                    <button class="btn" onclick="viewPartnerLocation()" style="background:transparent; border:1px dashed var(--text-sub); color:var(--text-sub); margin-bottom:15px;">
+                        👀 Открыть карту
+                    </button>
                     <div id="p-last-time" class="loc-time-info"></div>
                 </div>
             </div>
         </div>
 
         <div id="dmb" class="screen">
-            <span onclick="nav('home')" style="cursor:pointer; color:var(--accent); font-weight:900; margin-bottom:20px; display:inline-block;">← НАЗАД</span>
+            <span onclick="nav('home')" style="cursor:pointer; color:var(--accent); font-weight:900; margin-bottom:20px; display:inline-block; font-family: 'Montserrat', sans-serif;">← НАЗАД</span>
             
             <div id="setup" class="card">
                 <h3 style="margin:0 0 15px 0; font-family: 'Montserrat', sans-serif; text-align: center;">УСТАНОВКА ДАТ</h3>
                 <label>Дата призыва</label> <input type="date" id="ds">
                 <label>Дата дембеля</label> <input type="date" id="de">
-                <label>Дата присяги (необязательно)</label> <input type="date" id="dp">
                 <button class="btn" onclick="saveDMB()">ПОГНАЛИ</button>
             </div>
             
             <div id="view" style="display:none;">
                 <div class="card">
-                    <div class="dmb-hero">
-                        <div style="font-size: 10px; font-weight: 900; color: var(--text-sub); letter-spacing: 2px;">ПРОЙДЕНО СЛУЖБЫ</div>
-                        <div id="dmb-main-percent" class="dmb-percent">0.000000%</div>
+                    <p style="text-align:center; font-size:10px; color:var(--text-sub); margin:0; font-weight:900; font-family: 'Montserrat', sans-serif;">ДО ДОМА ОСТАЛОСЬ</p>
+                    <div id="countdown">
+                        <span id="vd">0</span><small>д</small> 
+                        <span id="vh">00</span><small>ч</small> 
+                        <span id="vm">00</span><small>м</small> 
+                        <span id="vs" class="neon">00</span>
                     </div>
-                    
-                    <div class="dmb-progress-wrap">
-                        <div class="dmb-ticks" id="dmb-ticks"></div>
-                        <div class="dmb-bar-bg"><div id="dmb-bar"></div></div>
-                    </div>
+                    <div class="progress"><div id="bar"></div></div>
+                    <div id="perc" style="text-align:center; font-size:14px; margin-top:8px; color:var(--mint); font-family:monospace; font-weight:bold; letter-spacing: 1px;">0.000000%</div>
+                </div>
 
-                    <div class="dmb-stats">
-                        <div class="dmb-col">
-                            <div class="dmb-col-title">ПРОШЛО</div>
-                            <div class="dmb-value-row"><span id="p-mo" class="dmb-val">0</span><span class="dmb-label">мес</span></div>
-                            <div class="dmb-value-row"><span id="p-we" class="dmb-val">0</span><span class="dmb-label">нед</span></div>
-                            <div class="dmb-value-row"><span id="p-da" class="dmb-val">0</span><span class="dmb-label">дн</span></div>
-                            <div class="dmb-value-row" style="border:none; padding-top: 10px;">
-                                <span id="p-time" style="font-size: 11px; font-weight: bold; color: var(--text-sub);">0ч 0м 0с</span>
-                            </div>
+                <div class="army-status-card" id="army-status-box">
+                    <div class="army-rank" id="army-rank">ЗАПАХ</div>
+                    <div class="army-msg" id="army-msg">Служба только началась. Впереди присяга и целый год!</div>
+                </div>
+
+                <div class="weeks-container">
+                    <div class="weeks-title">52 НЕДЕЛИ СЛУЖБЫ</div>
+                    <div class="weeks-grid" id="weeks-grid">
                         </div>
-                        <div class="dmb-col">
-                            <div class="dmb-col-title">ОСТАЛОСЬ</div>
-                            <div class="dmb-value-row"><span id="l-mo" class="dmb-val">0</span><span class="dmb-label">мес</span></div>
-                            <div class="dmb-value-row"><span id="l-we" class="dmb-val">0</span><span class="dmb-label">нед</span></div>
-                            <div class="dmb-value-row"><span id="l-da" class="dmb-val">0</span><span class="dmb-label">дн</span></div>
-                            <div class="dmb-value-row" style="border:none; padding-top: 10px;">
-                                <span id="l-time" style="font-size: 11px; font-weight: bold; color: var(--text-sub);">0ч 0м 0с</span>
-                            </div>
-                        </div>
+                    <div class="weeks-stats">
+                        <span class="w-passed" id="w-passed">Пройдено: 0</span>
+                        <span class="w-left" id="w-left">Осталось: 52</span>
                     </div>
                 </div>
 
                 <div class="milestones">
-                    <div class="m-card" id="card-oath" style="display:none; grid-column: span 2;">
-                        <small>ПРИСЯГА</small>
-                        <b id="v-oath">0 дней</b>
-                    </div>
                     <div class="m-card">
                         <small>ЭКВАТОР</small>
-                        <b id="v-eq">0 дней</b>
+                        <b id="v-eq">0 дн</b>
                     </div>
-                    <div class="m-card">
-                        <small>ДО ПРИКАЗА</small>
-                        <b id="v-ord">0 дней</b>
+                    <div class="m-card" style="border-color: var(--accent);">
+                        <small style="color: var(--text-main);">ДО ПРИКАЗА</small>
+                        <b id="v-ord" style="color: var(--accent);">0 дн</b>
                     </div>
                 </div>
-
-                <center><p style="font-size:11px; color:var(--text-sub); text-decoration:underline; cursor:pointer; margin-top: 25px;" onclick="localStorage.removeItem('s'); localStorage.removeItem('e'); localStorage.removeItem('p'); location.reload();">Изменить даты</p></center>
+                
+                <center>
+                    <p style="font-size:11px; color:var(--text-sub); text-decoration:underline; cursor:pointer; margin-top: 25px;" onclick="localStorage.removeItem('s'); localStorage.removeItem('e'); location.reload();">Сбросить даты</p>
+                </center>
             </div>
         </div>
 
         <div id="wish" class="screen">
-            <span onclick="nav('home')" style="cursor:pointer; color:var(--accent); font-weight:900; margin-bottom:20px; display:inline-block;">← НАЗАД</span>
-            <div class="wish-tabs"><div class="w-tab active" id="tab-partner" onclick="switchW('partner')">Хочет половинка</div><div class="w-tab" id="tab-me" onclick="switchW('me')">Мои желания</div></div>
+            <span onclick="nav('home')" style="cursor:pointer; color:var(--accent); font-weight:900; margin-bottom:20px; display:inline-block; font-family: 'Montserrat', sans-serif;">← НАЗАД</span>
+            
+            <div class="wish-tabs">
+                <div class="w-tab active" id="tab-partner" onclick="switchW('partner')">Хочет половинка</div>
+                <div class="w-tab" id="tab-me" onclick="switchW('me')">Мои желания</div>
+            </div>
+            
             <div class="card">
                 <div id="wish-input-group" style="display:none; gap:10px; margin-bottom:20px;">
                     <input type="text" id="wi" placeholder="Что подарить?" style="margin:0;">
@@ -271,9 +249,10 @@
         </div>
 
         <div id="settings" class="screen">
-            <span onclick="nav('home')" style="cursor:pointer; color:var(--accent); font-weight:900; margin-bottom:20px; display:inline-block;">← НАЗАД</span>
+            <span onclick="nav('home')" style="cursor:pointer; color:var(--accent); font-weight:900; margin-bottom:20px; display:inline-block; font-family: 'Montserrat', sans-serif;">← НАЗАД</span>
+            
             <div class="card">
-                <h3 style="margin:0; margin-bottom: 15px;">🎨 ВЫБОР ФОНА</h3>
+                <h3 style="margin:0; margin-bottom: 15px; font-family: 'Montserrat', sans-serif;">🎨 ВЫБОР ФОНА</h3>
                 <div class="bg-gallery">
                     <div class="bg-thumb" onclick="setBg('bg_1.jpg', this)" style="background-image:url('img/bg_1.jpg')"></div>
                     <div class="bg-thumb" onclick="setBg('bg_2.jpg', this)" style="background-image:url('img/bg_2.jpg')"></div>
@@ -289,41 +268,57 @@
 
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
-        let tg = window.Telegram.WebApp; tg.expand();
+        let tg = window.Telegram.WebApp; 
+        tg.expand();
+        
         const params = new URLSearchParams(window.location.search);
         
         if (params.get('reset') === '1') {
-            let bg = localStorage.getItem('custom_bg'), ord = localStorage.getItem('menuOrder');
-            localStorage.clear(); if(bg) localStorage.setItem('custom_bg', bg); if(ord) localStorage.setItem('menuOrder', ord);
-            document.getElementById('ds').value = ''; document.getElementById('de').value = ''; document.getElementById('dp').value = '';
+            let savedBg = localStorage.getItem('custom_bg'), savedOrder = localStorage.getItem('menuOrder');
+            localStorage.clear();
+            if(savedBg) localStorage.setItem('custom_bg', savedBg);
+            if(savedOrder) localStorage.setItem('menuOrder', savedOrder);
+            document.getElementById('ds').value = ''; document.getElementById('de').value = '';
+            document.getElementById('wl').innerHTML = ''; document.getElementById('p-last-time').innerText = '';
         }
 
-        ['role', 'pn', 'pp', 'plat', 'plon', 'pt', 's', 'e', 'p'].forEach(p => { if (params.has(p)) localStorage.setItem(p, params.get(p)); });
+        ['role', 'pn', 'pp', 'plat', 'plon', 'pt', 's', 'e'].forEach(p => { if (params.has(p)) localStorage.setItem(p, params.get(p)); });
         
         let wishesData = { boy: [], girl: [] };
-        try { let pd = JSON.parse(decodeURIComponent(params.get('w') || '{}')); wishesData = Object.assign(wishesData, pd); } catch(e) {}
+        try { let parsed = JSON.parse(decodeURIComponent(params.get('w') || '{}')); wishesData = Object.assign(wishesData, parsed); } catch(e) {}
 
         const role = localStorage.getItem('role') || 'boy';
         document.body.classList.toggle('theme-girl', role === 'girl');
         tg.headerColor = '#0d0e15';
 
-        // Генерируем "засечки" для прогресс бара
-        const ticksContainer = document.getElementById('dmb-ticks');
-        for(let i=0; i<40; i++) { const t = document.createElement('div'); t.className = 'dmb-tick'; ticksContainer.appendChild(t); }
+        // Инициализация сетки недель (52 штуки)
+        const grid = document.getElementById('weeks-grid');
+        for(let i=0; i<52; i++) {
+            const box = document.createElement('div');
+            box.className = 'week-box';
+            box.id = 'week-' + i;
+            grid.appendChild(box);
+        }
 
-        function applyBackground() { const b = localStorage.getItem('custom_bg'); document.body.style.backgroundImage = b ? `url('img/${b}')` : (role === 'girl' ? `url('img/bg_girl_default.jpg')` : `url('img/bg_boy_default.jpg')`); }
+        function applyBackground() { 
+            const b = localStorage.getItem('custom_bg'); 
+            document.body.style.backgroundImage = b ? `url('img/${b}')` : (role === 'girl' ? `url('img/bg_girl_default.jpg')` : `url('img/bg_boy_default.jpg')`); 
+        }
         applyBackground();
-        function setBg(f, el) { localStorage.setItem('custom_bg', f); applyBackground(); document.querySelectorAll('.bg-thumb').forEach(t => t.classList.remove('active')); el.classList.add('active'); tg.HapticFeedback.impactOccurred('medium'); }
+        
+        function setBg(file, el) { localStorage.setItem('custom_bg', file); applyBackground(); document.querySelectorAll('.bg-thumb').forEach(t => t.classList.remove('active')); el.classList.add('active'); tg.HapticFeedback.impactOccurred('medium'); }
         function resetBg() { localStorage.removeItem('custom_bg'); applyBackground(); document.querySelectorAll('.bg-thumb').forEach(t => t.classList.remove('active')); }
 
         const myData = tg.initDataUnsafe?.user, myAva = document.getElementById('my-ava');
-        if(myData?.photo_url) { myAva.style.backgroundImage = `url('${myData.photo_url}')`; myAva.innerText = ""; } else { myAva.innerText = 'Я'; }
+        if(myData?.photo_url) { myAva.style.backgroundImage = `url('${myData.photo_url}')`; myAva.innerText = ""; } else { myAva.innerText = myData?.first_name ? myData.first_name[0] : 'Я'; }
+        
         const pNick = localStorage.getItem('pn') || "Половинка", pPhoto = localStorage.getItem('pp'), pAva = document.getElementById('p-ava');
         if (pPhoto && pPhoto !== "" && pPhoto !== "None") { pAva.style.backgroundImage = `url('${pPhoto}')`; pAva.innerText = ""; } else { pAva.innerText = "❤️"; }
         document.getElementById('pair-names').innerText = `${myData?.first_name || 'Я'} ❤️ ${pNick}`;
 
         const menuContainer = document.getElementById('sortable-menu');
         let sortableInstance = null, isEditMode = false;
+        
         function toggleEdit() {
             const btn = document.getElementById('edit-btn'); isEditMode = !isEditMode;
             if (isEditMode) {
@@ -331,21 +326,46 @@
                 sortableInstance = new Sortable(menuContainer, { animation: 250, onEnd: () => { const order = Array.from(menuContainer.children).map(el => el.getAttribute('data-id')); localStorage.setItem('menuOrder', JSON.stringify(order)); } });
                 tg.HapticFeedback.impactOccurred('heavy');
             } else {
-                btn.innerText = "✏️"; menuContainer.classList.remove('edit-mode'); if (sortableInstance) sortableInstance.destroy(); tg.HapticFeedback.notificationOccurred('success');
+                btn.innerText = "✏️"; menuContainer.classList.remove('edit-mode'); if (sortableInstance) { sortableInstance.destroy(); sortableInstance = null; } tg.HapticFeedback.notificationOccurred('success');
             }
         }
+        
         const savedOrder = JSON.parse(localStorage.getItem('menuOrder'));
-        if (savedOrder) savedOrder.forEach(id => { const el = menuContainer.querySelector(`[data-id="${id}"]`); if (el) menuContainer.appendChild(el); });
+        if (savedOrder) { savedOrder.forEach(id => { const el = menuContainer.querySelector(`[data-id="${id}"]`); if (el) menuContainer.appendChild(el); }); }
 
-        function nav(id) { if (isEditMode) return; document.querySelectorAll('.screen').forEach(s => s.classList.remove('active')); document.getElementById(id).classList.add('active'); document.getElementById('edit-btn').style.display = (id === 'home') ? 'flex' : 'none'; if(id === 'locator') updatePartnerTime(); if(id === 'dmb') checkDMB(); if(id === 'wish') renderW(); }
+        function nav(id) { 
+            if (isEditMode) return; 
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active')); document.getElementById(id).classList.add('active'); 
+            document.getElementById('edit-btn').style.display = (id === 'home') ? 'flex' : 'none'; 
+            if(id === 'locator') updatePartnerTime(); if(id === 'dmb') checkDMB(); if(id === 'wish') renderW(); 
+        }
 
+        // === РАДАР ===
         function updatePartnerTime() {
             const pt = parseInt(localStorage.getItem('pt')), el = document.getElementById('p-last-time');
             if(!pt || isNaN(pt)) { el.innerText = "Локацией еще не делились 💔"; return; }
             const diff = Math.floor((Date.now() / 1000) - pt);
-            if(diff < 60) el.innerText = "ОБНОВЛЕНО ТОЛЬКО ЧТО 📍";
-            else if(diff < 3600) el.innerText = `БЫЛ(А) В СЕТИ ${Math.floor(diff/60)} МИН. НАЗАД`;
-            else el.innerText = `БЫЛ(А) В СЕТИ ${Math.floor(diff/3600)} Ч. НАЗАД`;
+            if(diff < 60) { el.innerText = "ОБНОВЛЕНО ТОЛЬКО ЧТО 📍"; } 
+            else if(diff < 3600) { el.innerText = `ПОСЛЕДНЯЯ ЛОКАЦИЯ: ${Math.floor(diff/60)} МИН. НАЗАД`; } 
+            else { el.innerText = `ПОСЛЕДНЯЯ ЛОКАЦИЯ: ${Math.floor(diff/3600)} Ч. НАЗАД`; }
+        }
+
+        function getDistance(lat1, lon1, lat2, lon2) {
+            const R = 6371; const dLat = (lat2 - lat1) * Math.PI / 180; const dLon = (lon2 - lon1) * Math.PI / 180;
+            const a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon/2) * Math.sin(dLon/2);
+            return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        }
+
+        function calculateDistance() {
+            const status = document.getElementById('loc-status'), plat = parseFloat(localStorage.getItem('plat')), plon = parseFloat(localStorage.getItem('plon'));
+            if(!plat || !plon || isNaN(plat)) { status.innerText = "ПОЛОВИНКА ЕЩЕ НЕ ОТПРАВЛЯЛА ГЕО!"; status.style.color = "#ff4757"; return; }
+            
+            status.innerText = "📡 СКАНИРОВАНИЕ ДИСТАНЦИИ..."; status.style.color = "var(--mint)";
+            navigator.geolocation.getCurrentPosition((pos) => { 
+                const dist = getDistance(pos.coords.latitude, pos.coords.longitude, plat, plon);
+                status.innerText = `МЕЖДУ ВАМИ ${dist < 1 ? Math.round(dist * 1000) + ' МЕТРОВ' : dist.toFixed(1) + ' КМ'} 💜`;
+                tg.HapticFeedback.notificationOccurred('success');
+            }, () => { status.innerText = "❌ РАЗРЕШИ ДОСТУП К ГЕОЛОКАЦИИ!"; status.style.color = "#ff4757"; }, { enableHighAccuracy: true }); 
         }
 
         function sendLocation() { 
@@ -359,133 +379,131 @@
                     try { 
                         tg.sendData(JSON.stringify({action: "checkin", lat: pos.coords.latitude, lon: pos.coords.longitude})); 
                         status.innerText = "✅ УСПЕШНО ДОСТАВЛЕНО!"; 
-                        setTimeout(() => { tg.close(); }, 1000);
+                        setTimeout(() => { tg.close(); }, 1200);
                     } catch(e) { btn.disabled = false; status.innerText = "❌ ОШИБКА ОТПРАВКИ!"; }
                 }, 800);
-            }, () => { btn.disabled = false; status.innerText = "❌ ВКЛЮЧИ GPS В ТЕЛЕФОНЕ!"; }, { enableHighAccuracy: true }); 
+            }, () => { btn.disabled = false; status.innerText = "❌ ВКЛЮЧИ GPS В ТЕЛЕФОНЕ!"; status.style.color = "#ff4757"; }, { enableHighAccuracy: true }); 
         }
         
-        function calculateDistance() {
-            const status = document.getElementById('loc-status'), plat = parseFloat(localStorage.getItem('plat')), plon = parseFloat(localStorage.getItem('plon'));
-            if(!plat) { status.innerText = "ОНА ЕЩЕ НЕ ДЕЛИЛАСЬ МЕТКОЙ!"; return; }
-            status.innerText = "📡 СКАНИРУЮ ДИСТАНЦИЮ...";
-            navigator.geolocation.getCurrentPosition((pos) => { 
-                const R = 6371; 
-                const dLat = (pos.coords.latitude - plat) * Math.PI / 180;
-                const dLon = (pos.coords.longitude - plon) * Math.PI / 180;
-                const a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(plat * Math.PI / 180) * Math.cos(pos.coords.latitude * Math.PI / 180) * Math.sin(dLon/2) * Math.sin(dLon/2);
-                const d = R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-                status.innerText = `МЕЖДУ ВАМИ ${d < 1 ? Math.round(d*1000)+' МЕТРОВ' : d.toFixed(1)+' КМ'} 💜`;
-                tg.HapticFeedback.notificationOccurred('success');
-            }); 
+        function viewPartnerLocation() { 
+            const lat = localStorage.getItem('plat'), lon = localStorage.getItem('plon'); 
+            if(!lat || !lon) { tg.showAlert("Геометки нет! 💔"); } else { window.open(`https://yandex.ru/maps/?pt=${lon},${lat}&z=16&l=map`, '_blank'); }
         }
 
-        function viewPartnerLocation() { const lat = localStorage.getItem('plat'), lon = localStorage.getItem('plon'); if(!lat) { tg.showAlert("Геометки нет!"); } else { window.open(`https://yandex.ru/maps/?pt=${lon},${lat}&z=16&l=map`, '_blank'); } }
+        // === ВИШЛИСТ ===
+        let currentWTab = 'partner';
+        function switchW(tab) { currentWTab = tab; document.getElementById('tab-partner').classList.toggle('active', tab === 'partner'); document.getElementById('tab-me').classList.toggle('active', tab === 'me'); document.getElementById('wish-input-group').style.display = tab === 'me' ? 'flex' : 'none'; renderW(); }
+        function renderW() {
+            const list = document.getElementById('wl'), pr = role === 'girl' ? 'boy' : 'girl';
+            let wData = { boy: [], girl: [] }; try { wData = JSON.parse(localStorage.getItem('w')); } catch(e) {}
+            const activeList = currentWTab === 'me' ? wData[role] : wData[pr];
+            if (!activeList || activeList.length === 0) { list.innerHTML = `<p style="text-align:center; color:var(--text-sub); margin-top:30px; font-size:12px;">Пусто...</p>`; return; }
+            list.innerHTML = activeList.map((w, i) => `<div class="wish-item"><div style="display:flex; justify-content:space-between; align-items:flex-start;"><span style="word-break: break-word; line-height: 1.5;">${w.replace(/(https?:\/\/[^\s]+)/g, '<br><a href="$1" target="_blank" class="wish-link">🔗 ОТКРЫТЬ ССЫЛКУ</a>')}</span>${currentWTab === 'me' ? `<span class="del-btn" onclick="delW(${i})">×</span>` : ''}</div></div>`).join('');
+        }
+        function addW() { const i = document.getElementById('wi'); if(!i.value.trim()) return; let wData = { boy: [], girl: [] }; try { wData = JSON.parse(localStorage.getItem('w')) || { boy: [], girl: [] }; } catch(e) {} if(!wData[role]) wData[role] = []; wData[role].push(i.value.trim()); i.value=''; localStorage.setItem('w', JSON.stringify(wData)); renderW(); }
+        function delW(i) { let wData = { boy: [], girl: [] }; try { wData = JSON.parse(localStorage.getItem('w')) || { boy: [], girl: [] }; } catch(e) {} wData[role].splice(i, 1); localStorage.setItem('w', JSON.stringify(wData)); renderW(); }
 
-        // === МОЩНЫЙ DMB ТАЙМЕР ===
-        function checkDMB() { 
-            if(localStorage.getItem('s')) { 
-                document.getElementById('setup').style.display='none'; document.getElementById('view').style.display='block'; tick(); 
-            } else { 
-                document.getElementById('setup').style.display='block'; document.getElementById('view').style.display='none'; 
-            } 
-        }
+        // === DMB ТАЙМЕР ===
+        function checkDMB() { if(localStorage.getItem('s')) { document.getElementById('setup').style.display='none'; document.getElementById('view').style.display='block'; tick(); } else { document.getElementById('setup').style.display='block'; document.getElementById('view').style.display='none'; } }
+        function saveDMB() { const s = document.getElementById('ds').value, e = document.getElementById('de').value; if(!s || !e) return; localStorage.setItem('s', s); localStorage.setItem('e', e); checkDMB(); }
         
-        function saveDMB() { 
-            const s = document.getElementById('ds').value, e = document.getElementById('de').value, p = document.getElementById('dp').value; 
-            if(!s || !e) return tg.showAlert("Выберите даты призыва и дембеля!"); 
-            localStorage.setItem('s', s); localStorage.setItem('e', e); if(p) localStorage.setItem('p', p);
-            checkDMB(); 
-        }
-        
-        function getDetailedTime(ms) {
-            if(ms < 0) ms = 0;
-            const days = Math.floor(ms / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((ms % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const mins = Math.floor((ms % (1000 * 60 * 60)) / (1000 * 60));
-            const secs = Math.floor((ms % (1000 * 60)) / 1000);
+        function updateArmyStatus(passedDays, leftDays) {
+            const rankEl = document.getElementById('army-rank');
+            const msgEl = document.getElementById('army-msg');
+            const boxEl = document.getElementById('army-status-box');
             
-            const mo = Math.floor(days / 30.44); // Примерно
-            const we = Math.floor((days % 30.44) / 7);
-            const da = Math.floor((days % 30.44) % 7);
-            
-            return { mo, we, da, hours, mins, secs, totalDays: days };
+            if (leftDays <= 10 && leftDays > 0) {
+                rankEl.innerText = "КОСМОС 🚀";
+                rankEl.style.color = "#ff4757";
+                msgEl.innerText = role === 'girl' ? `Готовься встречать! Осталось дней: ${leftDays}` : `Пошел обратный отсчет! Дней до дома: ${leftDays}`;
+                boxEl.style.borderStyle = "solid";
+                boxEl.style.borderColor = "#ff4757";
+                boxEl.style.background = "rgba(255, 71, 87, 0.1)";
+            } else if (leftDays <= 0) {
+                rankEl.innerText = "ДЕМБЕЛЬ 🎉";
+                rankEl.style.color = "var(--mint)";
+                msgEl.innerText = "Служба окончена! Свобода!";
+                boxEl.style.borderColor = "var(--mint)";
+            } else if (passedDays < 30) {
+                rankEl.innerText = "ЗАПАХ 🟢";
+                msgEl.innerText = role === 'girl' ? "Самое начало пути. Ему очень нужна твоя поддержка!" : "Служба только началась. Держись, солдат!";
+            } else if (passedDays < 180) {
+                rankEl.innerText = "ДУХ 🪖";
+                msgEl.innerText = role === 'girl' ? "Он уже привык к распорядку. Ждите экватор!" : "Учебка позади. Ты втягиваешься в ритм.";
+            } else if (leftDays > 100) {
+                rankEl.innerText = "СЛОН / ЧЕРПАК 🐘";
+                msgEl.innerText = role === 'girl' ? "Половина пройдена! Он уже опытный боец." : "Экватор взят! Теперь время пойдет быстрее.";
+            } else {
+                rankEl.innerText = "ДЕД 👑";
+                msgEl.innerText = role === 'girl' ? "Считаем дни до приказа! Скоро он будет дома." : "Приказ близко. Финишная прямая!";
+            }
         }
 
         function tick() {
             const start = new Date(localStorage.getItem('s')).getTime();
             const end = new Date(localStorage.getItem('e')).getTime();
-            const oath = localStorage.getItem('p') ? new Date(localStorage.getItem('p')).getTime() : null;
             const now = new Date().getTime();
+            const left = end - now;
             
-            if (now < start || start >= end) return;
+            if (now < start) return;
             
             const totalMs = end - start;
             let passedMs = now - start;
             if (passedMs > totalMs) passedMs = totalMs;
-            let leftMs = end - now;
-            if (leftMs < 0) leftMs = 0;
             
-            // Основной процент
-            const percent = (passedMs / totalMs) * 100;
-            document.getElementById('dmb-main-percent').innerText = percent.toFixed(6) + '%';
-            document.getElementById('dmb-bar').style.width = percent + '%';
+            // Точный процент
+            const p = (passedMs / totalMs) * 100;
+            document.getElementById('bar').style.width = p + '%';
+            document.getElementById('perc').innerText = p.toFixed(6) + '%';
             
-            // Детализация ПРОШЛО
-            const passed = getDetailedTime(passedMs);
-            document.getElementById('p-mo').innerText = passed.mo;
-            document.getElementById('p-we').innerText = passed.we;
-            document.getElementById('p-da').innerText = passed.da;
-            document.getElementById('p-time').innerText = `${passed.hours}ч ${passed.mins}м ${passed.secs}с`;
+            // Времени осталось
+            const leftClean = left < 0 ? 0 : left;
+            document.getElementById('vd').innerText = Math.floor(leftClean / 86400000);
+            document.getElementById('vh').innerText = Math.floor((leftClean % 86400000) / 3600000).toString().padStart(2, '0');
+            document.getElementById('vm').innerText = Math.floor((leftClean % 3600000) / 60000).toString().padStart(2, '0');
+            document.getElementById('vs').innerText = Math.floor((leftClean % 60000) / 1000).toString().padStart(2, '0');
             
-            // Детализация ОСТАЛОСЬ
-            const left = getDetailedTime(leftMs);
-            document.getElementById('l-mo').innerText = left.mo;
-            document.getElementById('l-we').innerText = left.we;
-            document.getElementById('l-da').innerText = left.da;
-            document.getElementById('l-time').innerText = `${left.hours}ч ${left.mins}м ${left.secs}с`;
-
-            // События
-            const eqDays = Math.max(0, Math.floor((start + totalMs/2 - now) / 86400000));
+            // Майлстоуны
+            const passedDays = Math.floor(passedMs / 86400000);
+            const leftDays = Math.floor(leftClean / 86400000);
+            
+            const eqDays = Math.max(0, Math.floor((start + totalMs/2 - now)/86400000));
             document.getElementById('v-eq').innerText = eqDays > 0 ? eqDays + ' дн' : 'Пройден!';
             
-            const ordDays = Math.max(0, Math.floor((end - (100 * 86400000) - now) / 86400000));
+            const ordDays = Math.max(0, Math.floor((end - 100*86400000 - now)/86400000));
             document.getElementById('v-ord').innerText = ordDays > 0 ? ordDays + ' дн' : 'Вышел!';
 
-            if (oath) {
-                document.getElementById('card-oath').style.display = 'block';
-                const oathLeft = oath - now;
-                if (oathLeft > 0) {
-                    document.getElementById('v-oath').innerText = Math.floor(oathLeft / 86400000) + ' дн';
+            // Обновление сетки 52 недель
+            const totalWeeks = 52;
+            const msPerWeek = totalMs / totalWeeks;
+            const currentWeekFloat = passedMs / msPerWeek;
+            const currentWeek = Math.floor(currentWeekFloat);
+            
+            document.getElementById('w-passed').innerText = `Пройдено: ${currentWeek}`;
+            document.getElementById('w-left').innerText = `Осталось: ${Math.max(0, totalWeeks - currentWeek)}`;
+
+            for(let i=0; i<totalWeeks; i++) {
+                const box = document.getElementById('week-' + i);
+                if (!box) continue;
+                
+                if (i < currentWeek) {
+                    box.className = 'week-box filled';
+                } else if (i === currentWeek) {
+                    box.className = 'week-box current';
                 } else {
-                    document.getElementById('v-oath').innerText = 'Пройдена!';
+                    box.className = 'week-box';
                 }
             }
-        }
 
-        let currentWTab = 'partner';
-        function switchW(t) { currentWTab = t; document.getElementById('tab-partner').classList.toggle('active', t === 'partner'); document.getElementById('tab-me').classList.toggle('active', t === 'me'); document.getElementById('wish-input-group').style.display = t === 'me' ? 'flex' : 'none'; renderW(); }
-        function renderW() {
-            const list = document.getElementById('wl'), role = localStorage.getItem('role') || 'boy', pr = role === 'girl' ? 'boy' : 'girl';
-            let wData = { boy: [], girl: [] }; try { wData = JSON.parse(localStorage.getItem('w')); } catch(e) {}
-            const activeList = currentWTab === 'me' ? wData[role] : wData[pr];
-            if (!activeList || activeList.length === 0) { list.innerHTML = `<p style="text-align:center; color:var(--text-sub); margin-top:30px; font-size:12px;">ПУСТО...</p>`; return; }
-            list.innerHTML = activeList.map((w, i) => `<div class="wish-item"><div style="display:flex; justify-content:space-between; align-items:flex-start;"><span style="word-break: break-word; line-height: 1.5;">${w.replace(/(https?:\/\/[^\s]+)/g, '<br><a href="$1" target="_blank" class="wish-link">🔗 ОТКРЫТЬ ССЫЛКУ</a>')}</span>${currentWTab === 'me' ? `<span class="del-btn" onclick="delW(${i})">×</span>` : ''}</div></div>`).join('');
+            // Обновление армейского статуса
+            updateArmyStatus(passedDays, leftDays);
         }
-        function addW() { const i = document.getElementById('wi'); if(!i.value.trim()) return; const role = localStorage.getItem('role') || 'boy'; let wData = { boy: [], girl: [] }; try { wData = JSON.parse(localStorage.getItem('w')) || { boy: [], girl: [] }; } catch(e) {} if(!wData[role]) wData[role] = []; wData[role].push(i.value.trim()); i.value=''; localStorage.setItem('w', JSON.stringify(wData)); renderW(); }
-        function delW(i) { const role = localStorage.getItem('role') || 'boy'; let wData = { boy: [], girl: [] }; try { wData = JSON.parse(localStorage.getItem('w')) || { boy: [], girl: [] }; } catch(e) {} wData[role].splice(i, 1); localStorage.setItem('w', JSON.stringify(wData)); renderW(); }
 
         function syncAll() { 
-            let pDate = localStorage.getItem('p') || '';
             let wData = { boy: [], girl: [] }; try { wData = JSON.parse(localStorage.getItem('w')) || { boy: [], girl: [] }; } catch(e) {}
-            try { 
-                // Отправляем дату присяги тоже, объединив её со стартом для упрощения (в реальном проекте лучше добавить колонку в БД, но пока обойдемся локалом)
-                tg.sendData(JSON.stringify({ s: localStorage.getItem('s'), e: localStorage.getItem('e'), w: wData })); 
-                tg.HapticFeedback.notificationOccurred('success'); 
-            } catch(e) { tg.showAlert("ОТКРОЙ ЧЕРЕЗ ФИОЛЕТОВУЮ КНОПКУ!"); } 
+            try { tg.sendData(JSON.stringify({ s: localStorage.getItem('s'), e: localStorage.getItem('e'), w: wData })); tg.HapticFeedback.notificationOccurred('success'); } catch(e) { tg.showAlert("Ошибка синхронизации!"); } 
         }
-        
-        setInterval(() => { if(localStorage.getItem('s')) tick(); }, 50); // Ускорили интервал для плавности процентов
+        setInterval(() => { if(localStorage.getItem('s')) tick(); }, 50);
     </script>
 </body>
 </html>
