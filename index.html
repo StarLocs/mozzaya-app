@@ -46,6 +46,7 @@
         #pair-names { font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; text-align: center; background: linear-gradient(90deg, #fff, var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 0; }
         
         .menu-item { display: flex; justify-content: space-between; align-items: center; font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 14px; padding: 22px; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: 0.1s; }
+        .menu-item:active { transform: scale(0.98); }
         @keyframes shake { 0%, 100% { transform: rotate(0deg); } 25% { transform: rotate(-1.5deg); } 75% { transform: rotate(1.5deg); } }
         .edit-mode .menu-item { animation: shake 0.35s infinite; border: 1px dashed var(--accent); background: rgba(0,0,0,0.3); }
         .sortable-ghost { opacity: 0.2; transform: scale(0.95); }
@@ -53,7 +54,6 @@
         .btn { font-family: 'Montserrat', sans-serif; background: var(--accent); color: #fff; border: none; padding: 18px; border-radius: 20px; font-weight: 900; width: 100%; font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; box-shadow: 0 10px 25px rgba(0,0,0,0.5); transition: 0.2s; cursor: pointer; }
         .btn:active { transform: scale(0.96); }
 
-        /* === DMB ИМБА СТИЛИ === */
         #countdown { font-family: 'Montserrat', sans-serif; font-size: 38px; font-weight: 900; text-align: center; margin: 10px 0; display: flex; justify-content: center; align-items: baseline; gap: 4px; text-shadow: 0 0 20px rgba(255,255,255,0.3); }
         #countdown small { font-size: 12px; color: var(--text-sub); margin-right: 6px; font-weight: 700;}
         .neon { color: var(--mint); text-shadow: 0 0 15px var(--mint); display: inline-block; }
@@ -79,13 +79,9 @@
         .m-card b { font-family: 'Montserrat', sans-serif; font-size: 18px; display: block; color: var(--mint); margin: 5px 0; }
         .m-card small { font-size: 9px; font-weight: 900; color: var(--text-sub); letter-spacing: 1px; text-transform: uppercase; }
 
-        /* === КНИГА ЗНАНИЙ (МОДАЛЬНОЕ ОКНО) === */
-        #book-modal {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
-            background: var(--bg-fallback); z-index: 999; padding: 20px; box-sizing: border-box;
-            flex-direction: column; overflow: hidden;
-        }
-        .book-close { align-self: flex-end; font-size: 24px; color: var(--text-main); cursor: pointer; margin-bottom: 10px; }
+        /* КНИГА */
+        #book-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: var(--bg-fallback); z-index: 999; padding: 20px; box-sizing: border-box; flex-direction: column; overflow: hidden; }
+        .book-close { align-self: flex-end; font-size: 24px; color: var(--text-main); cursor: pointer; margin-bottom: 10px; font-family: 'Montserrat', sans-serif; font-weight: 900;}
         .book-tabs { display: flex; background: rgba(0,0,0,0.5); border-radius: 20px; padding: 6px; margin-bottom: 20px; }
         .b-tab { flex: 1; text-align: center; padding: 14px; font-size: 11px; font-weight: 900; color: var(--text-sub); border-radius: 16px; cursor: pointer; font-family: 'Montserrat', sans-serif; text-transform: uppercase; transition: 0.3s; }
         .b-tab.active { background: var(--accent); color: #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
@@ -100,7 +96,6 @@
         .book-btn:active { background: var(--accent); border-color: var(--accent); }
         .book-page-num { font-family: monospace; font-size: 14px; font-weight: bold; color: var(--text-sub); }
 
-        /* === РАДАР === */
         .planet-wrap { position: relative; width: 180px; height: 180px; margin: 10px auto 30px auto; display: flex; justify-content: center; align-items: center; }
         .planet { font-size: 100px; line-height: 1; animation: float-spin 8s ease-in-out infinite; filter: drop-shadow(0 0 30px var(--mint)); position: relative; z-index: 2;}
         .planet::after { content: '🌍'; } 
@@ -113,7 +108,6 @@
         @keyframes radarPing { 0% { transform: scale(0.5); opacity: 0.8; } 100% { transform: scale(1.6); opacity: 0; } }
         .loc-time-info { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 800; color: var(--text-sub); text-transform: uppercase; letter-spacing: 1px; margin-top: 8px; opacity: 0.9; }
 
-        /* === ОСТАЛЬНОЕ === */
         .wish-tabs { display: flex; background: rgba(0,0,0,0.5); border-radius: 20px; padding: 6px; margin-bottom: 20px; }
         .w-tab { flex: 1; text-align: center; padding: 14px; font-size: 11px; font-weight: 900; color: var(--text-sub); border-radius: 16px; cursor: pointer; font-family: 'Montserrat', sans-serif; text-transform: uppercase; transition: 0.3s; }
         .w-tab.active { background: var(--accent); color: #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
@@ -329,7 +323,85 @@
             }, () => { status.innerText = "❌ РАЗРЕШИ ДОСТУП К ГЕОЛОКАЦИИ!"; status.style.color = "#ff4757"; }, { enableHighAccuracy: true }); 
         }
 
-        function viewPartnerLocation() { const lat = localStorage.getItem('plat'), lon = localStorage.getItem('plon'); if(!lat) { tg.showAlert("Геометки нет! 💔"); } else { window.open(`https://yandex.ru/maps/?pt=${lon},${lat}&z=16&l=map`, '_blank'); } }
+        function viewPartnerLocation() { const lat = localStorage.getItem('plat'), lon = localStorage.getItem('plon'); if(!lat) { tg.showAlert("Геометки нет!"); } else { window.open(`https://yandex.ru/maps/?pt=${lon},${lat}&z=16&l=map`, '_blank'); } }
+
+        // === БИБЛИОТЕКА АККОРДЕОН (30 СТРАНИЦ ДЛЯ ЖДУЛИ) ===
+        const bookData = {
+            army: [
+                { title: "🎒 Что брать в военкомат?", text: "Бери только самое дешевое и нужное. Дорогие вещи могут «уйти» в первые дни.<br><br><ul><li><b>Тапик:</b> Кнопочный телефон без камеры.</li><li><b>Рыльно-мыльное:</b> Щетка в футляре, мыло, дешевая пена для бритья, станки.</li><li><b>Нитки/Иголки:</b> Черные, белые, хаки. Иголки прячь в ручку.</li><li><b>Медицина:</b> Много пластырей, мазь Теймурова для ног.</li><li><b>Часы:</b> Дешевые электронные с подсветкой.</li></ul>" },
+                { title: "🪖 КМБ (Курс Молодого Бойца)", text: "Первый месяц. Жесткая адаптация, шагистика, заправка кровати по ниточке.<br><br><b>Главный совет:</b> Не выделяйся. Делай как все. Главная сложность — психологическая. Оторванность от дома пройдет, как только вольешься в режим." },
+                { title: "⏰ Распорядок дня", text: "<b>06:00</b> — Подъем (45 сек).<br><b>06:10</b> — УФЗ (зарядка).<br><b>07:00</b> — Туалет, кровати.<br><b>08:00</b> — Завтрак.<br><b>09:00</b> — Утренний развод на плацу.<br>Далее: Занятия, рабочки.<br><b>21:00</b> — Программа 'Время'.<br><b>22:00</b> — Отбой." },
+                { title: "🗣 Армейский сленг ч.1", text: "<ul><li><b>Дух</b> — до присяги или полгода. Низший статус.</li><li><b>Слон/Черпак</b> — после экватора.</li><li><b>Дед</b> — осталось менее 100 дней.</li><li><b>Дембель</b> — дата увольнения.</li><li><b>Шакал</b> — так иногда называют офицеров с плохим отношением к срочникам.</li></ul>" },
+                { title: "🧹 Армейский сленг ч.2", text: "<ul><li><b>ПХД</b> — парково-хозяйственный день (суббота). Пенная вечеринка с мылом на полу.</li><li><b>Взлётка</b> — центральный коридор казармы.</li><li><b>Каптёрка</b> — комната хранения личных вещей.</li><li><b>ЧИПОК</b> — местный магазин-кафе, где спускают всё довольствие.</li></ul>" },
+                { title: "🪂 ВДВ и Спецназ", text: "<b>ВДВ (Десантура):</b> «Никто, кроме нас!». Колоссальное физо, бег с выкладкой, прыжки с парашютом (Ил-76). Голубой берет.<br><br><b>Спецназ (ГРУ):</b> Элита. Секретность, тактика, стрельбы. Срочники туда попадают редко, нужна категория А1." },
+                { title: "⚓ ВМФ и ВКС", text: "<b>ВМФ (Флот):</b> Служба на кораблях или на берегу (Морпехи). Свой сленг: камбуз, гальюн. Строжайшая дисциплина.<br><br><b>ВКС (Космос):</b> Аэродромы, радары, ПВО. Физо меньше, но много работы с техникой и караулов." },
+                { title: "🚀 РВСН и Мотострелки", text: "<b>РВСН (Ракетчики):</b> Ядерный щит. Девиз: «После нас — тишина». Секретная аппаратура, Боевые Дежурства под землей.<br><br><b>Сухопутные (Пехота):</b> «Царица полей». Полигоны, окопы, танки. Классическая мужская школа выживания." },
+                { title: "💂‍♂️ Наряды и Караул", text: "<ul><li><b>Дневальный:</b> Стоит на «тумбочке», следит за порядком, орет команды. Спит мало.</li><li><b>Дежурный:</b> Обычно сержант, отвечает за роту.</li><li><b>Караул:</b> Охрана с боевым оружием. Спать запрещено (УК РФ). Нужно знать Устав наизусть.</li></ul>" },
+                { title: "🧠 Психология выживания", text: "<b>1. Коллектив — всё.</b> Не воруй у своих, не стучи. Помогай товарищам.<br><b>2. Включай броню.</b> Будут кричать за чужие косяки. Не принимай на свой счет.<br><b>3. Пиши Мозаичке.</b> Связь с домом вытаскивает из любой депрессии. Жди писем." }
+            ],
+            girl: [
+                { title: "❤️ 1. Первый день: Вдох-выдох", text: "Проводы позади. Сейчас ты чувствуешь пустоту. Разреши себе поплакать сегодня, но завтра — бери себя в руки. Ему нужна твоя уверенность, а не твои слезы." },
+                { title: "📞 2. Телефонные звонки", text: "Телефоны (тапики) обычно выдают только по выходным на 10-20 минут. Не трать это время на истерики. Рассказывай веселые истории, будь его лучиком света." },
+                { title: "🚫 3. О чем молчать", text: "Не грузи его бытовухой. Если сломался кран или ты поругалась с подругой — реши это сама. Из казармы он ничем не поможет, а будет только нервничать." },
+                { title: "💌 4. Магия бумажных писем", text: "Пиши от руки. Вложи пару фото. Брызни на бумагу своими духами — запах сведет его с ума. Письма в армии перечитывают по сто раз." },
+                { title: "📦 5. Идеальная посылка", text: "Солдат всегда хочет сладкого! Клади сгущенку (в пакетах, не в банках), Сникерсы, леденцы (сосать в строю), орехи, толстые черные носки." },
+                { title: "❌ 6. Что НЕ класть в посылку", text: "Никакого алкоголя, стекла, скоропортящихся продуктов (колбасы, фруктов) и медикаментов без рецепта. Посылку проверяют офицеры." },
+                { title: "🤯 7. Синдром 'Почему не в сети?'", text: "Он обещал позвонить и пропал? Не накручивай! Забрали телефоны за косяк взвода, сел аккумулятор, ушел в наряд. Жди, он позвонит, как только сможет." },
+                { title: "🎖 8. Подготовка к присяге", text: "Присяга — примерно через месяц. Обязательно поезжай. Наготовь домашней еды (котлеты, пирожки). Он соскучится по нормальной пище." },
+                { title: "🫂 9. Поведение на присяге", text: "Он может быть похудевшим и уставшим. Не охай и не причитай. Обними, накорми, скажи, что очень им гордишься." },
+                { title: "📆 10. Как занять себя", text: "Ожидание убивает, если ничего не делать. Погрузись в учебу, найди новое хобби, ходи в зал. Чем плотнее твой график, тем быстрее летит время." },
+                { title: "🤫 11. Ревность на расстоянии", text: "Доверяйте друг другу. В армии нет времени на измены, а у тебя нет повода сомневаться. Любое недоверие сейчас бьет в 10 раз больнее." },
+                { title: "🤝 12. Общение с его мамой", text: "Матерям тоже очень тяжело. Звони ей, делись новостями, поддерживайте друг друга. Это сильно сблизит вас как семью." },
+                { title: "🎁 13. Сюрпризы издалека", text: "Узнай адрес части. Если он договорится с сержантом или на КПП, ты сможешь заказать ему доставку пиццы или роллов на день рождения!" },
+                { title: "🌗 14. Экватор (полгода)", text: "Важнейший рубеж. Половина пройдена! Он становится 'Слоном'. Прессинг спадает, служба превращается в рутину. Отметьте этот день созвоном." },
+                { title: "✂️ 15. Сто дней до приказа", text: "Легендарная дата. Традиция — брить голову под ноль или отдавать масло молодым. Начинается обратный отсчет до приказа министра обороны." },
+                { title: "🚀 16. Космос", text: "Последние 10 дней службы. Отсчет идет как запуск ракеты: 10, 9, 8... Это самое тягучее время. Готовься встречать!" },
+                { title: "🧠 17. Психология: Он изменится", text: "Он вернется более жестким, серьезным и молчаливым. Это защита от армейской среды. Не пугайся, ему нужно время на 'распаковку'." },
+                { title: "🏠 18. Адаптация дома", text: "Первые недели дома он может рано просыпаться, избегать шума или странно себя вести. Просто будь рядом и дари ему нежность." },
+                { title: "🎉 19. Подготовка к дембелю", text: "Закажи торт 'С дембелем', купи шарики. Узнай, приедет ли он в гражданке или в 'парадке'. Встречай его на перроне — это незабываемо!" },
+                { title: "📖 20. Дембельский альбом", text: "Пока он служит, собирай ваши переписки, скриншоты видеозвонков, письма. Сделай из этого красивый альбом к его возвращению." },
+                { title: "💅 21. Твоя личная жизнь", text: "Ждать парня — не значит запереться в келье. Гуляй с подругами, развивайся. Ему будет приятно вернуться к красивой и успешной девушке." },
+                { title: "🏥 22. Госпиталь", text: "В армии все болеют (ОРВИ, мозоли, пневмония). Если он попал в госпиталь — это даже плюс. Там можно выспаться и телефоны выдают чаще." },
+                { title: "📱 23. Социальные сети", text: "Пости красивые фото, чтобы он видел, какую красотку он ждет дома. Отмечай его, пиши милые статусы — ему будет приятно." },
+                { title: "🏃‍♂️ 24. Увольнительные", text: "Если часть близко, его могут отпускать в 'увал'. Помни, что он ограничен по времени и территории. Не опаздывайте к КПП!" },
+                { title: "🍕 25. Армейский голод", text: "Поначалу он будет хотеть есть ВСЕГДА. Армейская порция мала для парня. Не удивляйся, если дома он будет сметать всё из холодильника." },
+                { title: "💼 26. Учебка vs Боевая часть", text: "Первые месяцы он в 'учебке' — там строже всего. Потом его распределят в боевую часть. Обычно там служба идет спокойнее." },
+                { title: "🗣 27. Мат и сленг", text: "Он начнет материться больше обычного и сыпать непонятными словами. Не ругай его, это профессиональная деформация. Пройдет." },
+                { title: "💸 28. Финансы", text: "Срочникам платят небольшое довольствие (около 2-3 тыс. руб). Не проси у него подарков, эти деньги уходят на мыло, подшиву и сладости." },
+                { title: "🔮 29. Стройте планы", text: "Обсуждайте, куда поедете отдыхать после дембеля, как сделаете ремонт или какую собаку заведете. Мечты помогают пережить реальность." },
+                { title: "👑 30. Ты — героиня", text: "Дождаться парня из армии — это поступок. Вы оба пройдете огромную проверку на прочность, и после этого вам ничего не будет страшно!" }
+            ]
+        };
+
+        let currentBook = 'army';
+        let currentPage = 0;
+
+        function openBook() { document.getElementById('book-modal').style.display = 'flex'; tg.HapticFeedback.impactOccurred('medium'); renderPage(); }
+        function closeBook() { document.getElementById('book-modal').style.display = 'none'; }
+        
+        function switchBook(type) {
+            currentBook = type; currentPage = 0;
+            document.getElementById('book-tab-army').classList.toggle('active', type === 'army');
+            document.getElementById('book-tab-girl').classList.toggle('active', type === 'girl');
+            tg.HapticFeedback.impactOccurred('light'); renderPage();
+        }
+
+        function renderPage() {
+            const pages = bookData[currentBook];
+            document.getElementById('book-title').innerText = pages[currentPage].title;
+            document.getElementById('book-content').innerHTML = pages[currentPage].text;
+            document.getElementById('book-page-num').innerText = `${currentPage + 1} / ${pages.length}`;
+            document.querySelector('.book-page-container').scrollTop = 0;
+        }
+
+        function nextPage() {
+            const pages = bookData[currentBook];
+            if (currentPage < pages.length - 1) { currentPage++; renderPage(); tg.HapticFeedback.impactOccurred('light'); }
+        }
+
+        function prevPage() {
+            if (currentPage > 0) { currentPage--; renderPage(); tg.HapticFeedback.impactOccurred('light'); }
+        }
 
         function checkDMB() { if(localStorage.getItem('s')) { document.getElementById('setup').style.display='none'; document.getElementById('view').style.display='block'; tick(); } else { document.getElementById('setup').style.display='block'; document.getElementById('view').style.display='none'; } }
         function saveDMB() { const s = document.getElementById('ds').value, e = document.getElementById('de').value, p = document.getElementById('dp').value; if(!s || !e) return tg.showAlert("Выберите даты!"); localStorage.setItem('s', s); localStorage.setItem('e', e); if(p) localStorage.setItem('p', p); checkDMB(); }
@@ -363,99 +435,6 @@
             document.getElementById('w-passed').innerText = `Пройдено: ${currentWeek}`; document.getElementById('w-left').innerText = `Осталось: ${Math.max(0, totalWeeks - currentWeek)}`;
             for(let i=0; i<totalWeeks; i++) { const box = document.getElementById('week-' + i); if (!box) continue; if (i < currentWeek) { box.className = 'week-box filled'; } else if (i === currentWeek) { box.className = 'week-box current'; } else { box.className = 'week-box'; } }
             updateArmyStatus(passedDays, leftDays);
-        }
-
-        let currentWTab = 'partner';
-        function switchW(t) { currentWTab = t; document.getElementById('tab-partner').classList.toggle('active', t === 'partner'); document.getElementById('tab-me').classList.toggle('active', t === 'me'); document.getElementById('wish-input-group').style.display = t === 'me' ? 'flex' : 'none'; renderW(); }
-        function renderW() {
-            const list = document.getElementById('wl'), pr = role === 'girl' ? 'boy' : 'girl';
-            let wData = { boy: [], girl: [] }; try { wData = JSON.parse(localStorage.getItem('w')); } catch(e) {}
-            const activeList = currentWTab === 'me' ? wData[role] : wData[pr];
-            if (!activeList || activeList.length === 0) { list.innerHTML = `<p style="text-align:center; color:var(--text-sub); margin-top:30px; font-size:12px;">Пусто...</p>`; return; }
-            list.innerHTML = activeList.map((w, i) => `<div class="wish-item"><div style="display:flex; justify-content:space-between; align-items:flex-start;"><span style="word-break: break-word; line-height: 1.5;">${w.replace(/(https?:\/\/[^\s]+)/g, '<br><a href="$1" target="_blank" class="wish-link">🔗 ОТКРЫТЬ ССЫЛКУ</a>')}</span>${currentWTab === 'me' ? `<span class="del-btn" onclick="delW(${i})">×</span>` : ''}</div></div>`).join('');
-        }
-        function addW() { const i = document.getElementById('wi'); if(!i.value.trim()) return; let wData = { boy: [], girl: [] }; try { wData = JSON.parse(localStorage.getItem('w')) || { boy: [], girl: [] }; } catch(e) {} if(!wData[role]) wData[role] = []; wData[role].push(i.value.trim()); i.value=''; localStorage.setItem('w', JSON.stringify(wData)); renderW(); }
-        function delW(i) { let wData = { boy: [], girl: [] }; try { wData = JSON.parse(localStorage.getItem('w')) || { boy: [], girl: [] }; } catch(e) {} wData[role].splice(i, 1); localStorage.setItem('w', JSON.stringify(wData)); renderW(); }
-
-        function syncAll() { 
-            let wData = { boy: [], girl: [] }; try { wData = JSON.parse(localStorage.getItem('w')) || { boy: [], girl: [] }; } catch(e) {}
-            try { tg.sendData(JSON.stringify({ s: localStorage.getItem('s'), e: localStorage.getItem('e'), w: wData })); tg.HapticFeedback.notificationOccurred('success'); } catch(e) { tg.showAlert("ОШИБКА СОХРАНЕНИЯ!"); } 
-        }
-
-        // === БАЗА ЗНАНИЙ (ЛОГИКА КНИГИ) ===
-        const bookData = {
-            army: [
-                { title: "🎒 Сборка: Что брать в военкомат?", text: "Главное правило: бери только самое дешевое и нужное. Дорогие вещи могут «уйти» в первые дни.<br><br><ul><li><b>Тапик:</b> Кнопочный телефон без камеры (смартфон сдашь в сейф).</li><li><b>Рыльно-мыльное:</b> Зубная щетка в футляре, кусок мыла, пена для бритья, одноразовые станки.</li><li><b>Нитки/Иголки:</b> Черные, белые, хаки. Иголки удобно прятать в стержень ручки.</li><li><b>Медицина:</b> Много пластырей (берцы сотрут ноги), мазь Теймурова.</li><li><b>Часы:</b> Дешевые электронные (Casio/Montana) с подсветкой. Знать время — бесценно.</li></ul>" },
-                { title: "🪖 КМБ (Курс Молодого Бойца)", text: "Первый месяц службы. Это период жесткой адаптации. Тебя будут учить ходить строем, заправлять кровать по ниточке и подшиваться.<br><br><b>Главный совет:</b> Не выделяйся. Делай как все. Не пытайся быть умнее сержанта. Главная сложность КМБ — психологическая. Оторванность от дома и постоянный прессинг пройдут, как только ты вольешься в режим." },
-                { title: "⏰ Распорядок дня (База)", text: "Армия живет по расписанию. Твой день расписан по минутам:<br><br><b>06:00</b> — Подъем (прыжок в берцы за 45 секунд).<br><b>06:10</b> — Утренняя физическая зарядка (УФЗ). Бег, турники.<br><b>07:00</b> — Утренний туалет, заправка коек.<br><b>08:00</b> — Завтрак.<br><b>09:00</b> — Утренний развод (построение на плацу).<br><b>Далее:</b> Занятия, ПХД, рабочки.<br><b>21:00</b> — Просмотр новостей (программа 'Время').<br><b>22:00</b> — Отбой." },
-                { title: "🗣 Армейский сленг (Дух-Слон)", text: "В армии свой язык. Без него не выжить.<br><br><ul><li><b>Дух</b> — солдат до принятия присяги или в первые полгода. Самый низший статус.</li><li><b>Слон / Черпак</b> — солдат после экватора (полгода службы).</li><li><b>Дед</b> — солдат, которому осталось служить менее 100 дней.</li><li><b>Дембель</b> — уволенный в запас (или дата увольнения).</li><li><b>Шакал</b> — так иногда называют офицеров или контрактников с плохим отношением к срочникам.</li></ul>" },
-                { title: "🧹 Сленг ч.2: ПХД и Каптерка", text: "Продолжаем изучать термины:<br><br><ul><li><b>ПХД (Парково-хозяйственный день)</b> — генеральная уборка в субботу. Пенная вечеринка с мылом и щетками на полу.</li><li><b>Взлётка</b> — центральный коридор в казарме. Его моют до блеска.</li><li><b>Каптёрка</b> — комната для хранения личных вещей и формы. Место обитания каптёра (важного человека).</li><li><b>ЧИПОК</b> — армейский магазин-кафе. Место, где спускают всё довольствие на сникерсы и колу.</li></ul>" },
-                { title: "🪂 Войска: ВДВ и Спецназ", text: "<b>ВДВ (Воздушно-десантные войска)</b><br>Девиз: «Никто, кроме нас!». Готовься к колоссальному физо, бегу с полной выкладкой и прыжкам с парашютом (Ил-76). Строгие традиции, голубой берет, тельняшка.<br><br><b>Спецназ (ГРУ)</b><br>Элита. Секретность, маскировка, тактика, стрельбы из всех видов оружия. Срочники туда попадают редко, нужен идеальный профиль и категория А1." },
-                { title: "⚓ Войска: ВМФ и ВКС", text: "<b>ВМФ (Военно-Морской Флот)</b><br>Служба на кораблях или на берегу (Морская пехота). Свой сленг: камбуз (кухня), гальюн (туалет). Ограниченное пространство, строжайшая дисциплина.<br><br><b>ВКС (Воздушно-Космические Силы)</b><br>Обслуживание аэродромов, радары, ПВО. Физо меньше, чем в ВДВ, но много работы с техникой, караулов и дежурств по охране объектов." },
-                { title: "🚀 Войска: РВСН и Пехота", text: "<b>РВСН (Ракетные Войска)</b><br>Ядерный щит. Девиз: «После нас — тишина». Служба связана с секретной аппаратурой и постоянными Боевыми Дежурствами (БД) под землей. Ответственность высочайшая.<br><br><b>Сухопутные войска (Мотострелки)</b><br>«Царица полей». Полигоны, танки, окопы, стрельбы. Классическая армейская школа, где ты прочувствуешь всю суть службы в полях." },
-                { title: "💂‍♂️ Наряды и Караул", text: "Служба — это не только бег и стрельба, это еще и дежурства.<br><br><ul><li><b>Дневальный по роте:</b> Стоит на «тумбочке», следит за порядком, подает команды («Рота, подъем!»). Спит мало.</li><li><b>Дежурный по роте:</b> Обычно сержант. Отвечает за роту.</li><li><b>Караул:</b> Охрана объектов с боевым оружием. Самый ответственный наряд. Спать категорически запрещено (УК РФ). Учат Устав караульной службы наизусть.</li></ul>" },
-                { title: "🧠 Психология выживания", text: "Армия ломает тех, кто сопротивляется системе. Будь гибким.<br><br><b>1. Коллектив — всё.</b> Не будь крысой (не воруй у своих) и не стучи. Помогай товарищам, они помогут тебе.<br><b>2. Включай броню.</b> На тебя будут кричать, ругать за чужие косяки. Это армия, тут наказывают всех за одного. Не принимай на личный счет.<br><b>3. Пиши Мозаичке.</b> Связь с домом вытаскивает из любой депрессии. Жди писем, это лучшее, что есть на службе." }
-            ],
-            girl: [
-                { title: "❤️‍🩹 1. Первый месяц: Как выжить?", text: "Первые недели — КМБ (Курс Молодого Бойца). Ему будет физически тяжело, а тебе — невыносимо одиноко. Это нормально.<br><br><b>Что делать:</b><br>Разреши себе поплакать пару дней, а потом бери себя в руки. Ему нужна твоя сила, а не твои слезы. Займи всё свободное время: учеба, спортзал, работа, хобби. Чем плотнее график, тем быстрее летит время до вечера." },
-                { title: "📞 2. Правила звонков", text: "Телефоны (кнопочные) обычно выдают только по выходным на 10-20 минут. Это ваше «золотое время».<br><br><ul><li><b>Не плачь в трубку.</b> Ему там и так тошно, твои слезы разобьют ему сердце.</li><li><b>Излучай позитив.</b> Рассказывай веселые истории про друзей, кота, учебу. Будь его лучиком света.</li><li><b>Не грузи бытовухой.</b> Если сломался кран — реши сама. Он всё равно не поможет оттуда.</li></ul>" },
-                { title: "💌 3. Магия писем", text: "В эпоху Telegram бумажное письмо — это армейский экстаз. Письма там ждут все.<br><br>Пиши от руки. Вложи пару распечатанных совместных фото (но без излишней эротики, парни любят заглядывать в чужие письма). Брызни на бумагу своим парфюмом — запах сведет его с ума. Расцелуй письмо накрашенными губами. Он будет перечитывать его каждый вечер перед отбоем." },
-                { title: "📦 4. Идеальная посылка", text: "Посылка в армию — это праздник для всего взвода, потому что делиться принято со всеми.<br><br><b>Что класть:</b> Сгущенка (в мягкой упаковке с крышечкой), шоколадки (Сникерс, Марс), конфеты-леденцы (чтобы сосать в строю), орехи, печенье.<br><b>Из полезного:</b> Черные толстые носки, пластыри рулонные, подшива (спроси у него, нужна ли), зубная паста.<br><b>НЕ КЛАСТЬ:</b> Алкоголь, скоропорт, стеклянные банки." },
-                { title: "🤯 5. Накручивание: 'Почему он не в сети?'", text: "Главный враг ждули — её фантазия. Если он обещал позвонить в воскресенье и не позвонил — это НЕ значит, что он тебя разлюбил.<br><br>В армии тысяча причин: командир забрал телефоны за косяк роты, его поставили в наряд (в караул), телефон сел, а розеток на 100 человек всего три. Учись доверять и просто ждать. Он позвонит при первой возможности." },
-                { title: "🎖 6. Присяга", text: "Это первый раз, когда вы увидитесь! Обычно через месяц после призыва.<br><br>Обязательно поезжай, если есть возможность. Привези домашней еды (котлеты, курица, пирожки — он соскучился по нормальной пище). Подготовься к тому, что он может быть худым (скинет пару кг от стресса и бега) или уставшим. Просто обними и накорми." },
-                { title: "🎁 7. Сюрпризы на расстоянии", text: "Как порадовать бойца, если он за тысячу километров?<br><br><ul><li>Узнай у него (или у его мамы) адрес части. Во многих городах работают доставки еды (пицца/роллы). Если он договорится с сержантом, ты сможешь оплатить ему доставку прямо на КПП.</li><li>Договорись с сослуживцем (если есть контакт), чтобы он передал ему записку.</li><li>Сделай дембельский календарь и зачеркивай дни вместе.</li></ul>" },
-                { title: "🌗 8. Экватор службы", text: "Полгода позади! Это важнейший психологический рубеж. Теперь вы оба понимаете, что время идет на убыль.<br><br>Он переходит из статуса «Духа» в «Слона» или «Черпака». Служба становится понятной, прессинг уходит, появляется рутина. Начинайте потихоньку обсуждать, что будете делать, когда он вернется. Это дает мотивацию." },
-                { title: "🧠 9. Психология: Он изменится", text: "Армия меняет парней. Будь готова, что он вернется чуть более жестким, серьезным и молчаливым. Это защитная реакция психики на строгую иерархию и мужской коллектив.<br><br>Не пугайся, если первые недели дома он будет странно себя вести, рано просыпаться или избегать шумных компаний. Ему нужна будет твоя нежность, чтобы снова «распаковаться» и стать домашним." },
-                { title: "🎉 10. Дембельский аккорд", text: "Последние 100 дней (Приказ) и особенно Космос (последние 10 дней) тянутся дольше всего года.<br><br><b>Твоя задача:</b> Подготовить сюрприз. Закажи красивый торт с надписью «Дембель», купи шарики, подготовь романтический вечер. Узнай, в чем он приедет (в гражданке или в парадке). И готовься прыгать ему на шею на вокзале — вы это заслужили!" }
-            ]
-        };
-
-        let currentBook = 'army';
-        let currentPage = 0;
-
-        function openBook() {
-            document.getElementById('book-modal').style.display = 'flex';
-            tg.HapticFeedback.impactOccurred('medium');
-            renderPage();
-        }
-
-        function closeBook() {
-            document.getElementById('book-modal').style.display = 'none';
-        }
-
-        function switchBook(type) {
-            currentBook = type;
-            currentPage = 0;
-            document.getElementById('book-tab-army').classList.toggle('active', type === 'army');
-            document.getElementById('book-tab-girl').classList.toggle('active', type === 'girl');
-            tg.HapticFeedback.impactOccurred('light');
-            renderPage();
-        }
-
-        function renderPage() {
-            const pages = bookData[currentBook];
-            document.getElementById('book-title').innerText = pages[currentPage].title;
-            document.getElementById('book-content').innerHTML = pages[currentPage].text;
-            document.getElementById('book-page-num').innerText = `${currentPage + 1} / ${pages.length}`;
-            // Скроллим текст наверх при перелистывании
-            document.querySelector('.book-page-container').scrollTop = 0;
-        }
-
-        function nextPage() {
-            const pages = bookData[currentBook];
-            if (currentPage < pages.length - 1) {
-                currentPage++;
-                renderPage();
-                tg.HapticFeedback.impactOccurred('light');
-            }
-        }
-
-        function prevPage() {
-            if (currentPage > 0) {
-                currentPage--;
-                renderPage();
-                tg.HapticFeedback.impactOccurred('light');
-            }
         }
 
         setInterval(() => { if(localStorage.getItem('s')) tick(); }, 50);
