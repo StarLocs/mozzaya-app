@@ -32,7 +32,7 @@
         .screen.active { display: flex; animation: slideFade 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
         @keyframes slideFade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         
-        .card { background: var(--card-bg); backdrop-filter: blur(20px); border: 1px solid var(--border); border-radius: 28px; padding: 22px; margin-bottom: 15px; box-shadow: var(--card-shadow); }
+        .card { background: var(--card-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid var(--border); border-radius: 28px; padding: 22px; margin-bottom: 15px; box-shadow: var(--card-shadow); }
 
         .edit-toggle { position: absolute; top: 25px; left: 25px; z-index: 10; width: 42px; height: 42px; border-radius: 14px; background: var(--card-bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 20px; cursor: pointer; backdrop-filter: blur(10px); transition: 0.2s; }
         .edit-toggle:active { transform: scale(0.9); }
@@ -54,6 +54,7 @@
         .btn { font-family: 'Montserrat', sans-serif; background: var(--accent); color: #fff; border: none; padding: 18px; border-radius: 20px; font-weight: 900; width: 100%; font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; box-shadow: 0 10px 25px rgba(0,0,0,0.5); transition: 0.2s; cursor: pointer; }
         .btn:active { transform: scale(0.96); }
 
+        /* === DMB СТИЛИ === */
         #countdown { font-family: 'Montserrat', sans-serif; font-size: 38px; font-weight: 900; text-align: center; margin: 10px 0; display: flex; justify-content: center; align-items: baseline; gap: 4px; text-shadow: 0 0 20px rgba(255,255,255,0.3); }
         #countdown small { font-size: 12px; color: var(--text-sub); margin-right: 6px; font-weight: 700;}
         .neon { color: var(--mint); text-shadow: 0 0 15px var(--mint); display: inline-block; }
@@ -79,7 +80,7 @@
         .m-card b { font-family: 'Montserrat', sans-serif; font-size: 18px; display: block; color: var(--mint); margin: 5px 0; }
         .m-card small { font-size: 9px; font-weight: 900; color: var(--text-sub); letter-spacing: 1px; text-transform: uppercase; }
 
-        /* КНИГА */
+        /* === КНИГА === */
         #book-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: var(--bg-fallback); z-index: 999; padding: 20px; box-sizing: border-box; flex-direction: column; overflow: hidden; }
         .book-close { align-self: flex-end; font-size: 24px; color: var(--text-main); cursor: pointer; margin-bottom: 10px; font-family: 'Montserrat', sans-serif; font-weight: 900;}
         .book-tabs { display: flex; background: rgba(0,0,0,0.5); border-radius: 20px; padding: 6px; margin-bottom: 20px; gap: 4px; }
@@ -96,6 +97,7 @@
         .book-btn:active { background: var(--accent); border-color: var(--accent); }
         .book-page-num { font-family: monospace; font-size: 14px; font-weight: bold; color: var(--text-sub); }
 
+        /* === РАДАР === */
         .planet-wrap { position: relative; width: 180px; height: 180px; margin: 10px auto 30px auto; display: flex; justify-content: center; align-items: center; }
         .planet { font-size: 100px; line-height: 1; animation: float-spin 8s ease-in-out infinite; filter: drop-shadow(0 0 30px var(--mint)); position: relative; z-index: 2;}
         .planet::after { content: '🌍'; } 
@@ -108,12 +110,13 @@
         @keyframes radarPing { 0% { transform: scale(0.5); opacity: 0.8; } 100% { transform: scale(1.6); opacity: 0; } }
         .loc-time-info { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 800; color: var(--text-sub); text-transform: uppercase; letter-spacing: 1px; margin-top: 8px; opacity: 0.9; }
 
+        /* === КОРЗИНА И ПРОЧЕЕ === */
         .wish-tabs { display: flex; background: rgba(0,0,0,0.5); border-radius: 20px; padding: 6px; margin-bottom: 20px; }
         .w-tab { flex: 1; text-align: center; padding: 14px; font-size: 11px; font-weight: 900; color: var(--text-sub); border-radius: 16px; cursor: pointer; font-family: 'Montserrat', sans-serif; text-transform: uppercase; transition: 0.3s; }
         .w-tab.active { background: var(--accent); color: #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
         .wish-item { display: flex; flex-direction: column; padding: 18px; background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 18px; margin-bottom: 12px; font-weight: 700; font-size: 14px; }
         .wish-link { display: inline-flex; align-items: center; margin-top: 10px; color: #000; text-decoration: none; background: var(--mint); padding: 8px 16px; border-radius: 12px; font-size: 11px; font-weight: 900; }
-        .del-btn { color: #ff4757; font-size: 24px; font-weight: bold; background: rgba(255, 71, 87, 0.15); width: 35px; height: 35px; border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+        .del-btn { color: #ff4757; font-size: 24px; font-weight: bold; background: rgba(255, 71, 87, 0.15); width: 35px; height: 35px; border-radius: 10px; display: flex; align-items: center; justify-content: center; cursor: pointer;}
 
         .bg-thumb { width: 100%; height: 85px; border-radius: 16px; background-size: cover; background-position: center; border: 2px solid transparent; transition: 0.2s; }
         .bg-thumb.active { border-color: var(--mint); transform: scale(0.95); }
@@ -121,7 +124,7 @@
         input { width: 100%; background: rgba(0,0,0,0.4); border: 1px solid var(--border); border-radius: 16px; padding: 18px; color: var(--text-main); margin: 5px 0 15px 0; box-sizing: border-box; outline: none; font-size: 15px; font-weight: 600; font-family: inherit;}
         label { font-size: 10px; color: var(--text-sub); font-weight: 800; letter-spacing: 2px; text-transform: uppercase; display: block; margin-bottom: 5px; font-family: 'Montserrat', sans-serif;}
         .sync-wrapper { text-align: center; margin-top: auto; padding-top: 25px; padding-bottom: 10px; }
-        .btn-sync-small { background: var(--card-bg); backdrop-filter: blur(10px); border: 1px solid var(--mint); color: var(--mint); padding: 12px 26px; border-radius: 30px; font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; box-shadow: var(--card-shadow); transition: 0.2s; }
+        .btn-sync-small { background: var(--card-bg); border: 1px solid var(--mint); color: var(--mint); padding: 12px 26px; border-radius: 30px; font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; box-shadow: var(--card-shadow); transition: 0.2s; }
     </style>
 </head>
 <body>
@@ -186,6 +189,7 @@
             <span onclick="nav('home')" style="cursor:pointer; color:var(--accent); font-weight:900; margin-bottom:20px; display:inline-block;">← НАЗАД</span>
             
             <div id="setup" class="card">
+                <button class="btn" onclick="openBook()" style="margin-bottom: 25px; background: rgba(0,0,0,0.5); border: 1px solid var(--mint); color: var(--mint); box-shadow: 0 0 15px rgba(3, 218, 198, 0.2);">📚 АРМЕЙСКАЯ БАЗА ЗНАНИЙ</button>
                 <h3 style="margin:0 0 15px 0; font-family: 'Montserrat', sans-serif; text-align: center;">УСТАНОВКА ДАТ</h3>
                 <label>Дата призыва</label> <input type="date" id="ds">
                 <label>Дата дембеля</label> <input type="date" id="de">
@@ -326,7 +330,7 @@
 
         function viewPartnerLocation() { const lat = localStorage.getItem('plat'), lon = localStorage.getItem('plon'); if(!lat) { tg.showAlert("Геометки нет!"); } else { window.open(`https://yandex.ru/maps/?pt=${lon},${lat}&z=16&l=map`, '_blank'); } }
 
-        // === ОГРОМНАЯ БАЗА ЗНАНИЙ (10 БОЕЦ + 30 ЖДУЛЯ + 10 СОВЕТОВ) ===
+        // === БАЗА ЗНАНИЙ ===
         const bookData = {
             army: [
                 { title: "🎒 Что брать с собой в военкомат? (Гайд для новобранца)", text: "<b>Подготовка к отправке — это половина успеха.</b> Не тащи с собой дорогие вещи, огромные сумки и мамины пирожки на неделю. В распределительном пункте всё лишнее заставят выкинуть или отправить домой.<br><br><b>Что ОБЯЗАТЕЛЬНО нужно взять:</b><br><br><ul><li><b>Телефон «Тапик»:</b> Кнопочный телефон без камеры и выхода в интернет. Смартфон всё равно заберут в сейф и будут выдавать раз в неделю. Бери тот, что держит зарядку неделю (Nokia, Philips).</li><li><b>Рыльно-мыльное:</b> Зубная щетка в жестком футляре, кусок дешевого мыла в мыльнице, дешевая пена для бритья и упаковка одноразовых станков (лучше Gillette с синими ручками).</li><li><b>Нитки и Иголки:</b> Черные, белые и защитного цвета (хаки). Лайфхак: спрячь пару иголок в стержень шариковой ручки, чтобы не потерять.</li><li><b>Медицина:</b> Упаковка бактерицидных пластырей (берцы гарантированно сотрут ноги в кровь в первые дни). Очень выручит паста Теймурова для ног (от пота и запаха).</li><li><b>Часы:</b> Самые дешевые электронные часы на черном ремешке. Обязательно с подсветкой! В армии знать точное время — вопрос выживания, потому что опоздание на 1 минуту на построение карается всей ротой.</li></ul><br><b>Чего брать НЕ НУЖНО:</b> Скоропортящуюся еду, стеклянные бутылки, ножницы, дорогие бритвы, парфюм. Оставь гражданскую одежду самой простой, её всё равно упакуют в мешок и отправят домой." },
@@ -373,52 +377,75 @@
                 { title: "👑 30. Ты — героиня", text: "Давай честно: дождаться парня из армии в 21 веке — это Поступок. Многие ломаются, не выдерживают расстояния и тишины.<br><br>Ты выбрала сложный путь, но он того стоит. Вы пройдете огромную проверку на прочность. Эта разлука покажет истинную ценность ваших отношений. Когда он выйдет из поезда и обнимет тебя, ты поймешь, что этот год ожидания стоил каждой секунды. Вы будете гордиться собой. Всё будет хорошо!" }
             ],
             advice: [
-                { title: "💡 Совет 1: Время на себя", text: "«Когда он ушел, первые две недели хотелось просто лежать и плакать. Но потом пришло понимание: этот год можно использовать как отпуск для саморазвития! Я записалась на курсы, начала бегать по утрам, занялась фигурой. Время полетело незаметно, а когда он вернулся, он просто обалдел от того, какой я стала. Девочки, вкладывайте это время в себя!»" },
-                { title: "💡 Совет 2: Сила бумаги", text: "«Не ленитесь писать письма от руки! Бумажные письма там — огромная ценность. Мой служил там, где телефоны выдавали раз в две недели. Я купила пачку красивых конвертов и писала каждые 3 дня. Просто обо всем: как прошел день, какую смешную собаку видела. Вкладывала пакетики чая. Он привез эти письма домой затертые до дыр. Говорил, они пахли домом.»" },
-                { title: "💡 Совет 3: Про срывы", text: "«Будьте готовы к тому, что иногда он будет срываться по телефону. Мой однажды наорал на меня из-за какой-то мелочи. Я сначала обиделась до слез, а потом узнала, что их роту перед этим полночи гоняли на плацу в грязи. У них там нервы на пределе. Учитесь проглатывать мелкие обиды. Скажите: 'Я понимаю, что ты устал, я тебя люблю'. Он остынет и сам извинится.»" },
-                { title: "💡 Совет 4: Сюрприз на КПП", text: "«Делайте сюрпризы! У моего был День рождения зимой. Я накопила денег, договорилась с его мамой, и мы втайне поехали к нему в часть за 600 км! Я списалась с его ротным в ВК, и он разрешил вызвать его на КПП. Вы бы видели его лицо, когда он вышел, а там я с тортом! Делайте такие вещи, это остается в памяти навсегда.»" },
-                { title: "💡 Совет 5: Вокзал и слезы", text: "«В день ДМБ готовьтесь к водопаду эмоций. Я стояла на перроне, у меня дрожали колени. Когда я увидела его в форме, выходящего из вагона, я забыла вообще всё. Просто бежала и ревела. Надевайте удобную обувь, чтобы можно было запрыгнуть на него, и не делайте сложный макияж — всё равно размажется от слез счастья. Вы дождетесь!»" },
-                { title: "💡 Совет 6: Не закрывайтесь", text: "«Самая большая ошибка — запереться дома. Я первые месяцы отказывалась никуда ходить, думала, что это предательство. А он, наоборот, переживал, что я там чахну. Продолжайте общаться с друзьями, гуляйте, живите! Ему гораздо приятнее видеть вас счастливой на фотографиях, чем слушать унылый голос в трубке.»" },
-                { title: "💡 Совет 7: Про финансы", text: "«Не ждите от него подарков на праздники и не обижайтесь, если он ничего не прислал. Солдатское довольствие копеечное (около 2 тысяч), и оно мгновенно уходит на пену, лезвия, подшиву и сникерсы в 'чипке'. Наоборот, иногда лучше самой закинуть ему 500 рублей на карту, чтобы он купил себе сладкого.»" },
-                { title: "💡 Совет 8: Доверие", text: "«Не давайте поводов для ревности. Там парни становятся очень мнительными. Лучше лишний раз предупредить, куда и с кем вы идете. Если пошли в клуб с девочками — запишите ему кружочек, покажите, что вы одни. Любое недопонимание на расстоянии превращается в катастрофу.»" },
-                { title: "💡 Совет 9: Адаптация", text: "«Примите то, что он вернется немного другим. Более серьезным, возможно, резким. Ему потребуется время на гражданскую адаптацию. Не тащите его сразу по всем родственникам и друзьям. Дайте ему пару недель просто выспаться на нормальной кровати и привыкнуть, что никто не кричит по утрам.»" },
-                { title: "💡 Совет 10: Связь с мамой", text: "«Обязательно общайтесь с его мамой! Ей тоже безумно тяжело. Вместе ждать намного легче. Если он позвонил вам, а ей не успел — сразу напишите ей, успокойте. Это очень сблизит вас с его семьей, и после армии вы станете по-настоящему родными людьми.»" }
+                { title: "💡 Совет 1: Инвестируй в себя", text: "«Когда он ушел, первые две недели хотелось просто лежать и плакать. Но потом пришло понимание: этот год можно использовать как отпуск для саморазвития! Я записалась на курсы, начала бегать по утрам, занялась фигурой. Время полетело незаметно, а когда он вернулся, он просто обалдел от того, какой я стала. Девочки, вкладывайте это время в себя!»" },
+                { title: "💡 Совет 2: Письма — это база", text: "«Не ленитесь писать письма от руки! Бумажные письма там — огромная ценность. Мой служил там, где телефоны выдавали раз в две недели. Я купила пачку красивых конвертов и писала каждые 3 дня. Просто обо всем: как прошел день, какую смешную собаку видела. Вкладывала пакетики чая. Он привез эти письма домой затертые до дыр. Говорил, они пахли домом.»" },
+                { title: "💡 Совет 3: Без паники", text: "«Если он не звонит в воскресенье — это не значит, что он тебя разлюбил. Это значит, что рота в наряде, телефон сел или сержант забрал телефоны за косяк взвода. Дышите ровно. Учитесь доверять. Он позвонит, как только сможет!»" },
+                { title: "💡 Совет 4: Свекровь — союзник", text: "«Обязательно общайтесь с его мамой! Ей тоже безумно тяжело. Вместе ждать намного легче. Если он позвонил вам, а ей не успел — сразу напишите ей, успокойте. Это очень сблизит вас с его семьей, и после армии вы станете по-настоящему родными людьми.»" },
+                { title: "💡 Совет 5: Экономь на дембель", text: "«Не тратьте деньги на ерунду. Копите. Дембельский праздник, подарок, торт и ваш первый совместный отпуск или поход в ресторан потребуют бюджета. Лучше откладывать понемногу весь год.»" },
+                { title: "💡 Совет 6: Секретность в соцсетях", text: "«Не вываливайте подробности его службы в социальные сети. Не пишите номер части, не выкладывайте его фото с оружием или техникой. Лишние глаза и языки могут создать ему огромные проблемы с командирами в части.»" },
+                { title: "💡 Совет 7: Сон и режим", text: "«Не сидите в телефоне до 3 ночи, ожидая его сообщения, если он в карауле. Высыпайтесь! Тебе нужны силы, чтобы оставаться красивой, бодрой и адекватной. Нервная и невыспавшаяся девушка — плохая поддержка для солдата.»" },
+                { title: "💡 Совет 8: Маленькие радости", text: "«В посылках важны мелочи. Сгущенка и сникерсы — это хорошо, но маленькое письмо, вложенное прямо под обертку шоколадки, или смешная распечатанная мем-фотка — это просто бесценно для его настроения.»" },
+                { title: "💡 Совет 9: Планы на будущее", text: "«Постоянно обсуждайте, что вы сделаете ПЕРВЫМ делом, когда он сойдет с перрона. Визуализация очень сближает и помогает пережить разлуку. Мечтайте о поездке, о ремонте, о том, какую собаку заведете. Это дает им силы служить дальше.»" },
+                { title: "💡 Совет 10: Гордость", text: "«Никогда не стыдитесь того, что ваш парень в армии. Это достойный мужской путь. Гордитесь им, говорите ему об этом постоянно. И он будет чувствовать себя супер-героем даже стоя в наряде по столовой с чисткой картошки!»" }
             ]
         };
 
-        let currentBook = 'army';
-        let currentPage = 0;
-
-        function openBook() { document.getElementById('book-modal').style.display = 'flex'; tg.HapticFeedback.impactOccurred('medium'); renderPage(); }
-        function closeBook() { document.getElementById('book-modal').style.display = 'none'; }
+        let currentBook = 'army', currentPage = 0;
         
-        function switchBook(type) {
-            currentBook = type; currentPage = 0;
-            document.getElementById('book-tab-army').classList.toggle('active', type === 'army');
-            document.getElementById('book-tab-girl').classList.toggle('active', type === 'girl');
-            document.getElementById('book-tab-advice').classList.toggle('active', type === 'advice');
-            tg.HapticFeedback.impactOccurred('light'); renderPage();
+        function openBook() { 
+            document.getElementById('book-modal').style.display = 'flex'; 
+            tg.HapticFeedback.impactOccurred('medium');
+            renderPage(); 
         }
-
-        function renderPage() {
-            const pages = bookData[currentBook];
-            document.getElementById('book-title').innerText = pages[currentPage].title;
-            document.getElementById('book-content').innerHTML = pages[currentPage].text;
-            document.getElementById('book-page-num').innerText = `${currentPage + 1} / ${pages.length}`;
+        function closeBook() { 
+            document.getElementById('book-modal').style.display = 'none'; 
+        }
+        function switchBook(t) { 
+            currentBook = t; 
+            currentPage = 0; 
+            ['army','girl','advice'].forEach(v => document.getElementById('book-tab-'+v).classList.toggle('active', v===t)); 
+            tg.HapticFeedback.impactOccurred('light');
+            renderPage(); 
+        }
+        function renderPage() { 
+            const p = bookData[currentBook]; 
+            document.getElementById('book-title').innerText = p[currentPage].title; 
+            document.getElementById('book-content').innerHTML = p[currentPage].text; 
+            document.getElementById('book-page-num').innerText = `${currentPage + 1} / ${p.length}`; 
             document.querySelector('.book-page-container').scrollTop = 0;
         }
-
-        function nextPage() {
-            const pages = bookData[currentBook];
-            if (currentPage < pages.length - 1) { currentPage++; renderPage(); tg.HapticFeedback.impactOccurred('light'); }
+        function nextPage() { 
+            if (currentPage < bookData[currentBook].length - 1) { 
+                currentPage++; 
+                renderPage(); 
+                tg.HapticFeedback.impactOccurred('light');
+            } 
+        }
+        function prevPage() { 
+            if (currentPage > 0) { 
+                currentPage--; 
+                renderPage(); 
+                tg.HapticFeedback.impactOccurred('light');
+            } 
         }
 
-        function prevPage() {
-            if (currentPage > 0) { currentPage--; renderPage(); tg.HapticFeedback.impactOccurred('light'); }
+        // === DMB ТАЙМЕР ===
+        function checkDMB() { 
+            if(localStorage.getItem('s')) { 
+                document.getElementById('setup').style.display='none'; 
+                document.getElementById('view').style.display='block'; 
+                tick(); 
+            } else { 
+                document.getElementById('setup').style.display='block'; 
+                document.getElementById('view').style.display='none'; 
+            } 
         }
-
-        function checkDMB() { if(localStorage.getItem('s')) { document.getElementById('setup').style.display='none'; document.getElementById('view').style.display='block'; tick(); } else { document.getElementById('setup').style.display='block'; document.getElementById('view').style.display='none'; } }
-        function saveDMB() { const s = document.getElementById('ds').value, e = document.getElementById('de').value, p = document.getElementById('dp').value; if(!s || !e) return tg.showAlert("Выберите даты!"); localStorage.setItem('s', s); localStorage.setItem('e', e); if(p) localStorage.setItem('p', p); checkDMB(); }
+        function saveDMB() { 
+            const s = document.getElementById('ds').value, e = document.getElementById('de').value, p = document.getElementById('dp').value; 
+            if(!s || !e) return tg.showAlert("Выберите даты!"); 
+            localStorage.setItem('s', s); localStorage.setItem('e', e); if(p) localStorage.setItem('p', p); 
+            checkDMB(); 
+        }
         
         function updateArmyStatus(passedDays, leftDays) {
             const rankEl = document.getElementById('army-rank'), msgEl = document.getElementById('army-msg'), boxEl = document.getElementById('army-status-box');
@@ -433,25 +460,61 @@
         function tick() {
             const start = new Date(localStorage.getItem('s')).getTime(), end = new Date(localStorage.getItem('e')).getTime(), oath = localStorage.getItem('p') ? new Date(localStorage.getItem('p')).getTime() : null, now = new Date().getTime();
             if (now < start) return;
-            const totalMs = end - start; let passedMs = now - start; if (passedMs > totalMs) passedMs = totalMs; const left = end - now; const leftClean = left < 0 ? 0 : left;
+            const totalMs = end - start; let passedMs = Math.min(now - start, totalMs); const left = Math.max(end - now, 0);
             
             const p = (passedMs / totalMs) * 100;
             document.getElementById('bar').style.width = p + '%'; document.getElementById('perc').innerText = p.toFixed(6) + '%';
             
-            document.getElementById('vd').innerText = Math.floor(leftClean / 86400000); document.getElementById('vh').innerText = Math.floor((leftClean % 86400000) / 3600000).toString().padStart(2, '0'); document.getElementById('vm').innerText = Math.floor((leftClean % 3600000) / 60000).toString().padStart(2, '0'); document.getElementById('vs').innerText = Math.floor((leftClean % 60000) / 1000).toString().padStart(2, '0');
+            document.getElementById('vd').innerText = Math.floor(left / 86400000);
+            document.getElementById('vh').innerText = Math.floor((left % 86400000) / 3600000).toString().padStart(2, '0');
+            document.getElementById('vm').innerText = Math.floor((left % 3600000) / 60000).toString().padStart(2, '0');
+            document.getElementById('vs').innerText = Math.floor((left % 60000) / 1000).toString().padStart(2, '0');
             
-            const passedDays = Math.floor(passedMs / 86400000), leftDays = Math.floor(leftClean / 86400000);
-            document.getElementById('v-eq').innerText = Math.max(0, Math.floor((start + totalMs/2 - now)/86400000)) > 0 ? Math.max(0, Math.floor((start + totalMs/2 - now)/86400000)) + ' дн' : 'Пройден!';
-            document.getElementById('v-ord').innerText = Math.max(0, Math.floor((end - 100*86400000 - now)/86400000)) > 0 ? Math.max(0, Math.floor((end - 100*86400000 - now)/86400000)) + ' дн' : 'Вышел!';
+            const passedDays = Math.floor(passedMs / 86400000), leftDays = Math.floor(left / 86400000);
+            const cw = Math.floor(passedMs / (totalMs / 52));
+            for(let i=0; i<52; i++) { const box = document.getElementById('week-' + i); if(box) box.className = i < cw ? 'week-box filled' : (i === cw ? 'week-box current' : 'week-box'); }
+            document.getElementById('w-passed').innerText = `Пройдено: ${cw}`; document.getElementById('w-left').innerText = `Осталось: ${Math.max(0, 52 - cw)}`;
+            
+            const eq = Math.max(0, Math.floor((start + totalMs/2 - now)/86400000)); document.getElementById('v-eq').innerText = eq > 0 ? eq + ' дн' : 'Пройден!';
+            const ord = Math.max(0, Math.floor((end - 100*86400000 - now)/86400000)); document.getElementById('v-ord').innerText = ord > 0 ? ord + ' дн' : 'Вышел!';
             if (oath) { document.getElementById('card-oath').style.display = 'block'; const oathLeft = oath - now; document.getElementById('v-oath').innerText = oathLeft > 0 ? Math.floor(oathLeft / 86400000) + ' дн' : 'Пройдена!'; }
 
-            const totalWeeks = 52, msPerWeek = totalMs / totalWeeks, currentWeek = Math.floor(passedMs / msPerWeek);
-            document.getElementById('w-passed').innerText = `Пройдено: ${currentWeek}`; document.getElementById('w-left').innerText = `Осталось: ${Math.max(0, totalWeeks - currentWeek)}`;
-            for(let i=0; i<totalWeeks; i++) { const box = document.getElementById('week-' + i); if (!box) continue; if (i < currentWeek) { box.className = 'week-box filled'; } else if (i === currentWeek) { box.className = 'week-box current'; } else { box.className = 'week-box'; } }
             updateArmyStatus(passedDays, leftDays);
         }
 
-        setInterval(() => { if(localStorage.getItem('s')) tick(); }, 50);
+        // === КОРЗИНА (WISH) ===
+        let currentWTab = 'partner';
+        function switchW(t) { 
+            currentWTab = t; 
+            document.getElementById('tab-partner').classList.toggle('active', t === 'partner'); 
+            document.getElementById('tab-me').classList.toggle('active', t === 'me'); 
+            document.getElementById('wish-input-group').style.display = t === 'me' ? 'flex' : 'none'; 
+            renderW(); 
+        }
+        function renderW() {
+            const list = document.getElementById('wl'), pr = role === 'girl' ? 'boy' : 'girl';
+            let wData = { boy: [], girl: [] }; try { wData = JSON.parse(localStorage.getItem('w')); } catch(e) {}
+            const activeList = currentWTab === 'me' ? wData[role] : wData[pr];
+            if (!activeList || activeList.length === 0) { list.innerHTML = `<p style="text-align:center; color:var(--text-sub); margin-top:30px; font-size:12px;">Пусто...</p>`; return; }
+            list.innerHTML = activeList.map((w, i) => `<div class="wish-item"><div style="display:flex; justify-content:space-between; align-items:flex-start;"><span style="word-break: break-word; line-height: 1.5;">${w.replace(/(https?:\/\/[^\s]+)/g, '<br><a href="$1" target="_blank" class="wish-link">🔗 ОТКРЫТЬ ССЫЛКУ</a>')}</span>${currentWTab === 'me' ? `<span class="del-btn" onclick="delW(${i})">×</span>` : ''}</div></div>`).join('');
+        }
+        function addW() { 
+            const i = document.getElementById('wi'); if(!i.value.trim()) return; 
+            let wData = { boy: [], girl: [] }; try { wData = JSON.parse(localStorage.getItem('w')) || { boy: [], girl: [] }; } catch(e) {} 
+            if(!wData[role]) wData[role] = []; wData[role].push(i.value.trim()); i.value=''; 
+            localStorage.setItem('w', JSON.stringify(wData)); renderW(); 
+        }
+        function delW(i) { 
+            let wData = { boy: [], girl: [] }; try { wData = JSON.parse(localStorage.getItem('w')) || { boy: [], girl: [] }; } catch(e) {} 
+            wData[role].splice(i, 1); localStorage.setItem('w', JSON.stringify(wData)); renderW(); 
+        }
+
+        function syncAll() { 
+            let wData = { boy: [], girl: [] }; try { wData = JSON.parse(localStorage.getItem('w')) || { boy: [], girl: [] }; } catch(e) {}
+            try { tg.sendData(JSON.stringify({ s: localStorage.getItem('s'), e: localStorage.getItem('e'), w: wData })); tg.HapticFeedback.notificationOccurred('success'); } catch(e) { tg.showAlert("ОШИБКА СОХРАНЕНИЯ!"); } 
+        }
+        
+        setInterval(() => { if(localStorage.getItem('s')) tick(); }, 100);
     </script>
 </body>
-</html>
+</html>a
