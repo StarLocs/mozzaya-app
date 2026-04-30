@@ -37,11 +37,7 @@
         .screen.active { display: flex; animation: slideFade 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
         @keyframes slideFade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         
-        .card { 
-            background: var(--card-bg); 
-            backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); 
-            border: 1px solid var(--border); border-radius: 28px; padding: 22px; margin-bottom: 15px; box-shadow: var(--card-shadow); 
-        }
+        .card { background: var(--card-bg); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border: 1px solid var(--border); border-radius: 28px; padding: 22px; margin-bottom: 15px; box-shadow: var(--card-shadow); }
 
         .edit-toggle { position: absolute; top: 25px; left: 25px; z-index: 10; width: 42px; height: 42px; border-radius: 14px; background: var(--card-bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 20px; cursor: pointer; backdrop-filter: blur(10px); transition: 0.2s; box-shadow: 0 5px 15px rgba(0,0,0,0.6); }
         .edit-toggle:active { transform: scale(0.9); }
@@ -58,19 +54,10 @@
         .menu-item:active { transform: scale(0.98); }
         @keyframes shake { 0%, 100% { transform: rotate(0deg); } 25% { transform: rotate(-1.5deg); } 75% { transform: rotate(1.5deg); } }
         .edit-mode .menu-item { animation: shake 0.35s infinite; border: 1px dashed var(--accent); background: rgba(0,0,0,0.5); }
-        .sortable-ghost { opacity: 0.2; transform: scale(0.95); }
 
         .btn { font-family: 'Montserrat', sans-serif; background: var(--accent); color: #fff; border: none; padding: 18px; border-radius: 20px; font-weight: 900; width: 100%; font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; box-shadow: 0 10px 25px rgba(0,0,0,0.7); transition: 0.2s; cursor: pointer; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
         .btn:active { transform: scale(0.96); }
-
-        .btn-lib {
-            background: linear-gradient(135deg, rgba(20,20,25,0.95), rgba(30,30,40,0.95));
-            border: 2px solid var(--mint); color: var(--mint); padding: 16px 20px; border-radius: 22px;
-            font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 13px; text-transform: uppercase;
-            letter-spacing: 1px; width: 100%; margin-bottom: 20px; cursor: pointer;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 15px rgba(3, 218, 198, 0.2);
-            text-shadow: 0 2px 5px rgba(0,0,0,0.9); transition: 0.2s;
-        }
+        .btn-lib { background: linear-gradient(135deg, rgba(20,20,25,0.95), rgba(30,30,40,0.95)); border: 2px solid var(--mint); color: var(--mint); padding: 16px 20px; border-radius: 22px; font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; width: 100%; margin-bottom: 20px; cursor: pointer; box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 15px rgba(3, 218, 198, 0.2); text-shadow: 0 2px 5px rgba(0,0,0,0.9); transition: 0.2s; }
         .btn-lib:active { transform: scale(0.96); }
 
         /* === DMB === */
@@ -79,30 +66,36 @@
         .neon { color: var(--mint); text-shadow: 0 0 15px var(--mint), 0 2px 10px rgba(0,0,0,0.9); display: inline-block; }
         .progress { height: 10px; background: rgba(0,0,0,0.8); border-radius: 10px; overflow: hidden; margin-top: 15px; border: 1px solid var(--border); box-shadow: inset 0 2px 5px rgba(0,0,0,0.9);}
         #bar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--mint)); box-shadow: 0 0 15px var(--accent); transition: 0.5s; }
-        #perc { text-shadow: 0 2px 5px rgba(0,0,0,0.9); font-size: 15px !important; margin-top: 12px !important; }
-
+        
         .weeks-container { margin-top: 25px; padding: 18px; background: rgba(10,10,15,0.85); border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); box-shadow: inset 0 5px 20px rgba(0,0,0,0.6), 0 10px 20px rgba(0,0,0,0.5); }
-        .weeks-title { font-size: 11px; font-family: 'Montserrat', sans-serif; font-weight: 900; text-align: center; color: var(--text-sub); letter-spacing: 2px; margin-bottom: 15px; text-transform: uppercase; text-shadow: 0 2px 5px rgba(0,0,0,0.9); }
-        .weeks-grid { display: grid; grid-template-columns: repeat(13, 1fr); gap: 6px; }
+        .weeks-grid { display: grid; grid-template-columns: repeat(13, 1fr); gap: 6px; margin-top: 10px;}
         .week-box { aspect-ratio: 1; border-radius: 4px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); transition: 0.3s; }
         .week-box.filled { background: var(--accent); box-shadow: 0 0 10px var(--accent); border-color: transparent; }
         .week-box.current { background: var(--mint); box-shadow: 0 0 15px var(--mint); animation: pulse 1.5s infinite; border-color: transparent; }
         @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.85); } }
-        .weeks-stats { display: flex; justify-content: space-between; margin-top: 15px; font-size: 12px; font-weight: 800; font-family: 'Montserrat', sans-serif; text-shadow: 0 2px 5px rgba(0,0,0,0.9); }
-        .w-passed { color: var(--mint); } .w-left { color: var(--accent); }
 
-        .army-status-card { text-align: center; padding: 18px; background: linear-gradient(135deg, rgba(20,20,25,0.95), rgba(30,30,40,0.95)); border-radius: 20px; border: 1px dashed var(--accent); margin-top: 20px; position: relative; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.6); }
+        .army-status-card { text-align: center; padding: 18px; background: linear-gradient(135deg, rgba(20,20,25,0.95), rgba(30,30,40,0.95)); border-radius: 20px; border: 1px dashed var(--accent); margin-top: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.6); }
         .army-rank { font-family: 'Montserrat', sans-serif; font-size: 24px; font-weight: 900; color: var(--text-main); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 2px 5px rgba(0,0,0,0.9);}
-        .army-msg { font-size: 12px; color: var(--text-sub); font-weight: 700; line-height: 1.5; text-shadow: 0 2px 4px rgba(0,0,0,0.9); }
-
+        
         .milestones { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px;}
-        .m-card { background: rgba(10,10,15,0.85); text-align: center; padding: 18px 10px; border-radius: 18px; border: 1px solid rgba(255,255,255,0.15); box-shadow: inset 0 2px 10px rgba(0,0,0,0.5), 0 8px 15px rgba(0,0,0,0.5); transition: 0.3s;}
+        .m-card { background: rgba(10,10,15,0.85); text-align: center; padding: 18px 10px; border-radius: 18px; border: 1px solid rgba(255,255,255,0.15); box-shadow: inset 0 2px 10px rgba(0,0,0,0.5), 0 8px 15px rgba(0,0,0,0.5);}
         .m-card b { font-family: 'Montserrat', sans-serif; font-size: 20px; display: block; color: var(--mint); margin: 6px 0; text-shadow: 0 2px 5px rgba(0,0,0,0.9); }
         .m-card small { font-size: 10px; font-weight: 900; color: var(--text-sub); letter-spacing: 1px; text-transform: uppercase; text-shadow: 0 2px 4px rgba(0,0,0,0.9); }
-        
         .holiday-active { background: linear-gradient(135deg, rgba(3, 218, 198, 0.2), rgba(187, 134, 252, 0.2)) !important; border-color: var(--mint) !important; box-shadow: 0 0 20px rgba(3, 218, 198, 0.4) !important;}
 
-        /* === КНИГА === */
+        /* === FLO (ЖЕНСКИЙ КАЛЕНДАРЬ) === */
+        .flo-status-card { text-align: center; padding: 25px 15px; border-radius: 20px; border: 2px solid transparent; margin-bottom: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.8); transition: 0.5s; }
+        .flo-phase-title { font-family: 'Montserrat', sans-serif; font-size: 22px; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; text-shadow: 0 2px 5px rgba(0,0,0,0.9);}
+        .flo-day { font-size: 50px; font-weight: 900; font-family: 'Montserrat', sans-serif; margin: 10px 0; text-shadow: 0 4px 15px rgba(0,0,0,0.9); }
+        .flo-advice { font-size: 13px; font-weight: 600; color: #fff; line-height: 1.5; padding: 10px; background: rgba(0,0,0,0.3); border-radius: 12px; margin-top: 15px; text-shadow: 0 1px 3px rgba(0,0,0,0.9);}
+        
+        .phase-period { background: linear-gradient(135deg, rgba(255, 71, 87, 0.2), rgba(255, 71, 87, 0.05)); border-color: #ff4757; color: #ff4757; }
+        .phase-follicular { background: linear-gradient(135deg, rgba(3, 218, 198, 0.2), rgba(3, 218, 198, 0.05)); border-color: #03dac6; color: #03dac6; }
+        .phase-ovulation { background: linear-gradient(135deg, rgba(187, 134, 252, 0.2), rgba(187, 134, 252, 0.05)); border-color: #bb86fc; color: #bb86fc; }
+        .phase-luteal { background: linear-gradient(135deg, rgba(255, 165, 2, 0.2), rgba(255, 165, 2, 0.05)); border-color: #ffa502; color: #ffa502; }
+        .phase-pms { background: linear-gradient(135deg, rgba(255, 107, 129, 0.2), rgba(255, 107, 129, 0.05)); border-color: #ff6b81; color: #ff6b81; }
+
+        /* КНИГА */
         #book-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: var(--bg-fallback); z-index: 999; padding: 20px; box-sizing: border-box; flex-direction: column; overflow: hidden; }
         .book-close { align-self: flex-end; font-size: 24px; color: var(--text-main); cursor: pointer; margin-bottom: 10px; font-family: 'Montserrat', sans-serif; font-weight: 900; text-shadow: 0 2px 5px rgba(0,0,0,0.9);}
         .book-tabs { display: flex; background: rgba(10,10,15,0.8); border-radius: 20px; padding: 6px; margin-bottom: 20px; gap: 4px; box-shadow: inset 0 2px 10px rgba(0,0,0,0.8);}
@@ -113,13 +106,10 @@
         .book-text { font-size: 14px; color: var(--text-main); line-height: 1.6; flex-grow: 1; text-shadow: 0 1px 3px rgba(0,0,0,0.8);}
         .book-text b { color: var(--accent); }
         .book-text ul { padding-left: 20px; margin-top: 10px; }
-        .book-text li { margin-bottom: 10px; }
         .book-controls { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; padding-top: 15px; border-top: 1px solid var(--border); }
         .book-btn { background: rgba(255,255,255,0.1); border: 1px solid var(--border); color: #fff; padding: 10px 20px; border-radius: 12px; font-weight: bold; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.5); text-shadow: 0 2px 4px rgba(0,0,0,0.9);}
-        .book-btn:active { background: var(--accent); border-color: var(--accent); }
-        .book-page-num { font-family: monospace; font-size: 14px; font-weight: bold; color: var(--text-sub); text-shadow: 0 2px 4px rgba(0,0,0,0.9);}
-
-        /* === РАДАР === */
+        
+        /* РАДАР И ПРОЧЕЕ */
         .planet-wrap { position: relative; width: 180px; height: 180px; margin: 10px auto 30px auto; display: flex; justify-content: center; align-items: center; }
         .planet { font-size: 100px; line-height: 1; animation: float-spin 8s ease-in-out infinite; filter: drop-shadow(0 0 30px var(--mint)); position: relative; z-index: 2;}
         .planet::after { content: '🌍'; } 
@@ -130,9 +120,7 @@
         .radar-ring { position: absolute; border: 2px solid var(--mint); border-radius: 50%; opacity: 0; animation: radarPing 3s ease-out infinite; }
         .r1 { width: 140px; height: 140px; animation-delay: 0s; } .r2 { width: 200px; height: 190px; animation-delay: 1.5s; }
         @keyframes radarPing { 0% { transform: scale(0.5); opacity: 0.8; } 100% { transform: scale(1.6); opacity: 0; } }
-        .loc-time-info { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 800; color: var(--text-sub); text-transform: uppercase; letter-spacing: 1px; margin-top: 8px; opacity: 0.9; text-shadow: 0 2px 4px rgba(0,0,0,0.9);}
 
-        /* === КОРЗИНА И ПРОЧЕЕ === */
         .wish-tabs { display: flex; background: rgba(10,10,15,0.8); border-radius: 20px; padding: 6px; margin-bottom: 20px; box-shadow: inset 0 2px 10px rgba(0,0,0,0.8);}
         .w-tab { flex: 1; text-align: center; padding: 14px; font-size: 11px; font-weight: 900; color: var(--text-sub); border-radius: 16px; cursor: pointer; font-family: 'Montserrat', sans-serif; text-transform: uppercase; transition: 0.3s; text-shadow: 0 2px 4px rgba(0,0,0,0.9);}
         .w-tab.active { background: var(--accent); color: #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
@@ -189,12 +177,38 @@
             
             <div id="sortable-menu">
                 <div class="card menu-item" data-id="dmb" onclick="nav('dmb')"><span>🎖 Штаб службы (Таймер)</span> <span style="color:var(--accent)">→</span></div>
+                <div class="card menu-item" data-id="flo" onclick="nav('flo')"><span>🌸 Женский календарь</span> <span style="color:var(--accent)">→</span></div>
                 <div class="card menu-item" data-id="wish" onclick="nav('wish')"><span>🎁 Корзина счастья</span> <span style="color:var(--accent)">→</span></div>
                 <div class="card menu-item" data-id="locator" onclick="nav('locator')"><span>📍 Локация половинки</span> <span style="color:var(--accent)">→</span></div>
                 <div class="card menu-item" data-id="settings" onclick="nav('settings')"><span>⚙️ Настройки фона</span> <span style="color:var(--accent)">→</span></div>
             </div>
             
             <div class="sync-wrapper"><div class="btn-sync-small" onclick="syncAll()">🔄 СИНХРОНИЗИРОВАТЬ ДАННЫЕ</div></div>
+        </div>
+
+        <!-- === ЖЕНСКИЙ КАЛЕНДАРЬ (FLO) === -->
+        <div id="flo" class="screen">
+            <span onclick="nav('home')" style="cursor:pointer; color:var(--accent); font-weight:900; margin-bottom:20px; display:inline-block; text-shadow: 0 2px 5px rgba(0,0,0,0.9);">← НАЗАД</span>
+            
+            <div id="flo-girl-view" style="display: none;">
+                <div class="card">
+                    <h3 style="margin:0 0 15px 0; font-family: 'Montserrat', sans-serif; text-align: center; text-shadow: 0 2px 5px rgba(0,0,0,0.9);">НАСТРОЙКА ЦИКЛА</h3>
+                    <label>Первый день последних месячных</label> <input type="date" id="flo-start">
+                    <label>Длина цикла (дней, обычно 28)</label> <input type="number" id="flo-cycle" placeholder="28">
+                    <label>Длительность (дней, обычно 5)</label> <input type="number" id="flo-len" placeholder="5">
+                    <button class="btn" onclick="saveFlo()">ОБНОВИТЬ КАЛЕНДАРЬ</button>
+                </div>
+            </div>
+
+            <div id="flo-status-view">
+                <div class="flo-status-card" id="flo-card">
+                    <div class="flo-phase-title" id="flo-phase">Загрузка...</div>
+                    <div style="font-size: 12px; font-weight: 700; opacity: 0.8; text-transform: uppercase; letter-spacing: 1px;">ДЕНЬ ЦИКЛА</div>
+                    <div class="flo-day" id="flo-day-num">0</div>
+                    <div class="flo-advice" id="flo-advice">Здесь будет совет или прогноз.</div>
+                </div>
+                <center><p style="font-size:11px; color:var(--text-sub); text-decoration:underline; cursor:pointer; text-shadow: 0 2px 4px rgba(0,0,0,0.9);" onclick="resetFlo()">Сбросить данные календаря</p></center>
+            </div>
         </div>
 
         <!-- === ЛОКАТОР === -->
@@ -253,12 +267,12 @@
                     <div class="m-card" style="border-color: var(--accent);"><small style="color: var(--text-main);">ДО ПРИКАЗА</small><b id="v-ord" style="color: var(--accent);">0 дн</b></div>
                     
                     <!-- ПЛАШКА ВОЕННЫХ ПРАЗДНИКОВ -->
-                    <div class="m-card" id="holiday-card" style="grid-column: span 2; margin-top: 5px;">
+                    <div class="m-card" id="holiday-card" style="grid-column: span 2; margin-top: 5px; display: none;">
                         <small id="hol-name" style="color: var(--text-sub);">БЛИЖАЙШИЙ ПРАЗДНИК</small>
                         <b id="hol-val" style="color: var(--mint);">Загрузка...</b>
                     </div>
                 </div>
-                <center><p style="font-size:11px; color:var(--text-sub); text-decoration:underline; cursor:pointer; margin-top: 25px; text-shadow: 0 2px 4px rgba(0,0,0,0.9);" onclick="localStorage.removeItem('s'); localStorage.removeItem('e'); localStorage.removeItem('p'); location.reload();">Сбросить даты</p></center>
+                <center><p style="font-size:11px; color:var(--text-sub); text-decoration:underline; cursor:pointer; margin-top: 25px; text-shadow: 0 2px 4px rgba(0,0,0,0.9);" onclick="resetDMB()">Сбросить даты</p></center>
             </div>
         </div>
 
@@ -300,7 +314,10 @@
         }
 
         ['role', 'pn', 'pp', 'plat', 'plon', 'pt', 's', 'e', 'p'].forEach(p => { if (params.has(p)) localStorage.setItem(p, params.get(p)); });
+        
         let wishesData = { boy: [], girl: [] }; try { let pd = JSON.parse(decodeURIComponent(params.get('w') || '{}')); wishesData = Object.assign(wishesData, pd); } catch(e) {}
+        let floData = { start: '', cycle: 28, len: 5 }; try { let fd = JSON.parse(decodeURIComponent(params.get('flo') || '{}')); floData = Object.assign(floData, fd); } catch(e) {}
+        
         const role = localStorage.getItem('role') || 'boy';
         document.body.classList.toggle('theme-girl', role === 'girl');
         tg.headerColor = '#0d0e15';
@@ -333,8 +350,110 @@
         const savedOrder = JSON.parse(localStorage.getItem('menuOrder'));
         if (savedOrder) savedOrder.forEach(id => { const el = menuContainer.querySelector(`[data-id="${id}"]`); if (el) menuContainer.appendChild(el); });
 
-        function nav(id) { if (isEditMode) return; document.querySelectorAll('.screen').forEach(s => s.classList.remove('active')); document.getElementById(id).classList.add('active'); document.getElementById('edit-btn').style.display = (id === 'home') ? 'flex' : 'none'; if(id === 'locator') updatePartnerTime(); if(id === 'dmb') checkDMB(); if(id === 'wish') renderW(); }
+        function nav(id) { 
+            if (isEditMode) return; 
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active')); document.getElementById(id).classList.add('active'); 
+            document.getElementById('edit-btn').style.display = (id === 'home') ? 'flex' : 'none'; 
+            if(id === 'locator') updatePartnerTime(); if(id === 'dmb') checkDMB(); if(id === 'wish') renderW(); if(id === 'flo') checkFlo();
+        }
 
+        // === FLO (Календарь) ===
+        function checkFlo() {
+            const floStr = localStorage.getItem('flo');
+            if (floStr) {
+                try { floData = Object.assign(floData, JSON.parse(floStr)); } catch(e) {}
+            }
+            if (role === 'girl') {
+                document.getElementById('flo-girl-view').style.display = 'block';
+                if (floData.start) document.getElementById('flo-start').value = floData.start;
+                if (floData.cycle) document.getElementById('flo-cycle').value = floData.cycle;
+                if (floData.len) document.getElementById('flo-len').value = floData.len;
+            } else {
+                document.getElementById('flo-girl-view').style.display = 'none';
+            }
+
+            if (floData.start) {
+                document.getElementById('flo-status-view').style.display = 'block';
+                calculateFlo();
+            } else {
+                document.getElementById('flo-status-view').style.display = 'none';
+                if (role === 'boy') {
+                    document.getElementById('flo').innerHTML = `<span onclick="nav('home')" style="cursor:pointer; color:var(--accent); font-weight:900; display:inline-block;">← НАЗАД</span><div class="card" style="text-align:center; margin-top:20px;">Мозаичка еще не настроила календарь 🌸</div>`;
+                }
+            }
+        }
+
+        function saveFlo() {
+            const start = document.getElementById('flo-start').value;
+            const cycle = parseInt(document.getElementById('flo-cycle').value) || 28;
+            const len = parseInt(document.getElementById('flo-len').value) || 5;
+            if (!start) return tg.showAlert("Выбери дату начала!");
+            floData = { start, cycle, len };
+            localStorage.setItem('flo', JSON.stringify(floData));
+            checkFlo();
+            syncAll();
+        }
+
+        function resetFlo() {
+            floData = { start: '', cycle: 28, len: 5 };
+            localStorage.removeItem('flo');
+            checkFlo();
+            syncAll();
+            tg.HapticFeedback.notificationOccurred('success');
+        }
+
+        function calculateFlo() {
+            if (!floData.start) return;
+            const start = new Date(floData.start);
+            const now = new Date();
+            
+            start.setHours(0,0,0,0);
+            now.setHours(0,0,0,0);
+            
+            const diffTime = now - start;
+            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+            
+            // Если дата в будущем, не считаем
+            if (diffDays < 0) return;
+
+            const cycle = floData.cycle || 28;
+            const len = floData.len || 5;
+            
+            // Текущий день цикла
+            const currentDay = (diffDays % cycle) + 1;
+            document.getElementById('flo-day-num').innerText = currentDay;
+
+            const card = document.getElementById('flo-card');
+            const phaseTitle = document.getElementById('flo-phase');
+            const advice = document.getElementById('flo-advice');
+            
+            card.className = "flo-status-card"; // сброс классов
+
+            if (currentDay >= 1 && currentDay <= len) {
+                card.classList.add('phase-period');
+                phaseTitle.innerText = "МЕНСТРУАЦИЯ 🩸";
+                advice.innerText = role === 'girl' ? "Позаботься о себе. Пей больше теплой воды, отдохни от тренировок." : "Ей сейчас нелегко. Купи вкусняшек, сделай массаж, не спорь по пустякам.";
+            } else if (currentDay > len && currentDay <= 11) {
+                card.classList.add('phase-follicular');
+                phaseTitle.innerText = "ФОЛЛИКУЛЯРНАЯ ФАЗА ✨";
+                advice.innerText = role === 'girl' ? "Энергия на пике! Отличное время для сложных задач и спорта." : "Ее энергия на высоте. Отличное время для активных свиданий или прогулок.";
+            } else if (currentDay >= 12 && currentDay <= 16) {
+                card.classList.add('phase-ovulation');
+                phaseTitle.innerText = "ОВУЛЯЦИЯ 🌸";
+                advice.innerText = role === 'girl' ? "Высокая вероятность забеременеть. Твоя привлекательность на максимуме!" : "Пик фертильности! Она сейчас особенно привлекательна и чувствительна.";
+            } else if (currentDay >= 17 && currentDay <= cycle - 5) {
+                card.classList.add('phase-luteal');
+                phaseTitle.innerText = "ЛЮТЕИНОВАЯ ФАЗА 🌙";
+                advice.innerText = role === 'girl' ? "Может появиться легкая усталость. Ешь больше овощей и высыпайся." : "Спокойный период. Идеально для уютных домашних вечеров с фильмом.";
+            } else {
+                card.classList.add('phase-pms');
+                phaseTitle.innerText = "ПМС ⚡";
+                advice.innerText = role === 'girl' ? "Возможны перепады настроения и тяга к сладкому. Не кори себя за это." : "ВНИМАНИЕ! Возможны резкие перепады настроения. Будь терпелив, купи шоколад и просто обнимай.";
+            }
+        }
+
+
+        // === РАДАР И ОСТАЛЬНОЕ ===
         function updatePartnerTime() {
             const pt = parseInt(localStorage.getItem('pt')), el = document.getElementById('p-last-time');
             if(!pt || isNaN(pt)) { el.innerText = "Локацией еще не делились 💔"; return; }
@@ -376,7 +495,7 @@
                 { title: "⏰ Распорядок дня (База)", text: "<b>Армия — это система, которая живет по строгому расписанию.</b> Твой день будет расписан буквально по минутам, и очень скоро ты привыкнешь к этому ритму.<br><br><b>Стандартный распорядок:</b><br><ul><li><b>06:00 — Подъем.</b> Звучит команда «Рота, подъем!». У тебя есть 45 секунд, чтобы вскочить, надеть форму и построиться на центральном проходе.</li><li><b>06:10 — УФЗ (Утренняя физическая зарядка).</b> В любую погоду. Бег от 3 до 5 км, турники, отжимания.</li><li><b>07:00 — Утренний туалет и заправка коек.</b> Это время привести себя в порядок и выровнять кантики на кроватях так, чтобы об них можно было порезаться.</li><li><b>08:00 — Завтрак.</b> Поход в столовую строем и с песней.</li><li><b>09:00 — Утренний развод (построение на плацу).</b> Командир части ставит задачи на день. Поднятие флага, гимн.</li><li><b>10:00 - 14:00 — Учебные занятия.</b> Изучение устава, огневая подготовка, строевая подготовка или рабочки.</li><li><b>14:00 — Обед.</b></li><li><b>15:00 - 18:00 — Продолжение занятий или работ.</b></li><li><b>19:00 — Ужин.</b></li><li><b>21:00 — Просмотр новостей.</b> Обязательный просмотр программы «Время» на Первом канале.</li><li><b>21:30 — Вечерняя поверка.</b> Перекличка личного состава.</li><li><b>22:00 — Отбой.</b> Команда «Рота, отбой!». После этого в казарме должна быть абсолютная тишина.</li></ul>" },
                 { title: "🗣 Армейский сленг ч.1: Кто есть кто", text: "В армии свой язык. Без его понимания тебе будет очень сложно общаться. Вот базовые термины, обозначающие статус солдата в зависимости от срока службы:<br><br><ul><li><b>Дух (Бесплотный)</b> — солдат в период КМБ (до принятия военной присяги). У него нет никаких прав, только обязанности.</li><li><b>Дух</b> — солдат после присяги до полугода службы. Выполняет самую тяжелую и грязную работу в роте.</li><li><b>Слон (или Фазан)</b> — солдат, отслуживший полгода (перешагнувший «экватор»). Жизнь становится чуть легче, он уже знает все порядки и может перекладывать часть задач на «духов».</li><li><b>Дед</b> — солдат, которому до приказа об увольнении в запас осталось менее 100 дней. Пользуется непререкаемым авторитетом среди срочников.</li><li><b>Дембель</b> — солдат после выхода Приказа министра обороны. Он уже практически гражданский человек, его задача — просто дождаться поезда домой и не влезть в неприятности.</li><li><b>Шакал</b> — так на армейском сленге иногда называют офицеров или прапорщиков, которые относятся к срочникам с излишней жестокостью или несправедливостью (использовать этот термин вслух крайне не рекомендуется).</li><li><b>Контрабас</b> — военнослужащий по контракту.</li></ul>" },
                 { title: "🧹 Армейский сленг ч.2: Быт и места", text: "Продолжаем изучать армейские термины, теперь касающиеся быта:<br><br><ul><li><b>ПХД (Парково-хозяйственный день)</b> — обычно проходит в субботу. Это день генеральной уборки всей части. В казарме устраивают пенную вечеринку: пол заливают мыльной водой (с помощью мыла и щеток) и трут до идеального блеска.</li><li><b>Взлётка</b> — центральный, самый широкий коридор в казарме от дверей до спального расположения. Главное место для построений. Мыть взлетку — особая «честь».</li><li><b>Располога</b> — спальное помещение, где стоят солдатские кровати (шконки) и тумбочки.</li><li><b>Каптёрка</b> — комната для хранения личных вещей, парадной формы и снаряжения.</li><li><b>Каптёр</b> — солдат, заведующий каптеркой. Человек с огромным влиянием в роте, так как у него есть доступ к вещам и чаю.</li><li><b>ЧИПОК (Часть Индивидуального Продуктового Обеспечения Красноармейца)</b> — местный магазин-кафе на территории части. Место, где спускают всё мизерное солдатское довольствие на сникерсы, пряники и кока-колу.</li><li><b>Кантик</b> — идеально ровный прямой угол. В армии всё должно быть квадратным: кровати заправляются «с кантиком», сугробы зимой выравниваются лопатами «под кантик».</li><li><b>Рожать</b> — достать что-либо во что бы то ни стало. Сержант не спрашивает, где ты возьмешь новую швабру, он говорит: «Иди и роди её!».</li></ul>" },
-                { title: "🪂 Войска: ВДВ и Спецназ (ГРУ)", text: "<b>ВДВ (Воздушно-десантные войска) — «Крылатая пехота»</b><br>Девиз: «Никто, кроме нас!».<br>Попасть сюда — мечта многих, но служить здесь невероятно тяжело. Это войска быстрого реагирования. Подготовка направлена на развитие феноменальной выносливости. Готовься к ежеднев марш-броскам по 10-15 км с полной выкладкой (оружие, бронежилет, вещмешок). Обязательная часть программы — воздушно-десантная подготовка и прыжки с парашютом из самолетов Ил-76 и вертолетов Ан-2. Символы ВДВ — голубой берет и тельняшка — нужно заслужить потом и кровью.<br><br><b>Спецназ (ГРУ и другие)</b><br>Девиз: «Выше нас только звёзды» (неофициальный).<br>Это элита армейской разведки. Срочники туда попадают редко, в основном требуются контратники, но шанс есть, если у тебя идеальное здоровье (категория А1), спортивные разряды и чистая биография. Служба здесь — это скрытность, маскировка, тактика малых групп, выживание в лесу и стрельбы из абсолютно любых видов стрелкового оружия. Физо здесь не просто много, оно на пределе человеческих возможностей." },
+                { title: "🪂 Войска: ВДВ и Спецназ (ГРУ)", text: "<b>ВДВ (Воздушно-десантные войска) — «Крылатая пехота»</b><br>Девиз: «Никто, кроме нас!».<br>Попасть сюда — мечта многих, но служить здесь невероятно тяжело. Это войска быстрого реагирования. Подготовка направлена на развитие феноменальной выносливости. Готовься к ежедневным марш-броскам по 10-15 км с полной выкладкой (оружие, бронежилет, вещмешок). Обязательная часть программы — воздушно-десантная подготовка и прыжки с парашютом из самолетов Ил-76 и вертолетов Ан-2. Символы ВДВ — голубой берет и тельняшка — нужно заслужить потом и кровью.<br><br><b>Спецназ (ГРУ и другие)</b><br>Девиз: «Выше нас только звёзды» (неофициальный).<br>Это элита армейской разведки. Срочники туда попадают редко, в основном требуются контратники, но шанс есть, если у тебя идеальное здоровье (категория А1), спортивные разряды и чистая биография. Служба здесь — это скрытность, маскировка, тактика малых групп, выживание в лесу и стрельбы из абсолютно любых видов стрелкового оружия. Физо здесь не просто много, оно на пределе человеческих возможностей." },
                 { title: "⚓ Войска: ВМФ и ВКС", text: "<b>ВМФ (Военно-Морской Флот)</b><br>Девиз: «С нами Бог и Андреевский флаг!»<br>Служба на флоте делится на корабельную (на крейсерах, эсминцах, подлодках) и береговую (Морская пехота). На кораблях царят свои уникальные традиции и строжайшая дисциплина, связанная с жизнью в замкнутом стальном пространстве. У моряков свой особый язык: кухня — это камбуз, туалет — гальюн, комната — кубрик, лестница — трап. <br><i>Морская пехота</i> («Черные береты») — это элитные подразделения, действующие на суше с моря. Их девиз: «Там, где мы, там — победа!».<br><br><b>ВКС (Воздушно-Космические Силы)</b><br>Девиз: «Всё выше и выше!»<br>Срочники в ВКС не летают на самолетах. Твоя задача будет заключаться в обслуживании военных аэродромов, работе с радиолокационными станциями (радарами) или в частях Противовоздушной обороны (ПВО). Физических нагрузок здесь меньше, чем в пехоте, но требуется технический склад ума и внимательность. Огромную часть времени занимают караулы и охрана стратегических объектов." },
                 { title: "🚀 Войска: РВСН и Мотострелки", text: "<b>РВСН (Ракетные Войска Стратегического Назначения)</b><br>Девиз: «После нас — тишина.»<br>Основа ядерного щита страны. Служба здесь связана с высочайшим уровнем секретности. Солдаты работают с сложной аппаратурой и несут Боевые Дежурства (БД), часто находясь на подземных командных пунктах или сопровождая мобильные ракетные комплексы («Ярс», «Тополь»). Физической подготовки тут в меру, но психологическая нагрузка и ответственность огромные. Дисциплина жесткая, так как войска находятся в постоянной боевой готовности.<br><br><b>Сухопутные войска (Мотострелки и Танкисты)</b><br>Негласный статус: «Царица полей».<br>Это самый массовый и универсальный род войск. Служба здесь — это классическая армия, которую показывают в фильмах. Бесконечные выезды на полигоны, стрельбы из автоматов и пулеметов, вождение бронетехники (БМП, БТР), рытье окопов в любую погоду. Если ты попадешь в мотострелки, ты на 100% прочувствуешь, что такое полевая романтика, запах пороха и грязь на берцах." },
                 { title: "💂‍♂️ Наряды и Караул: Жизнь без сна", text: "Служба в армии — это не только стрельбы и марш-броски. Огромную часть времени солдат проводит в нарядах (дежурствах).<br><br><b>Основные виды нарядов:</b><br><ul><li><b>Дневальный по роте:</b> Самый частый наряд. Солдат стоит на «тумбочке» (особое место возле входа в казарму) с штык-ножом. Его задача — следить за порядком, никого чужого не пускать и подавать голосовые команды роте («Рота, подъем!», «Дежурный по роте, на выход!»). В наряде спят по 4 часа в сутки по очереди.</li><li><b>Дежурный по роте:</b> Обычно это сержант или самый опытный солдат. Он руководит дневальными и отвечает за всё, что происходит в роте, пока нет офицеров.</li><li><b>Караул (Гарнизонный или Внутренний):</b> Самый серьезный и опасный наряд. Это вооруженная охрана складов с боеприпасами, техникой или знаменем части. У караульного в руках автомат с боевыми патронами. Перед заступлением в караул солдаты сдают жесткие тесты на знание Устава гарнизонной и караульной службы. Спать на посту КАТЕГОРИЧЕСКИ запрещено (это уголовное преступление). У часового есть право применять оружие на поражение в случае нападения на пост.</li><li><b>Наряд по столовой:</b> Физически тяжелый наряд. Чистка сотен килограммов картошки, мытье огромных котлов и полов в столовой.</li></ul>" },
@@ -505,14 +624,12 @@
 
             for (let h of holidays) {
                 let holDate = new Date(`${year}-${h.date}T00:00:00`);
-                // Если праздник в этом году уже прошел, берем следующий год
                 if (holDate < now && holDate.toDateString() !== now.toDateString()) {
                     holDate = new Date(`${year + 1}-${h.date}T00:00:00`);
                 }
                 
                 const diff = holDate.getTime() - now.getTime();
                 
-                // Проверяем, если праздник СЕГОДНЯ
                 if (holDate.toDateString() === now.toDateString()) {
                     return { name: h.name, daysLeft: 0, isToday: true };
                 }
@@ -576,7 +693,6 @@
 
             updateArmyStatus(passedDays, leftDays);
 
-            // ПРАЗДНИКИ
             const hol = getNextHoliday();
             const holCard = document.getElementById('holiday-card');
             if (hol) {
@@ -595,6 +711,16 @@
             } else {
                 holCard.style.display = 'none';
             }
+        }
+
+        function resetDMB() {
+            localStorage.removeItem('s'); localStorage.removeItem('e'); localStorage.removeItem('p');
+            let wData = { boy: [], girl: [] }; try { wData = JSON.parse(localStorage.getItem('w')) || { boy: [], girl: [] }; } catch(e) {}
+            let floData = { start: '', cycle: 28, len: 5 }; try { floData = JSON.parse(localStorage.getItem('flo')) || floData; } catch(e) {}
+            try { tg.sendData(JSON.stringify({ s: '', e: '', w: wData, flo: floData })); } catch(e) {}
+            document.getElementById('ds').value = ''; document.getElementById('de').value = ''; document.getElementById('dp').value = '';
+            checkDMB();
+            tg.HapticFeedback.notificationOccurred('success');
         }
 
         // === КОРЗИНА (WISH) ===
@@ -624,9 +750,103 @@
             wData[role].splice(i, 1); localStorage.setItem('w', JSON.stringify(wData)); renderW(); 
         }
 
+        // === FLO (Женский календарь) ===
+        function checkFlo() {
+            let floData = { start: '', cycle: 28, len: 5 };
+            const floStr = localStorage.getItem('flo');
+            if (floStr) { try { floData = Object.assign(floData, JSON.parse(floStr)); } catch(e) {} }
+            
+            if (role === 'girl') {
+                document.getElementById('flo-girl-view').style.display = 'block';
+                if (floData.start) document.getElementById('flo-start').value = floData.start;
+                if (floData.cycle) document.getElementById('flo-cycle').value = floData.cycle;
+                if (floData.len) document.getElementById('flo-len').value = floData.len;
+            } else {
+                document.getElementById('flo-girl-view').style.display = 'none';
+            }
+
+            if (floData.start) {
+                document.getElementById('flo-status-view').style.display = 'block';
+                calculateFlo(floData);
+            } else {
+                document.getElementById('flo-status-view').style.display = 'none';
+                if (role === 'boy') {
+                    document.getElementById('flo-status-view').style.display = 'block';
+                    document.getElementById('flo-card').innerHTML = `<div class="flo-phase-title">ОЖИДАНИЕ ДАННЫХ</div><div class="flo-advice">Мозаичка еще не настроила свой календарь 🌸</div>`;
+                    document.getElementById('flo-card').className = "flo-status-card phase-follicular";
+                }
+            }
+        }
+
+        function saveFlo() {
+            const start = document.getElementById('flo-start').value;
+            const cycle = parseInt(document.getElementById('flo-cycle').value) || 28;
+            const len = parseInt(document.getElementById('flo-len').value) || 5;
+            if (!start) return tg.showAlert("Выбери дату начала!");
+            const floData = { start, cycle, len };
+            localStorage.setItem('flo', JSON.stringify(floData));
+            checkFlo();
+            syncAll();
+        }
+
+        function resetFloLocally() {
+            localStorage.removeItem('flo');
+            let wData = { boy: [], girl: [] }; try { wData = JSON.parse(localStorage.getItem('w')) || { boy: [], girl: [] }; } catch(e) {}
+            try { tg.sendData(JSON.stringify({ s: localStorage.getItem('s')||'', e: localStorage.getItem('e')||'', w: wData, flo: {} })); } catch(e) {}
+            document.getElementById('flo-start').value = '';
+            checkFlo();
+            tg.HapticFeedback.notificationOccurred('success');
+        }
+
+        function calculateFlo(floData) {
+            const start = new Date(floData.start);
+            const now = new Date();
+            start.setHours(0,0,0,0); now.setHours(0,0,0,0);
+            
+            const diffTime = now - start;
+            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+            
+            if (diffDays < 0) return;
+
+            const cycle = floData.cycle || 28;
+            const len = floData.len || 5;
+            const currentDay = (diffDays % cycle) + 1;
+            
+            let cardHtml = `<div class="flo-phase-title" id="flo-phase">Загрузка...</div><div style="font-size: 12px; font-weight: 700; opacity: 0.8; text-transform: uppercase; letter-spacing: 1px;">ДЕНЬ ЦИКЛА</div><div class="flo-day" id="flo-day-num">${currentDay}</div><div class="flo-advice" id="flo-advice">Здесь будет совет.</div>`;
+            document.getElementById('flo-card').innerHTML = cardHtml;
+
+            const card = document.getElementById('flo-card');
+            const phaseTitle = document.getElementById('flo-phase');
+            const advice = document.getElementById('flo-advice');
+            card.className = "flo-status-card"; 
+
+            if (currentDay >= 1 && currentDay <= len) {
+                card.classList.add('phase-period');
+                phaseTitle.innerText = "МЕНСТРУАЦИЯ 🩸";
+                advice.innerText = role === 'girl' ? "Позаботься о себе. Пей больше теплой воды, отдохни от тренировок." : "Ей сейчас нелегко. Купи вкусняшек, сделай массаж, не спорь по пустякам.";
+            } else if (currentDay > len && currentDay <= 11) {
+                card.classList.add('phase-follicular');
+                phaseTitle.innerText = "ФОЛЛИКУЛЯРНАЯ ФАЗА ✨";
+                advice.innerText = role === 'girl' ? "Энергия на пике! Отличное время для сложных задач и спорта." : "Ее энергия на высоте. Отличное время для активных свиданий или долгих прогулок.";
+            } else if (currentDay >= 12 && currentDay <= 16) {
+                card.classList.add('phase-ovulation');
+                phaseTitle.innerText = "ОВУЛЯЦИЯ 🌸";
+                advice.innerText = role === 'girl' ? "Высокая вероятность забеременеть. Твоя привлекательность на максимуме!" : "Пик фертильности! Она сейчас особенно привлекательна и чувствительна.";
+            } else if (currentDay >= 17 && currentDay <= cycle - 5) {
+                card.classList.add('phase-luteal');
+                phaseTitle.innerText = "ЛЮТЕИНОВАЯ ФАЗА 🌙";
+                advice.innerText = role === 'girl' ? "Может появиться легкая усталость. Ешь больше овощей и высыпайся." : "Спокойный период. Идеально для уютных домашних вечеров с фильмом.";
+            } else {
+                card.classList.add('phase-pms');
+                phaseTitle.innerText = "ПМС ⚡";
+                advice.innerText = role === 'girl' ? "Возможны перепады настроения и тяга к сладкому. Не кори себя за это." : "ВНИМАНИЕ! Возможны резкие перепады настроения. Будь терпелив, купи шоколад и просто обнимай.";
+            }
+        }
+
         function syncAll() { 
             let wData = { boy: [], girl: [] }; try { wData = JSON.parse(localStorage.getItem('w')) || { boy: [], girl: [] }; } catch(e) {}
-            try { tg.sendData(JSON.stringify({ s: localStorage.getItem('s'), e: localStorage.getItem('e'), w: wData })); tg.HapticFeedback.notificationOccurred('success'); } catch(e) { tg.showAlert("ОШИБКА СОХРАНЕНИЯ!"); } 
+            let floData = { start: '', cycle: 28, len: 5 }; try { const fs = localStorage.getItem('flo'); if(fs) floData = JSON.parse(fs); } catch(e) {}
+            try { tg.sendData(JSON.stringify({ s: localStorage.getItem('s')||'', e: localStorage.getItem('e')||'', w: wData, flo: floData })); tg.HapticFeedback.notificationOccurred('success'); } catch(e) { tg.showAlert("ОШИБКА СОХРАНЕНИЯ!"); } 
         }
         
         setInterval(() => { if(localStorage.getItem('s')) tick(); }, 100);
