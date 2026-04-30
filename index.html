@@ -19,10 +19,10 @@
         body { background-color: var(--bg-fallback); background-size: cover; background-position: center; background-attachment: fixed; background-repeat: no-repeat; color: var(--text-main); font-family: 'Montserrat', sans-serif; margin: 0; display: flex; justify-content: center; min-height: 100vh; overflow-x: hidden; transition: 0.4s; user-select: none; -webkit-user-select: none; }
         .app { width: 100%; max-width: 400px; padding: 20px 20px 30px 20px; box-sizing: border-box; display: flex; flex-direction: column; position: relative;}
         .screen { display: none; flex-direction: column; flex-grow: 1; }
-        .screen.active { display: flex; animation: slideFade 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        .screen.active { display: flex; animation: slideFade 0.3s ease-out; }
         @keyframes slideFade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         
-        .card { background: var(--card-bg); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border: 1px solid var(--border); border-radius: 28px; padding: 22px; margin-bottom: 15px; box-shadow: var(--card-shadow); }
+        .card { background: var(--card-bg); backdrop-filter: blur(25px); border: 1px solid var(--border); border-radius: 28px; padding: 22px; margin-bottom: 15px; box-shadow: var(--card-shadow); }
         .edit-toggle { position: absolute; top: 25px; left: 25px; z-index: 10; width: 42px; height: 42px; border-radius: 14px; background: var(--card-bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 20px; cursor: pointer; backdrop-filter: blur(10px); transition: 0.2s; box-shadow: 0 5px 15px rgba(0,0,0,0.6); }
         .edit-toggle:active { transform: scale(0.9); }
         .header-badge { background: var(--card-bg); border: 1px solid var(--border); border-radius: 35px; padding: 25px 15px; margin-bottom: 25px; display: flex; flex-direction: column; align-items: center; box-shadow: var(--card-shadow); backdrop-filter: blur(25px); }
@@ -34,17 +34,16 @@
         
         .menu-item { display: flex; justify-content: space-between; align-items: center; font-weight: 800; font-size: 14px; padding: 22px; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: 0.1s; text-shadow: 0 2px 5px rgba(0,0,0,0.8); }
         .menu-item:active { transform: scale(0.98); }
-        @keyframes shake { 0%, 100% { transform: rotate(0deg); } 25% { transform: rotate(-1.5deg); } 75% { transform: rotate(1.5deg); } }
-        .edit-mode .menu-item { animation: shake 0.35s infinite; border: 1px dashed var(--accent); background: rgba(0,0,0,0.5); }
+        .edit-mode .menu-item { border: 1px dashed var(--accent); background: rgba(0,0,0,0.5); }
+        
         .btn { background: var(--accent); color: #fff; border: none; padding: 18px; border-radius: 20px; font-weight: 900; width: 100%; font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; box-shadow: 0 10px 25px rgba(0,0,0,0.7); transition: 0.2s; cursor: pointer; text-shadow: 0 2px 4px rgba(0,0,0,0.5); font-family: 'Montserrat', sans-serif;}
         .btn:active { transform: scale(0.96); }
-        .btn-lib { background: linear-gradient(135deg, rgba(20,20,25,0.95), rgba(30,30,40,0.95)); border: 2px solid var(--mint); color: var(--mint); padding: 16px 20px; border-radius: 22px; font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; width: 100%; margin-bottom: 20px; cursor: pointer; box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 15px rgba(3, 218, 198, 0.2); text-shadow: 0 2px 5px rgba(0,0,0,0.9); transition: 0.2s; }
-        .btn-lib:active { transform: scale(0.96); }
+        .btn-lib { background: linear-gradient(135deg, rgba(20,20,25,0.95), rgba(30,30,40,0.95)); border: 2px solid var(--mint); color: var(--mint); padding: 16px 20px; border-radius: 22px; font-weight: 900; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; width: 100%; margin-bottom: 20px; cursor: pointer; box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 15px rgba(3, 218, 198, 0.2); text-shadow: 0 2px 5px rgba(0,0,0,0.9); }
 
-        /* === FLO CALENDAR === */
+        /* FLO CALENDAR */
         .flo-hero { text-align: center; margin-bottom: 20px; }
         .flo-subtitle { font-size: 12px; font-weight: 700; color: var(--text-sub); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; text-shadow: 0 2px 4px rgba(0,0,0,0.8);}
-        .flo-main-text { font-size: 26px; font-weight: 900; color: #fff; line-height: 1.2; text-shadow: 0 4px 10px rgba(0,0,0,0.8); margin-bottom: 20px;}
+        .flo-main-text { font-size: 24px; font-weight: 900; color: #fff; line-height: 1.2; text-shadow: 0 4px 10px rgba(0,0,0,0.8); margin-bottom: 20px;}
         .flo-partner-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px;}
         .f-card { border-radius: 20px; padding: 15px; position: relative; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.5); transition: 0.3s;}
         .fc-blue { background: linear-gradient(135deg, #2b5876, #4e4376); border: 1px solid rgba(255,255,255,0.2);}
@@ -65,51 +64,48 @@
         .log-title { font-size: 11px; font-weight: 900; text-align: center; color: var(--text-sub); letter-spacing: 1px; margin-bottom: 12px; text-transform: uppercase; }
         .log-group { margin-bottom: 12px; }
         .log-btns { display: flex; gap: 8px; flex-wrap: wrap; }
-        .log-btn { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1); padding: 8px 12px; border-radius: 12px; font-size: 13px; font-weight: 700; cursor: pointer; transition: 0.2s; color: var(--text-sub); }
+        .log-btn { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1); padding: 8px 12px; border-radius: 12px; font-size: 13px; font-weight: 700; cursor: pointer; transition: 0.2s; color: var(--text-sub); display:flex; align-items:center; gap:5px;}
         .log-btn.active { background: rgba(242, 98, 121, 0.2); border-color: var(--flo-pink); color: #fff; }
 
-        /* === DMB === */
-        #countdown { font-family: 'Montserrat', sans-serif; font-size: 40px; font-weight: 900; text-align: center; margin: 10px 0; display: flex; justify-content: center; align-items: baseline; gap: 4px; text-shadow: 0 4px 15px rgba(0,0,0,0.9), 0 0 20px rgba(255,255,255,0.2); }
-        #countdown small { font-size: 13px; color: var(--text-sub); margin-right: 6px; font-weight: 800; text-shadow: 0 2px 5px rgba(0,0,0,0.9);}
-        .neon { color: var(--mint); text-shadow: 0 0 15px var(--mint), 0 2px 10px rgba(0,0,0,0.9); display: inline-block; }
+        /* DMB */
+        #countdown { font-size: 40px; font-weight: 900; text-align: center; margin: 10px 0; display: flex; justify-content: center; align-items: baseline; gap: 4px; text-shadow: 0 4px 15px rgba(0,0,0,0.9), 0 0 20px rgba(255,255,255,0.2); }
+        #countdown small { font-size: 13px; color: var(--text-sub); font-weight: 800; text-shadow: 0 2px 5px rgba(0,0,0,0.9);}
+        .neon { color: var(--mint); text-shadow: 0 0 15px var(--mint), 0 2px 10px rgba(0,0,0,0.9); }
         .progress { height: 10px; background: rgba(0,0,0,0.8); border-radius: 10px; overflow: hidden; margin-top: 15px; border: 1px solid var(--border); box-shadow: inset 0 2px 5px rgba(0,0,0,0.9);}
         #bar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--mint)); box-shadow: 0 0 15px var(--accent); transition: 0.5s; }
-        #perc { text-shadow: 0 2px 5px rgba(0,0,0,0.9); font-size: 15px !important; margin-top: 12px !important; }
-        .weeks-container { margin-top: 25px; padding: 18px; background: rgba(10,10,15,0.85); border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); box-shadow: inset 0 5px 20px rgba(0,0,0,0.6), 0 10px 20px rgba(0,0,0,0.5); }
-        .weeks-title { font-size: 11px; font-family: 'Montserrat', sans-serif; font-weight: 900; text-align: center; color: var(--text-sub); letter-spacing: 2px; margin-bottom: 15px; text-transform: uppercase; text-shadow: 0 2px 5px rgba(0,0,0,0.9); }
+        .weeks-container { margin-top: 25px; padding: 18px; background: rgba(10,10,15,0.85); border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); box-shadow: inset 0 5px 20px rgba(0,0,0,0.6); }
+        .weeks-title { font-size: 11px; font-weight: 900; text-align: center; color: var(--text-sub); letter-spacing: 2px; margin-bottom: 15px; text-transform: uppercase; }
         .weeks-grid { display: grid; grid-template-columns: repeat(13, 1fr); gap: 6px; }
         .week-box { aspect-ratio: 1; border-radius: 4px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); transition: 0.3s; }
         .week-box.filled { background: var(--accent); box-shadow: 0 0 10px var(--accent); border-color: transparent; }
         .week-box.current { background: var(--mint); box-shadow: 0 0 15px var(--mint); animation: pulse 1.5s infinite; border-color: transparent; }
         @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.85); } }
-        .weeks-stats { display: flex; justify-content: space-between; margin-top: 15px; font-size: 12px; font-weight: 800; font-family: 'Montserrat', sans-serif; text-shadow: 0 2px 5px rgba(0,0,0,0.9); }
+        .weeks-stats { display: flex; justify-content: space-between; margin-top: 15px; font-size: 12px; font-weight: 800; text-shadow: 0 2px 5px rgba(0,0,0,0.9); }
         .w-passed { color: var(--mint); } .w-left { color: var(--accent); }
-        .army-status-card { text-align: center; padding: 18px; background: linear-gradient(135deg, rgba(20,20,25,0.95), rgba(30,30,40,0.95)); border-radius: 20px; border: 1px dashed var(--accent); margin-top: 20px; position: relative; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.6); }
-        .army-rank { font-family: 'Montserrat', sans-serif; font-size: 24px; font-weight: 900; color: var(--text-main); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 2px 5px rgba(0,0,0,0.9);}
+        .army-status-card { text-align: center; padding: 18px; background: linear-gradient(135deg, rgba(20,20,25,0.95), rgba(30,30,40,0.95)); border-radius: 20px; border: 1px dashed var(--accent); margin-top: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.6); }
+        .army-rank { font-size: 24px; font-weight: 900; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 2px 5px rgba(0,0,0,0.9);}
         .army-msg { font-size: 12px; color: var(--text-sub); font-weight: 700; line-height: 1.5; text-shadow: 0 2px 4px rgba(0,0,0,0.9); }
         .milestones { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px;}
-        .m-card { background: rgba(10,10,15,0.85); text-align: center; padding: 18px 10px; border-radius: 18px; border: 1px solid rgba(255,255,255,0.15); box-shadow: inset 0 2px 10px rgba(0,0,0,0.5), 0 8px 15px rgba(0,0,0,0.5); transition: 0.3s;}
-        .m-card b { font-family: 'Montserrat', sans-serif; font-size: 20px; display: block; color: var(--mint); margin: 6px 0; text-shadow: 0 2px 5px rgba(0,0,0,0.9); }
-        .m-card small { font-size: 10px; font-weight: 900; color: var(--text-sub); letter-spacing: 1px; text-transform: uppercase; text-shadow: 0 2px 4px rgba(0,0,0,0.9); }
-        .holiday-active { background: linear-gradient(135deg, rgba(3, 218, 198, 0.2), rgba(187, 134, 252, 0.2)) !important; border-color: var(--mint) !important; box-shadow: 0 0 20px rgba(3, 218, 198, 0.4) !important;}
+        .m-card { background: rgba(10,10,15,0.85); text-align: center; padding: 18px 10px; border-radius: 18px; border: 1px solid rgba(255,255,255,0.15); box-shadow: inset 0 2px 10px rgba(0,0,0,0.5);}
+        .m-card b { font-size: 20px; display: block; color: var(--mint); margin: 6px 0; text-shadow: 0 2px 5px rgba(0,0,0,0.9); }
+        .m-card small { font-size: 10px; font-weight: 900; color: var(--text-sub); letter-spacing: 1px; text-transform: uppercase; }
+        .holiday-active { background: linear-gradient(135deg, rgba(3, 218, 198, 0.2), rgba(187, 134, 252, 0.2)) !important; border-color: var(--mint) !important; }
 
         /* КНИГА */
         #book-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: var(--bg-fallback); z-index: 999; padding: 20px; box-sizing: border-box; flex-direction: column; overflow: hidden; }
-        .book-close { align-self: flex-end; font-size: 24px; color: var(--text-main); cursor: pointer; margin-bottom: 10px; font-family: 'Montserrat', sans-serif; font-weight: 900; text-shadow: 0 2px 5px rgba(0,0,0,0.9);}
-        .book-tabs { display: flex; background: rgba(10,10,15,0.8); border-radius: 20px; padding: 6px; margin-bottom: 20px; gap: 4px; box-shadow: inset 0 2px 10px rgba(0,0,0,0.8);}
-        .b-tab { flex: 1; text-align: center; padding: 12px 6px; font-size: 10px; font-weight: 900; color: var(--text-sub); border-radius: 16px; cursor: pointer; font-family: 'Montserrat', sans-serif; text-transform: uppercase; transition: 0.3s; text-shadow: 0 2px 4px rgba(0,0,0,0.9);}
+        .book-close { align-self: flex-end; font-size: 24px; color: var(--text-main); cursor: pointer; margin-bottom: 10px; font-weight: 900;}
+        .book-tabs { display: flex; background: rgba(10,10,15,0.8); border-radius: 20px; padding: 6px; margin-bottom: 20px; gap: 4px; }
+        .b-tab { flex: 1; text-align: center; padding: 12px 6px; font-size: 10px; font-weight: 900; color: var(--text-sub); border-radius: 16px; cursor: pointer; text-transform: uppercase; transition: 0.3s; }
         .b-tab.active { background: var(--accent); color: #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.6); }
         .book-page-container { flex-grow: 1; background: var(--card-bg); backdrop-filter: blur(25px); border: 1px solid var(--border); border-radius: 28px; padding: 25px; overflow-y: auto; display: flex; flex-direction: column; box-shadow: var(--card-shadow);}
-        .book-title { font-family: 'Montserrat', sans-serif; font-size: 18px; font-weight: 900; color: var(--mint); margin-top: 0; margin-bottom: 15px; border-bottom: 1px dashed rgba(255,255,255,0.2); padding-bottom: 15px; line-height: 1.3; text-shadow: 0 2px 5px rgba(0,0,0,0.9);}
-        .book-text { font-size: 14px; color: var(--text-main); line-height: 1.6; flex-grow: 1; text-shadow: 0 1px 3px rgba(0,0,0,0.8);}
+        .book-title { font-size: 18px; font-weight: 900; color: var(--mint); margin-top: 0; margin-bottom: 15px; border-bottom: 1px dashed rgba(255,255,255,0.2); padding-bottom: 15px; line-height: 1.3;}
+        .book-text { font-size: 14px; line-height: 1.6; flex-grow: 1; }
         .book-text b { color: var(--accent); }
         .book-text ul { padding-left: 20px; margin-top: 10px; }
         .book-text li { margin-bottom: 10px; }
         .book-controls { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; padding-top: 15px; border-top: 1px solid var(--border); }
-        .book-btn { background: rgba(255,255,255,0.1); border: 1px solid var(--border); color: #fff; padding: 10px 20px; border-radius: 12px; font-weight: bold; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.5); text-shadow: 0 2px 4px rgba(0,0,0,0.9);}
-        .book-btn:active { background: var(--accent); border-color: var(--accent); }
-        .book-page-num { font-family: monospace; font-size: 14px; font-weight: bold; color: var(--text-sub); text-shadow: 0 2px 4px rgba(0,0,0,0.9);}
-
+        .book-btn { background: rgba(255,255,255,0.1); border: 1px solid var(--border); color: #fff; padding: 10px 20px; border-radius: 12px; font-weight: bold; cursor: pointer;}
+        
         /* РАДАР */
         .planet-wrap { position: relative; width: 180px; height: 180px; margin: 10px auto 30px auto; display: flex; justify-content: center; align-items: center; }
         .planet { font-size: 100px; line-height: 1; animation: float-spin 8s ease-in-out infinite; filter: drop-shadow(0 0 30px var(--mint)); position: relative; z-index: 2;}
@@ -121,27 +117,27 @@
         .radar-ring { position: absolute; border: 2px solid var(--mint); border-radius: 50%; opacity: 0; animation: radarPing 3s ease-out infinite; }
         .r1 { width: 140px; height: 140px; animation-delay: 0s; } .r2 { width: 200px; height: 190px; animation-delay: 1.5s; }
         @keyframes radarPing { 0% { transform: scale(0.5); opacity: 0.8; } 100% { transform: scale(1.6); opacity: 0; } }
-        .loc-time-info { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 800; color: var(--text-sub); text-transform: uppercase; letter-spacing: 1px; margin-top: 8px; opacity: 0.9; text-shadow: 0 2px 4px rgba(0,0,0,0.9);}
 
-        /* КОРЗИНА И ПРОЧЕЕ */
-        .wish-tabs { display: flex; background: rgba(10,10,15,0.8); border-radius: 20px; padding: 6px; margin-bottom: 20px; box-shadow: inset 0 2px 10px rgba(0,0,0,0.8);}
-        .w-tab { flex: 1; text-align: center; padding: 14px; font-size: 11px; font-weight: 900; color: var(--text-sub); border-radius: 16px; cursor: pointer; font-family: 'Montserrat', sans-serif; text-transform: uppercase; transition: 0.3s; text-shadow: 0 2px 4px rgba(0,0,0,0.9);}
+        /* ВВОД И ПРОЧЕЕ */
+        .wish-tabs { display: flex; background: rgba(10,10,15,0.8); border-radius: 20px; padding: 6px; margin-bottom: 20px;}
+        .w-tab { flex: 1; text-align: center; padding: 14px; font-size: 11px; font-weight: 900; color: var(--text-sub); border-radius: 16px; cursor: pointer; text-transform: uppercase; transition: 0.3s;}
         .w-tab.active { background: var(--accent); color: #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
-        .wish-item { display: flex; flex-direction: column; padding: 18px; background: rgba(10,10,15,0.6); border: 1px solid var(--border); border-radius: 18px; margin-bottom: 12px; font-weight: 700; font-size: 14px; text-shadow: 0 1px 3px rgba(0,0,0,0.8); box-shadow: inset 0 2px 5px rgba(0,0,0,0.5);}
-        .wish-link { display: inline-flex; align-items: center; margin-top: 10px; color: #000; text-decoration: none; background: var(--mint); padding: 8px 16px; border-radius: 12px; font-size: 11px; font-weight: 900; text-shadow: none; box-shadow: 0 4px 10px rgba(0,0,0,0.5);}
-        .del-btn { color: #ff4757; font-size: 24px; font-weight: bold; background: rgba(255, 71, 87, 0.15); width: 35px; height: 35px; border-radius: 10px; display: flex; align-items: center; justify-content: center; cursor: pointer; text-shadow: 0 2px 4px rgba(0,0,0,0.9);}
-
-        .bg-thumb { width: 100%; height: 85px; border-radius: 16px; background-size: cover; background-position: center; border: 2px solid transparent; transition: 0.2s; box-shadow: 0 5px 15px rgba(0,0,0,0.5);}
+        .wish-item { display: flex; flex-direction: column; padding: 18px; background: rgba(10,10,15,0.6); border: 1px solid var(--border); border-radius: 18px; margin-bottom: 12px; font-weight: 700; font-size: 14px;}
+        .wish-link { display: inline-flex; align-items: center; margin-top: 10px; color: #000; text-decoration: none; background: var(--mint); padding: 8px 16px; border-radius: 12px; font-size: 11px; font-weight: 900;}
+        .del-btn { color: #ff4757; font-size: 24px; font-weight: bold; background: rgba(255, 71, 87, 0.15); width: 35px; height: 35px; border-radius: 10px; display: flex; align-items: center; justify-content: center; cursor: pointer;}
+        
+        input { width: 100%; background: rgba(10,10,15,0.8); border: 1px solid var(--border); border-radius: 16px; padding: 18px; color: var(--text-main); margin: 5px 0 15px 0; box-sizing: border-box; outline: none; font-size: 15px; font-weight: 600; font-family: inherit;}
+        label { font-size: 10px; color: var(--text-sub); font-weight: 800; letter-spacing: 2px; text-transform: uppercase; display: block; margin-bottom: 5px;}
+        .sync-wrapper { text-align: center; margin-top: auto; padding-top: 25px; padding-bottom: 10px; }
+        .btn-sync-small { background: var(--card-bg); border: 1px solid var(--mint); color: var(--mint); padding: 12px 26px; border-radius: 30px; font-size: 11px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; transition: 0.2s; }
+        
+        .bg-thumb { width: 100%; height: 85px; border-radius: 16px; background-size: cover; background-position: center; border: 2px solid transparent; transition: 0.2s;}
         .bg-thumb.active { border-color: var(--mint); transform: scale(0.95); box-shadow: 0 0 15px var(--mint);}
         .bg-gallery { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
-        input { width: 100%; background: rgba(10,10,15,0.8); border: 1px solid var(--border); border-radius: 16px; padding: 18px; color: var(--text-main); margin: 5px 0 15px 0; box-sizing: border-box; outline: none; font-size: 15px; font-weight: 600; font-family: inherit; box-shadow: inset 0 2px 10px rgba(0,0,0,0.8); text-shadow: 0 2px 4px rgba(0,0,0,0.9);}
-        label { font-size: 10px; color: var(--text-sub); font-weight: 800; letter-spacing: 2px; text-transform: uppercase; display: block; margin-bottom: 5px; font-family: 'Montserrat', sans-serif; text-shadow: 0 2px 4px rgba(0,0,0,0.9);}
-        .sync-wrapper { text-align: center; margin-top: auto; padding-top: 25px; padding-bottom: 10px; }
-        .btn-sync-small { background: var(--card-bg); border: 1px solid var(--mint); color: var(--mint); padding: 12px 26px; border-radius: 30px; font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.8); text-shadow: 0 2px 5px rgba(0,0,0,0.9); transition: 0.2s; }
-        .btn-sync-small:active { transform: scale(0.96); }
     </style>
 </head>
 <body>
+    <!-- ИНТЕРАКТИВНАЯ КНИГА ЗНАНИЙ -->
     <div id="book-modal">
         <div class="book-close" onclick="closeBook()">✖ ЗАКРЫТЬ</div>
         <div class="book-tabs">
@@ -163,6 +159,7 @@
     <div class="app" id="main-app">
         <div id="edit-btn" class="edit-toggle" onclick="toggleEdit()">✏️</div>
 
+        <!-- ГЛАВНАЯ -->
         <div id="home" class="screen active">
             <div class="header-badge">
                 <div class="profile-row"><div id="my-ava" class="avatar">Я</div><span class="heart-icon">❤️</span><div id="p-ava" class="avatar">?</div></div>
@@ -178,14 +175,16 @@
             <div class="sync-wrapper"><div class="btn-sync-small" onclick="syncAll()">🔄 СИНХРОНИЗИРОВАТЬ ДАННЫЕ</div></div>
         </div>
 
+        <!-- FLO -->
         <div id="flo" class="screen">
-            <span onclick="nav('home')" style="cursor:pointer; color:var(--accent); font-weight:900; margin-bottom:20px; display:inline-block; text-shadow: 0 2px 5px rgba(0,0,0,0.9);">← НАЗАД</span>
+            <span onclick="nav('home')" style="cursor:pointer; color:var(--accent); font-weight:900; margin-bottom:20px; display:inline-block;">← НАЗАД</span>
+            
             <div id="flo-setup" class="card" style="display:none;">
                 <h3 style="margin:0 0 15px 0; text-align: center;">НАСТРОЙКА ЦИКЛА</h3>
                 <label>Первый день последних месячных</label> <input type="date" id="flo-start">
                 <label>Длина цикла (дней, в среднем 28)</label> <input type="number" id="flo-cycle" placeholder="28">
                 <label>Длительность (дней, в среднем 5)</label> <input type="number" id="flo-len" placeholder="5">
-                <button class="btn" onclick="saveFlo()" style="background:var(--flo-pink);">ОБНОВИТЬ КАЛЕНДАРЬ</button>
+                <button class="btn" onclick="saveFlo()" style="background:var(--flo-pink);">СОХРАНИТЬ КАЛЕНДАРЬ</button>
             </div>
 
             <div id="flo-partner-view" style="display:none;">
@@ -212,17 +211,19 @@
                         <div class="log-btn" data-val="💊 Тянет живот" onclick="toggleLog(this)">💊 Тянет живот</div>
                         <div class="log-btn" data-val="🛏 Хочу спать" onclick="toggleLog(this)">🛏 Хочу спать</div>
                         <div class="log-btn" data-val="🍕 Жор" onclick="toggleLog(this)">🍕 Жор</div>
+                        <div class="log-btn" data-val="❤️ Было дело" onclick="toggleLog(this)">❤️ Было дело</div>
                     </div></div>
                 </div>
             </div>
-            <center><p style="font-size:11px; color:var(--text-sub); text-decoration:underline; cursor:pointer; margin-top:10px;" onclick="resetFloLocally()">Сбросить настройки календаря</p></center>
+            <center><p style="font-size:11px; color:var(--text-sub); text-decoration:underline; cursor:pointer; margin-top:10px;" onclick="resetFlo()">Сбросить календарь</p></center>
         </div>
 
+        <!-- DMB -->
         <div id="dmb" class="screen">
-            <span onclick="nav('home')" style="cursor:pointer; color:var(--accent); font-weight:900; margin-bottom:20px; display:inline-block; text-shadow: 0 2px 5px rgba(0,0,0,0.9);">← НАЗАД</span>
+            <span onclick="nav('home')" style="cursor:pointer; color:var(--accent); font-weight:900; margin-bottom:20px; display:inline-block;">← НАЗАД</span>
             <div id="setup" class="card">
                 <button class="btn-lib" onclick="openBook()">📚 АРМЕЙСКАЯ БАЗА ЗНАНИЙ</button>
-                <h3 style="margin:0 0 15px 0; font-family: 'Montserrat', sans-serif; text-align: center; text-shadow: 0 2px 5px rgba(0,0,0,0.9);">УСТАНОВКА ДАТ</h3>
+                <h3 style="margin:0 0 15px 0; text-align: center;">УСТАНОВКА ДАТ</h3>
                 <label>Дата призыва</label> <input type="date" id="ds">
                 <label>Дата дембеля</label> <input type="date" id="de">
                 <label>Дата присяги (необязательно)</label> <input type="date" id="dp">
@@ -231,7 +232,7 @@
             <div id="view" style="display:none;">
                 <button class="btn-lib" onclick="openBook()">📚 АРМЕЙСКАЯ БАЗА ЗНАНИЙ</button>
                 <div class="card">
-                    <p style="text-align:center; font-size:10px; color:var(--text-sub); margin:0; font-weight:900; font-family: 'Montserrat', sans-serif; text-shadow: 0 2px 4px rgba(0,0,0,0.9);">ДО ДОМА ОСТАЛОСЬ</p>
+                    <p style="text-align:center; font-size:10px; color:var(--text-sub); margin:0; font-weight:900;">ДО ДОМА ОСТАЛОСЬ</p>
                     <div id="countdown"><span id="vd">0</span><small>д</small> <span id="vh">00</span><small>ч</small> <span id="vm">00</span><small>м</small> <span id="vs" class="neon">00</span></div>
                     <div class="progress"><div id="bar"></div></div>
                     <div id="perc" style="text-align:center; font-family:monospace; font-weight:bold; letter-spacing: 1px; color: var(--mint);">0.000000%</div>
@@ -241,20 +242,21 @@
                 <div class="milestones">
                     <div class="m-card" id="card-oath" style="display:none; grid-column: span 2;"><small>ПРИСЯГА</small><b id="v-oath">0 дней</b></div>
                     <div class="m-card"><small>ЭКВАТОР</small><b id="v-eq">0 дн</b></div>
-                    <div class="m-card" style="border-color: var(--accent);"><small style="color: var(--text-main);">ДО ПРИКАЗА</small><b id="v-ord" style="color: var(--accent);">0 дн</b></div>
+                    <div class="m-card" style="border-color: var(--accent);"><small>ДО ПРИКАЗА</small><b id="v-ord" style="color: var(--accent);">0 дн</b></div>
                     <div class="m-card" id="holiday-card" style="grid-column: span 2; display: none; margin-top: 5px;"><small id="hol-name" style="color: var(--text-sub);">БЛИЖАЙШИЙ ПРАЗДНИК</small><b id="hol-val" style="color: var(--mint);">Загрузка...</b></div>
                 </div>
-                <center><p style="font-size:11px; color:var(--text-sub); text-decoration:underline; cursor:pointer; margin-top: 25px; text-shadow: 0 2px 4px rgba(0,0,0,0.9);" onclick="resetDMB()">Сбросить даты</p></center>
+                <center><p style="font-size:11px; color:var(--text-sub); text-decoration:underline; cursor:pointer; margin-top: 25px;" onclick="resetDMB()">Сбросить даты службы</p></center>
             </div>
         </div>
 
+        <!-- LOCATOR -->
         <div id="locator" class="screen">
-            <span onclick="nav('home')" style="cursor:pointer; color:var(--accent); font-weight:900; margin-bottom:20px; display:inline-block; text-shadow: 0 2px 5px rgba(0,0,0,0.9);">← НАЗАД</span>
+            <span onclick="nav('home')" style="cursor:pointer; color:var(--accent); font-weight:900; margin-bottom:20px; display:inline-block;">← НАЗАД</span>
             <div class="card" style="text-align:center;">
-                <h3 style="margin:0; color:var(--mint); font-family: 'Montserrat', sans-serif; text-shadow: 0 2px 5px rgba(0,0,0,0.9);">ГЕО-РАДАР СВЯЗИ ❤️</h3>
+                <h3 style="margin:0; color:var(--mint);">ГЕО-РАДАР СВЯЗИ ❤️</h3>
                 <div class="planet-wrap"><div class="radar-ring r1"></div><div class="radar-ring r2"></div><div class="satellite s1"></div><div class="satellite s2"></div><div class="planet"></div></div>
-                <p id="loc-status" style="font-size:12px; font-weight:900; margin: 15px 0; min-height:25px; font-family: 'Montserrat', sans-serif; color: var(--mint); text-transform: uppercase; text-shadow: 0 2px 5px rgba(0,0,0,0.9);"></p>
-                <button class="btn" id="btn-loc" onclick="sendLocation()" style="background:var(--mint); color:#000; margin-bottom:12px; text-shadow:none;">📍 ОТПРАВИТЬ ГЕОМЕТКУ</button>
+                <p id="loc-status" style="font-size:12px; font-weight:900; margin: 15px 0; min-height:25px; color: var(--mint); text-transform: uppercase;"></p>
+                <button class="btn" id="btn-loc" onclick="sendLocation()" style="background:var(--mint); color:#000; margin-bottom:12px;">📍 ОТПРАВИТЬ ГЕОМЕТКУ</button>
                 <div style="display:flex; flex-direction:column; align-items:center;">
                     <button class="btn" onclick="calculateDistance()" style="background:rgba(255,255,255,0.1); border:1px solid var(--accent); color:#fff; margin-bottom:12px;">📡 СКАНЕР ДИСТАНЦИИ</button>
                     <button class="btn" onclick="viewPartnerLocation()" style="background:transparent; border:1px dashed var(--text-sub); color:var(--text-sub); margin-bottom:15px;">👀 ОТКРЫТЬ КАРТУ</button>
@@ -263,16 +265,18 @@
             </div>
         </div>
 
+        <!-- WISH -->
         <div id="wish" class="screen">
-            <span onclick="nav('home')" style="cursor:pointer; color:var(--accent); font-weight:900; margin-bottom:20px; display:inline-block; text-shadow: 0 2px 5px rgba(0,0,0,0.9);">← НАЗАД</span>
+            <span onclick="nav('home')" style="cursor:pointer; color:var(--accent); font-weight:900; margin-bottom:20px; display:inline-block;">← НАЗАД</span>
             <div class="wish-tabs"><div class="w-tab active" id="tab-partner" onclick="switchW('partner')">Хочет половинка</div><div class="w-tab" id="tab-me" onclick="switchW('me')">Мои желания</div></div>
             <div class="card"><div id="wish-input-group" style="display:none; gap:10px; margin-bottom:20px;"><input type="text" id="wi" placeholder="Что подарить?" style="margin:0;"><button class="btn" onclick="addW()" style="width:auto; padding:0 25px; margin:0;">+</button></div><div id="wl"></div></div>
         </div>
 
+        <!-- SETTINGS -->
         <div id="settings" class="screen">
-            <span onclick="nav('home')" style="cursor:pointer; color:var(--accent); font-weight:900; margin-bottom:20px; display:inline-block; text-shadow: 0 2px 5px rgba(0,0,0,0.9);">← НАЗАД</span>
+            <span onclick="nav('home')" style="cursor:pointer; color:var(--accent); font-weight:900; margin-bottom:20px; display:inline-block;">← НАЗАД</span>
             <div class="card">
-                <h3 style="margin:0; margin-bottom: 15px; text-shadow: 0 2px 5px rgba(0,0,0,0.9);">🎨 ВЫБОР ФОНА</h3>
+                <h3 style="margin:0; margin-bottom: 15px;">🎨 ВЫБОР ФОНА</h3>
                 <div class="bg-gallery">
                     <div class="bg-thumb" onclick="setBg('bg_1.jpg', this)" style="background-image:url('img/bg_1.jpg')"></div>
                     <div class="bg-thumb" onclick="setBg('bg_2.jpg', this)" style="background-image:url('img/bg_2.jpg')"></div>
@@ -292,14 +296,30 @@
         let tg = window.Telegram.WebApp; tg.expand(); tg.headerColor = '#0d0e15';
         const params = new URLSearchParams(window.location.search);
         
-        ['role', 'pn', 'pp', 'plat', 'plon', 'pt', 's', 'e', 'p'].forEach(p => { if (params.has(p)) localStorage.setItem(p, params.get(p)); });
+        // Чтение параметров из URL
+        ['role', 'pn', 'pp', 'plat', 'plon', 'pt', 's', 'e', 'p'].forEach(p => { 
+            if (params.has(p)) localStorage.setItem(p, params.get(p)); 
+        });
         
         const role = localStorage.getItem('role') || 'boy';
         document.body.classList.toggle('theme-girl', role === 'girl');
 
+        // ИНИЦИАЛИЗАЦИЯ ДАННЫХ
         let floData = { start: '', cycle: 28, len: 5, logs: {} }; 
-        try { let fd = JSON.parse(decodeURIComponent(params.get('flo') || '{}')); floData = Object.assign(floData, fd); } catch(e) {}
+        try { 
+            let lsFlo = JSON.parse(localStorage.getItem('flo'));
+            if(lsFlo) { floData.start = lsFlo.start||''; floData.cycle = lsFlo.cycle||28; floData.len = lsFlo.len||5; floData.logs = lsFlo.logs||{}; }
+            else if (params.has('flo')) {
+                let fd = JSON.parse(decodeURIComponent(params.get('flo'))); 
+                floData = Object.assign(floData, fd);
+                localStorage.setItem('flo', JSON.stringify(floData));
+            }
+        } catch(e) {}
         if (!floData.logs) floData.logs = {};
+
+        // ГЕНЕРАЦИЯ СЕТКИ 52 НЕДЕЛЬ
+        const grid = document.getElementById('weeks-grid');
+        if(grid) { grid.innerHTML = ''; for(let i=0; i<52; i++) { const box = document.createElement('div'); box.className = 'week-box'; box.id = 'week-' + i; grid.appendChild(box); } }
 
         function applyBackground() { const b = localStorage.getItem('custom_bg'); document.body.style.backgroundImage = b ? `url('img/${b}')` : (role === 'girl' ? `url('img/bg_girl_default.jpg')` : `url('img/bg_boy_default.jpg')`); }
         applyBackground();
@@ -312,6 +332,7 @@
         if (pPhoto && pPhoto !== "" && pPhoto !== "None") { pAva.style.backgroundImage = `url('${pPhoto}')`; pAva.innerText = ""; } else { pAva.innerText = "❤️"; }
         document.getElementById('pair-names').innerText = `${myData?.first_name || 'Я'} ❤️ ${pNick}`;
 
+        // МЕНЮ
         const menuContainer = document.getElementById('sortable-menu'); let sortableInstance = null, isEditMode = false;
         function toggleEdit() {
             const btn = document.getElementById('edit-btn'); isEditMode = !isEditMode;
@@ -328,109 +349,116 @@
             if(id === 'locator') updatePartnerTime(); if(id === 'dmb') checkDMB(); if(id === 'wish') renderW(); if(id === 'flo') initFlo();
         }
 
-        // === BOOK LOGIC ===
-        const bookData = {
-            army: [
-                { title: "🎒 Что брать с собой в военкомат? (Гайд для новобранца)", text: "<b>Подготовка к отправке — это половина успеха.</b> Не тащи с собой дорогие вещи, огромные сумки и мамины пирожки на неделю. В распределительном пункте всё лишнее заставят выкинуть или отправить домой.<br><br><b>Что ОБЯЗАТЕЛЬНО нужно взять:</b><br><br><ul><li><b>Телефон «Тапик»:</b> Кнопочный телефон без камеры и выхода в интернет. Смартфон всё равно заберут в сейф и будут выдавать раз в неделю. Бери тот, что держит зарядку неделю (Nokia, Philips).</li><li><b>Рыльно-мыльное:</b> Зубная щетка в жестком футляре, кусок дешевого мыла в мыльнице, дешевая пена для бритья и упаковка одноразовых станков (лучше Gillette с синими ручками).</li><li><b>Нитки и Иголки:</b> Черные, белые и защитного цвета (хаки). Лайфхак: спрячь пару иголок в стержень шариковой ручки, чтобы не потерять.</li><li><b>Медицина:</b> Упаковка бактерицидных пластырей (берцы гарантированно сотрут ноги в кровь в первые дни). Очень выручит паста Теймурова для ног (от пота и запаха).</li><li><b>Часы:</b> Самые дешевые электронные часы на черном ремешке. Обязательно с подсветкой! В армии знать точное время — вопрос выживания, потому что опоздание на 1 минуту на построение карается всей ротой.</li></ul><br><b>Чего брать НЕ НУЖНО:</b> Скоропортящуюся еду, стеклянные бутылки, ножницы, дорогие бритвы, парфюм. Оставь гражданскую одежду самой простой, её всё равно упакуют в мешок и отправят домой." },
-                { title: "🪖 КМБ (Курс Молодого Бойца): Выживание в первый месяц", text: "<b>КМБ — это самый сложный психологический этап за весь год службы.</b> Тебя вырвали из теплого дома и поместили в жесткую систему, где всё по расписанию и всё делается бегом.<br><br><b>Что тебя ждет:</b><br>Вас будут учить самым базовым вещам: как правильно заправлять кровать (по ниточке, чтобы кантик был идеально ровным), как подшивать воротничок (если в вашей части еще используют подшиву), как ходить строем и петь строевые песни. Огневой подготовки будет минимум, а вот физической — максимум.<br><br><b>Главный совет по выживанию: НЕ ВЫДЕЛЯЙСЯ.</b><br>В армии работает правило: «Инициатива наказуема». Не пытайся казаться умнее сержанта, не спорь, даже если приказ кажется глупым. В армии нет логики «почему», есть логика «так положено». Твоя задача — слиться с коллективом, делать всё быстро и четко. Если косячишь ты — отжимается вся рота. Не будь тем парнем, из-за которого страдает коллектив. <br><br>Помни, что этот прессинг временный. Сержанты проверяют вас на прочность. Как только вы научитесь базовой дисциплине, криков станет в разы меньше." },
-                { title: "⏰ Распорядок дня (База)", text: "<b>Армия — это система, которая живет по строгому расписанию.</b> Твой день будет расписан буквально по минутам, и очень скоро ты привыкнешь к этому ритму.<br><br><b>Стандартный распорядок:</b><br><ul><li><b>06:00 — Подъем.</b> Звучит команда «Рота, подъем!». У тебя есть 45 секунд, чтобы вскочить, надеть форму и построиться на центральном проходе.</li><li><b>06:10 — УФЗ (Утренняя физическая зарядка).</b> В любую погоду. Бег от 3 до 5 км, турники, отжимания.</li><li><b>07:00 — Утренний туалет и заправка коек.</b> Это время привести себя в порядок и выровнять кантики на кроватях так, чтобы об них можно было порезаться.</li><li><b>08:00 — Завтрак.</b> Поход в столовую строем и с песней.</li><li><b>09:00 — Утренний развод (построение на плацу).</b> Командир части ставит задачи на день. Поднятие флага, гимн.</li><li><b>10:00 - 14:00 — Учебные занятия.</b> Изучение устава, огневая подготовка, строевая подготовка или рабочки.</li><li><b>14:00 — Обед.</b></li><li><b>15:00 - 18:00 — Продолжение занятий или работ.</b></li><li><b>19:00 — Ужин.</b></li><li><b>21:00 — Просмотр новостей.</b> Обязательный просмотр программы «Время» на Первом канале.</li><li><b>21:30 — Вечерняя поверка.</b> Перекличка личного состава.</li><li><b>22:00 — Отбой.</b> Команда «Рота, отбой!». После этого в казарме должна быть абсолютная тишина.</li></ul>" },
-                { title: "🗣 Армейский сленг ч.1: Кто есть кто", text: "В армии свой язык. Без его понимания тебе будет очень сложно общаться. Вот базовые термины, обозначающие статус солдата в зависимости от срока службы:<br><br><ul><li><b>Дух (Бесплотный)</b> — солдат в период КМБ (до принятия военной присяги). У него нет никаких прав, только обязанности.</li><li><b>Дух</b> — солдат после присяги до полугода службы. Выполняет самую тяжелую и грязную работу в роте.</li><li><b>Слон (или Фазан)</b> — солдат, отслуживший полгода (перешагнувший «экватор»). Жизнь становится чуть легче, он уже знает все порядки и может перекладывать часть задач на «духов».</li><li><b>Дед</b> — солдат, которому до приказа об увольнении в запас осталось менее 100 дней. Пользуется непререкаемым авторитетом среди срочников.</li><li><b>Дембель</b> — солдат после выхода Приказа министра обороны. Он уже практически гражданский человек, его задача — просто дождаться поезда домой и не влезть в неприятности.</li><li><b>Шакал</b> — так на армейском сленге иногда называют офицеров или прапорщиков, которые относятся к срочникам с излишней жестокостью или несправедливостью (использовать этот термин вслух крайне не рекомендуется).</li><li><b>Контрабас</b> — военнослужащий по контракту.</li></ul>" },
-                { title: "🧹 Армейский сленг ч.2: Быт и места", text: "Продолжаем изучать армейские термины, теперь касающиеся быта:<br><br><ul><li><b>ПХД (Парково-хозяйственный день)</b> — обычно проходит в субботу. Это день генеральной уборки всей части. В казарме устраивают пенную вечеринку: пол заливают мыльной водой (с помощью мыла и щеток) и трут до идеального блеска.</li><li><b>Взлётка</b> — центральный, самый широкий коридор в казарме от дверей до спального расположения. Главное место для построений. Мыть взлетку — особая «честь».</li><li><b>Располога</b> — спальное помещение, где стоят солдатские кровати (шконки) и тумбочки.</li><li><b>Каптёрка</b> — комната для хранения личных вещей, парадной формы и снаряжения.</li><li><b>Каптёр</b> — солдат, заведующий каптеркой. Человек с огромным влиянием в роте, так как у него есть доступ к вещам и чаю.</li><li><b>ЧИПОК (Часть Индивидуального Продуктового Обеспечения Красноармейца)</b> — местный магазин-кафе на территории части. Место, где спускают всё мизерное солдатское довольствие на сникерсы, пряники и кока-колу.</li><li><b>Кантик</b> — идеально ровный прямой угол. В армии всё должно быть квадратным: кровати заправляются «с кантиком», сугробы зимой выравниваются лопатами «под кантик».</li><li><b>Рожать</b> — достать что-либо во что бы то ни стало. Сержант не спрашивает, где ты возьмешь новую швабру, он говорит: «Иди и роди её!».</li></ul>" },
-                { title: "🪂 Войска: ВДВ и Спецназ (ГРУ)", text: "<b>ВДВ (Воздушно-десантные войска) — «Крылатая пехота»</b><br>Девиз: «Никто, кроме нас!».<br>Попасть сюда — мечта многих, но служить здесь невероятно тяжело. Это войска быстрого реагирования. Подготовка направлена на развитие феноменальной выносливости. Готовься к ежедневным марш-броскам по 10-15 км с полной выкладкой (оружие, бронежилет, вещмешок). Обязательная часть программы — воздушно-десантная подготовка и прыжки с парашютом из самолетов Ил-76 и вертолетов Ан-2. Символы ВДВ — голубой берет и тельняшка — нужно заслужить потом и кровью.<br><br><b>Спецназ (ГРУ и другие)</b><br>Девиз: «Выше нас только звёзды» (неофициальный).<br>Это элита армейской разведки. Срочники туда попадают редко, в основном требуются контратники, но шанс есть, если у тебя идеальное здоровье (категория А1), спортивные разряды и чистая биография. Служба здесь — это скрытность, маскировка, тактика малых групп, выживание в лесу и стрельбы из абсолютно любых видов стрелкового оружия. Физо здесь не просто много, оно на пределе человеческих возможностей." },
-                { title: "⚓ Войска: ВМФ и ВКС", text: "<b>ВМФ (Военно-Морской Флот)</b><br>Девиз: «С нами Бог и Андреевский флаг!»<br>Служба на флоте делится на корабельную (на крейсерах, эсминцах, подлодках) и береговую (Морская пехота). На кораблях царят свои уникальные традиции и строжайшая дисциплина, связанная с жизнью в замкнутом стальном пространстве. У моряков свой особый язык: кухня — это камбуз, туалет — гальюн, комната — кубрик, лестница — трап. <br><i>Морская пехота</i> («Черные береты») — это элитные подразделения, действующие на суше с моря. Их девиз: «Там, где мы, там — победа!».<br><br><b>ВКС (Воздушно-Космические Силы)</b><br>Девиз: «Всё выше и выше!»<br>Срочники в ВКС не летают на самолетах. Твоя задача будет заключаться в обслуживании военных аэродромов, работе с радиолокационными станциями (радарами) или в частях Противовоздушной обороны (ПВО). Физических нагрузок здесь меньше, чем в пехоте, но требуется технический склад ума и внимательность. Огромную часть времени занимают караулы и охрана стратегических объектов." },
-                { title: "🚀 Войска: РВСН и Мотострелки", text: "<b>РВСН (Ракетные Войска Стратегического Назначения)</b><br>Девиз: «После нас — тишина.»<br>Основа ядерного щита страны. Служба здесь связана с высочайшим уровнем секретности. Солдаты работают с сложной аппаратурой и несут Боевые Дежурства (БД), часто находясь на подземных командных пунктах или сопровождая мобильные ракетные комплексы («Ярс», «Тополь»). Физической подготовки тут в меру, но психологическая нагрузка и ответственность огромные. Дисциплина жесткая, так как войска находятся в постоянной боевой готовности.<br><br><b>Сухопутные войска (Мотострелки и Танкисты)</b><br>Негласный статус: «Царица полей».<br>Это самый массовый и универсальный род войск. Служба здесь — это классическая армия, которую показывают в фильмах. Бесконечные выезды на полигоны, стрельбы из автоматов и пулеметов, вождение бронетехники (БМП, БТР), рытье окопов в любую погоду. Если ты попадешь в мотострелки, ты на 100% прочувствуешь, что такое полевая романтика, запах пороха и грязь на берцах." },
-                { title: "💂‍♂️ Наряды и Караул: Жизнь без сна", text: "Служба в армии — это не только стрельбы и марш-броски. Огромную часть времени солдат проводит в нарядах (дежурствах).<br><br><b>Основные виды нарядов:</b><br><ul><li><b>Дневальный по роте:</b> Самый частый наряд. Солдат стоит на «тумбочке» (особое место возле входа в казарму) с штык-ножом. Его задача — следить за порядком, никого чужого не пускать и подавать голосовые команды роте («Рота, подъем!», «Дежурный по роте, на выход!»). В наряде спят по 4 часа в сутки по очереди.</li><li><b>Дежурный по роте:</b> Обычно это сержант или самый опытный солдат. Он руководит дневальными и отвечает за всё, что происходит в роте, пока нет офицеров.</li><li><b>Караул (Гарнизонный или Внутренний):</b> Самый серьезный и опасный наряд. Это вооруженная охрана складов с боеприпасами, техникой или знаменем части. У караульного в руках автомат с боевыми патронами. Перед заступлением в караул солдаты сдают жесткие тесты на знание Устава гарнизонной и караульной службы. Спать на посту КАТЕГОРИЧЕСКИ запрещено (это уголовное преступление). У часового есть право применять оружие на поражение в случае нападения на пост.</li><li><b>Наряд по столовой:</b> Физически тяжелый наряд. Чистка сотен килограммов картошки, мытье огромных котлов и полов в столовой.</li></ul>" },
-                { title: "🧠 Психология выживания (Советы деда)", text: "Армия — это закрытый мужской коллектив, который живет по законам стаи. Если ты поймешь психологию службы в первый месяц, оставшийся год пройдет гладко.<br><br><b>Три золотых правила выживания:</b><br><br><b>1. Коллектив важнее всего.</b> В армии нет «Я», есть «МЫ». Если один солдат накосячил (уснул в строю, спрятал телефон) — наказывают всю роту. Никогда не «крысь» (не воруй у своих) и не «стучи» (не жалуйся офицерам на сослуживцев). Помогай товарищам: если кто-то не успевает заправить кровать — помоги ему, завтра он прикроет тебя.<br><br><b>2. Включай психологическую броню.</b> На тебя будут кричать, тебя будут оскорблять, заставлять отжиматься за пылинку на полу. Пойми: они кричат не на тебя лично, они кричат на «солдата». Это механизм подавления эго и приучения к беспрекословному подчинению. Не принимай это близко к сердцу, не дерзи в ответ. Выдохни и выполни приказ.<br><br><b>3. Не забывай о доме.</b> Связь с гражданкой (твоя девушка, родители, друзья) — это то, что будет давать тебе силы. Пиши бумажные письма, проси присылать фото. Когда тебе будет казаться, что этот армейский дурдом никогда не закончится, письмо от любимой вернет тебя в реальность." }
-            ],
-            girl: [
-                { title: "❤️ 1. Первый день: Вдох-выдох", text: "Проводы закончились. Поезд или автобус уехал. Ты возвращаешься в пустую комнату, и именно сейчас накатывает самая сильная тоска. <br><br><b>Что важно понять:</b> Этот день нужно просто пережить. Разреши себе плакать в подушку, съесть ведро мороженого и пересматривать ваши совместные видео. Эмоции должны выйти наружу. Но дай себе установку: завтра утром ты берешь себя в руки. Ему там в тысячу раз тяжелее и страшнее, чем тебе в теплой постели. Ему нужна твоя уверенность, твой голос, полный любви, а не твои истерики. Ты теперь его надежный тыл." },
-                { title: "📞 2. Телефонные звонки: Инструкция", text: "В армии смартфоны под запретом. Телефоны-«тапики» (кнопочные) хранятся в сейфе у командира роты и выдаются обычно только в воскресенье на 15-30 минут.<br><br><b>Как вести себя во время звонка:</b><br><ul><li><b>Держи лицо.</b> Как бы ты ни скучала, услышав его голос, не начинай рыдать в трубку со словами «забери меня, я не могу». Это разобьет ему сердце, он будет изводить себя всю неделю, а помочь ничем не сможет.</li><li><b>Излучай позитив.</b> Он находится в сером, орущем, матерном мире. Ты должна быть для него островком уюта и радости. Рассказывай смешные истории про общих друзей, про учебу, про то, как смешно спал кот.</li><li><b>Слушай его.</b> Задавай вопросы: чем кормили, с кем подружился, как погода. Ему важно выговориться и почувствовать, что его жизнь тебе интересна.</li></ul>" },
-                { title: "🚫 3. О чем категорически молчать", text: "Армия — это информационный вакуум. Каждая проблема из дома там масштабируется в сознании парня в катастрофу.<br><br><b>Никогда не рассказывай ему о:</b><br>1. <b>Бытовых проблемах.</b> Сломался кран, прорвало трубу, нет денег на проезд — реши это сама или попроси помощи у родителей/друзей. Он будет чувствовать себя беспомощным, сидя в казарме.<br>2. <b>Ссорах с подругами.</b> Ему неинтересны женские интриги, у него своих проблем с сержантами хватает.<br>3. <b>Мужском внимании.</b> Забудь фразы в стиле «Ко мне сегодня на улице подошел парень знакомиться, но я ему отказала». Ты думаешь, это покажет твою верность, а у него включится дикая паранойя и ревность. В армии все парни становятся дико мнительными." },
-                { title: "💌 4. Магия бумажных писем", text: "В эпоху мгновенных сообщений в Telegram, обычное бумажное письмо кажется пережитком прошлого. Но не в армии!<br><br><b>Письмо для солдата — это высшая ценность.</b> Это кусочек дома, который можно подержать в руках. Пиши много и часто. Пиши обо всем: что видела на улице, какие фильмы посмотрела, как сильно его любишь.<br><b>Лайфхаки:</b><br>Вложи в конверт распечатанные фотографии (лучше нейтральные, так как конверты иногда вскрывают или просвечивают). Попшикай письмо своими любимыми духами. Оставь на бумаге след от помады. Он будет перечитывать это письмо каждую ночь с фонариком под одеялом." },
-                { title: "📦 5. Идеальная посылка: Что отправлять", text: "Сбор посылки — это целый ритуал. Помни главное армейское правило: посылка общая. Твой парень обязательно будет делиться с товарищами по взводу.<br><br><b>Что класть:</b><br><ul><li><b>Сладости (Много!).</b> Сгущенка (только в мягких пакетах дой-пак с крышкой, железные банки могут забрать), шоколадные батончики (Сникерс, Твикс), леденцы (сосать в строю — бесценно), печенье, шоколадная паста.</li><li><b>Полезное:</b> Хорошие толстые черные носки (без логотипов), много бактерицидных пластырей, крем для ног (Теймурова), зубная паста, одноразовые бритвы.</li><li><b>Мясное:</b> Сырокопченая колбаса (в вакуумной упаковке, которая не испортится).</li></ul>" },
-                { title: "❌ 6. Что НЕ класть в посылку", text: "Посылки в армии ВСЕГДА вскрываются в присутствии офицера или сержанта (для проверки на запрещенку).<br><br><b>Категорически запрещено:</b><br>1. Любой алкоголь (выкинут и накажут всю роту).<br>2. Скоропортящиеся продукты: фрукты, домашние пирожки с мясом, вареную колбасу, молочку. Если это испортится в пути и он отравится, будут проблемы.<br>3. Острые и колющие предметы: ножницы, перочинные ножи.<br>4. Лекарства в таблетках: любые таблетки забирает начмед в санчасть. Исключение — пластыри, витамины, мази и зеленка." },
-                { title: "🤯 7. Синдром 'Почему он не в сети?'", text: "Это главная болезнь всех ждуль. Он сказал: «Позвоню в воскресенье в 15:00». На часах 18:00, телефон молчит. У тебя паника, слезы и мысли «Он меня разлюбил / Он нашел другую (в лесу?!)».<br><br><b>ОСТАНОВИСЬ И ВЫДОХНИ.</b> В армии тысячи причин не позвонить:<br>- Рота накосячила, и командир лишил всех телефонов на месяц.<br>- Его внезапно поставили в наряд (в караул или чистить картошку).<br>- У него банально разрядился телефон, а на 100 человек в казарме всего 3 розетки, возле которых идет битва за выживание.<br>Учись доверять. Он позвонит, как только у него появится хоть одна свободная и безопасная секунда." },
-                { title: "🎖 8. Подготовка к присяге", text: "Присяга — это священный день. Обычно она проходит через месяц после призыва (окончание КМБ). Это первый раз, когда вы сможете увидеться вживую!<br><br><b>Как готовиться:</b> Узнай заранее точную дату и время. Если часть в другом городе, бронируй гостиницу или квартиру за неделю, так как приедут родственники всех призывников, и мест не будет. Наготовь его любимой домашней еды (котлеты, отбивные, салаты) — армейская сечка и капуста ему уже снятся в кошмарах. Оденься красиво, но удобно (на плацу придется долго стоять)." },
-                { title: "🫂 9. Поведение на присяге (Важно!)", text: "Когда ты увидишь его марширующим с автоматом, у тебя захватит дух. Но будь готова: он изменился.<br><br>Он похудел (армейская диета и бег делают свое дело), он может быть обритым наголо, у него могут быть синяки на шее от автомата и мозоли. <b>НИ В КОЕМ СЛУЧАЕ не охай, не причитай 'Ой, какой ты худенький, бедный мой'.</b> Он теперь солдат. Он мужчина. Просто крепко обними его, скажи, как сильно ты им гордишься и какой он красивый в форме. После торжественной части вас отпустят в увольнительное (обычно до вечера или до утра). Просто корми его и дари ласку." },
-                { title: "📆 10. Как занять себя: Теория времени", text: "Год ожидания может стать для тебя годом деградации в слезах, а может — годом мощного саморазвития.<br><br><b>Закон армии:</b> Время тянется медленно только тогда, когда ты ничего не делаешь. Составь жесткий график. Запишись в спортзал, получи права, найди подработку, выучи новый язык, прочитай 50 книг. Сделай так, чтобы вечером ты падала в кровать без сил. Во-первых, время полетит со скоростью света. Во-вторых, представь, как он будет гордиться, когда вернется и увидит, какой крутой, красивой и умной девушкой ты стала!" },
-                { title: "🤫 11. Ревность на расстоянии", text: "Это убивает отношения быстрее, чем километры.<br><br><b>Для тебя:</b> Пойми, в армии вокруг него одни мужики, кирзовые сапоги и автоматы. Ему физически негде тебе изменить. <br><b>От него к тебе:</b> Парни в армии становятся параноиками. У них отбирают свободу, и единственное, что у них остается — это ты. Любая твоя фотка из клуба, любой новый друг в ВК вызывает у него в голове взрыв ядерной бомбы. Будь мудрее. Не провоцируй его. Если идешь гулять с подругами — предупреди, пришли смешное фото с ними. Дай ему уверенность, что он единственный." },
-                { title: "🤝 12. Общение с его мамой (Союзницы)", text: "Его маме сейчас так же тяжело, как и тебе, а может и тяжелее. Она отдала своего мальчика в неизвестность.<br><br>Не конкурируйте за его внимание, станьте командой! Звони ей раз в неделю, узнавай, как у нее дела. Если он позвонил тебе, а ей не успел — сразу напиши ей: «Тетя Лена, Ваш сын звонил, у него всё хорошо, здоров, передавал вам огромный привет!». Совместное ожидание очень сближает, и после его возвращения у тебя будут идеальные отношения со свекровью." },
-                { title: "🎁 13. Сюрпризы издалека (Лайфхаки)", text: "Вы находитесь за тысячу километров, но это не значит, что романтика умерла. Включи фантазию!<br><br>Узнай точный адрес КПП его части. Почти во всех городах работают Яндекс.Еда или Деливери. В его День рождения, если он договорится с дежурным по КПП, ты можешь заказать ему огромную пиццу или сет роллов прямо к воротам части! Оплати картой онлайн. Это произведет фурор во всей роте. Еще вариант: найди в ВК группу его воинской части, спишись с кем-то из контрактников или офицеров (за небольшое вознаграждение они могут передать ему торт или записку)." },
-                { title: "🌗 14. Экватор службы (Полгода)", text: "Полгода позади. Это самый важный рубеж. Психологически становится намного легче: вы уже не «начинаете» служить, вы «заканчиваете». <br><br>Он переходит из статуса «Духа» в «Слона» (или Черпака). Физический прессинг спадает, он уже всё знает, ко всему привык. Служба превращается в рутину (День сурка). Обязательно отметьте эту дату по телефону. Начните потихоньку, маленькими шажками обсуждать, что вы будете делать, когда он вернется. Эти мечты дадут ему огромный заряд энергии на вторые полгода." },
-                { title: "✂️ 15. Сто дней до приказа", text: "Легендарная дата в армии! Приказ министра обороны об увольнении в запас выходит дважды в год: 27 марта (для весенне-летнего призыва) и 27 сентября (для осенне-зимнего). <br><br>От этой даты отсчитывают 100 дней назад. В этот день солдаты, которым скоро домой, становятся «Дедами». Есть старая армейская традиция: в этот день 'деды' бреют голову под ноль (хотя сейчас это делают реже) и отдают свою порцию сливочного масла за завтраком 'молодым' бойцам. Начинай готовить дембельский альбом!" },
-                { title: "🚀 16. Космос (Финальный отсчет)", text: "«Космос» начинается за 10 дней до дембеля. Это самое тягучее, самое невыносимое время за весь год. <br><br>Дни тянутся как резина. В роте принято каждый вечер громко считать: «Десять! Девять! Восемь!» — как при запуске ракеты. Твоя задача на этом этапе — активно готовиться к встрече. Закупай шарики, заказывай торт, договаривайся с его друзьями о встрече на вокзале. Финишная прямая!" },
-                { title: "🧠 17. Психология: Он изменится (Будь готова)", text: "Девушки часто ждут, что с поезда сойдет тот же самый беззаботный мальчик, которого они провожали. Это ошибка.<br><br>Армия меняет психику. Он жил год в строгой иерархии, где за малейшую слабость наказывают. Он вернется более жестким, более молчаливым, более прямолинейным. У него могут появиться резкие суждения. Не пугайся и не говори «Ты стал другим, я тебя не узнаю». Это его защитный панцирь. Окружи его нежностью, лаской и заботой, и через месяц-два этот панцирь растает." },
-                { title: "🏠 18. Адаптация дома (Пост-армейский синдром)", text: "Первые недели на гражданке для дембеля — это шок. Он отвык от свободы выбора.<br><br><b>Что может быть:</b><br>- Он будет просыпаться в 6 утра без будильника и не понимать, где он.<br>- Его будут раздражать толпы людей в торговых центрах и гражданская суета.<br>- Он может зависать, глядя в одну точку.<br>Не тащи его сразу по клубам и тусовкам. Дай ему неделю просто отлежаться на диване, поесть домашней еды и привыкнуть, что ему больше никуда не нужно бежать по команде." },
-                { title: "🎉 19. Подготовка к Дембелю: Сюрприз", text: "Встреча из армии — это событие, которое вы будете вспоминать всю жизнь. Сделай его ярким!<br><br><b>Идеи:</b><br>- Узнай заранее, в чем он приедет: в 'парадке' (украшенной форме) или в 'гражданке' (переоденется в поезде).<br>- Закажи красивый бенто-торт с надписью «Дембель неизбежен» или «Мой герой дома».<br>- Купи воздушные шары в цветах хаки или с надписями.<br>- Договорись с его друзьями, чтобы они стояли на перроне с плакатом, но ты стой впереди всех. Прыжок ему на шею — обязателен!" },
-                { title: "📖 20. Дембельский альбом (Сделай сама)", text: "В современных реалиях парни редко делают дембельские альбомы руками (обычно просто сохраняют фото на флешку). Сделай ему сюрприз!<br><br>Купи красивый альбом. Распечатай скрины ваших милых переписок за этот год, скрины с видеозвонков (где он смешной лысый, а ты в пижаме), вклей туда конверты от его писем, билеты на поезд, когда ты ездила к нему на присягу. Напиши трогательные комментарии под фото. Подари этот альбом в день возвращения — он будет растроган до слез." },
-                { title: "💅 21. Твоя личная жизнь (Это важно)", text: "Многие ждули совершают ошибку: они 'хоронят' себя заживо на этот год. Перестают краситься, не гуляют с друзьями, сидят дома у окна.<br><br><b>Не делай так!</b> Ожидание — это не тюрьма. Встречайся с подругами, ходи в кино, покупай новые платья. Парню в казарме гораздо приятнее смотреть на фото своей улыбающейся, красивой девушки, которая живет полной жизнью, чем на заплаканную страдалицу. Твоя красота и энергия — его мотивация." },
-                { title: "🏥 22. Если он попал в госпиталь", text: "В армии болеют абсолютно все. Смена климата, сквозняки в казармах, тонкая форма зимой. ОРВИ, мозоли, иногда пневмония — это классика.<br><br>Если он звонит из госпиталя (санчасти) — <b>не паникуй!</b> В армейских реалиях госпиталь — это санаторий. Там можно лежать в кровати весь день, там тепло, там нормальная еда, а самое главное — там часто разрешают пользоваться телефонами. Для солдата неделя в госпитале — это легальный отпуск от сержантов и построений." },
-                { title: "📱 23. Социальные сети: Что постить?", text: "Твой профиль в ВК или Нельзяграме — это его окно в мир. <br><br>Пости красивые фотографии. Делай милые подписи в стиле «Считаю дни до встречи с моим 🪖❤️». Отмечай его на фото. Для него это публичное признание твоей верности, а перед сослуживцами он будет гордо хвастаться: «Смотрите, какая у меня девчонка, ждет меня!». НО: никакого провокационного контента с клубами и другими парнями. Побереги его нервы." },
-                { title: "🏃‍♂️ 24. Увольнительные (Увалы)", text: "Увольнительное — это временный выход за пределы части (на день или сутки).<br><br>Увалы дают не всем и не часто (в некоторых частях их вообще нет). Если к нему приехали родители или официальная жена (справка из ЗАГСа), отпустят с большей вероятностью. К девушке отпускают неохотно, нужно договариваться с командиром роты. Если вас отпустили — гуляйте, снимите квартиру или номер в отеле. <b>САМОЕ ВАЖНОЕ:</b> верните его на КПП за 15 минут до назначенного времени. Опоздание на минуту = лишение увалов до конца службы." },
-                { title: "🍕 25. Армейский голод (Феномен)", text: "Будь готова к тому, что первый месяц дома он будет есть всё, что не приколочено. <br><br>В армии еды хватает для калорий, но она однообразная (капуста, сечка, рыба). Парень, который раньше ел как птичка, будет сметать по три тарелки борща за раз и ночью идти за бутербродами. Это психологический армейский голод. Просто держи холодильник полным и балуй его вкусностями." },
-                { title: "💼 26. Учебка vs Боевая часть", text: "Служба делится на два этапа. Первые 3-5 месяцев он может провести в «учебной части» (Учебка). Там готовят специалистов (механиков, связистов, наводчиков). В учебке самый жесткий устав и контроль.<br><br>После экзаменов его распределят в «Боевую часть» (в другой город). В боевой части служба обычно идет спокойнее, отношения с сержантами становятся более человечными, а телефон достать проще." },
-                { title: "🗣 27. Мат и профессиональная деформация", text: "В армии не ругаются матом — на нем разговаривают. Сержант не будет вежливо просить принести ведро, он использует трехэтажную конструкцию.<br><br>Твой парень впитает эту культуру. Не падай в обморок, если в увольнительном или по возвращении домой через каждое слово у него будет проскакивать мат. Не ругай его и не читай нотации. Просто мягко напоминай: «Милый, ты уже дома, тут можно разговаривать нормально». За пару недель он перестроится." },
-                { title: "💸 28. Финансовый вопрос", text: "Срочникам платят небольшое денежное довольствие (оклад) — обычно около 2000-3000 рублей в месяц (перечисляют на армейскую карту ВТБ или Мир).<br><br>Эти деньги уходят молниеносно: на пену для бритья, нитки, подшиву, и конечно же, на сникерсы в 'Чипке'. Не жди от него подарков из армии и не проси перевести денег. Наоборот, будь готова к тому, что иногда ему придется подкидывать по 500 рублей на сигареты или сладкое." },
-                { title: "🔮 29. Стройте планы на будущее", text: "Главный антидепрессант на расстоянии — это совместные мечты.<br><br>Во время звонков обсуждайте, куда вы пойдете в первый день после дембеля. Какую закажете пиццу? В какой кинотеатр пойдете? Может, съездите на море или снимете квартиру? Конкретизируйте детали. Когда мозг занят планированием светлого будущего, серое армейское настоящее переносится в сто раз легче." },
-                { title: "👑 30. Ты — героиня", text: "Давай честно: дождаться парня из армии в 21 веке — это Поступок. Многие ломаются, не выдерживают расстояния и тишины.<br><br>Ты выбрала сложный путь, но он того стоит. Вы пройдете огромную проверку на прочность. Эта разлука покажет истинную ценность ваших отношений. Когда он выйдет из поезда и обнимет тебя, ты поймешь, что этот год ожидания стоил каждой секунды. Вы будете гордиться собой. Всё будет хорошо!" }
-            ],
-            advice: [
-                { title: "💡 Совет 1: Инвестируй в себя", text: "«Когда он ушел, первые две недели хотелось просто лежать и плакать. Но потом пришло понимание: этот год можно использовать как отпуск для саморазвития! Я записалась на курсы, начала бегать по утрам, занялась фигурой. Время полетело незаметно, а когда он вернулся, он просто обалдел от того, какой я стала. Девочки, вкладывайте это время в себя!»" },
-                { title: "💡 Совет 2: Письма — это база", text: "«Не ленитесь писать письма от руки! Бумажные письма там — огромная ценность. Мой служил там, где телефоны выдавали раз в две недели. Я купила пачку красивых конвертов и писала каждые 3 дня. Просто обо всем: как прошел день, какую смешную собаку видела. Вкладывала пакетики чая. Он привез эти письма домой затертые до дыр. Говорил, они пахли домом.»" },
-                { title: "💡 Совет 3: Без паники", text: "«Если он не звонит в воскресенье — это не значит, что он тебя разлюбил. Это значит, что рота в наряде, телефон сел или сержант забрал телефоны за косяк взвода. Дышите ровно. Учитесь доверять. Он позвонит, как только сможет!»" },
-                { title: "💡 Совет 4: Свекровь — союзник", text: "«Обязательно общайтесь с его мамой! Ей тоже безумно тяжело. Вместе ждать намного легче. Если он позвонил вам, а ей не успел — сразу напишите ей, успокойте. Это очень сблизит вас с его семьей, и после армии вы станете по-настоящему родными людьми.»" },
-                { title: "💡 Совет 5: Экономь на дембель", text: "«Не тратьте деньги на ерунду. Копите. Дембельский праздник, подарок, торт и ваш первый совместный отпуск или поход в ресторан потребуют бюджета. Лучше откладывать понемногу весь год.»" },
-                { title: "💡 Совет 6: Секретность в соцсетях", text: "«Не вываливайте подробности его службы в социальные сети. Не пишите номер части, не выкладывайте его фото с оружием или техникой. Лишние глаза и языки могут создать ему огромные проблемы с командирами в части.»" },
-                { title: "💡 Совет 7: Сон и режим", text: "«Не сидите в телефоне до 3 ночи, ожидая его сообщения, если он в карауле. Высыпайтесь! Тебе нужны силы, чтобы оставаться красивой, бодрой и адекватной. Нервная и невыспавшаяся девушка — плохая поддержка для солдата.»" },
-                { title: "💡 Совет 8: Маленькие радости", text: "«В посылках важны мелочи. Сгущенка и сникерсы — это хорошо, но маленькое письмо, вложенное прямо под обертку шоколадки, или смешная распечатанная мем-фотка — это просто бесценно для его настроения.»" },
-                { title: "💡 Совет 9: Планы на будущее", text: "«Постоянно обсуждайте, что вы сделаете ПЕРВЫМ делом, когда он сойдет с перрона. Визуализация очень сближает и помогает пережить разлуку. Мечтайте о поездке, о ремонте, о том, какую собаку заведете. Это дает им силы служить дальше.»" },
-                { title: "💡 Совет 10: Гордость", text: "«Никогда не стыдитесь того, что ваш парень в армии. Это достойный мужской путь. Гордитесь им, говорите ему об этом постоянно. И он будет чувствовать себя супер-героем даже стоя в наряде по столовой с чисткой картошки!»" }
-            ]
-        };
+        // === БЕЗОПАСНАЯ РАЗНИЦА В ДНЯХ ===
+        function diffDays(d1, d2) {
+            const u1 = Date.UTC(d1.getFullYear(), d1.getMonth(), d1.getDate());
+            const u2 = Date.UTC(d2.getFullYear(), d2.getMonth(), d2.getDate());
+            return Math.floor((u2 - u1) / (1000 * 60 * 60 * 24));
+        }
 
-        let currentBook = 'army', currentPage = 0;
-        function openBook() { document.getElementById('book-modal').style.display = 'flex'; tg.HapticFeedback.impactOccurred('medium'); renderPage(); }
-        function closeBook() { document.getElementById('book-modal').style.display = 'none'; }
-        function switchBook(t) { currentBook = t; currentPage = 0; ['army','girl','advice'].forEach(v => document.getElementById('book-tab-'+v).classList.toggle('active', v===t)); tg.HapticFeedback.impactOccurred('light'); renderPage(); }
-        function renderPage() { const p = bookData[currentBook]; document.getElementById('book-title').innerText = p[currentPage].title; document.getElementById('book-content').innerHTML = p[currentPage].text; document.getElementById('book-page-num').innerText = `${currentPage + 1} / ${p.length}`; document.querySelector('.book-page-container').scrollTop = 0; }
-        function nextPage() { if (currentPage < bookData[currentBook].length - 1) { currentPage++; renderPage(); tg.HapticFeedback.impactOccurred('light'); } }
-        function prevPage() { if (currentPage > 0) { currentPage--; renderPage(); tg.HapticFeedback.impactOccurred('light'); } }
+        // === FLO ===
+        function getTodayStr() { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; }
 
-        // === DMB ТАЙМЕР И ПРАЗДНИКИ ===
+        function initFlo() {
+            if (!floData.start) {
+                if (role === 'girl') { document.getElementById('flo-setup').style.display = 'block'; document.getElementById('flo-girl-view').style.display = 'none'; } 
+                else { document.getElementById('flo-partner-view').style.display = 'block'; document.getElementById('flo-p-main').innerText = "Половинка еще не настроила календарь 🌸"; document.getElementById('flo-p-sub').innerText = "Ждем данных"; }
+                return;
+            }
+            document.getElementById('flo-setup').style.display = 'none';
+            if (role === 'girl') { document.getElementById('flo-girl-view').style.display = 'block'; renderCalendar(); renderLogs(); } 
+            else { document.getElementById('flo-partner-view').style.display = 'block'; renderPartnerView(); }
+        }
+
+        function saveFlo() {
+            const start = document.getElementById('flo-start').value; if (!start) return tg.showAlert("Выбери дату начала!");
+            floData.start = start; floData.cycle = parseInt(document.getElementById('flo-cycle').value) || 28; floData.len = parseInt(document.getElementById('flo-len').value) || 5;
+            localStorage.setItem('flo', JSON.stringify(floData)); initFlo(); syncAll();
+        }
+
+        function resetFlo() {
+            floData = { start: '', cycle: 28, len: 5, logs: {} }; localStorage.removeItem('flo'); document.getElementById('flo-start').value = '';
+            initFlo(); syncAll(); tg.HapticFeedback.notificationOccurred('success');
+        }
+
+        function toggleLog(btn) {
+            const today = getTodayStr(), val = btn.getAttribute('data-val');
+            if (!floData.logs[today]) floData.logs[today] = [];
+            const idx = floData.logs[today].indexOf(val);
+            if (idx > -1) floData.logs[today].splice(idx, 1); else floData.logs[today].push(val);
+            localStorage.setItem('flo', JSON.stringify(floData)); renderLogs(); syncAll(); tg.HapticFeedback.impactOccurred('light');
+        }
+
+        function renderLogs() {
+            const today = getTodayStr(), log = floData.logs[today] || [];
+            document.querySelectorAll('.log-btn').forEach(btn => { btn.classList.toggle('active', log.includes(btn.getAttribute('data-val'))); });
+        }
+
+        function renderCalendar() {
+            const now = new Date(), startStr = new Date(floData.start);
+            const cycle = floData.cycle, len = floData.len;
+            const monthNames = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"];
+            document.getElementById('cal-month-name').innerText = monthNames[now.getMonth()] + " " + now.getFullYear();
+            const grid = document.getElementById('cal-grid'); grid.innerHTML = '';
+            const firstDayIndex = new Date(now.getFullYear(), now.getMonth(), 1).getDay();
+            const daysInMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+            const startPad = firstDayIndex === 0 ? 6 : firstDayIndex - 1;
+            for (let i = 0; i < startPad; i++) { grid.innerHTML += `<div></div>`; }
+            
+            for (let d = 1; d <= daysInMonth; d++) {
+                const iterDate = new Date(now.getFullYear(), now.getMonth(), d);
+                const dfDays = diffDays(startStr, iterDate);
+                let classes = "cal-day"; if (iterDate.toDateString() === now.toDateString()) classes += " cal-today";
+                if (dfDays >= 0) {
+                    const dayOfCycle = (dfDays % cycle) + 1;
+                    if (dayOfCycle >= 1 && dayOfCycle <= len) classes += " cal-period";
+                    else if (dayOfCycle === cycle - 14) classes += " cal-ovulation";
+                } else {
+                    const futureDiff = Math.abs(dfDays), futureDayCycle = cycle - (futureDiff % cycle) + 1;
+                    if (futureDayCycle >= 1 && futureDayCycle <= len) classes += " cal-pred-period";
+                }
+                grid.innerHTML += `<div class="${classes}">${d}</div>`;
+            }
+        }
+
+        function renderPartnerView() {
+            const startStr = new Date(floData.start);
+            const now = new Date();
+            const dfDays = diffDays(startStr, now);
+            const cycle = floData.cycle, len = floData.len;
+            const currentDay = dfDays >= 0 ? (dfDays % cycle) + 1 : 0; const daysUntilNext = cycle - currentDay + 1;
+            const mainText = document.getElementById('flo-p-main'), subText = document.getElementById('flo-p-sub'), fcDay = document.getElementById('fc-day'), fcDate = document.getElementById('fc-date'), fcAdvice = document.getElementById('fc-advice');
+            fcDate.innerText = now.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long' });
+            
+            if (currentDay >= 1 && currentDay <= len) { subText.innerText = "У неё начались эти дни"; mainText.innerText = "Предложите ей вкусной еды и покой"; fcDay.innerText = `День ${currentDay}`; fcAdvice.innerText = "Купи шоколад и не спорь"; } 
+            else if (daysUntilNext <= 3) { subText.innerText = `Ее месячные начнутся через ${daysUntilNext} дня`; mainText.innerText = "Предложите прогулку на свежем воздухе"; fcDay.innerText = `ПМС`; fcAdvice.innerText = "Будь терпелив и нежен"; } 
+            else if (currentDay >= cycle - 16 && currentDay <= cycle - 12) { subText.innerText = "Фаза овуляции"; mainText.innerText = "Ее привлекательность и энергия на пике!"; fcDay.innerText = `Фертильное окно`; fcAdvice.innerText = "Идеальное время для свидания"; } 
+            else { subText.innerText = `Следующие через ${daysUntilNext} дней`; mainText.innerText = "Сейчас отличный спокойный период"; fcDay.innerText = `День цикла: ${currentDay}`; fcAdvice.innerText = "Дари любовь и заботу"; }
+            
+            const log = floData.logs[getTodayStr()], logBox = document.getElementById('flo-p-logs');
+            if (log && log.length > 0) { logBox.style.display = 'block'; document.getElementById('p-log-text').innerText = log.join(', '); } else { logBox.style.display = 'none'; }
+        }
+
+        // === DMB ===
         const holidays = [
-            { date: "02-23", name: "День защитника Отечества" },
-            { date: "02-27", name: "День ССО" },
-            { date: "03-19", name: "День моряка-подводника" },
-            { date: "03-27", name: "День войск нацгвардии" },
-            { date: "04-08", name: "День военных комиссариатов" },
-            { date: "04-15", name: "День специалиста по РЭБ" },
-            { date: "05-07", name: "День связиста" },
-            { date: "05-09", name: "День Победы" },
-            { date: "05-28", name: "День пограничника" },
-            { date: "05-29", name: "День военного автомобилиста" },
-            { date: "08-02", name: "День ВДВ" },
-            { date: "08-06", name: "День Железнодорожных войск" },
-            { date: "08-12", name: "День ВВС" },
-            { date: "09-02", name: "День Российской гвардии" },
-            { date: "09-08", name: "День танкиста" },
-            { date: "10-01", name: "День Сухопутных войск" },
-            { date: "10-04", name: "День Космических войск" },
-            { date: "10-24", name: "День спецназа" },
-            { date: "11-05", name: "День военного разведчика" },
-            { date: "11-19", name: "День ракетных войск и артиллерии" },
-            { date: "11-27", name: "День морской пехоты" },
+            { date: "02-23", name: "День защитника Отечества" }, { date: "02-27", name: "День ССО" }, { date: "03-19", name: "День моряка-подводника" },
+            { date: "03-27", name: "День нацгвардии" }, { date: "04-08", name: "День военкоматов" }, { date: "04-15", name: "День РЭБ" },
+            { date: "05-07", name: "День связиста" }, { date: "05-09", name: "День Победы" }, { date: "05-28", name: "День пограничника" },
+            { date: "05-29", name: "День автомобилиста" }, { date: "08-02", name: "День ВДВ" }, { date: "08-06", name: "День ЖД войск" },
+            { date: "08-12", name: "День ВВС" }, { date: "09-02", name: "День Рос. гвардии" }, { date: "09-08", name: "День танкиста" },
+            { date: "10-01", name: "День Сухопутных войск" }, { date: "10-04", name: "День Космических войск" }, { date: "10-24", name: "День спецназа" },
+            { date: "11-05", name: "День военного разведчика" }, { date: "11-19", name: "День РВиА" }, { date: "11-27", name: "День морской пехоты" },
             { date: "12-17", name: "День РВСН" }
         ];
 
         function getNextHoliday() {
-            const now = new Date(); const year = now.getFullYear();
-            let nextHol = null; let minDiff = Infinity;
+            const now = new Date(); const year = now.getFullYear(); let nextHol = null; let minDiff = Infinity;
             for (let h of holidays) {
                 let holDate = new Date(`${year}-${h.date}T00:00:00`);
                 if (holDate < now && holDate.toDateString() !== now.toDateString()) holDate = new Date(`${year + 1}-${h.date}T00:00:00`);
-                const diff = holDate.getTime() - now.getTime();
-                if (holDate.toDateString() === now.toDateString()) return { name: h.name, daysLeft: 0, isToday: true };
-                if (diff > 0 && diff < minDiff) { minDiff = diff; nextHol = { name: h.name, daysLeft: Math.ceil(diff / (1000 * 3600 * 24)), isToday: false }; }
+                const diff = diffDays(now, holDate);
+                if (diff === 0) return { name: h.name, daysLeft: 0, isToday: true };
+                if (diff > 0 && diff < minDiff) { minDiff = diff; nextHol = { name: h.name, daysLeft: diff, isToday: false }; }
             }
             return nextHol;
         }
@@ -442,12 +470,18 @@
         function saveDMB() { 
             const s = document.getElementById('ds').value, e = document.getElementById('de').value, p = document.getElementById('dp').value; 
             if(!s || !e) return tg.showAlert("Выберите даты!"); 
-            localStorage.setItem('s', s); localStorage.setItem('e', e); if(p) localStorage.setItem('p', p); checkDMB(); 
+            localStorage.setItem('s', s); localStorage.setItem('e', e); if(p) localStorage.setItem('p', p); checkDMB(); syncAll();
         }
         
+        function resetDMB() {
+            localStorage.removeItem('s'); localStorage.removeItem('e'); localStorage.removeItem('p');
+            document.getElementById('ds').value = ''; document.getElementById('de').value = ''; document.getElementById('dp').value = '';
+            checkDMB(); syncAll(); tg.HapticFeedback.notificationOccurred('success');
+        }
+
         function updateArmyStatus(passedDays, leftDays) {
             const rankEl = document.getElementById('army-rank'), msgEl = document.getElementById('army-msg'), boxEl = document.getElementById('army-status-box');
-            if (leftDays <= 10 && leftDays > 0) { rankEl.innerText = "КОСМОС 🚀"; rankEl.style.color = "#ff4757"; msgEl.innerText = role === 'girl' ? `Готовься встречать! Осталось дней: ${leftDays}` : `Пошел обратный отсчет! Дней до дома: ${leftDays}`; boxEl.style.borderStyle = "solid"; boxEl.style.borderColor = "#ff4757"; boxEl.style.background = "rgba(255, 71, 87, 0.1)"; } 
+            if (leftDays <= 10 && leftDays > 0) { rankEl.innerText = "КОСМОС 🚀"; rankEl.style.color = "#ff4757"; msgEl.innerText = role === 'girl' ? `Готовься встречать! Осталось дней: ${leftDays}` : `Пошел обратный отсчет! Дней до дома: ${leftDays}`; boxEl.style.borderStyle = "solid"; boxEl.style.borderColor = "#ff4757"; } 
             else if (leftDays <= 0) { rankEl.innerText = "ДЕМБЕЛЬ 🎉"; rankEl.style.color = "var(--mint)"; msgEl.innerText = "Служба окончена! Свобода!"; boxEl.style.borderColor = "var(--mint)"; } 
             else if (passedDays < 30) { rankEl.innerText = "ЗАПАХ 🟢"; msgEl.innerText = role === 'girl' ? "Самое начало пути. Ему очень нужна твоя поддержка!" : "Служба только началась. Держись, солдат!"; } 
             else if (passedDays < 180) { rankEl.innerText = "ДУХ 🪖"; msgEl.innerText = role === 'girl' ? "Он уже привык к распорядку. Ждите экватор!" : "Учебка позади. Ты втягиваешься в ритм."; } 
@@ -456,138 +490,123 @@
         }
 
         function tick() {
-            const start = new Date(localStorage.getItem('s')).getTime(), end = new Date(localStorage.getItem('e')).getTime(), oath = localStorage.getItem('p') ? new Date(localStorage.getItem('p')).getTime() : null, now = new Date().getTime();
-            if (now < start) return;
-            const totalMs = end - start; let passedMs = Math.min(now - start, totalMs); const left = Math.max(end - now, 0);
+            const startStr = localStorage.getItem('s'), endStr = localStorage.getItem('e'), oathStr = localStorage.getItem('p');
+            if(!startStr || !endStr) return;
+            const start = new Date(startStr), end = new Date(endStr), now = new Date();
             
-            const p = (passedMs / totalMs) * 100;
+            const totalDays = diffDays(start, end);
+            const passedDays = Math.max(0, Math.min(diffDays(start, now), totalDays));
+            const leftDays = Math.max(0, totalDays - passedDays);
+            
+            const totalMs = end.getTime() - start.getTime();
+            const leftMs = Math.max(0, end.getTime() - now.getTime());
+            
+            const p = (passedMs / totalDays) * 100;
             document.getElementById('bar').style.width = p + '%'; document.getElementById('perc').innerText = p.toFixed(6) + '%';
             
-            document.getElementById('vd').innerText = Math.floor(left / 86400000); document.getElementById('vh').innerText = Math.floor((left % 86400000) / 3600000).toString().padStart(2, '0'); document.getElementById('vm').innerText = Math.floor((left % 3600000) / 60000).toString().padStart(2, '0'); document.getElementById('vs').innerText = Math.floor((left % 60000) / 1000).toString().padStart(2, '0');
+            document.getElementById('vd').innerText = leftDays; 
+            document.getElementById('vh').innerText = Math.floor((leftMs % 86400000) / 3600000).toString().padStart(2, '0'); 
+            document.getElementById('vm').innerText = Math.floor((leftMs % 3600000) / 60000).toString().padStart(2, '0'); 
+            document.getElementById('vs').innerText = Math.floor((leftMs % 60000) / 1000).toString().padStart(2, '0');
             
-            const passedDays = Math.floor(passedMs / 86400000), leftDays = Math.floor(left / 86400000);
-            const cw = Math.floor(passedMs / (totalMs / 52));
+            const cw = Math.floor(passedDays / (totalDays / 52));
             for(let i=0; i<52; i++) { const box = document.getElementById('week-' + i); if(box) box.className = i < cw ? 'week-box filled' : (i === cw ? 'week-box current' : 'week-box'); }
             document.getElementById('w-passed').innerText = `Пройдено: ${cw}`; document.getElementById('w-left').innerText = `Осталось: ${Math.max(0, 52 - cw)}`;
             
-            const eq = Math.max(0, Math.floor((start + totalMs/2 - now)/86400000)); document.getElementById('v-eq').innerText = eq > 0 ? eq + ' дн' : 'Пройден!';
-            const ord = Math.max(0, Math.floor((end - 100*86400000 - now)/86400000)); document.getElementById('v-ord').innerText = ord > 0 ? ord + ' дн' : 'Вышел!';
-            if (oath) { document.getElementById('card-oath').style.display = 'block'; const oathLeft = oath - now; document.getElementById('v-oath').innerText = oathLeft > 0 ? Math.floor(oathLeft / 86400000) + ' дн' : 'Пройдена!'; }
+            const eqDays = Math.max(0, Math.floor(totalDays/2) - passedDays); document.getElementById('v-eq').innerText = eqDays > 0 ? eqDays + ' дн' : 'Пройден!';
+            const ordDays = Math.max(0, leftDays - 100); document.getElementById('v-ord').innerText = ordDays > 0 ? ordDays + ' дн' : 'Вышел!';
+            if (oathStr) { document.getElementById('card-oath').style.display = 'block'; const oLeft = diffDays(now, new Date(oathStr)); document.getElementById('v-oath').innerText = oLeft > 0 ? oLeft + ' дн' : 'Пройдена!'; }
 
             updateArmyStatus(passedDays, leftDays);
 
             const hol = getNextHoliday(); const holCard = document.getElementById('holiday-card');
             if (hol) {
                 holCard.style.display = 'block';
-                if (hol.isToday) {
-                    document.getElementById('hol-name').innerText = "⭐ СЕГОДНЯ ПРАЗДНИК! ⭐"; document.getElementById('hol-name').style.color = "#ff4757"; document.getElementById('hol-val').innerText = hol.name; holCard.classList.add('holiday-active');
-                } else {
-                    document.getElementById('hol-name').innerText = `БЛИЖАЙШИЙ ПРАЗДНИК: ${hol.name}`; document.getElementById('hol-name').style.color = "var(--text-sub)"; document.getElementById('hol-val').innerText = `через ${hol.daysLeft} дн`; holCard.classList.remove('holiday-active');
-                }
+                if (hol.isToday) { document.getElementById('hol-name').innerText = "⭐ СЕГОДНЯ ПРАЗДНИК! ⭐"; document.getElementById('hol-name').style.color = "#ff4757"; document.getElementById('hol-val').innerText = hol.name; holCard.classList.add('holiday-active'); } 
+                else { document.getElementById('hol-name').innerText = `БЛИЖАЙШИЙ ПРАЗДНИК: ${hol.name}`; document.getElementById('hol-name').style.color = "var(--text-sub)"; document.getElementById('hol-val').innerText = `через ${hol.daysLeft} дн`; holCard.classList.remove('holiday-active'); }
             } else { holCard.style.display = 'none'; }
         }
 
-        function resetDMB() {
-            localStorage.removeItem('s'); localStorage.removeItem('e'); localStorage.removeItem('p');
-            let wData = { boy: [], girl: [] }; try { wData = JSON.parse(localStorage.getItem('w')) || { boy: [], girl: [] }; } catch(e) {}
-            let fData = { start: '', cycle: 28, len: 5, logs: {} }; try { fData = JSON.parse(localStorage.getItem('flo')) || fData; } catch(e) {}
-            try { tg.sendData(JSON.stringify({ s: '', e: '', w: wData, flo: fData })); } catch(e) {}
-            document.getElementById('ds').value = ''; document.getElementById('de').value = ''; document.getElementById('dp').value = ''; checkDMB(); tg.HapticFeedback.notificationOccurred('success');
-        }
+        // === КНИГА ===
+        const bookData = {
+            army: [
+                { title: "🎒 Что брать в военкомат? (Гайд)", text: "<b>Бери только самое дешевое и нужное.</b><br><br><ul><li><b>Телефон «Тапик»:</b> Кнопочный телефон без камеры.</li><li><b>Рыльно-мыльное:</b> Щетка в футляре, мыло, пена, станки.</li><li><b>Нитки и Иголки:</b> Черные, белые, хаки. Прячь иголки в ручку.</li><li><b>Медицина:</b> Много пластырей (берцы сотрут ноги), паста Теймурова.</li><li><b>Часы:</b> Дешевые электронные с подсветкой. Опоздание карается всей ротой.</li></ul><br><b>НЕ НУЖНО:</b> Скоропортящуюся еду, стекло, ножницы." },
+                { title: "🪖 КМБ: Выживание в первый месяц", text: "<b>КМБ — самый сложный психологический этап.</b><br>Будут учить заправлять кровать по ниточке, ходить строем и петь. Огневой подготовки мало, физической — максимум.<br><br><b>Совет: НЕ ВЫДЕЛЯЙСЯ.</b><br>«Инициатива наказуема». Не спорь. Задача — слиться с коллективом, делать всё быстро и четко. Если косячишь ты — отжимается вся рота. Этот прессинг временный." },
+                { title: "⏰ Распорядок дня", text: "<b>Стандартный распорядок:</b><br><ul><li><b>06:00 — Подъем.</b> 45 секунд, чтобы вскочить.</li><li><b>06:10 — УФЗ (Зарядка).</b> Бег, турники.</li><li><b>07:00 — Туалет, койки.</b></li><li><b>08:00 — Завтрак.</b></li><li><b>09:00 — Утренний развод на плацу.</b></li><li><b>10:00 - 14:00 — Занятия / Рабочки.</b></li><li><b>14:00 — Обед.</b></li><li><b>19:00 — Ужин.</b></li><li><b>21:00 — Просмотр новостей («Время»).</b></li><li><b>21:30 — Вечерняя поверка.</b></li><li><b>22:00 — Отбой.</b></li></ul>" },
+                { title: "🗣 Армейский сленг ч.1", text: "<ul><li><b>Дух (Бесплотный)</b> — солдат до присяги. Нет прав.</li><li><b>Дух</b> — солдат до полугода службы. Тяжелая работа.</li><li><b>Слон (Фазан/Черпак)</b> — отслуживший полгода. Жизнь легче.</li><li><b>Дед</b> — до приказа менее 100 дней. Авторитет.</li><li><b>Дембель</b> — солдат после Приказа МО РФ.</li><li><b>Шакал</b> — офицер/прапорщик с плохим отношением (не говори вслух).</li><li><b>Контрабас</b> — контрактник.</li></ul>" },
+                { title: "🧹 Армейский сленг ч.2", text: "<ul><li><b>ПХД (Парково-хозяйственный день)</b> — суббота. Пенная вечеринка с мылом на полу.</li><li><b>Взлётка</b> — центральный коридор казармы.</li><li><b>Располога</b> — спальное помещение (шконки).</li><li><b>Каптёрка</b> — комната хранения личных вещей и формы.</li><li><b>ЧИПОК</b> — магазин-кафе на территории части.</li><li><b>Кантик</b> — идеально ровный прямой угол (на кровати, на снегу).</li><li><b>Рожать</b> — достать что-либо во что бы то ни стало.</li></ul>" },
+                { title: "🪂 ВДВ и Спецназ", text: "<b>ВДВ (Крылатая пехота)</b><br>Девиз: «Никто, кроме нас!». Феноменальная выносливость, марш-броски по 10-15 км с выкладкой, прыжки из Ил-76 и Ан-2. Голубой берет нужно заслужить.<br><br><b>Спецназ (ГРУ)</b><br>Девиз: «Выше нас только звёзды». Элита разведки. Скрытность, тактика, стрельбы из всех видов оружия. Срочники попадают редко (нужна категория А1)." },
+                { title: "⚓ ВМФ и ВКС", text: "<b>ВМФ (Флот)</b><br>Девиз: «С нами Бог и Андреевский флаг!» Корабли и Морпехи. Язык: камбуз, гальюн, кубрик, трап. Морпехи — элита: «Там, где мы, там — победа!».<br><br><b>ВКС (Космические Силы)</b><br>Девиз: «Всё выше и выше!» Срочники не летают. Обслуживание аэродромов, радары, ПВО. Физо меньше, но нужно техническое мышление и много караулов." },
+                { title: "🚀 РВСН и Мотострелки", text: "<b>РВСН (Ракетные Войска)</b><br>Девиз: «После нас — тишина.» Ядерный щит. Высочайшая секретность. Боевые Дежурства (БД) под землей или с комплексами «Ярс». Дисциплина жесткая.<br><br><b>Сухопутные (Мотострелки/Танкисты)</b><br>«Царица полей». Самый массовый род. Полигоны, стрельбы, вождение БМП/БТР, рытье окопов. Полевая романтика, запах пороха и грязь." },
+                { title: "💂‍♂️ Наряды и Караул", text: "<b>Виды нарядов:</b><br><ul><li><b>Дневальный по роте:</b> Стоит на «тумбочке». Следит за порядком, подает команды. Спят 4 часа.</li><li><b>Дежурный по роте:</b> Сержант. Руководит дневальными.</li><li><b>Караул (Гарнизонный):</b> Вооруженная охрана складов. ОЧЕНЬ серьезно. Спать на посту — уголовка. У часового боевые патроны.</li><li><b>Наряд по столовой:</b> Чистка тонн картошки, мытье огромных котлов.</li></ul>" },
+                { title: "🧠 Психология выживания", text: "<b>1. Коллектив важнее всего.</b> В армии нет «Я», есть «МЫ». Никогда не воруй у своих и не стучи. Помогай товарищам.<br><b>2. Психологическая броня.</b> На тебя будут кричать. Они кричат на «солдата», чтобы приучить к подчинению. Не дерзи, выдохни, выполни приказ.<br><b>3. Не забывай о доме.</b> Связь с девушкой и родными — это твои силы. Пиши бумажные письма. Они возвращают в реальность." }
+            ],
+            girl: [
+                { title: "❤️ 1. Первый день", text: "Этот день нужно просто пережить. Разреши себе плакать в подушку, съесть ведро мороженого и пересматривать видео. Завтра утром ты берешь себя в руки. Ему там в тысячу раз тяжелее и страшнее, чем тебе. Ему нужна твоя уверенность и голос, полный любви." },
+                { title: "📞 2. Телефонные звонки", text: "Смартфоны под запретом. Кнопочные выдают в воскресенье на 15 минут. <b>Держи лицо.</b> Не рыдай в трубку со словами «забери меня». Рассказывай смешные истории про общих друзей, про кота. Задавай вопросы: чем кормили, как погода." },
+                { title: "🚫 3. О чем молчать", text: "Никогда не рассказывай о: 1. Бытовых проблемах (сломался кран) — реши сама, он всё равно не поможет. 2. Ссорах с подругами. 3. Мужском внимании (фраза «ко мне подошли знакомиться, но я отказала» включит у него дикую паранойю)." },
+                { title: "💌 4. Бумажные письма", text: "В армии письмо — это высшая ценность. Пиши много и часто. Вложи распечатанные фотографии (нейтральные, конверты могут вскрывать). Попшикай письмо духами. Оставь след от помады. Он будет перечитывать его каждую ночь с фонариком." },
+                { title: "📦 5. Идеальная посылка", text: "Посылка в армии общая, он будет делиться. <b>Класть:</b> Сгущенку (в мягких пакетах), Сникерсы, леденцы (сосать в строю), печенье, толстые черные носки, бактерицидные пластыри, пасту Теймурова, одноразовые бритвы, сырокопченую колбасу." },
+                { title: "❌ 6. Что НЕ класть", text: "Посылки вскрывают офицеры. <b>Запрещено:</b> 1. Алкоголь (выкинут, роту накажут). 2. Скоропорт: фрукты, домашние пирожки, вареную колбасу (отравятся — будут проблемы). 3. Ножницы, ножи. 4. Таблетки (кроме пластырей и мазей)." },
+                { title: "🤯 7. Синдром 'Почему не в сети?'", text: "Он обещал позвонить в 15:00, а уже 18:00? Вдох-выдох! В армии 1000 причин: рота накосячила и телефоны забрали, он в наряде (чистит картошку), телефон сел (а розеток всего 3 на 100 человек). Доверяй. Позвонит, как только сможет." },
+                { title: "🎖 8. Присяга", text: "Присяга — через месяц после призыва. Это первый раз, когда вы увидитесь! Бронируй жилье заранее. Наготовь домашней еды (котлеты, отбивные) — армейская сечка ему уже снится в кошмарах. Оденься красиво, но удобно (на плацу долго стоять)." },
+                { title: "🫂 9. Поведение на присяге", text: "Он изменился. Похудел, обрит наголо, синяки от автомата. <b>НИ В КОЕМ СЛУЧАЕ</b> не причитай 'бедный мой, худенький'. Он солдат. Обними, скажи, что гордишься. В увольнительном (до вечера/утра) просто корми его и дари ласку." },
+                { title: "📆 10. Как занять себя", text: "Время тянется медленно только тогда, когда ты ничего не делаешь. Составь жесткий график. Спортзал, права, подработка, языки. Сделай так, чтобы вечером падать в кровать без сил. Время полетит, а он вернется и увидит, какой крутой ты стала!" },
+                { title: "🤫 11. Ревность", text: "У него отбирают свободу, и единственное, что остается — это ты. Любая фотка из клуба вызывает взрыв паранойи. Будь мудрее. Если идешь гулять — предупреди, пришли смешное фото. Дай ему уверенность, что он единственный." },
+                { title: "🤝 12. Его мама (Союзница)", text: "Его маме так же тяжело. Не конкурируйте! Звони ей раз в неделю. Если он позвонил тебе, а ей не успел — сразу напиши ей: «Ваня звонил, здоров, передавал привет!». Совместное ожидание сближает." },
+                { title: "🎁 13. Сюрпризы издалека", text: "Узнай точный адрес КПП. Во многих городах работают Яндекс.Еда или Деливери. В День рождения, если он договорится с дежурным по КПП, закажи ему пиццу прямо к воротам части! Или найди в ВК группу его части и попроси офицеров передать торт." },
+                { title: "🌗 14. Экватор (Полгода)", text: "Важнейший рубеж. Вы «заканчиваете» служить. Он переходит из «Духа» в «Слона». Физический прессинг спадает, служба превращается в рутину. Начните обсуждать, что будете делать, когда он вернется. Это даст ему заряд энергии." },
+                { title: "✂️ 15. Сто дней до приказа", text: "Приказ выходит дважды в год: 27 марта и 27 сентября. За 100 дней до этого 'деды' иногда бреют голову и отдают масло за завтраком 'молодым'. Начинай готовить дембельский альбом и продумывать встречу!" },
+                { title: "🚀 16. Космос", text: "Последние 10 дней до дембеля. Самое тягучее время. Дни тянутся как резина. В роте принято считать: «Десять! Девять! Восемь!». Твоя задача — активно готовиться: шарики, торт, плакаты." },
+                { title: "🧠 17. Он изменится", text: "Армия меняет психику. Он вернется более жестким, молчаливым, прямолинейным. Это защитный панцирь. Не говори «Я тебя не узнаю». Окружи лаской, и через пару месяцев этот панцирь растает." },
+                { title: "🏠 18. Адаптация дома", text: "Шок свободы. Он будет просыпаться в 6 утра, его будут бесить толпы людей в ТЦ. Не тащи его по клубам. Дай неделю отлежаться на диване, поесть домашней еды и привыкнуть, что не нужно бежать по команде." },
+                { title: "🎉 19. Подготовка к Дембелю", text: "Узнай, в чем он приедет: 'парадка' или 'гражданка'. Закажи бенто-торт «Мой герой дома». Купи шарики цвета хаки. Договорись с друзьями встречать на перроне. Прыжок ему на шею — обязателен!" },
+                { title: "📖 20. Дембельский альбом", text: "Сделай альбом сама! Распечатай скрины переписок, скрины с видеозвонков (он лысый, ты в пижаме), вклей билеты с присяги. Напиши трогательные комментарии. Он будет растроган до слез." },
+                { title: "💅 21. Твоя жизнь", text: "Многие ждули 'хоронят' себя дома. Не делай так! Встречайся с подругами, ходи в кино, покупай платья. Парню приятнее смотреть на фото счастливой, красивой девушки, чем на заплаканную страдалицу." },
+                { title: "🏥 22. Госпиталь", text: "В армии болеют все (ОРВИ, мозоли). Если он в госпитале — не паникуй! В армии это санаторий. Там тепло, нормальная еда, можно лежать весь день и часто выдают телефоны. Это легальный отпуск от сержантов." },
+                { title: "📱 23. Социальные сети", text: "Твой профиль — его окно в мир. Пости красивые фото. Делай милые подписи «Жду моего 🪖❤️». Отмечай его. Для него это публичное признание твоей верности, он будет хвастаться перед сослуживцами." },
+                { title: "🏃‍♂️ 24. Увальнительные (Увалы)", text: "Временный выход за пределы части. Дают не всем. Если к девушке — нужно договариваться. Снимите квартиру. САМОЕ ВАЖНОЕ: верните его на КПП за 15 минут до назначенного времени. Опоздание = лишение увалов до конца службы." },
+                { title: "🍕 25. Армейский голод", text: "Первый месяц дома он будет есть всё. Армейская еда однообразна. Парень будет сметать по 3 тарелки борща и ночью идти за бутербродами. Просто держи холодильник полным." },
+                { title: "💼 26. Учебка vs Боевая часть", text: "Первые 3-5 месяцев — «Учебка» (жесткий устав и контроль). Затем распределение в «Боевую часть». Там служба обычно идет спокойнее, отношения с сержантами человечнее, телефон достать проще." },
+                { title: "🗣 27. Мат", text: "В армии на мате разговаривают. Он впитает эту культуру. Не падай в обморок, если по возвращении будет проскакивать мат. Не читай нотации, мягко напоминай: «Ты дома». За пару недель он перестроится." },
+                { title: "💸 28. Финансы", text: "Платят копейки (2000-3000 руб). Они уходят на пену, нитки и сникерсы. Не жди подарков из армии. Наоборот, будь готова иногда подкидывать ему по 500 рублей на сигареты или сладкое." },
+                { title: "🔮 29. Стройте планы", text: "Обсуждайте первый день после дембеля. Какую закажете пиццу? Куда поедете отдыхать? Планирование светлого будущего помогает пережить серое армейское настоящее." },
+                { title: "👑 30. Ты — героиня", text: "Дождаться парня — это Поступок. Вы пройдете огромную проверку на прочность. Когда он выйдет из поезда и обнимет тебя, ты поймешь, что этот год стоил каждой секунды. Всё будет хорошо!" }
+            ],
+            advice: [
+                { title: "💡 Совет 1: Саморазвитие", text: "«Когда он ушел, хотелось плакать. Потом я поняла: этот год — отпуск для саморазвития! Записалась на курсы, начала бегать. Когда он вернулся, обалдел от того, какой я стала. Вкладывайте время в себя!»" },
+                { title: "💡 Совет 2: Письма", text: "«Не ленитесь писать письма от руки! Мой служил там, где телефоны выдавали раз в 2 недели. Я писала каждые 3 дня обо всем, вкладывала чай. Он привез эти письма затертые до дыр. Говорил, они пахли домом.»" },
+                { title: "💡 Совет 3: Без паники", text: "«Не звонит в воскресенье? Это не значит, что разлюбил. Рота в наряде, телефон сел или сержант забрал телефоны за косяк. Дышите ровно. Позвонит, как только сможет!»" },
+                { title: "💡 Совет 4: Свекровь", text: "«Общайтесь с его мамой! Ей тоже тяжело. Если позвонил вам, а ей не успел — напишите ей, успокойте. Это сблизит вас с его семьей, станете родными людьми.»" },
+                { title: "💡 Совет 5: Экономь", text: "«Копите деньги. Дембельский праздник, торт, ваш первый совместный поход в ресторан потребуют бюджета. Лучше откладывать понемногу весь год.»" },
+                { title: "💡 Совет 6: Секретность", text: "«Не вываливайте подробности службы в соцсети. Не пишите номер части, не выкладывайте его фото с оружием. Лишние глаза создадут ему проблемы с командирами.»" },
+                { title: "💡 Совет 7: Режим", text: "«Не сидите в телефоне до 3 ночи, ожидая сообщения. Высыпайтесь! Нервная и невыспавшаяся девушка — плохая поддержка для солдата.»" },
+                { title: "💡 Совет 8: Мелочи в посылке", text: "«Сгущенка — хорошо, но маленькое письмо, спрятанное под обертку шоколадки, или смешная распечатанная мем-фотка — это просто бесценно для его настроения.»" },
+                { title: "💡 Совет 9: Планы", text: "«Постоянно обсуждайте, что сделаете ПЕРВЫМ делом, когда он сойдет с перрона. Мечтайте о поездке, ремонте. Это дает им силы служить дальше.»" },
+                { title: "💡 Совет 10: Гордость", text: "«Никогда не стыдитесь, что парень в армии. Это достойный путь. Гордитесь им, говорите ему об этом. И он будет чувствовать себя супер-героем даже на чистке картошки!»" }
+            ]
+        };
 
-        // === FLO ЛОГИКА ===
-        function getTodayStr() { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; }
-        function initFlo() {
-            if (!floData.start) {
-                if (role === 'girl') { document.getElementById('flo-setup').style.display = 'block'; document.getElementById('flo-girl-view').style.display = 'none'; } 
-                else { document.getElementById('flo-partner-view').style.display = 'block'; document.getElementById('flo-p-main').innerText = "Она еще не настроила календарь 🌸"; document.getElementById('flo-p-sub').innerText = "Ждем данных"; }
-                return;
-            }
-            document.getElementById('flo-setup').style.display = 'none';
-            if (role === 'girl') { document.getElementById('flo-girl-view').style.display = 'block'; renderCalendar(); renderLogs(); } 
-            else { document.getElementById('flo-partner-view').style.display = 'block'; renderPartnerView(); }
-        }
-        function saveFlo() {
-            const start = document.getElementById('flo-start').value; if (!start) return tg.showAlert("Выбери дату начала!");
-            floData.start = start; floData.cycle = parseInt(document.getElementById('flo-cycle').value) || 28; floData.len = parseInt(document.getElementById('flo-len').value) || 5;
-            localStorage.setItem('flo', JSON.stringify(floData)); initFlo(); syncAll();
-        }
-        function resetFloLocally() {
-            floData = { start: '', cycle: 28, len: 5, logs: {} }; localStorage.removeItem('flo'); document.getElementById('flo-start').value = '';
-            let wData = { boy: [], girl: [] }; try { wData = JSON.parse(localStorage.getItem('w')) || { boy: [], girl: [] }; } catch(e) {}
-            try { tg.sendData(JSON.stringify({ s: localStorage.getItem('s')||'', e: localStorage.getItem('e')||'', w: wData, flo: floData })); } catch(e) {}
-            initFlo(); tg.HapticFeedback.notificationOccurred('success');
-        }
-        function toggleLog(btn) {
-            const today = getTodayStr(), val = btn.getAttribute('data-val');
-            if (!floData.logs[today]) floData.logs[today] = [];
-            const idx = floData.logs[today].indexOf(val);
-            if (idx > -1) floData.logs[today].splice(idx, 1); else floData.logs[today].push(val);
-            localStorage.setItem('flo', JSON.stringify(floData)); renderLogs(); syncAll(); tg.HapticFeedback.impactOccurred('light');
-        }
-        function renderLogs() {
-            const today = getTodayStr(), log = floData.logs[today] || [];
-            document.querySelectorAll('.log-btn').forEach(btn => { btn.classList.toggle('active', log.includes(btn.getAttribute('data-val'))); });
-        }
-        function renderCalendar() {
-            const now = new Date(), startStr = new Date(floData.start); startStr.setHours(0,0,0,0);
-            const cycle = floData.cycle, len = floData.len;
-            const monthNames = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"];
-            document.getElementById('cal-month-name').innerText = monthNames[now.getMonth()] + " " + now.getFullYear();
-            const grid = document.getElementById('cal-grid'); grid.innerHTML = '';
-            const firstDayIndex = new Date(now.getFullYear(), now.getMonth(), 1).getDay();
-            const daysInMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
-            const startPad = firstDayIndex === 0 ? 6 : firstDayIndex - 1;
-            for (let i = 0; i < startPad; i++) { grid.innerHTML += `<div></div>`; }
-            for (let d = 1; d <= daysInMonth; d++) {
-                const iterDate = new Date(now.getFullYear(), now.getMonth(), d);
-                const diffDays = Math.floor((iterDate - startStr) / (1000 * 60 * 60 * 24));
-                let classes = "cal-day"; if (iterDate.toDateString() === now.toDateString()) classes += " cal-today";
-                if (diffDays >= 0) {
-                    const dayOfCycle = (diffDays % cycle) + 1;
-                    if (dayOfCycle >= 1 && dayOfCycle <= len) classes += " cal-period";
-                    else if (dayOfCycle === cycle - 14) classes += " cal-ovulation";
-                } else {
-                    const futureDiff = Math.abs(diffDays), futureDayCycle = cycle - (futureDiff % cycle) + 1;
-                    if (futureDayCycle >= 1 && futureDayCycle <= len) classes += " cal-pred-period";
-                }
-                grid.innerHTML += `<div class="${classes}">${d}</div>`;
-            }
-        }
-        function renderPartnerView() {
-            const startStr = new Date(floData.start); startStr.setHours(0,0,0,0);
-            const now = new Date(); now.setHours(0,0,0,0);
-            const diffDays = Math.floor((now - startStr) / (1000 * 60 * 60 * 24));
-            const cycle = floData.cycle, len = floData.len;
-            const currentDay = diffDays >= 0 ? (diffDays % cycle) + 1 : 0; const daysUntilNext = cycle - currentDay + 1;
-            const mainText = document.getElementById('flo-p-main'), subText = document.getElementById('flo-p-sub'), fcDay = document.getElementById('fc-day'), fcDate = document.getElementById('fc-date'), fcAdvice = document.getElementById('fc-advice');
-            fcDate.innerText = now.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long' });
-            if (currentDay >= 1 && currentDay <= len) { subText.innerText = "У неё начались эти дни"; mainText.innerText = "Предложите ей вкусной еды и покой"; fcDay.innerText = `День ${currentDay}`; fcAdvice.innerText = "Купи шоколад и не спорь"; } 
-            else if (daysUntilNext <= 3) { subText.innerText = `Ее месячные начнутся через ${daysUntilNext} дня`; mainText.innerText = "Предложите прогулку на свежем воздухе"; fcDay.innerText = `ПМС`; fcAdvice.innerText = "Будь терпелив и нежен"; } 
-            else if (currentDay >= cycle - 16 && currentDay <= cycle - 12) { subText.innerText = "Фаза овуляции"; mainText.innerText = "Ее привлекательность и энергия на пике!"; fcDay.innerText = `Фертильное окно`; fcAdvice.innerText = "Идеальное время для свидания"; } 
-            else { subText.innerText = `Следующие через ${daysUntilNext} дней`; mainText.innerText = "Сейчас отличный спокойный период"; fcDay.innerText = `День цикла: ${currentDay}`; fcAdvice.innerText = "Дари любовь и заботу"; }
-            const log = floData.logs[getTodayStr()], logBox = document.getElementById('flo-p-logs');
-            if (log && log.length > 0) { logBox.style.display = 'block'; document.getElementById('p-log-text').innerText = log.join(', '); } else { logBox.style.display = 'none'; }
-        }
+        let currentBook = 'army', currentPage = 0;
+        function openBook() { document.getElementById('book-modal').style.display = 'flex'; renderPage(); tg.HapticFeedback.impactOccurred('medium'); }
+        function closeBook() { document.getElementById('book-modal').style.display = 'none'; }
+        function switchBook(t) { currentBook = t; currentPage = 0; ['army','girl','advice'].forEach(v => document.getElementById('book-tab-'+v).classList.toggle('active', v===t)); renderPage(); tg.HapticFeedback.impactOccurred('light'); }
+        function renderPage() { const p = bookData[currentBook]; document.getElementById('book-title').innerText = p[currentPage].title; document.getElementById('book-content').innerHTML = p[currentPage].text; document.getElementById('book-page-num').innerText = `${currentPage + 1} / ${p.length}`; document.querySelector('.book-page-container').scrollTop = 0; }
+        function nextPage() { if (currentPage < bookData[currentBook].length - 1) { currentPage++; renderPage(); tg.HapticFeedback.impactOccurred('light'); } }
+        function prevPage() { if (currentPage > 0) { currentPage--; renderPage(); tg.HapticFeedback.impactOccurred('light'); } }
 
-        // === КОРЗИНА (WISH) ===
-        let currentWTab = 'partner';
-        function switchW(t) { currentWTab = t; document.getElementById('tab-partner').classList.toggle('active', t === 'partner'); document.getElementById('tab-me').classList.toggle('active', t === 'me'); document.getElementById('wish-input-group').style.display = t === 'me' ? 'flex' : 'none'; renderW(); }
-        function renderW() {
-            const list = document.getElementById('wl'), pr = role === 'girl' ? 'boy' : 'girl';
-            let wData = { boy: [], girl: [] }; try { wData = JSON.parse(localStorage.getItem('w')); } catch(e) {}
-            const activeList = currentWTab === 'me' ? wData[role] : wData[pr];
-            if (!activeList || activeList.length === 0) { list.innerHTML = `<p style="text-align:center; color:var(--text-sub); margin-top:30px; font-size:12px;">Пусто...</p>`; return; }
-            list.innerHTML = activeList.map((w, i) => `<div class="wish-item"><div style="display:flex; justify-content:space-between; align-items:flex-start;"><span style="word-break: break-word; line-height: 1.5;">${w.replace(/(https?:\/\/[^\s]+)/g, '<br><a href="$1" target="_blank" class="wish-link">🔗 ОТКРЫТЬ ССЫЛКУ</a>')}</span>${currentWTab === 'me' ? `<span class="del-btn" onclick="delW(${i})">×</span>` : ''}</div></div>`).join('');
-        }
-        function addW() { const i = document.getElementById('wi'); if(!i.value.trim()) return; let wData = { boy: [], girl: [] }; try { wData = JSON.parse(localStorage.getItem('w')) || { boy: [], girl: [] }; } catch(e) {} if(!wData[role]) wData[role] = []; wData[role].push(i.value.trim()); i.value=''; localStorage.setItem('w', JSON.stringify(wData)); renderW(); }
-        function delW(i) { let wData = { boy: [], girl: [] }; try { wData = JSON.parse(localStorage.getItem('w')) || { boy: [], girl: [] }; } catch(e) {} wData[role].splice(i, 1); localStorage.setItem('w', JSON.stringify(wData)); renderW(); }
-
+        // === ОДНА ГЛОБАЛЬНАЯ ФУНКЦИЯ SYNC ===
         function syncAll() { 
             let wData = { boy: [], girl: [] }; try { wData = JSON.parse(localStorage.getItem('w')) || { boy: [], girl: [] }; } catch(e) {}
-            try { tg.sendData(JSON.stringify({ s: localStorage.getItem('s')||'', e: localStorage.getItem('e')||'', w: wData, flo: floData })); tg.HapticFeedback.notificationOccurred('success'); } catch(e) { tg.showAlert("ОШИБКА СОХРАНЕНИЯ!"); } 
+            let fData = { start: '', cycle: 28, len: 5, logs: {} }; try { const fs = localStorage.getItem('flo'); if(fs) fData = JSON.parse(fs); } catch(e) {}
+            try { 
+                const payload = JSON.stringify({ s: localStorage.getItem('s')||'', e: localStorage.getItem('e')||'', w: wData, flo: fData });
+                if(payload.length < 4000) tg.sendData(payload); // Защита от лимита телеграма
+                tg.HapticFeedback.notificationOccurred('success'); 
+            } catch(e) { console.log(e); } 
         }
-        setInterval(() => { if(localStorage.getItem('s')) tick(); }, 100);
+
+        setInterval(() => { if(localStorage.getItem('s')) tick(); }, 1000);
     </script>
 </body>
 </html>
