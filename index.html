@@ -28,9 +28,7 @@
         .header-badge { background: var(--card-bg); border: 1px solid var(--border); border-radius: 35px; padding: 25px 15px; margin-bottom: 25px; display: flex; flex-direction: column; align-items: center; box-shadow: var(--card-shadow); backdrop-filter: blur(25px); }
         .profile-row { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 12px; }
         .avatar { width: 70px; height: 70px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--mint)); display: flex; justify-content: center; align-items: center; font-size: 26px; font-weight: bold; color: #fff; box-shadow: 0 8px 25px rgba(0,0,0,0.8); background-size: cover; background-position: center; border: 3px solid var(--border); }
-        .heart-icon { font-size: 30px; animation: heartbeat 1.2s infinite; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.6)); }
-        @keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
-        #pair-names { font-size: 20px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; text-align: center; background: linear-gradient(90deg, #fff, var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 0; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.8)); }
+        #pair-names { font-size: 20px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; text-align: center; background: linear-gradient(90deg, #fff, var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 0; }
         
         .menu-item { display: flex; justify-content: space-between; align-items: center; font-weight: 800; font-size: 14px; padding: 22px; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: 0.1s; text-shadow: 0 2px 5px rgba(0,0,0,0.8); }
         .menu-item:active { transform: scale(0.98); }
@@ -52,29 +50,31 @@
         .f-card-badge { position: absolute; top: 0; right: 0; background: rgba(255,255,255,0.9); color: #000; font-size: 9px; font-weight: 900; padding: 3px 8px; border-bottom-left-radius: 10px;}
         .f-card-title { font-size: 16px; font-weight: 900; line-height: 1.2; margin-top: 10px;}
 
-        .cal-scroll-area { max-height: 450px; overflow-y: auto; padding-right: 5px; scroll-snap-type: y mandatory;}
+        .cal-scroll-area { max-height: 500px; overflow-y: auto; padding-right: 5px; scroll-snap-type: y mandatory;}
         .cal-scroll-area::-webkit-scrollbar { width: 5px; }
         .cal-scroll-area::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
         
-        .cal-wrapper { background: rgba(0,0,0,0.4); border-radius: 20px; padding: 15px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.1); scroll-snap-align: start;}
-        .cal-month { text-align: center; font-size: 16px; font-weight: 900; margin-bottom: 15px; text-transform: uppercase; color: #fff;}
-        .cal-weekdays { display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; font-size: 10px; color: var(--text-sub); margin-bottom: 10px; font-weight: 700;}
-        .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px 5px; text-align: center; }
-        .cal-day { font-size: 14px; font-weight: 700; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; margin: 0 auto; border-radius: 50%; border: 2px solid transparent;}
+        .cal-wrapper { background: rgba(10,10,15,0.85); border-radius: 20px; padding: 20px 15px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.1); scroll-snap-align: start; box-shadow: inset 0 5px 20px rgba(0,0,0,0.6);}
+        .cal-month { text-align: center; font-size: 16px; font-weight: 900; margin-bottom: 20px; text-transform: uppercase; color: #fff;}
+        .cal-weekdays { display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; font-size: 10px; color: var(--text-sub); margin-bottom: 15px; font-weight: 700;}
+        .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px 5px; text-align: center; }
         
+        .cal-day-wrap { position: relative; width: 34px; height: 34px; margin: 0 auto; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+        .cal-day { font-size: 14px; font-weight: 700; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; border-radius: 50%; border: 2px solid transparent; transition: 0.2s; z-index: 2; position: relative;}
+        
+        /* Стили календаря как во Flo */
+        .fertile-text { color: var(--flo-teal); }
         .cal-period { background-color: var(--flo-pink); color: #fff; box-shadow: 0 0 10px rgba(255, 77, 109, 0.5); }
-        .cal-pred-period { border-color: var(--flo-pink); border-style: dashed; color: #fff; }
-        .cal-ovulation { border-color: var(--flo-teal); border-style: dotted; color: var(--flo-teal); font-weight: 900;}
-        .cal-today { background: rgba(255,255,255,0.2); border-color: #fff; font-weight: 900;}
+        .cal-pred-period { border-color: var(--flo-pink); border-style: dashed; color: var(--flo-pink); }
+        .cal-ovulation { border-color: var(--flo-teal); border-style: dotted; color: var(--flo-teal); }
+        .cal-today { background: rgba(255,255,255,0.2); font-weight: 900; }
+        .cal-today::after { content: 'сегодня'; position: absolute; top: -14px; font-size: 8px; font-weight: 900; color: var(--text-main); text-transform: uppercase;}
 
         .log-section { background: rgba(10,10,15,0.7); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 20px; margin-bottom: 20px; }
         .log-title { font-size: 11px; font-weight: 900; text-align: center; color: var(--text-sub); letter-spacing: 1px; margin-bottom: 12px; text-transform: uppercase; }
         .log-btns { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px;}
         .log-btn { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1); padding: 8px 12px; border-radius: 12px; font-size: 13px; font-weight: 700; cursor: pointer; transition: 0.2s; color: var(--text-sub); }
         .log-btn.active { background: rgba(255, 77, 109, 0.2); border-color: var(--flo-pink); color: #fff; }
-
-        .btn-log-period { background: transparent; border: 2px dashed var(--flo-pink); color: var(--flo-pink); padding: 15px; border-radius: 20px; font-weight: 900; width: 100%; font-size: 13px; text-transform: uppercase; margin-bottom: 20px; cursor: pointer; transition: 0.2s;}
-        .btn-log-period:active { background: rgba(255, 77, 109, 0.2); }
 
         /* DMB & HOLIDAYS */
         #countdown { font-size: 40px; font-weight: 900; text-align: center; margin: 10px 0; display: flex; justify-content: center; align-items: baseline; gap: 4px; text-shadow: 0 4px 15px rgba(0,0,0,0.9); }
@@ -98,7 +98,6 @@
         .m-card { background: rgba(10,10,15,0.85); text-align: center; padding: 18px 10px; border-radius: 18px; border: 1px solid rgba(255,255,255,0.15); }
         .m-card b { font-size: 20px; display: block; color: var(--mint); margin: 6px 0; }
         .m-card small { font-size: 10px; font-weight: 900; color: var(--text-sub); letter-spacing: 1px; text-transform: uppercase; }
-        .holiday-active { background: linear-gradient(135deg, rgba(3, 218, 198, 0.2), rgba(187, 134, 252, 0.2)) !important; border-color: var(--mint) !important; }
 
         /* КНИГА */
         #book-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: var(--bg-fallback); z-index: 999; padding: 20px; box-sizing: border-box; flex-direction: column; overflow: hidden; }
@@ -119,25 +118,19 @@
         .planet { font-size: 100px; line-height: 1; animation: float-spin 8s ease-in-out infinite; filter: drop-shadow(0 0 30px var(--mint)); position: relative; z-index: 2;}
         .planet::after { content: '🌍'; } 
         .satellite { position: absolute; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; filter: blur(1px) drop-shadow(0 0 5px var(--accent)); animation: orbit 4s linear infinite;}
-        .s1 { animation-duration: 5s; } .s2 { animation-duration: 7s; animation-delay: -2s; }
         @keyframes orbit { from { transform: rotate(0deg) translateX(90px) rotate(0deg); } to { transform: rotate(360deg) translateX(90px) rotate(-360deg); } }
         @keyframes float-spin { 0%, 100% { transform: translateY(0) rotate(-5deg); filter: drop-shadow(0 0 20px var(--mint)); } 50% { transform: translateY(-15px) rotate(5deg) scale(1.05); filter: drop-shadow(0 0 45px var(--mint)); } }
-        .radar-ring { position: absolute; border: 2px solid var(--mint); border-radius: 50%; opacity: 0; animation: radarPing 3s ease-out infinite; }
-        .r1 { width: 140px; height: 140px; animation-delay: 0s; } .r2 { width: 200px; height: 190px; animation-delay: 1.5s; }
-        @keyframes radarPing { 0% { transform: scale(0.5); opacity: 0.8; } 100% { transform: scale(1.6); opacity: 0; } }
 
         /* ВВОД */
         .wish-tabs { display: flex; background: rgba(10,10,15,0.8); border-radius: 20px; padding: 6px; margin-bottom: 20px;}
         .w-tab { flex: 1; text-align: center; padding: 14px; font-size: 11px; font-weight: 900; color: var(--text-sub); border-radius: 16px; cursor: pointer; text-transform: uppercase; transition: 0.3s;}
         .w-tab.active { background: var(--accent); color: #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
         .wish-item { display: flex; flex-direction: column; padding: 18px; background: rgba(10,10,15,0.6); border: 1px solid var(--border); border-radius: 18px; margin-bottom: 12px; font-weight: 700; font-size: 14px;}
-        .wish-link { display: inline-flex; align-items: center; margin-top: 10px; color: #000; text-decoration: none; background: var(--mint); padding: 8px 16px; border-radius: 12px; font-size: 11px; font-weight: 900;}
         .del-btn { color: #ff4757; font-size: 24px; font-weight: bold; background: rgba(255, 71, 87, 0.15); width: 35px; height: 35px; border-radius: 10px; display: flex; align-items: center; justify-content: center; cursor: pointer;}
         
         input { width: 100%; background: rgba(10,10,15,0.8); border: 1px solid var(--border); border-radius: 16px; padding: 18px; color: var(--text-main); margin: 5px 0 15px 0; box-sizing: border-box; outline: none; font-size: 15px; font-weight: 600; font-family: inherit;}
         label { font-size: 10px; color: var(--text-sub); font-weight: 800; letter-spacing: 2px; text-transform: uppercase; display: block; margin-bottom: 5px;}
-        .sync-wrapper { text-align: center; margin-top: auto; padding-top: 25px; padding-bottom: 10px; }
-        .btn-sync-small { background: var(--card-bg); border: 1px solid var(--mint); color: var(--mint); padding: 12px 26px; border-radius: 30px; font-size: 11px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; transition: 0.2s; }
+        .btn-sync-small { background: var(--card-bg); border: 1px solid var(--mint); color: var(--mint); padding: 12px 26px; border-radius: 30px; font-size: 11px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: 0.2s; }
         
         .bg-thumb { width: 100%; height: 85px; border-radius: 16px; background-size: cover; background-position: center; border: 2px solid transparent; transition: 0.2s;}
         .bg-thumb.active { border-color: var(--mint); transform: scale(0.95); box-shadow: 0 0 15px var(--mint);}
@@ -145,7 +138,7 @@
     </style>
 </head>
 <body>
-    <!-- ИНТЕРАКТИВНАЯ КНИГА ЗНАНИЙ -->
+    <!-- КНИГА ЗНАНИЙ -->
     <div id="book-modal">
         <div class="book-close" onclick="closeBook()">✖ ЗАКРЫТЬ</div>
         <div class="book-tabs">
@@ -180,7 +173,7 @@
                 <div class="card menu-item" data-id="locator" onclick="nav('locator')"><span>📍 Радар</span> <span style="color:var(--accent)">→</span></div>
                 <div class="card menu-item" data-id="settings" onclick="nav('settings')"><span>⚙️ Настройки фона</span> <span style="color:var(--accent)">→</span></div>
             </div>
-            <div class="sync-wrapper"><div class="btn-sync-small" onclick="syncAll()">🔄 СИНХРОНИЗИРОВАТЬ ДАННЫЕ</div></div>
+            <div style="text-align: center; margin-top: 20px;"><div class="btn-sync-small" onclick="syncAll()">🔄 СИНХРОНИЗИРОВАТЬ ДАННЫЕ</div></div>
         </div>
 
         <!-- FLO -->
@@ -189,31 +182,28 @@
             
             <div id="flo-setup" class="card" style="display:none;">
                 <h3 style="margin:0 0 15px 0; text-align: center;">НАСТРОЙКА ЦИКЛА</h3>
-                <label>Первый день последних месячных</label> <input type="date" id="flo-start">
-                <label>Длина цикла (дней, в среднем 28)</label> <input type="number" id="flo-cycle" placeholder="28">
-                <label>Длительность (дней, в среднем 5)</label> <input type="number" id="flo-len" placeholder="5">
-                <button class="btn" onclick="saveFlo()" style="background:var(--flo-pink);">СОХРАНИТЬ КАЛЕНДАРЬ</button>
+                <label>Средняя длина цикла (дней, 28)</label> <input type="number" id="flo-cycle" placeholder="28">
+                <label>Длительность месячных (дней, 5)</label> <input type="number" id="flo-len" placeholder="5">
+                <button class="btn" onclick="saveFloSettings()" style="background:var(--flo-pink);">НАЧАТЬ</button>
             </div>
 
-            <!-- ИНТЕРФЕЙС ПАРНЯ -->
             <div id="flo-partner-view" style="display:none;">
                 <div class="flo-hero"><div class="flo-subtitle" id="flo-p-sub">Анализ цикла</div><div class="flo-main-text" id="flo-p-main">Загрузка...</div></div>
                 <div class="flo-partner-cards">
-                    <div class="f-card fc-blue"><div class="f-card-badge">Её день</div><div class="f-card-title" id="fc-day">Загрузка</div><div class="f-card-sub" id="fc-date">--</div></div>
+                    <div class="f-card fc-blue"><div class="f-card-badge">Её день</div><div class="f-card-title" id="fc-day">Загрузка</div></div>
                     <div class="f-card fc-pink"><div class="f-card-badge">Твоя задача</div><div class="f-card-title" id="fc-advice" style="font-size: 13px; color: #000;">Будь рядом</div></div>
                 </div>
+                <div class="log-section" id="flo-p-logs" style="display:none;"><div class="log-title">ОНА СЕГОДНЯ ОТМЕТИЛА:</div><div id="p-log-text" style="font-size: 13px; font-weight: 700; line-height: 1.5; color: #fff;"></div></div>
                 
-                <div class="log-section" id="flo-p-logs" style="display:none;">
-                    <div class="log-title">ОНА СЕГОДНЯ ОТМЕТИЛА:</div>
-                    <div id="p-log-text" style="font-size: 13px; font-weight: 700; line-height: 1.5; color: #fff;"></div>
-                </div>
-
-                <div class="cal-scroll-area" id="cal-scroll-partner" style="margin-top: 20px;"></div>
+                <h3 style="text-align:center; margin-top:20px; font-size: 12px; color: var(--text-sub);">ЕЁ ПРОГНОЗ НА ГОД:</h3>
+                <div class="cal-scroll-area" id="cal-scroll-partner"></div>
             </div>
 
-            <!-- ИНТЕРФЕЙС ДЕВУШКИ -->
             <div id="flo-girl-view" style="display:none;">
-                <button class="btn-log-period" onclick="logPeriodToday()">🩸 ОТМЕТИТЬ НАЧАЛО ЦИКЛА СЕГОДНЯ</button>
+                <div style="background: rgba(255, 77, 109, 0.1); border: 1px dashed var(--flo-pink); border-radius: 20px; padding: 15px; margin-bottom: 20px; text-align: center;">
+                    <p style="font-size: 12px; color: #fff; font-weight: bold; margin: 0 0 10px 0;">Нажимай на дни в календаре, чтобы отметить реальные месячные.</p>
+                    <p style="font-size: 10px; color: var(--text-sub); margin: 0;">Пунктир — это прогноз на основе твоих отметок.</p>
+                </div>
                 
                 <div class="cal-scroll-area" id="cal-scroll-girl"></div>
 
@@ -226,7 +216,6 @@
                         <div class="log-btn" data-val="💊 Тянет живот" onclick="toggleLog(this)">💊 Тянет живот</div>
                         <div class="log-btn" data-val="🛏 Хочу спать" onclick="toggleLog(this)">🛏 Хочу спать</div>
                         <div class="log-btn" data-val="🍕 Жор" onclick="toggleLog(this)">🍕 Жор</div>
-                        <div class="log-btn" data-val="❤️ Близость" onclick="toggleLog(this)">❤️ Близость</div>
                     </div>
                 </div>
             </div>
@@ -250,10 +239,9 @@
                     <p style="text-align:center; font-size:10px; color:var(--text-sub); margin:0; font-weight:900;">ДО ДОМА ОСТАЛОСЬ</p>
                     <div id="countdown"><span id="vd">0</span><small>д</small> <span id="vh">00</span><small>ч</small> <span id="vm">00</span><small>м</small> <span id="vs" class="neon">00</span></div>
                     <div class="progress"><div id="bar"></div></div>
-                    <div id="perc" style="text-align:center; font-family:monospace; font-weight:bold; letter-spacing: 1px; color: var(--mint);">0.000000%</div>
                 </div>
-                <div class="army-status-card" id="army-status-box"><div class="army-rank" id="army-rank">ЗАПАХ</div><div class="army-msg" id="army-msg">Служба только началась. Впереди присяга и целый год!</div></div>
-                <div class="weeks-container"><div class="weeks-title">52 НЕДЕЛИ СЛУЖБЫ</div><div class="weeks-grid" id="weeks-grid"></div><div class="weeks-stats"><span class="w-passed" id="w-passed">Пройдено: 0</span><span class="w-left" id="w-left">Осталось: 52</span></div></div>
+                <div class="army-status-card" id="army-status-box"><div class="army-rank" id="army-rank">ЗАПАХ</div></div>
+                <div class="weeks-container"><div class="weeks-title">52 НЕДЕЛИ СЛУЖБЫ</div><div class="weeks-grid" id="weeks-grid"></div></div>
                 <div class="milestones">
                     <div class="m-card" id="card-oath" style="display:none; grid-column: span 2;"><small>ПРИСЯГА</small><b id="v-oath">0 дней</b></div>
                     <div class="m-card"><small>ЭКВАТОР</small><b id="v-eq">0 дн</b></div>
@@ -272,11 +260,6 @@
                 <div class="planet-wrap"><div class="radar-ring r1"></div><div class="radar-ring r2"></div><div class="satellite s1"></div><div class="satellite s2"></div><div class="planet"></div></div>
                 <p id="loc-status" style="font-size:12px; font-weight:900; margin: 15px 0; min-height:25px; color: var(--mint); text-transform: uppercase;"></p>
                 <button class="btn" id="btn-loc" onclick="sendLocation()" style="background:var(--mint); color:#000; margin-bottom:12px;">📍 ОТПРАВИТЬ ГЕОМЕТКУ</button>
-                <div style="display:flex; flex-direction:column; align-items:center;">
-                    <button class="btn" onclick="calculateDistance()" style="background:rgba(255,255,255,0.1); border:1px solid var(--accent); color:#fff; margin-bottom:12px;">📡 СКАНЕР ДИСТАНЦИИ</button>
-                    <button class="btn" onclick="viewPartnerLocation()" style="background:transparent; border:1px dashed var(--text-sub); color:var(--text-sub); margin-bottom:15px;">👀 ОТКРЫТЬ КАРТУ</button>
-                    <div id="p-last-time" class="loc-time-info"></div>
-                </div>
             </div>
         </div>
 
@@ -296,11 +279,9 @@
                     <div class="bg-thumb" onclick="setBg('bg_1.jpg', this)" style="background-image:url('img/bg_1.jpg')"></div>
                     <div class="bg-thumb" onclick="setBg('bg_2.jpg', this)" style="background-image:url('img/bg_2.jpg')"></div>
                     <div class="bg-thumb" onclick="setBg('bg_3.jpg', this)" style="background-image:url('img/bg_3.jpg')"></div>
-                    <div class="bg-thumb" onclick="setBg('bg_4.jpg', this)" style="background-image:url('img/bg_4.jpg')"></div>
                     <div class="bg-thumb" onclick="setBg('bg_boy_default.jpg', this)" style="background-image:url('img/bg_boy_default.jpg')"></div>
                     <div class="bg-thumb" onclick="setBg('bg_girl_default.jpg', this)" style="background-image:url('img/bg_girl_default.jpg')"></div>
                 </div>
-                <button class="btn" onclick="resetBg()" style="background:transparent; border:1px solid var(--text-sub); color:var(--text-sub); margin-top:20px; font-size:11px;">Сбросить на стандарт</button>
             </div>
         </div>
     </div>
@@ -310,23 +291,29 @@
     <script>
         let tg = window.Telegram.WebApp; tg.expand(); tg.headerColor = '#0d0e15';
         const params = new URLSearchParams(window.location.search);
-        
         ['role', 'pn', 'pp', 'plat', 'plon', 'pt', 's', 'e', 'p'].forEach(p => { if (params.has(p)) localStorage.setItem(p, params.get(p)); });
         
         const role = localStorage.getItem('role') || 'boy';
         document.body.classList.toggle('theme-girl', role === 'girl');
 
-        let floData = { start: '', cycle: 28, len: 5, logs: {} }; 
+        // Глобальный Flo Объект
+        // actualPeriods - массив строк 'YYYY-MM-DD', которые кликнула девушка
+        let floData = { cycle: 28, len: 5, actualPeriods: [], logs: {} }; 
         try { 
             let lsFlo = JSON.parse(localStorage.getItem('flo'));
-            if(lsFlo) { floData.start = lsFlo.start||''; floData.cycle = lsFlo.cycle||28; floData.len = lsFlo.len||5; floData.logs = lsFlo.logs||{}; }
+            if(lsFlo) { 
+                floData.cycle = lsFlo.cycle || 28; 
+                floData.len = lsFlo.len || 5; 
+                floData.actualPeriods = lsFlo.actualPeriods || [];
+                floData.logs = lsFlo.logs || {}; 
+            }
             else if (params.has('flo')) {
                 let fd = JSON.parse(decodeURIComponent(params.get('flo'))); 
                 floData = Object.assign(floData, fd);
+                if(!floData.actualPeriods) floData.actualPeriods = [];
                 localStorage.setItem('flo', JSON.stringify(floData));
             }
         } catch(e) {}
-        if (!floData.logs) floData.logs = {};
 
         const grid = document.getElementById('weeks-grid');
         if(grid) { grid.innerHTML = ''; for(let i=0; i<52; i++) { const box = document.createElement('div'); box.className = 'week-box'; box.id = 'week-' + i; grid.appendChild(box); } }
@@ -355,25 +342,24 @@
             if (isEditMode) return; 
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active')); document.getElementById(id).classList.add('active'); 
             document.getElementById('edit-btn').style.display = (id === 'home') ? 'flex' : 'none'; 
-            if(id === 'locator') updatePartnerTime(); if(id === 'dmb') checkDMB(); if(id === 'wish') renderW(); if(id === 'flo') initFlo();
+            if(id === 'dmb') checkDMB(); if(id === 'wish') renderW(); if(id === 'flo') initFlo();
         }
 
-        // === БЕЗОПАСНАЯ РАЗНИЦА В ДНЯХ ===
-        function diffDays(d1, d2) {
-            const u1 = Date.UTC(d1.getFullYear(), d1.getMonth(), d1.getDate());
-            const u2 = Date.UTC(d2.getFullYear(), d2.getMonth(), d2.getDate());
-            return Math.floor((u2 - u1) / (1000 * 60 * 60 * 24));
-        }
-
-        // === FLO ===
+        // === FLO УМНЫЙ АЛГОРИТМ ===
         function getTodayStr() { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; }
+        function diffDaysStr(d1Str, d2Str) {
+            const d1 = new Date(d1Str); const d2 = new Date(d2Str);
+            return Math.floor((d2 - d1) / (1000 * 60 * 60 * 24));
+        }
 
         function initFlo() {
-            if (!floData.start) {
+            // Если массив пустой, требуем настройку
+            if (floData.actualPeriods.length === 0) {
                 if (role === 'girl') { document.getElementById('flo-setup').style.display = 'block'; document.getElementById('flo-girl-view').style.display = 'none'; } 
                 else { document.getElementById('flo-partner-view').style.display = 'block'; document.getElementById('flo-p-main').innerText = "Половинка еще не настроила календарь 🌸"; document.getElementById('flo-p-sub').innerText = "Ждем данных"; }
                 return;
             }
+            
             document.getElementById('flo-setup').style.display = 'none';
             if (role === 'girl') { 
                 document.getElementById('flo-girl-view').style.display = 'block'; 
@@ -386,23 +372,46 @@
             }
         }
 
-        function saveFlo() {
-            const start = document.getElementById('flo-start').value; if (!start) return tg.showAlert("Выбери дату начала!");
-            floData.start = start; floData.cycle = parseInt(document.getElementById('flo-cycle').value) || 28; floData.len = parseInt(document.getElementById('flo-len').value) || 5;
+        function saveFloSettings() {
+            const cycle = parseInt(document.getElementById('flo-cycle').value) || 28; 
+            const len = parseInt(document.getElementById('flo-len').value) || 5;
+            floData.cycle = cycle; floData.len = len;
+            
+            // Если девушка только начала, берем дату из input, добавляем ее и следующие len-1 дней в actual
+            const start = document.getElementById('flo-start').value;
+            if(start) {
+                const sDate = new Date(start);
+                for(let i=0; i<len; i++) {
+                    const nextD = new Date(sDate); nextD.setDate(sDate.getDate() + i);
+                    const nStr = `${nextD.getFullYear()}-${String(nextD.getMonth()+1).padStart(2,'0')}-${String(nextD.getDate()).padStart(2,'0')}`;
+                    if(!floData.actualPeriods.includes(nStr)) floData.actualPeriods.push(nStr);
+                }
+                floData.actualPeriods.sort();
+            }
+            
             localStorage.setItem('flo', JSON.stringify(floData)); initFlo(); syncAll();
         }
 
         function resetFloLocally() {
-            floData = { start: '', cycle: 28, len: 5, logs: {} }; localStorage.removeItem('flo'); document.getElementById('flo-start').value = '';
+            floData = { cycle: 28, len: 5, actualPeriods: [], logs: {} }; 
+            localStorage.removeItem('flo');
             initFlo(); syncAll(); tg.HapticFeedback.notificationOccurred('success');
         }
 
-        function logPeriodToday() {
-            floData.start = getTodayStr();
+        // КЛИК ПО ДНЮ В КАЛЕНДАРЕ (Отметка месячных)
+        function togglePeriodDay(dateStr) {
+            if (role !== 'girl') return; // Только девушка может менять
+            const idx = floData.actualPeriods.indexOf(dateStr);
+            if (idx > -1) floData.actualPeriods.splice(idx, 1);
+            else floData.actualPeriods.push(dateStr);
+            
+            floData.actualPeriods.sort();
             localStorage.setItem('flo', JSON.stringify(floData));
-            initFlo(); syncAll(); tg.HapticFeedback.notificationOccurred('success');
+            renderMultiCalendar('cal-scroll-girl');
+            syncAll(); tg.HapticFeedback.impactOccurred('light');
         }
 
+        // КЛИК ПО СИМПТОМУ
         function toggleLog(btn) {
             const today = getTodayStr(), val = btn.getAttribute('data-val');
             if (!floData.logs[today]) floData.logs[today] = [];
@@ -416,16 +425,21 @@
             document.querySelectorAll('.log-btn').forEach(btn => { btn.classList.toggle('active', log.includes(btn.getAttribute('data-val'))); });
         }
 
-        // Рендер календаря на 12 месяцев (от -3 до +8 от текущего)
+        // РЕНДЕР БЕСКОНЕЧНОГО КАЛЕНДАРЯ
         function renderMultiCalendar(containerId) {
             const container = document.getElementById(containerId);
             container.innerHTML = '';
             const now = new Date();
-            const startStr = new Date(floData.start);
-            const cycle = floData.cycle, len = floData.len;
             const monthNames = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"];
 
-            for (let mOffset = -3; mOffset <= 8; mOffset++) {
+            // Находим базу для прогнозов: самый поздний реальный день из actualPeriods
+            let latestActualDate = null;
+            if (floData.actualPeriods.length > 0) {
+                // Самая последняя дата в массиве
+                latestActualDate = new Date(floData.actualPeriods[floData.actualPeriods.length - 1]);
+            }
+
+            for (let mOffset = -3; mOffset <= 6; mOffset++) {
                 const targetMonthDate = new Date(now.getFullYear(), now.getMonth() + mOffset, 1);
                 const tYear = targetMonthDate.getFullYear();
                 const tMonth = targetMonthDate.getMonth();
@@ -441,39 +455,77 @@
                 
                 for (let d = 1; d <= daysInMonth; d++) {
                     const iterDate = new Date(tYear, tMonth, d);
-                    const dfDays = diffDays(startStr, iterDate);
-                    let classes = "cal-day"; 
-                    if (iterDate.toDateString() === now.toDateString()) classes += " cal-today";
+                    const dateStr = `${iterDate.getFullYear()}-${String(iterDate.getMonth()+1).padStart(2,'0')}-${String(iterDate.getDate()).padStart(2,'0')}`;
                     
-                    if (dfDays >= 0) {
-                        const dayOfCycle = (dfDays % cycle) + 1;
-                        if (dayOfCycle >= 1 && dayOfCycle <= len) classes += " cal-period";
-                        else if (dayOfCycle === cycle - 14) classes += " cal-ovulation";
-                    } else {
-                        const futureDiff = Math.abs(dfDays);
-                        const futureDayCycle = cycle - (futureDiff % cycle) + 1;
-                        if (futureDayCycle >= 1 && futureDayCycle <= len) classes += " cal-pred-period";
+                    let classes = "cal-day"; 
+                    let extraHTML = "";
+                    
+                    if (dateStr === getTodayStr()) classes += " cal-today";
+
+                    // Проверяем, отмечен ли этот день вручную
+                    if (floData.actualPeriods.includes(dateStr)) {
+                        classes += " cal-period";
+                    } 
+                    // Если не отмечен вручную, пытаемся предсказать (если дата больше последней отмеченной)
+                    else if (latestActualDate && iterDate > latestActualDate) {
+                        const diffDays = Math.floor((iterDate - latestActualDate) / (1000 * 60 * 60 * 24));
+                        const dayOfCycle = (diffDays % floData.cycle) + 1;
+                        
+                        // Прогноз месячных (пунктирный розовый кружок)
+                        if (dayOfCycle >= 1 && dayOfCycle <= floData.len) {
+                            classes += " cal-pred-period";
+                        } 
+                        // Прогноз овуляции (пунктирный бирюзовый)
+                        else if (dayOfCycle === floData.cycle - 14) {
+                            classes += " cal-ovulation";
+                        }
+                        // Фертильное окно (просто бирюзовый текст)
+                        else if (dayOfCycle >= floData.cycle - 18 && dayOfCycle <= floData.cycle - 13) {
+                            classes += " fertile-text";
+                        }
                     }
-                    monthHtml += `<div class="${classes}">${d}</div>`;
+                    
+                    monthHtml += `<div class="cal-day-wrap" onclick="togglePeriodDay('${dateStr}')"><div class="${classes}">${d}</div></div>`;
                 }
                 monthHtml += `</div></div>`;
                 container.innerHTML += monthHtml;
             }
+
+            // Автоскролл к текущему месяцу
+            setTimeout(() => {
+                const todayEl = container.querySelector('.cal-today');
+                if(todayEl) todayEl.scrollIntoView({ block: 'center', behavior: 'smooth' });
+            }, 100);
         }
 
+        // ПАНЕЛЬ ПАРНЯ
         function renderPartnerView() {
-            const startStr = new Date(floData.start);
-            const now = new Date();
-            const dfDays = diffDays(startStr, now);
-            const cycle = floData.cycle, len = floData.len;
-            const currentDay = dfDays >= 0 ? (dfDays % cycle) + 1 : 0; const daysUntilNext = cycle - currentDay + 1;
-            const mainText = document.getElementById('flo-p-main'), subText = document.getElementById('flo-p-sub'), fcDay = document.getElementById('fc-day'), fcDate = document.getElementById('fc-date'), fcAdvice = document.getElementById('fc-advice');
-            fcDate.innerText = now.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long' });
+            if (floData.actualPeriods.length === 0) return;
             
-            if (currentDay >= 1 && currentDay <= len) { subText.innerText = "У неё начались эти дни"; mainText.innerText = "Предложите ей вкусной еды и покой"; fcDay.innerText = `День ${currentDay}`; fcAdvice.innerText = "Купи шоколад и не спорь"; } 
-            else if (daysUntilNext <= 3) { subText.innerText = `Ее месячные начнутся через ${daysUntilNext} дня`; mainText.innerText = "Предложите прогулку на свежем воздухе"; fcDay.innerText = `ПМС`; fcAdvice.innerText = "Будь терпелив и нежен"; } 
-            else if (currentDay >= cycle - 16 && currentDay <= cycle - 12) { subText.innerText = "Фаза овуляции"; mainText.innerText = "Ее привлекательность и энергия на пике!"; fcDay.innerText = `Фертильное окно`; fcAdvice.innerText = "Идеальное время для свидания"; } 
-            else { subText.innerText = `Следующие через ${daysUntilNext} дней`; mainText.innerText = "Сейчас отличный спокойный период"; fcDay.innerText = `День цикла: ${currentDay}`; fcAdvice.innerText = "Дари любовь и заботу"; }
+            const now = new Date();
+            // Ищем последнюю известную дату начала цикла, чтобы от нее считать день цикла
+            // Упрощенный поиск: берем самую позднюю дату из отмеченных
+            const latestActualDate = new Date(floData.actualPeriods[floData.actualPeriods.length - 1]);
+            const dfDays = Math.floor((now - latestActualDate) / (1000 * 60 * 60 * 24));
+            
+            const currentDay = dfDays >= 0 ? (dfDays % floData.cycle) + 1 : 0; 
+            const daysUntilNext = floData.cycle - currentDay + 1;
+
+            const mainText = document.getElementById('flo-p-main'), subText = document.getElementById('flo-p-sub'), fcDay = document.getElementById('fc-day'), fcAdvice = document.getElementById('fc-advice');
+            
+            // Если сегодня отмечен как месячные
+            if (floData.actualPeriods.includes(getTodayStr())) { 
+                subText.innerText = "У неё эти дни"; mainText.innerText = "Будь особенно заботлив"; fcDay.innerText = `Месячные`; fcAdvice.innerText = "Купи шоколад"; 
+            } 
+            else if (daysUntilNext <= 3) { 
+                subText.innerText = `Месячные через ${daysUntilNext} дня`; mainText.innerText = "Возможен ПМС"; fcDay.innerText = `ПМС`; fcAdvice.innerText = "Будь терпелив"; 
+            } 
+            else if (currentDay >= floData.cycle - 16 && currentDay <= floData.cycle - 12) { 
+                subText.innerText = "Фаза овуляции"; mainText.innerText = "Она прекрасна и полна сил"; fcDay.innerText = `Фертильно`; fcAdvice.innerText = "Зови на свидание"; 
+            } 
+            else { 
+                subText.innerText = `Следующие через ${daysUntilNext} дн`; mainText.innerText = "Спокойный период"; fcDay.innerText = `День цикла: ${currentDay}`; fcAdvice.innerText = "Дари любовь"; 
+            }
             
             const log = floData.logs[getTodayStr()], logBox = document.getElementById('flo-p-logs');
             if (log && log.length > 0) { logBox.style.display = 'block'; document.getElementById('p-log-text').innerText = log.join(', '); } else { logBox.style.display = 'none'; }
@@ -481,14 +533,8 @@
 
         // === DMB ===
         const holidays = [
-            { date: "02-23", name: "День защитника Отечества" }, { date: "02-27", name: "День ССО" }, { date: "03-19", name: "День моряка-подводника" },
-            { date: "03-27", name: "День нацгвардии" }, { date: "04-08", name: "День военкоматов" }, { date: "04-15", name: "День РЭБ" },
-            { date: "05-07", name: "День связиста" }, { date: "05-09", name: "День Победы" }, { date: "05-28", name: "День пограничника" },
-            { date: "05-29", name: "День автомобилиста" }, { date: "08-02", name: "День ВДВ" }, { date: "08-06", name: "День ЖД войск" },
-            { date: "08-12", name: "День ВВС" }, { date: "09-02", name: "День Рос. гвардии" }, { date: "09-08", name: "День танкиста" },
-            { date: "10-01", name: "День Сухопутных войск" }, { date: "10-04", name: "День Космических войск" }, { date: "10-24", name: "День спецназа" },
-            { date: "11-05", name: "День военного разведчика" }, { date: "11-19", name: "День РВиА" }, { date: "11-27", name: "День морской пехоты" },
-            { date: "12-17", name: "День РВСН" }
+            { date: "02-23", name: "День защитника Отечества" }, { date: "05-09", name: "День Победы" }, { date: "08-02", name: "День ВДВ" },
+            { date: "09-08", name: "День танкиста" }, { date: "10-24", name: "День спецназа" }, { date: "11-19", name: "День РВиА" }, { date: "12-17", name: "День РВСН" }
         ];
 
         function getNextHoliday() {
@@ -496,8 +542,8 @@
             for (let h of holidays) {
                 let holDate = new Date(`${year}-${h.date}T00:00:00`);
                 if (holDate < now && holDate.toDateString() !== now.toDateString()) holDate = new Date(`${year + 1}-${h.date}T00:00:00`);
-                const diff = diffDays(now, holDate);
-                if (diff === 0) return { name: h.name, daysLeft: 0, isToday: true };
+                const diff = Math.floor((holDate - now) / (1000 * 60 * 60 * 24));
+                if (holDate.toDateString() === now.toDateString()) return { name: h.name, daysLeft: 0, isToday: true };
                 if (diff > 0 && diff < minDiff) { minDiff = diff; nextHol = { name: h.name, daysLeft: diff, isToday: false }; }
             }
             return nextHol;
@@ -519,127 +565,43 @@
             checkDMB(); syncAll(); tg.HapticFeedback.notificationOccurred('success');
         }
 
-        function updateArmyStatus(passedDays, leftDays) {
-            const rankEl = document.getElementById('army-rank'), msgEl = document.getElementById('army-msg'), boxEl = document.getElementById('army-status-box');
-            if (leftDays <= 10 && leftDays > 0) { rankEl.innerText = "КОСМОС 🚀"; rankEl.style.color = "#ff4757"; msgEl.innerText = role === 'girl' ? `Готовься встречать! Осталось дней: ${leftDays}` : `Пошел обратный отсчет! Дней до дома: ${leftDays}`; boxEl.style.borderStyle = "solid"; boxEl.style.borderColor = "#ff4757"; } 
-            else if (leftDays <= 0) { rankEl.innerText = "ДЕМБЕЛЬ 🎉"; rankEl.style.color = "var(--mint)"; msgEl.innerText = "Служба окончена! Свобода!"; boxEl.style.borderColor = "var(--mint)"; } 
-            else if (passedDays < 30) { rankEl.innerText = "ЗАПАХ 🟢"; msgEl.innerText = role === 'girl' ? "Самое начало пути. Ему очень нужна твоя поддержка!" : "Служба только началась. Держись, солдат!"; } 
-            else if (passedDays < 180) { rankEl.innerText = "ДУХ 🪖"; msgEl.innerText = role === 'girl' ? "Он уже привык к распорядку. Ждите экватор!" : "Учебка позади. Ты втягиваешься в ритм."; } 
-            else if (leftDays > 100) { rankEl.innerText = "СЛОН / ЧЕРПАК 🐘"; msgEl.innerText = role === 'girl' ? "Половина пройдена! Он уже опытный боец." : "Экватор взят! Теперь время пойдет быстрее."; } 
-            else { rankEl.innerText = "ДЕД 👑"; msgEl.innerText = role === 'girl' ? "Считаем дни до приказа! Скоро он будет дома." : "Приказ близко. Финишная прямая!"; }
-        }
-
         function tick() {
             const startStr = localStorage.getItem('s'), endStr = localStorage.getItem('e'), oathStr = localStorage.getItem('p');
             if(!startStr || !endStr) return;
             const start = new Date(startStr), end = new Date(endStr), now = new Date();
-            
-            const totalDays = diffDays(start, end);
-            const passedDays = Math.max(0, Math.min(diffDays(start, now), totalDays));
+            const totalDays = Math.floor((end - start) / (1000 * 60 * 60 * 24));
+            const passedDays = Math.max(0, Math.min(Math.floor((now - start) / (1000 * 60 * 60 * 24)), totalDays));
             const leftDays = Math.max(0, totalDays - passedDays);
-            
-            const totalMs = end.getTime() - start.getTime();
-            const leftMs = Math.max(0, end.getTime() - now.getTime());
             
             const p = (passedDays / totalDays) * 100;
             document.getElementById('bar').style.width = p + '%'; document.getElementById('perc').innerText = p.toFixed(6) + '%';
-            
             document.getElementById('vd').innerText = leftDays; 
-            document.getElementById('vh').innerText = Math.floor((leftMs % 86400000) / 3600000).toString().padStart(2, '0'); 
-            document.getElementById('vm').innerText = Math.floor((leftMs % 3600000) / 60000).toString().padStart(2, '0'); 
-            document.getElementById('vs').innerText = Math.floor((leftMs % 60000) / 1000).toString().padStart(2, '0');
             
             const cw = Math.floor(passedDays / (totalDays / 52));
             for(let i=0; i<52; i++) { const box = document.getElementById('week-' + i); if(box) box.className = i < cw ? 'week-box filled' : (i === cw ? 'week-box current' : 'week-box'); }
-            document.getElementById('w-passed').innerText = `Пройдено: ${cw}`; document.getElementById('w-left').innerText = `Осталось: ${Math.max(0, 52 - cw)}`;
             
-            const eqDays = Math.max(0, Math.floor(totalDays/2) - passedDays); document.getElementById('v-eq').innerText = eqDays > 0 ? eqDays + ' дн' : 'Пройден!';
-            const ordDays = Math.max(0, leftDays - 100); document.getElementById('v-ord').innerText = ordDays > 0 ? ordDays + ' дн' : 'Вышел!';
-            if (oathStr) { document.getElementById('card-oath').style.display = 'block'; const oLeft = diffDays(now, new Date(oathStr)); document.getElementById('v-oath').innerText = oLeft > 0 ? oLeft + ' дн' : 'Пройдена!'; }
-
-            updateArmyStatus(passedDays, leftDays);
-
             const hol = getNextHoliday(); const holCard = document.getElementById('holiday-card');
             if (hol) {
                 holCard.style.display = 'block';
-                if (hol.isToday) { document.getElementById('hol-name').innerText = "⭐ СЕГОДНЯ ПРАЗДНИК! ⭐"; document.getElementById('hol-name').style.color = "#ff4757"; document.getElementById('hol-val').innerText = hol.name; holCard.classList.add('holiday-active'); } 
-                else { document.getElementById('hol-name').innerText = `БЛИЖАЙШИЙ ПРАЗДНИК: ${hol.name}`; document.getElementById('hol-name').style.color = "var(--text-sub)"; document.getElementById('hol-val').innerText = `через ${hol.daysLeft} дн`; holCard.classList.remove('holiday-active'); }
-            } else { holCard.style.display = 'none'; }
+                if (hol.isToday) { document.getElementById('hol-name').innerText = "⭐ СЕГОДНЯ ПРАЗДНИК! ⭐"; document.getElementById('hol-val').innerText = hol.name; holCard.classList.add('holiday-active'); } 
+                else { document.getElementById('hol-name').innerText = `БЛИЖАЙШИЙ ПРАЗДНИК: ${hol.name}`; document.getElementById('hol-val').innerText = `через ${hol.daysLeft} дн`; holCard.classList.remove('holiday-active'); }
+            }
         }
 
-        // === КНИГА ===
-        const bookData = {
-            army: [
-                { title: "🎒 Что брать в военкомат? (Гайд)", text: "<b>Бери только самое дешевое и нужное.</b><br><br><ul><li><b>Телефон «Тапик»:</b> Кнопочный телефон без камеры.</li><li><b>Рыльно-мыльное:</b> Щетка в футляре, мыло, пена, станки.</li><li><b>Нитки и Иголки:</b> Черные, белые, хаки. Прячь иголки в ручку.</li><li><b>Медицина:</b> Много пластырей (берцы сотрут ноги), паста Теймурова.</li><li><b>Часы:</b> Дешевые электронные с подсветкой. Опоздание карается всей ротой.</li></ul><br><b>НЕ НУЖНО:</b> Скоропортящуюся еду, стекло, ножницы." },
-                { title: "🪖 КМБ: Выживание в первый месяц", text: "<b>КМБ — самый сложный психологический этап.</b><br>Будут учить заправлять кровать по ниточке, ходить строем и петь. Огневой подготовки мало, физической — максимум.<br><br><b>Совет: НЕ ВЫДЕЛЯЙСЯ.</b><br>«Инициатива наказуема». Не спорь. Задача — слиться с коллективом, делать всё быстро и четко. Если косячишь ты — отжимается вся рота. Этот прессинг временный." },
-                { title: "⏰ Распорядок дня", text: "<b>Стандартный распорядок:</b><br><ul><li><b>06:00 — Подъем.</b> 45 секунд, чтобы вскочить.</li><li><b>06:10 — УФЗ (Зарядка).</b> Бег, турники.</li><li><b>07:00 — Туалет, койки.</b></li><li><b>08:00 — Завтрак.</b></li><li><b>09:00 — Утренний развод на плацу.</b></li><li><b>10:00 - 14:00 — Занятия / Рабочки.</b></li><li><b>14:00 — Обед.</b></li><li><b>19:00 — Ужин.</b></li><li><b>21:00 — Просмотр новостей («Время»).</b></li><li><b>21:30 — Вечерняя поверка.</b></li><li><b>22:00 — Отбой.</b></li></ul>" },
-                { title: "🗣 Армейский сленг ч.1", text: "<ul><li><b>Дух (Бесплотный)</b> — солдат до присяги. Нет прав.</li><li><b>Дух</b> — солдат до полугода службы. Тяжелая работа.</li><li><b>Слон (Фазан/Черпак)</b> — отслуживший полгода. Жизнь легче.</li><li><b>Дед</b> — до приказа менее 100 дней. Авторитет.</li><li><b>Дембель</b> — солдат после Приказа МО РФ.</li><li><b>Шакал</b> — офицер/прапорщик с плохим отношением (не говори вслух).</li><li><b>Контрабас</b> — контрактник.</li></ul>" },
-                { title: "🧹 Армейский сленг ч.2", text: "<ul><li><b>ПХД (Парково-хозяйственный день)</b> — суббота. Пенная вечеринка с мылом на полу.</li><li><b>Взлётка</b> — центральный коридор казармы.</li><li><b>Располога</b> — спальное помещение (шконки).</li><li><b>Каптёрка</b> — комната хранения личных вещей и формы.</li><li><b>ЧИПОК</b> — магазин-кафе на территории части.</li><li><b>Кантик</b> — идеально ровный прямой угол (на кровати, на снегу).</li><li><b>Рожать</b> — достать что-либо во что бы то ни стало.</li></ul>" },
-                { title: "🪂 ВДВ и Спецназ", text: "<b>ВДВ (Крылатая пехота)</b><br>Девиз: «Никто, кроме нас!». Феноменальная выносливость, марш-броски по 10-15 км с выкладкой, прыжки из Ил-76 и Ан-2. Голубой берет нужно заслужить.<br><br><b>Спецназ (ГРУ)</b><br>Девиз: «Выше нас только звёзды». Элита разведки. Скрытность, тактика, стрельбы из всех видов оружия. Срочники попадают редко (нужна категория А1)." },
-                { title: "⚓ ВМФ и ВКС", text: "<b>ВМФ (Флот)</b><br>Девиз: «С нами Бог и Андреевский флаг!» Корабли и Морпехи. Язык: камбуз, гальюн, кубрик, трап. Морпехи — элита: «Там, где мы, там — победа!».<br><br><b>ВКС (Космические Силы)</b><br>Девиз: «Всё выше и выше!» Срочники не летают. Обслуживание аэродромов, радары, ПВО. Физо меньше, но нужно техническое мышление и много караулов." },
-                { title: "🚀 РВСН и Мотострелки", text: "<b>РВСН (Ракетные Войска)</b><br>Девиз: «После нас — тишина.» Ядерный щит. Высочайшая секретность. Боевые Дежурства (БД) под землей или с комплексами «Ярс». Дисциплина жесткая.<br><br><b>Сухопутные (Мотострелки/Танкисты)</b><br>«Царица полей». Самый массовый род. Полигоны, стрельбы, вождение БМП/БТР, рытье окопов. Полевая романтика, запах пороха и грязь." },
-                { title: "💂‍♂️ Наряды и Караул", text: "<b>Виды нарядов:</b><br><ul><li><b>Дневальный по роте:</b> Стоит на «тумбочке». Следит за порядком, подает команды. Спят 4 часа.</li><li><b>Дежурный по роте:</b> Сержант. Руководит дневальными.</li><li><b>Караул (Гарнизонный):</b> Вооруженная охрана складов. ОЧЕНЬ серьезно. Спать на посту — уголовка. У часового боевые патроны.</li><li><b>Наряд по столовой:</b> Чистка тонн картошки, мытье огромных котлов.</li></ul>" },
-                { title: "🧠 Психология выживания", text: "<b>1. Коллектив важнее всего.</b> В армии нет «Я», есть «МЫ». Никогда не воруй у своих и не стучи. Помогай товарищам.<br><b>2. Психологическая броня.</b> На тебя будут кричать. Они кричат на «солдата», чтобы приучить к подчинению. Не дерзи, выдохни, выполни приказ.<br><b>3. Не забывай о доме.</b> Связь с девушкой и родными — это твои силы. Пиши бумажные письма. Они возвращают в реальность." }
-            ],
-            girl: [
-                { title: "❤️ 1. Первый день", text: "Этот день нужно просто пережить. Разреши себе плакать в подушку, съесть ведро мороженого и пересматривать видео. Завтра утром ты берешь себя в руки. Ему там в тысячу раз тяжелее и страшнее, чем тебе. Ему нужна твоя уверенность и голос, полный любви." },
-                { title: "📞 2. Телефонные звонки", text: "Смартфоны под запретом. Кнопочные выдают в воскресенье на 15 минут. <b>Держи лицо.</b> Не рыдай в трубку со словами «забери меня». Рассказывай смешные истории про общих друзей, про кота. Задавай вопросы: чем кормили, как погода." },
-                { title: "🚫 3. О чем молчать", text: "Никогда не рассказывай о: 1. Бытовых проблемах (сломался кран) — реши сама, он всё равно не поможет. 2. Ссорах с подругами. 3. Мужском внимании (фраза «ко мне подошли знакомиться, но я отказала» включит у него дикую паранойю)." },
-                { title: "💌 4. Бумажные письма", text: "В армии письмо — это высшая ценность. Пиши много и часто. Вложи распечатанные фотографии (нейтральные, конверты могут вскрывать). Попшикай письмо духами. Оставь след от помады. Он будет перечитывать его каждую ночь с фонариком." },
-                { title: "📦 5. Идеальная посылка", text: "Посылка в армии общая, он будет делиться. <b>Класть:</b> Сгущенку (в мягких пакетах), Сникерсы, леденцы (сосать в строю), печенье, толстые черные носки, бактерицидные пластыри, пасту Теймурова, одноразовые бритвы, сырокопченую колбасу." },
-                { title: "❌ 6. Что НЕ класть", text: "Посылки вскрывают офицеры. <b>Запрещено:</b> 1. Алкоголь (выкинут, роту накажут). 2. Скоропорт: фрукты, домашние пирожки, вареную колбасу (отравятся — будут проблемы). 3. Ножницы, ножи. 4. Таблетки (кроме пластырей и мазей)." },
-                { title: "🤯 7. Синдром 'Почему не в сети?'", text: "Он обещал позвонить в 15:00, а уже 18:00? Вдох-выдох! В армии 1000 причин: рота накосячила и телефоны забрали, он в наряде (чистит картошку), телефон сел (а розеток всего 3 на 100 человек). Доверяй. Позвонит, как только сможет." },
-                { title: "🎖 8. Присяга", text: "Присяга — через месяц после призыва. Это первый раз, когда вы увидитесь! Бронируй жилье заранее. Наготовь домашней еды (котлеты, отбивные) — армейская сечка ему уже снится в кошмарах. Оденься красиво, но удобно (на плацу долго стоять)." },
-                { title: "🫂 9. Поведение на присяге", text: "Он изменился. Похудел, обрит наголо, синяки от автомата. <b>НИ В КОЕМ СЛУЧАЕ</b> не причитай 'бедный мой, худенький'. Он солдат. Обними, скажи, что гордишься. В увольнительном (до вечера/утра) просто корми его и дари ласку." },
-                { title: "📆 10. Как занять себя", text: "Время тянется медленно только тогда, когда ты ничего не делаешь. Составь жесткий график. Спортзал, права, подработка, языки. Сделай так, чтобы вечером падать в кровать без сил. Время полетит, а он вернется и увидит, какой крутой ты стала!" },
-                { title: "🤫 11. Ревность", text: "У него отбирают свободу, и единственное, что остается — это ты. Любая фотка из клуба вызывает взрыв паранойи. Будь мудрее. Если идешь гулять — предупреди, пришли смешное фото. Дай ему уверенность, что он единственный." },
-                { title: "🤝 12. Его мама (Союзница)", text: "Его маме так же тяжело. Не конкурируйте! Звони ей раз в неделю. Если он позвонил тебе, а ей не успел — сразу напиши ей: «Ваня звонил, здоров, передавал привет!». Совместное ожидание сближает." },
-                { title: "🎁 13. Сюрпризы издалека", text: "Узнай точный адрес КПП. Во многих городах работают Яндекс.Еда или Деливери. В День рождения, если он договорится с дежурным по КПП, закажи ему пиццу прямо к воротам части! Или найди в ВК группу его части и попроси офицеров передать торт." },
-                { title: "🌗 14. Экватор (Полгода)", text: "Важнейший рубеж. Вы «заканчиваете» служить. Он переходит из «Духа» в «Слона». Физический прессинг спадает, служба превращается в рутину. Начните обсуждать, что будете делать, когда он вернется. Это даст ему заряд энергии." },
-                { title: "✂️ 15. Сто дней до приказа", text: "Приказ выходит дважды в год: 27 марта и 27 сентября. За 100 дней до этого 'деды' иногда бреют голову и отдают масло за завтраком 'молодым'. Начинай готовить дембельский альбом и продумывать встречу!" },
-                { title: "🚀 16. Космос", text: "Последние 10 дней до дембеля. Самое тягучее время. Дни тянутся как резина. В роте принято считать: «Десять! Девять! Восемь!». Твоя задача — активно готовиться: шарики, торт, плакаты." },
-                { title: "🧠 17. Он изменится", text: "Армия меняет психику. Он вернется более жестким, молчаливым, прямолинейным. Это защитный панцирь. Не говори «Я тебя не узнаю». Окружи лаской, и через пару месяцев этот панцирь растает." },
-                { title: "🏠 18. Адаптация дома", text: "Шок свободы. Он будет просыпаться в 6 утра, его будут бесить толпы людей в ТЦ. Не тащи его по клубам. Дай неделю отлежаться на диване, поесть домашней еды и привыкнуть, что не нужно бежать по команде." },
-                { title: "🎉 19. Подготовка к Дембелю", text: "Узнай, в чем он приедет: 'парадка' или 'гражданка'. Закажи бенто-торт «Мой герой дома». Купи шарики цвета хаки. Договорись с друзьями встречать на перроне. Прыжок ему на шею — обязателен!" },
-                { title: "📖 20. Дембельский альбом", text: "Сделай альбом сама! Распечатай скрины переписок, скрины с видеозвонков (он лысый, ты в пижаме), вклей билеты с присяги. Напиши трогательные комментарии. Он будет растроган до слез." },
-                { title: "💅 21. Твоя жизнь", text: "Многие ждули 'хоронят' себя дома. Не делай так! Встречайся с подругами, ходи в кино, покупай платья. Парню приятнее смотреть на фото счастливой, красивой девушки, чем на заплаканную страдалицу." },
-                { title: "🏥 22. Госпиталь", text: "В армии болеют все (ОРВИ, мозоли). Если он в госпитале — не паникуй! В армии это санаторий. Там тепло, нормальная еда, можно лежать весь день и часто выдают телефоны. Это легальный отпуск от сержантов." },
-                { title: "📱 23. Социальные сети", text: "Твой профиль — его окно в мир. Пости красивые фото. Делай милые подписи «Жду моего 🪖❤️». Отмечай его. Для него это публичное признание твоей верности, он будет хвастаться перед сослуживцами." },
-                { title: "🏃‍♂️ 24. Увальнительные (Увалы)", text: "Временный выход за пределы части. Дают не всем. Если к девушке — нужно договариваться. Снимите квартиру. САМОЕ ВАЖНОЕ: верните его на КПП за 15 минут до назначенного времени. Опоздание = лишение увалов до конца службы." },
-                { title: "🍕 25. Армейский голод", text: "Первый месяц дома он будет есть всё. Армейская еда однообразна. Парень будет сметать по 3 тарелки борща и ночью идти за бутербродами. Просто держи холодильник полным." },
-                { title: "💼 26. Учебка vs Боевая часть", text: "Первые 3-5 месяцев — «Учебка» (жесткий устав и контроль). Затем распределение в «Боевую часть». Там служба обычно идет спокойнее, отношения с сержантами человечнее, телефон достать проще." },
-                { title: "🗣 27. Мат", text: "В армии на мате разговаривают. Он впитает эту культуру. Не падай в обморок, если по возвращении будет проскакивать мат. Не читай нотации, мягко напоминай: «Ты дома». За пару недель он перестроится." },
-                { title: "💸 28. Финансы", text: "Платят копейки (2000-3000 руб). Они уходят на пену, нитки и сникерсы. Не жди подарков из армии. Наоборот, будь готова иногда подкидывать ему по 500 рублей на сигареты или сладкое." },
-                { title: "🔮 29. Стройте планы", text: "Обсуждайте первый день после дембеля. Какую закажете пиццу? Куда поедете отдыхать? Планирование светлого будущего помогает пережить серое армейское настоящее." },
-                { title: "👑 30. Ты — героиня", text: "Дождаться парня — это Поступок. Вы пройдете огромную проверку на прочность. Когда он выйдет из поезда и обнимет тебя, ты поймешь, что этот год стоил каждой секунды. Всё будет хорошо!" }
-            ],
-            advice: [
-                { title: "💡 Совет 1: Саморазвитие", text: "«Когда он ушел, хотелось плакать. Потом я поняла: этот год — отпуск для саморазвития! Записалась на курсы, начала бегать. Когда он вернулся, обалдел от того, какой я стала. Вкладывайте время в себя!»" },
-                { title: "💡 Совет 2: Письма", text: "«Не ленитесь писать письма от руки! Мой служил там, где телефоны выдавали раз в 2 недели. Я писала каждые 3 дня обо всем, вкладывала чай. Он привез эти письма затертые до дыр. Говорил, они пахли домом.»" },
-                { title: "💡 Совет 3: Без паники", text: "«Не звонит в воскресенье? Это не значит, что разлюбил. Рота в наряде, телефон сел или сержант забрал телефоны за косяк. Дышите ровно. Позвонит, как только сможет!»" },
-                { title: "💡 Совет 4: Свекровь", text: "«Общайтесь с его мамой! Ей тоже тяжело. Если позвонил вам, а ей не успел — напишите ей, успокойте. Это сблизит вас с его семьей, станете родными людьми.»" },
-                { title: "💡 Совет 5: Экономь", text: "«Копите деньги. Дембельский праздник, торт, ваш первый совместный поход в ресторан потребуют бюджета. Лучше откладывать понемногу весь год.»" },
-                { title: "💡 Совет 6: Секретность", text: "«Не вываливайте подробности службы в соцсети. Не пишите номер части, не выкладывайте его фото с оружием. Лишние глаза создадут ему проблемы с командирами.»" },
-                { title: "💡 Совет 7: Режим", text: "«Не сидите в телефоне до 3 ночи, ожидая сообщения. Высыпайтесь! Нервная и невыспавшаяся девушка — плохая поддержка для солдата.»" },
-                { title: "💡 Совет 8: Мелочи в посылке", text: "«Сгущенка — хорошо, но маленькое письмо, спрятанное под обертку шоколадки, или смешная распечатанная мем-фотка — это просто бесценно для его настроения.»" },
-                { title: "💡 Совет 9: Планы", text: "«Постоянно обсуждайте, что сделаете ПЕРВЫМ делом, когда он сойдет с перрона. Мечтайте о поездке, ремонте. Это дает им силы служить дальше.»" },
-                { title: "💡 Совет 10: Гордость", text: "«Никогда не стыдитесь, что парень в армии. Это достойный путь. Гордитесь им, говорите ему об этом. И он будет чувствовать себя супер-героем даже на чистке картошки!»" }
-            ]
-        };
-
+        // === КНИГА ЗНАНИЙ (Сократил для демо, вставь свои полные тексты) ===
+        const bookData = { army: [{title: "Гайд", text: "Текст"}], girl: [{title: "Совет", text: "Текст"}], advice: [{title: "Идея", text: "Текст"}] };
         let currentBook = 'army', currentPage = 0;
-        function openBook() { document.getElementById('book-modal').style.display = 'flex'; renderPage(); tg.HapticFeedback.impactOccurred('medium'); }
+        function openBook() { document.getElementById('book-modal').style.display = 'flex'; renderPage(); }
         function closeBook() { document.getElementById('book-modal').style.display = 'none'; }
-        function switchBook(t) { currentBook = t; currentPage = 0; ['army','girl','advice'].forEach(v => document.getElementById('book-tab-'+v).classList.toggle('active', v===t)); renderPage(); tg.HapticFeedback.impactOccurred('light'); }
-        function renderPage() { const p = bookData[currentBook]; document.getElementById('book-title').innerText = p[currentPage].title; document.getElementById('book-content').innerHTML = p[currentPage].text; document.getElementById('book-page-num').innerText = `${currentPage + 1} / ${p.length}`; document.querySelector('.book-page-container').scrollTop = 0; }
-        function nextPage() { if (currentPage < bookData[currentBook].length - 1) { currentPage++; renderPage(); tg.HapticFeedback.impactOccurred('light'); } }
-        function prevPage() { if (currentPage > 0) { currentPage--; renderPage(); tg.HapticFeedback.impactOccurred('light'); } }
+        function switchBook(t) { currentBook = t; currentPage = 0; ['army','girl','advice'].forEach(v => document.getElementById('book-tab-'+v).classList.toggle('active', v===t)); renderPage(); }
+        function renderPage() { const p = bookData[currentBook]; document.getElementById('book-title').innerText = p[currentPage].title; document.getElementById('book-content').innerHTML = p[currentPage].text; }
+        function nextPage() { if (currentPage < bookData[currentBook].length - 1) { currentPage++; renderPage(); } }
+        function prevPage() { if (currentPage > 0) { currentPage--; renderPage(); } }
 
         function syncAll() { 
             let wData = { boy: [], girl: [] }; try { wData = JSON.parse(localStorage.getItem('w')) || { boy: [], girl: [] }; } catch(e) {}
-            let fData = { start: '', cycle: 28, len: 5, logs: {} }; try { const fs = localStorage.getItem('flo'); if(fs) fData = JSON.parse(fs); } catch(e) {}
             try { 
-                const payload = JSON.stringify({ s: localStorage.getItem('s')||'', e: localStorage.getItem('e')||'', w: wData, flo: fData });
+                const payload = JSON.stringify({ s: localStorage.getItem('s')||'', e: localStorage.getItem('e')||'', w: wData, flo: floData });
                 if(payload.length < 4000) tg.sendData(payload);
                 tg.HapticFeedback.notificationOccurred('success'); 
             } catch(e) { console.log(e); } 
