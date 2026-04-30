@@ -13,7 +13,7 @@
         :root { 
             --bg-fallback: #0d0e15; --card-bg: rgba(15, 15, 20, 0.88); --border: rgba(255, 255, 255, 0.25); 
             --text-main: #ffffff; --text-sub: #b0b3c6; --card-shadow: 0 15px 40px rgba(0, 0, 0, 0.95); 
-            --accent: #bb86fc; --mint: #03dac6; --flo-pink: #f26279; --flo-teal: #4db6ac;
+            --accent: #bb86fc; --mint: #03dac6; --flo-pink: #ff4d6d; --flo-teal: #1abc9c;
         }
         body.theme-girl { --accent: #ff4785; --mint: #ff1493; }
         body { background-color: var(--bg-fallback); background-size: cover; background-position: center; background-attachment: fixed; background-repeat: no-repeat; color: var(--text-main); font-family: 'Montserrat', sans-serif; margin: 0; display: flex; justify-content: center; min-height: 100vh; overflow-x: hidden; transition: 0.4s; user-select: none; -webkit-user-select: none; }
@@ -23,7 +23,7 @@
         @keyframes slideFade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         
         .card { background: var(--card-bg); backdrop-filter: blur(25px); border: 1px solid var(--border); border-radius: 28px; padding: 22px; margin-bottom: 15px; box-shadow: var(--card-shadow); }
-        .edit-toggle { position: absolute; top: 25px; left: 25px; z-index: 10; width: 42px; height: 42px; border-radius: 14px; background: var(--card-bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 20px; cursor: pointer; backdrop-filter: blur(10px); transition: 0.2s; box-shadow: 0 5px 15px rgba(0,0,0,0.6); }
+        .edit-toggle { position: absolute; top: 25px; left: 25px; z-index: 10; width: 42px; height: 42px; border-radius: 14px; background: var(--card-bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 20px; cursor: pointer; transition: 0.2s; box-shadow: 0 5px 15px rgba(0,0,0,0.6); }
         .edit-toggle:active { transform: scale(0.9); }
         .header-badge { background: var(--card-bg); border: 1px solid var(--border); border-radius: 35px; padding: 25px 15px; margin-bottom: 25px; display: flex; flex-direction: column; align-items: center; box-shadow: var(--card-shadow); backdrop-filter: blur(25px); }
         .profile-row { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 12px; }
@@ -38,56 +38,65 @@
         
         .btn { background: var(--accent); color: #fff; border: none; padding: 18px; border-radius: 20px; font-weight: 900; width: 100%; font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; box-shadow: 0 10px 25px rgba(0,0,0,0.7); transition: 0.2s; cursor: pointer; text-shadow: 0 2px 4px rgba(0,0,0,0.5); font-family: 'Montserrat', sans-serif;}
         .btn:active { transform: scale(0.96); }
-        .btn-lib { background: linear-gradient(135deg, rgba(20,20,25,0.95), rgba(30,30,40,0.95)); border: 2px solid var(--mint); color: var(--mint); padding: 16px 20px; border-radius: 22px; font-weight: 900; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; width: 100%; margin-bottom: 20px; cursor: pointer; box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 15px rgba(3, 218, 198, 0.2); text-shadow: 0 2px 5px rgba(0,0,0,0.9); }
+        .btn-lib { background: linear-gradient(135deg, rgba(20,20,25,0.95), rgba(30,30,40,0.95)); border: 2px solid var(--mint); color: var(--mint); padding: 16px 20px; border-radius: 22px; font-weight: 900; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; width: 100%; margin-bottom: 20px; cursor: pointer; box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 15px rgba(3, 218, 198, 0.2); }
 
-        /* FLO CALENDAR */
+        /* FLO CALENDAR & UI */
         .flo-hero { text-align: center; margin-bottom: 20px; }
-        .flo-subtitle { font-size: 12px; font-weight: 700; color: var(--text-sub); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; text-shadow: 0 2px 4px rgba(0,0,0,0.8);}
-        .flo-main-text { font-size: 24px; font-weight: 900; color: #fff; line-height: 1.2; text-shadow: 0 4px 10px rgba(0,0,0,0.8); margin-bottom: 20px;}
+        .flo-subtitle { font-size: 12px; font-weight: 700; color: var(--text-sub); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
+        .flo-main-text { font-size: 26px; font-weight: 900; color: #fff; line-height: 1.2; text-shadow: 0 4px 10px rgba(0,0,0,0.8); margin-bottom: 20px;}
+        
         .flo-partner-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px;}
-        .f-card { border-radius: 20px; padding: 15px; position: relative; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.5); transition: 0.3s;}
-        .fc-blue { background: linear-gradient(135deg, #2b5876, #4e4376); border: 1px solid rgba(255,255,255,0.2);}
+        .f-card { border-radius: 20px; padding: 15px; position: relative; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.5);}
+        .fc-blue { background: linear-gradient(135deg, #1e3c72, #2a5298); border: 1px solid rgba(255,255,255,0.2);}
         .fc-pink { background: linear-gradient(135deg, #ff9a9e, #fecfef); border: 1px solid rgba(255,255,255,0.2); color: #000;}
         .f-card-badge { position: absolute; top: 0; right: 0; background: rgba(255,255,255,0.9); color: #000; font-size: 9px; font-weight: 900; padding: 3px 8px; border-bottom-left-radius: 10px;}
         .f-card-title { font-size: 16px; font-weight: 900; line-height: 1.2; margin-top: 10px;}
-        .f-card-sub { font-size: 10px; font-weight: 700; opacity: 0.8; margin-top: 25px;}
-        .cal-wrapper { background: rgba(0,0,0,0.4); border-radius: 20px; padding: 15px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.1); }
-        .cal-month { text-align: center; font-size: 16px; font-weight: 900; margin-bottom: 15px; text-transform: uppercase;}
+
+        .cal-scroll-area { max-height: 450px; overflow-y: auto; padding-right: 5px; scroll-snap-type: y mandatory;}
+        .cal-scroll-area::-webkit-scrollbar { width: 5px; }
+        .cal-scroll-area::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
+        
+        .cal-wrapper { background: rgba(0,0,0,0.4); border-radius: 20px; padding: 15px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.1); scroll-snap-align: start;}
+        .cal-month { text-align: center; font-size: 16px; font-weight: 900; margin-bottom: 15px; text-transform: uppercase; color: #fff;}
         .cal-weekdays { display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; font-size: 10px; color: var(--text-sub); margin-bottom: 10px; font-weight: 700;}
         .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px 5px; text-align: center; }
         .cal-day { font-size: 14px; font-weight: 700; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; margin: 0 auto; border-radius: 50%; border: 2px solid transparent;}
-        .cal-period { background-color: var(--flo-pink); color: #fff; box-shadow: 0 0 10px rgba(242, 98, 121, 0.5); }
+        
+        .cal-period { background-color: var(--flo-pink); color: #fff; box-shadow: 0 0 10px rgba(255, 77, 109, 0.5); }
         .cal-pred-period { border-color: var(--flo-pink); border-style: dashed; color: #fff; }
-        .cal-ovulation { border-color: var(--flo-teal); border-style: dotted; color: var(--flo-teal); }
-        .cal-today { border-color: #fff; background: rgba(255,255,255,0.2); }
+        .cal-ovulation { border-color: var(--flo-teal); border-style: dotted; color: var(--flo-teal); font-weight: 900;}
+        .cal-today { background: rgba(255,255,255,0.2); border-color: #fff; font-weight: 900;}
+
         .log-section { background: rgba(10,10,15,0.7); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 20px; margin-bottom: 20px; }
         .log-title { font-size: 11px; font-weight: 900; text-align: center; color: var(--text-sub); letter-spacing: 1px; margin-bottom: 12px; text-transform: uppercase; }
-        .log-group { margin-bottom: 12px; }
-        .log-btns { display: flex; gap: 8px; flex-wrap: wrap; }
-        .log-btn { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1); padding: 8px 12px; border-radius: 12px; font-size: 13px; font-weight: 700; cursor: pointer; transition: 0.2s; color: var(--text-sub); display:flex; align-items:center; gap:5px;}
-        .log-btn.active { background: rgba(242, 98, 121, 0.2); border-color: var(--flo-pink); color: #fff; }
+        .log-btns { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px;}
+        .log-btn { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1); padding: 8px 12px; border-radius: 12px; font-size: 13px; font-weight: 700; cursor: pointer; transition: 0.2s; color: var(--text-sub); }
+        .log-btn.active { background: rgba(255, 77, 109, 0.2); border-color: var(--flo-pink); color: #fff; }
 
-        /* DMB */
-        #countdown { font-size: 40px; font-weight: 900; text-align: center; margin: 10px 0; display: flex; justify-content: center; align-items: baseline; gap: 4px; text-shadow: 0 4px 15px rgba(0,0,0,0.9), 0 0 20px rgba(255,255,255,0.2); }
-        #countdown small { font-size: 13px; color: var(--text-sub); font-weight: 800; text-shadow: 0 2px 5px rgba(0,0,0,0.9);}
-        .neon { color: var(--mint); text-shadow: 0 0 15px var(--mint), 0 2px 10px rgba(0,0,0,0.9); }
+        .btn-log-period { background: transparent; border: 2px dashed var(--flo-pink); color: var(--flo-pink); padding: 15px; border-radius: 20px; font-weight: 900; width: 100%; font-size: 13px; text-transform: uppercase; margin-bottom: 20px; cursor: pointer; transition: 0.2s;}
+        .btn-log-period:active { background: rgba(255, 77, 109, 0.2); }
+
+        /* DMB & HOLIDAYS */
+        #countdown { font-size: 40px; font-weight: 900; text-align: center; margin: 10px 0; display: flex; justify-content: center; align-items: baseline; gap: 4px; text-shadow: 0 4px 15px rgba(0,0,0,0.9); }
+        #countdown small { font-size: 13px; color: var(--text-sub); font-weight: 800; }
+        .neon { color: var(--mint); text-shadow: 0 0 15px var(--mint); }
         .progress { height: 10px; background: rgba(0,0,0,0.8); border-radius: 10px; overflow: hidden; margin-top: 15px; border: 1px solid var(--border); box-shadow: inset 0 2px 5px rgba(0,0,0,0.9);}
         #bar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--mint)); box-shadow: 0 0 15px var(--accent); transition: 0.5s; }
-        .weeks-container { margin-top: 25px; padding: 18px; background: rgba(10,10,15,0.85); border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); box-shadow: inset 0 5px 20px rgba(0,0,0,0.6); }
+        .weeks-container { margin-top: 25px; padding: 18px; background: rgba(10,10,15,0.85); border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); }
         .weeks-title { font-size: 11px; font-weight: 900; text-align: center; color: var(--text-sub); letter-spacing: 2px; margin-bottom: 15px; text-transform: uppercase; }
         .weeks-grid { display: grid; grid-template-columns: repeat(13, 1fr); gap: 6px; }
         .week-box { aspect-ratio: 1; border-radius: 4px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); transition: 0.3s; }
         .week-box.filled { background: var(--accent); box-shadow: 0 0 10px var(--accent); border-color: transparent; }
         .week-box.current { background: var(--mint); box-shadow: 0 0 15px var(--mint); animation: pulse 1.5s infinite; border-color: transparent; }
         @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.85); } }
-        .weeks-stats { display: flex; justify-content: space-between; margin-top: 15px; font-size: 12px; font-weight: 800; text-shadow: 0 2px 5px rgba(0,0,0,0.9); }
+        .weeks-stats { display: flex; justify-content: space-between; margin-top: 15px; font-size: 12px; font-weight: 800; }
         .w-passed { color: var(--mint); } .w-left { color: var(--accent); }
-        .army-status-card { text-align: center; padding: 18px; background: linear-gradient(135deg, rgba(20,20,25,0.95), rgba(30,30,40,0.95)); border-radius: 20px; border: 1px dashed var(--accent); margin-top: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.6); }
-        .army-rank { font-size: 24px; font-weight: 900; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 2px 5px rgba(0,0,0,0.9);}
-        .army-msg { font-size: 12px; color: var(--text-sub); font-weight: 700; line-height: 1.5; text-shadow: 0 2px 4px rgba(0,0,0,0.9); }
+        .army-status-card { text-align: center; padding: 18px; background: linear-gradient(135deg, rgba(20,20,25,0.95), rgba(30,30,40,0.95)); border-radius: 20px; border: 1px dashed var(--accent); margin-top: 20px; }
+        .army-rank { font-size: 24px; font-weight: 900; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 2px; }
+        .army-msg { font-size: 12px; color: var(--text-sub); font-weight: 700; line-height: 1.5; }
         .milestones { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px;}
-        .m-card { background: rgba(10,10,15,0.85); text-align: center; padding: 18px 10px; border-radius: 18px; border: 1px solid rgba(255,255,255,0.15); box-shadow: inset 0 2px 10px rgba(0,0,0,0.5);}
-        .m-card b { font-size: 20px; display: block; color: var(--mint); margin: 6px 0; text-shadow: 0 2px 5px rgba(0,0,0,0.9); }
+        .m-card { background: rgba(10,10,15,0.85); text-align: center; padding: 18px 10px; border-radius: 18px; border: 1px solid rgba(255,255,255,0.15); }
+        .m-card b { font-size: 20px; display: block; color: var(--mint); margin: 6px 0; }
         .m-card small { font-size: 10px; font-weight: 900; color: var(--text-sub); letter-spacing: 1px; text-transform: uppercase; }
         .holiday-active { background: linear-gradient(135deg, rgba(3, 218, 198, 0.2), rgba(187, 134, 252, 0.2)) !important; border-color: var(--mint) !important; }
 
@@ -97,12 +106,11 @@
         .book-tabs { display: flex; background: rgba(10,10,15,0.8); border-radius: 20px; padding: 6px; margin-bottom: 20px; gap: 4px; }
         .b-tab { flex: 1; text-align: center; padding: 12px 6px; font-size: 10px; font-weight: 900; color: var(--text-sub); border-radius: 16px; cursor: pointer; text-transform: uppercase; transition: 0.3s; }
         .b-tab.active { background: var(--accent); color: #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.6); }
-        .book-page-container { flex-grow: 1; background: var(--card-bg); backdrop-filter: blur(25px); border: 1px solid var(--border); border-radius: 28px; padding: 25px; overflow-y: auto; display: flex; flex-direction: column; box-shadow: var(--card-shadow);}
+        .book-page-container { flex-grow: 1; background: var(--card-bg); backdrop-filter: blur(25px); border: 1px solid var(--border); border-radius: 28px; padding: 25px; overflow-y: auto; display: flex; flex-direction: column; }
         .book-title { font-size: 18px; font-weight: 900; color: var(--mint); margin-top: 0; margin-bottom: 15px; border-bottom: 1px dashed rgba(255,255,255,0.2); padding-bottom: 15px; line-height: 1.3;}
         .book-text { font-size: 14px; line-height: 1.6; flex-grow: 1; }
         .book-text b { color: var(--accent); }
         .book-text ul { padding-left: 20px; margin-top: 10px; }
-        .book-text li { margin-bottom: 10px; }
         .book-controls { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; padding-top: 15px; border-top: 1px solid var(--border); }
         .book-btn { background: rgba(255,255,255,0.1); border: 1px solid var(--border); color: #fff; padding: 10px 20px; border-radius: 12px; font-weight: bold; cursor: pointer;}
         
@@ -118,7 +126,7 @@
         .r1 { width: 140px; height: 140px; animation-delay: 0s; } .r2 { width: 200px; height: 190px; animation-delay: 1.5s; }
         @keyframes radarPing { 0% { transform: scale(0.5); opacity: 0.8; } 100% { transform: scale(1.6); opacity: 0; } }
 
-        /* ВВОД И ПРОЧЕЕ */
+        /* ВВОД */
         .wish-tabs { display: flex; background: rgba(10,10,15,0.8); border-radius: 20px; padding: 6px; margin-bottom: 20px;}
         .w-tab { flex: 1; text-align: center; padding: 14px; font-size: 11px; font-weight: 900; color: var(--text-sub); border-radius: 16px; cursor: pointer; text-transform: uppercase; transition: 0.3s;}
         .w-tab.active { background: var(--accent); color: #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
@@ -187,35 +195,42 @@
                 <button class="btn" onclick="saveFlo()" style="background:var(--flo-pink);">СОХРАНИТЬ КАЛЕНДАРЬ</button>
             </div>
 
+            <!-- ИНТЕРФЕЙС ПАРНЯ -->
             <div id="flo-partner-view" style="display:none;">
                 <div class="flo-hero"><div class="flo-subtitle" id="flo-p-sub">Анализ цикла</div><div class="flo-main-text" id="flo-p-main">Загрузка...</div></div>
                 <div class="flo-partner-cards">
                     <div class="f-card fc-blue"><div class="f-card-badge">Её день</div><div class="f-card-title" id="fc-day">Загрузка</div><div class="f-card-sub" id="fc-date">--</div></div>
                     <div class="f-card fc-pink"><div class="f-card-badge">Твоя задача</div><div class="f-card-title" id="fc-advice" style="font-size: 13px; color: #000;">Будь рядом</div></div>
                 </div>
-                <div class="log-section" id="flo-p-logs" style="display:none;"><div class="log-title">ОНА СЕГОДНЯ ОТМЕТИЛА:</div><div id="p-log-text" style="font-size: 13px; font-weight: 700; line-height: 1.5; color: #fff;"></div></div>
+                
+                <div class="log-section" id="flo-p-logs" style="display:none;">
+                    <div class="log-title">ОНА СЕГОДНЯ ОТМЕТИЛА:</div>
+                    <div id="p-log-text" style="font-size: 13px; font-weight: 700; line-height: 1.5; color: #fff;"></div>
+                </div>
+
+                <div class="cal-scroll-area" id="cal-scroll-partner" style="margin-top: 20px;"></div>
             </div>
 
+            <!-- ИНТЕРФЕЙС ДЕВУШКИ -->
             <div id="flo-girl-view" style="display:none;">
-                <div class="cal-wrapper">
-                    <div class="cal-month" id="cal-month-name">Месяц</div>
-                    <div class="cal-weekdays"><div>ПН</div><div>ВТ</div><div>СР</div><div>ЧТ</div><div>ПТ</div><div>СБ</div><div>ВС</div></div>
-                    <div class="cal-grid" id="cal-grid"></div>
-                </div>
+                <button class="btn-log-period" onclick="logPeriodToday()">🩸 ОТМЕТИТЬ НАЧАЛО ЦИКЛА СЕГОДНЯ</button>
+                
+                <div class="cal-scroll-area" id="cal-scroll-girl"></div>
+
                 <div class="log-section">
                     <div class="log-title">САМОЧУВСТВИЕ СЕГОДНЯ</div>
-                    <div class="log-group"><div class="log-btns" id="log-sym-container">
+                    <div class="log-btns" id="log-sym-container">
                         <div class="log-btn" data-val="😍 Счастлива" onclick="toggleLog(this)">😍 Счастлива</div>
                         <div class="log-btn" data-val="😢 Плачу" onclick="toggleLog(this)">😢 Плачу</div>
                         <div class="log-btn" data-val="🤬 Бесит всё" onclick="toggleLog(this)">🤬 Бесит всё</div>
                         <div class="log-btn" data-val="💊 Тянет живот" onclick="toggleLog(this)">💊 Тянет живот</div>
                         <div class="log-btn" data-val="🛏 Хочу спать" onclick="toggleLog(this)">🛏 Хочу спать</div>
                         <div class="log-btn" data-val="🍕 Жор" onclick="toggleLog(this)">🍕 Жор</div>
-                        <div class="log-btn" data-val="❤️ Было дело" onclick="toggleLog(this)">❤️ Было дело</div>
-                    </div></div>
+                        <div class="log-btn" data-val="❤️ Близость" onclick="toggleLog(this)">❤️ Близость</div>
+                    </div>
                 </div>
             </div>
-            <center><p style="font-size:11px; color:var(--text-sub); text-decoration:underline; cursor:pointer; margin-top:10px;" onclick="resetFlo()">Сбросить календарь</p></center>
+            <center><p style="font-size:11px; color:var(--text-sub); text-decoration:underline; cursor:pointer; margin-top:10px;" onclick="resetFloLocally()">Сбросить настройки календаря</p></center>
         </div>
 
         <!-- DMB -->
@@ -245,7 +260,7 @@
                     <div class="m-card" style="border-color: var(--accent);"><small>ДО ПРИКАЗА</small><b id="v-ord" style="color: var(--accent);">0 дн</b></div>
                     <div class="m-card" id="holiday-card" style="grid-column: span 2; display: none; margin-top: 5px;"><small id="hol-name" style="color: var(--text-sub);">БЛИЖАЙШИЙ ПРАЗДНИК</small><b id="hol-val" style="color: var(--mint);">Загрузка...</b></div>
                 </div>
-                <center><p style="font-size:11px; color:var(--text-sub); text-decoration:underline; cursor:pointer; margin-top: 25px;" onclick="resetDMB()">Сбросить даты службы</p></center>
+                <center><p style="font-size:11px; color:var(--text-sub); text-decoration:underline; cursor:pointer; margin-top: 25px;" onclick="resetDMB()">Сбросить даты</p></center>
             </div>
         </div>
 
@@ -296,15 +311,11 @@
         let tg = window.Telegram.WebApp; tg.expand(); tg.headerColor = '#0d0e15';
         const params = new URLSearchParams(window.location.search);
         
-        // Чтение параметров из URL
-        ['role', 'pn', 'pp', 'plat', 'plon', 'pt', 's', 'e', 'p'].forEach(p => { 
-            if (params.has(p)) localStorage.setItem(p, params.get(p)); 
-        });
+        ['role', 'pn', 'pp', 'plat', 'plon', 'pt', 's', 'e', 'p'].forEach(p => { if (params.has(p)) localStorage.setItem(p, params.get(p)); });
         
         const role = localStorage.getItem('role') || 'boy';
         document.body.classList.toggle('theme-girl', role === 'girl');
 
-        // ИНИЦИАЛИЗАЦИЯ ДАННЫХ
         let floData = { start: '', cycle: 28, len: 5, logs: {} }; 
         try { 
             let lsFlo = JSON.parse(localStorage.getItem('flo'));
@@ -317,7 +328,6 @@
         } catch(e) {}
         if (!floData.logs) floData.logs = {};
 
-        // ГЕНЕРАЦИЯ СЕТКИ 52 НЕДЕЛЬ
         const grid = document.getElementById('weeks-grid');
         if(grid) { grid.innerHTML = ''; for(let i=0; i<52; i++) { const box = document.createElement('div'); box.className = 'week-box'; box.id = 'week-' + i; grid.appendChild(box); } }
 
@@ -332,7 +342,6 @@
         if (pPhoto && pPhoto !== "" && pPhoto !== "None") { pAva.style.backgroundImage = `url('${pPhoto}')`; pAva.innerText = ""; } else { pAva.innerText = "❤️"; }
         document.getElementById('pair-names').innerText = `${myData?.first_name || 'Я'} ❤️ ${pNick}`;
 
-        // МЕНЮ
         const menuContainer = document.getElementById('sortable-menu'); let sortableInstance = null, isEditMode = false;
         function toggleEdit() {
             const btn = document.getElementById('edit-btn'); isEditMode = !isEditMode;
@@ -366,8 +375,15 @@
                 return;
             }
             document.getElementById('flo-setup').style.display = 'none';
-            if (role === 'girl') { document.getElementById('flo-girl-view').style.display = 'block'; renderCalendar(); renderLogs(); } 
-            else { document.getElementById('flo-partner-view').style.display = 'block'; renderPartnerView(); }
+            if (role === 'girl') { 
+                document.getElementById('flo-girl-view').style.display = 'block'; 
+                renderMultiCalendar('cal-scroll-girl'); 
+                renderLogs(); 
+            } else { 
+                document.getElementById('flo-partner-view').style.display = 'block'; 
+                renderPartnerView(); 
+                renderMultiCalendar('cal-scroll-partner');
+            }
         }
 
         function saveFlo() {
@@ -376,8 +392,14 @@
             localStorage.setItem('flo', JSON.stringify(floData)); initFlo(); syncAll();
         }
 
-        function resetFlo() {
+        function resetFloLocally() {
             floData = { start: '', cycle: 28, len: 5, logs: {} }; localStorage.removeItem('flo'); document.getElementById('flo-start').value = '';
+            initFlo(); syncAll(); tg.HapticFeedback.notificationOccurred('success');
+        }
+
+        function logPeriodToday() {
+            floData.start = getTodayStr();
+            localStorage.setItem('flo', JSON.stringify(floData));
             initFlo(); syncAll(); tg.HapticFeedback.notificationOccurred('success');
         }
 
@@ -394,30 +416,48 @@
             document.querySelectorAll('.log-btn').forEach(btn => { btn.classList.toggle('active', log.includes(btn.getAttribute('data-val'))); });
         }
 
-        function renderCalendar() {
-            const now = new Date(), startStr = new Date(floData.start);
+        // Рендер календаря на 12 месяцев (от -3 до +8 от текущего)
+        function renderMultiCalendar(containerId) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+            const now = new Date();
+            const startStr = new Date(floData.start);
             const cycle = floData.cycle, len = floData.len;
             const monthNames = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"];
-            document.getElementById('cal-month-name').innerText = monthNames[now.getMonth()] + " " + now.getFullYear();
-            const grid = document.getElementById('cal-grid'); grid.innerHTML = '';
-            const firstDayIndex = new Date(now.getFullYear(), now.getMonth(), 1).getDay();
-            const daysInMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
-            const startPad = firstDayIndex === 0 ? 6 : firstDayIndex - 1;
-            for (let i = 0; i < startPad; i++) { grid.innerHTML += `<div></div>`; }
-            
-            for (let d = 1; d <= daysInMonth; d++) {
-                const iterDate = new Date(now.getFullYear(), now.getMonth(), d);
-                const dfDays = diffDays(startStr, iterDate);
-                let classes = "cal-day"; if (iterDate.toDateString() === now.toDateString()) classes += " cal-today";
-                if (dfDays >= 0) {
-                    const dayOfCycle = (dfDays % cycle) + 1;
-                    if (dayOfCycle >= 1 && dayOfCycle <= len) classes += " cal-period";
-                    else if (dayOfCycle === cycle - 14) classes += " cal-ovulation";
-                } else {
-                    const futureDiff = Math.abs(dfDays), futureDayCycle = cycle - (futureDiff % cycle) + 1;
-                    if (futureDayCycle >= 1 && futureDayCycle <= len) classes += " cal-pred-period";
+
+            for (let mOffset = -3; mOffset <= 8; mOffset++) {
+                const targetMonthDate = new Date(now.getFullYear(), now.getMonth() + mOffset, 1);
+                const tYear = targetMonthDate.getFullYear();
+                const tMonth = targetMonthDate.getMonth();
+                
+                let monthHtml = `<div class="cal-wrapper"><div class="cal-month">${monthNames[tMonth]} ${tYear}</div>`;
+                monthHtml += `<div class="cal-weekdays"><div>ПН</div><div>ВТ</div><div>СР</div><div>ЧТ</div><div>ПТ</div><div>СБ</div><div>ВС</div></div><div class="cal-grid">`;
+                
+                const firstDayIndex = targetMonthDate.getDay();
+                const daysInMonth = new Date(tYear, tMonth + 1, 0).getDate();
+                const startPad = firstDayIndex === 0 ? 6 : firstDayIndex - 1;
+                
+                for (let i = 0; i < startPad; i++) { monthHtml += `<div></div>`; }
+                
+                for (let d = 1; d <= daysInMonth; d++) {
+                    const iterDate = new Date(tYear, tMonth, d);
+                    const dfDays = diffDays(startStr, iterDate);
+                    let classes = "cal-day"; 
+                    if (iterDate.toDateString() === now.toDateString()) classes += " cal-today";
+                    
+                    if (dfDays >= 0) {
+                        const dayOfCycle = (dfDays % cycle) + 1;
+                        if (dayOfCycle >= 1 && dayOfCycle <= len) classes += " cal-period";
+                        else if (dayOfCycle === cycle - 14) classes += " cal-ovulation";
+                    } else {
+                        const futureDiff = Math.abs(dfDays);
+                        const futureDayCycle = cycle - (futureDiff % cycle) + 1;
+                        if (futureDayCycle >= 1 && futureDayCycle <= len) classes += " cal-pred-period";
+                    }
+                    monthHtml += `<div class="${classes}">${d}</div>`;
                 }
-                grid.innerHTML += `<div class="${classes}">${d}</div>`;
+                monthHtml += `</div></div>`;
+                container.innerHTML += monthHtml;
             }
         }
 
@@ -501,7 +541,7 @@
             const totalMs = end.getTime() - start.getTime();
             const leftMs = Math.max(0, end.getTime() - now.getTime());
             
-            const p = (passedMs / totalDays) * 100;
+            const p = (passedDays / totalDays) * 100;
             document.getElementById('bar').style.width = p + '%'; document.getElementById('perc').innerText = p.toFixed(6) + '%';
             
             document.getElementById('vd').innerText = leftDays; 
@@ -595,13 +635,12 @@
         function nextPage() { if (currentPage < bookData[currentBook].length - 1) { currentPage++; renderPage(); tg.HapticFeedback.impactOccurred('light'); } }
         function prevPage() { if (currentPage > 0) { currentPage--; renderPage(); tg.HapticFeedback.impactOccurred('light'); } }
 
-        // === ОДНА ГЛОБАЛЬНАЯ ФУНКЦИЯ SYNC ===
         function syncAll() { 
             let wData = { boy: [], girl: [] }; try { wData = JSON.parse(localStorage.getItem('w')) || { boy: [], girl: [] }; } catch(e) {}
             let fData = { start: '', cycle: 28, len: 5, logs: {} }; try { const fs = localStorage.getItem('flo'); if(fs) fData = JSON.parse(fs); } catch(e) {}
             try { 
                 const payload = JSON.stringify({ s: localStorage.getItem('s')||'', e: localStorage.getItem('e')||'', w: wData, flo: fData });
-                if(payload.length < 4000) tg.sendData(payload); // Защита от лимита телеграма
+                if(payload.length < 4000) tg.sendData(payload);
                 tg.HapticFeedback.notificationOccurred('success'); 
             } catch(e) { console.log(e); } 
         }
