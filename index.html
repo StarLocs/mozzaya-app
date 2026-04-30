@@ -13,9 +13,14 @@
     
     <style>
         :root { 
-            --bg-fallback: #0d0e15; --card-bg: rgba(20, 20, 25, 0.75); --border: rgba(255, 255, 255, 0.15); 
-            --text-main: #ffffff; --text-sub: #b0b3c6; --card-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
-            --accent: #bb86fc; --mint: #03dac6; 
+            --bg-fallback: #0d0e15; 
+            --card-bg: rgba(15, 15, 20, 0.88); 
+            --border: rgba(255, 255, 255, 0.25); 
+            --text-main: #ffffff; 
+            --text-sub: #b0b3c6; 
+            --card-shadow: 0 15px 40px rgba(0, 0, 0, 0.95); 
+            --accent: #bb86fc; 
+            --mint: #03dac6; 
         }
         body.theme-girl { --accent: #ff4785; --mint: #ff1493; }
 
@@ -32,70 +37,85 @@
         .screen.active { display: flex; animation: slideFade 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
         @keyframes slideFade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         
-        .card { background: var(--card-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid var(--border); border-radius: 28px; padding: 22px; margin-bottom: 15px; box-shadow: var(--card-shadow); }
+        .card { 
+            background: var(--card-bg); 
+            backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); 
+            border: 1px solid var(--border); border-radius: 28px; padding: 22px; margin-bottom: 15px; box-shadow: var(--card-shadow); 
+        }
 
-        .edit-toggle { position: absolute; top: 25px; left: 25px; z-index: 10; width: 42px; height: 42px; border-radius: 14px; background: var(--card-bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 20px; cursor: pointer; backdrop-filter: blur(10px); transition: 0.2s; }
+        .edit-toggle { position: absolute; top: 25px; left: 25px; z-index: 10; width: 42px; height: 42px; border-radius: 14px; background: var(--card-bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 20px; cursor: pointer; backdrop-filter: blur(10px); transition: 0.2s; box-shadow: 0 5px 15px rgba(0,0,0,0.6); }
         .edit-toggle:active { transform: scale(0.9); }
 
-        .header-badge { background: var(--card-bg); border: 1px solid var(--border); border-radius: 35px; padding: 25px 15px; margin-bottom: 25px; display: flex; flex-direction: column; align-items: center; box-shadow: var(--card-shadow); }
+        .header-badge { background: var(--card-bg); border: 1px solid var(--border); border-radius: 35px; padding: 25px 15px; margin-bottom: 25px; display: flex; flex-direction: column; align-items: center; box-shadow: var(--card-shadow); backdrop-filter: blur(25px); }
         .profile-row { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 12px; }
-        .avatar { width: 70px; height: 70px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--mint)); display: flex; justify-content: center; align-items: center; font-size: 26px; font-weight: bold; color: #fff; box-shadow: 0 8px 25px rgba(0,0,0,0.6); background-size: cover; background-position: center; border: 3px solid var(--border); }
-        .heart-icon { font-size: 30px; animation: heartbeat 1.2s infinite; }
+        .avatar { width: 70px; height: 70px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--mint)); display: flex; justify-content: center; align-items: center; font-size: 26px; font-weight: bold; color: #fff; box-shadow: 0 8px 25px rgba(0,0,0,0.8); background-size: cover; background-position: center; border: 3px solid var(--border); }
+        .heart-icon { font-size: 30px; animation: heartbeat 1.2s infinite; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.6)); }
         @keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
 
-        #pair-names { font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; text-align: center; background: linear-gradient(90deg, #fff, var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 0; }
+        #pair-names { font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; text-align: center; background: linear-gradient(90deg, #fff, var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 0; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.8)); }
         
-        .menu-item { display: flex; justify-content: space-between; align-items: center; font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 14px; padding: 22px; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: 0.1s; }
+        .menu-item { display: flex; justify-content: space-between; align-items: center; font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 14px; padding: 22px; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: 0.1s; text-shadow: 0 2px 5px rgba(0,0,0,0.8); }
         .menu-item:active { transform: scale(0.98); }
         @keyframes shake { 0%, 100% { transform: rotate(0deg); } 25% { transform: rotate(-1.5deg); } 75% { transform: rotate(1.5deg); } }
-        .edit-mode .menu-item { animation: shake 0.35s infinite; border: 1px dashed var(--accent); background: rgba(0,0,0,0.3); }
+        .edit-mode .menu-item { animation: shake 0.35s infinite; border: 1px dashed var(--accent); background: rgba(0,0,0,0.5); }
         .sortable-ghost { opacity: 0.2; transform: scale(0.95); }
 
-        .btn { font-family: 'Montserrat', sans-serif; background: var(--accent); color: #fff; border: none; padding: 18px; border-radius: 20px; font-weight: 900; width: 100%; font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; box-shadow: 0 10px 25px rgba(0,0,0,0.5); transition: 0.2s; cursor: pointer; }
+        .btn { font-family: 'Montserrat', sans-serif; background: var(--accent); color: #fff; border: none; padding: 18px; border-radius: 20px; font-weight: 900; width: 100%; font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; box-shadow: 0 10px 25px rgba(0,0,0,0.7); transition: 0.2s; cursor: pointer; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
         .btn:active { transform: scale(0.96); }
 
-        /* === DMB СТИЛИ === */
-        #countdown { font-family: 'Montserrat', sans-serif; font-size: 38px; font-weight: 900; text-align: center; margin: 10px 0; display: flex; justify-content: center; align-items: baseline; gap: 4px; text-shadow: 0 0 20px rgba(255,255,255,0.3); }
-        #countdown small { font-size: 12px; color: var(--text-sub); margin-right: 6px; font-weight: 700;}
-        .neon { color: var(--mint); text-shadow: 0 0 15px var(--mint); display: inline-block; }
-        .progress { height: 8px; background: rgba(0,0,0,0.6); border-radius: 10px; overflow: hidden; margin-top: 15px; border: 1px solid var(--border);}
-        #bar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--mint)); box-shadow: 0 0 15px var(--accent); transition: 0.5s; }
+        .btn-lib {
+            background: linear-gradient(135deg, rgba(20,20,25,0.95), rgba(30,30,40,0.95));
+            border: 2px solid var(--mint); color: var(--mint); padding: 16px 20px; border-radius: 22px;
+            font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 13px; text-transform: uppercase;
+            letter-spacing: 1px; width: 100%; margin-bottom: 20px; cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 15px rgba(3, 218, 198, 0.2);
+            text-shadow: 0 2px 5px rgba(0,0,0,0.9); transition: 0.2s;
+        }
+        .btn-lib:active { transform: scale(0.96); }
 
-        .weeks-container { margin-top: 25px; padding: 15px; background: rgba(0,0,0,0.4); border-radius: 20px; border: 1px solid rgba(255,255,255,0.05); }
-        .weeks-title { font-size: 10px; font-family: 'Montserrat', sans-serif; font-weight: 900; text-align: center; color: var(--text-sub); letter-spacing: 2px; margin-bottom: 15px; text-transform: uppercase; }
+        /* === DMB === */
+        #countdown { font-family: 'Montserrat', sans-serif; font-size: 40px; font-weight: 900; text-align: center; margin: 10px 0; display: flex; justify-content: center; align-items: baseline; gap: 4px; text-shadow: 0 4px 15px rgba(0,0,0,0.9), 0 0 20px rgba(255,255,255,0.2); }
+        #countdown small { font-size: 13px; color: var(--text-sub); margin-right: 6px; font-weight: 800; text-shadow: 0 2px 5px rgba(0,0,0,0.9);}
+        .neon { color: var(--mint); text-shadow: 0 0 15px var(--mint), 0 2px 10px rgba(0,0,0,0.9); display: inline-block; }
+        .progress { height: 10px; background: rgba(0,0,0,0.8); border-radius: 10px; overflow: hidden; margin-top: 15px; border: 1px solid var(--border); box-shadow: inset 0 2px 5px rgba(0,0,0,0.9);}
+        #bar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--mint)); box-shadow: 0 0 15px var(--accent); transition: 0.5s; }
+        #perc { text-shadow: 0 2px 5px rgba(0,0,0,0.9); font-size: 15px !important; margin-top: 12px !important; }
+
+        .weeks-container { margin-top: 25px; padding: 18px; background: rgba(10,10,15,0.85); border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); box-shadow: inset 0 5px 20px rgba(0,0,0,0.6), 0 10px 20px rgba(0,0,0,0.5); }
+        .weeks-title { font-size: 11px; font-family: 'Montserrat', sans-serif; font-weight: 900; text-align: center; color: var(--text-sub); letter-spacing: 2px; margin-bottom: 15px; text-transform: uppercase; text-shadow: 0 2px 5px rgba(0,0,0,0.9); }
         .weeks-grid { display: grid; grid-template-columns: repeat(13, 1fr); gap: 6px; }
-        .week-box { aspect-ratio: 1; border-radius: 4px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); transition: 0.3s; }
-        .week-box.filled { background: var(--accent); box-shadow: 0 0 8px var(--accent); border-color: transparent; }
-        .week-box.current { background: var(--mint); box-shadow: 0 0 12px var(--mint); animation: pulse 1.5s infinite; border-color: transparent; }
-        @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.9); } }
-        .weeks-stats { display: flex; justify-content: space-between; margin-top: 15px; font-size: 11px; font-weight: 700; font-family: 'Montserrat', sans-serif; }
+        .week-box { aspect-ratio: 1; border-radius: 4px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); transition: 0.3s; }
+        .week-box.filled { background: var(--accent); box-shadow: 0 0 10px var(--accent); border-color: transparent; }
+        .week-box.current { background: var(--mint); box-shadow: 0 0 15px var(--mint); animation: pulse 1.5s infinite; border-color: transparent; }
+        @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.85); } }
+        .weeks-stats { display: flex; justify-content: space-between; margin-top: 15px; font-size: 12px; font-weight: 800; font-family: 'Montserrat', sans-serif; text-shadow: 0 2px 5px rgba(0,0,0,0.9); }
         .w-passed { color: var(--mint); } .w-left { color: var(--accent); }
 
-        .army-status-card { text-align: center; padding: 15px; background: linear-gradient(135deg, rgba(187, 134, 252, 0.1), rgba(3, 218, 198, 0.1)); border-radius: 20px; border: 1px dashed var(--accent); margin-top: 15px; position: relative; overflow: hidden; }
-        .army-rank { font-family: 'Montserrat', sans-serif; font-size: 22px; font-weight: 900; color: var(--text-main); margin-bottom: 5px; text-transform: uppercase; letter-spacing: 2px;}
-        .army-msg { font-size: 11px; color: var(--text-sub); font-weight: 600; line-height: 1.4; }
+        .army-status-card { text-align: center; padding: 18px; background: linear-gradient(135deg, rgba(20,20,25,0.95), rgba(30,30,40,0.95)); border-radius: 20px; border: 1px dashed var(--accent); margin-top: 20px; position: relative; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.6); }
+        .army-rank { font-family: 'Montserrat', sans-serif; font-size: 24px; font-weight: 900; color: var(--text-main); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 2px 5px rgba(0,0,0,0.9);}
+        .army-msg { font-size: 12px; color: var(--text-sub); font-weight: 700; line-height: 1.5; text-shadow: 0 2px 4px rgba(0,0,0,0.9); }
 
-        .milestones { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px;}
-        .m-card { background: rgba(0,0,0,0.3); text-align: center; padding: 15px 10px; border-radius: 18px; border: 1px solid var(--border);}
-        .m-card b { font-family: 'Montserrat', sans-serif; font-size: 18px; display: block; color: var(--mint); margin: 5px 0; }
-        .m-card small { font-size: 9px; font-weight: 900; color: var(--text-sub); letter-spacing: 1px; text-transform: uppercase; }
+        .milestones { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px;}
+        .m-card { background: rgba(10,10,15,0.85); text-align: center; padding: 18px 10px; border-radius: 18px; border: 1px solid rgba(255,255,255,0.15); box-shadow: inset 0 2px 10px rgba(0,0,0,0.5), 0 8px 15px rgba(0,0,0,0.5);}
+        .m-card b { font-family: 'Montserrat', sans-serif; font-size: 20px; display: block; color: var(--mint); margin: 6px 0; text-shadow: 0 2px 5px rgba(0,0,0,0.9); }
+        .m-card small { font-size: 10px; font-weight: 900; color: var(--text-sub); letter-spacing: 1px; text-transform: uppercase; text-shadow: 0 2px 4px rgba(0,0,0,0.9); }
 
         /* === КНИГА === */
         #book-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: var(--bg-fallback); z-index: 999; padding: 20px; box-sizing: border-box; flex-direction: column; overflow: hidden; }
-        .book-close { align-self: flex-end; font-size: 24px; color: var(--text-main); cursor: pointer; margin-bottom: 10px; font-family: 'Montserrat', sans-serif; font-weight: 900;}
-        .book-tabs { display: flex; background: rgba(0,0,0,0.5); border-radius: 20px; padding: 6px; margin-bottom: 20px; gap: 4px; }
-        .b-tab { flex: 1; text-align: center; padding: 12px 6px; font-size: 10px; font-weight: 900; color: var(--text-sub); border-radius: 16px; cursor: pointer; font-family: 'Montserrat', sans-serif; text-transform: uppercase; transition: 0.3s; }
-        .b-tab.active { background: var(--accent); color: #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
-        .book-page-container { flex-grow: 1; background: var(--card-bg); border: 1px solid var(--border); border-radius: 28px; padding: 25px; overflow-y: auto; display: flex; flex-direction: column; }
-        .book-title { font-family: 'Montserrat', sans-serif; font-size: 18px; font-weight: 900; color: var(--mint); margin-top: 0; margin-bottom: 15px; border-bottom: 1px dashed rgba(255,255,255,0.2); padding-bottom: 15px; line-height: 1.3;}
-        .book-text { font-size: 14px; color: var(--text-main); line-height: 1.6; flex-grow: 1; }
+        .book-close { align-self: flex-end; font-size: 24px; color: var(--text-main); cursor: pointer; margin-bottom: 10px; font-family: 'Montserrat', sans-serif; font-weight: 900; text-shadow: 0 2px 5px rgba(0,0,0,0.9);}
+        .book-tabs { display: flex; background: rgba(10,10,15,0.8); border-radius: 20px; padding: 6px; margin-bottom: 20px; gap: 4px; box-shadow: inset 0 2px 10px rgba(0,0,0,0.8);}
+        .b-tab { flex: 1; text-align: center; padding: 12px 6px; font-size: 10px; font-weight: 900; color: var(--text-sub); border-radius: 16px; cursor: pointer; font-family: 'Montserrat', sans-serif; text-transform: uppercase; transition: 0.3s; text-shadow: 0 2px 4px rgba(0,0,0,0.9);}
+        .b-tab.active { background: var(--accent); color: #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.6); }
+        .book-page-container { flex-grow: 1; background: var(--card-bg); backdrop-filter: blur(25px); border: 1px solid var(--border); border-radius: 28px; padding: 25px; overflow-y: auto; display: flex; flex-direction: column; box-shadow: var(--card-shadow);}
+        .book-title { font-family: 'Montserrat', sans-serif; font-size: 18px; font-weight: 900; color: var(--mint); margin-top: 0; margin-bottom: 15px; border-bottom: 1px dashed rgba(255,255,255,0.2); padding-bottom: 15px; line-height: 1.3; text-shadow: 0 2px 5px rgba(0,0,0,0.9);}
+        .book-text { font-size: 14px; color: var(--text-main); line-height: 1.6; flex-grow: 1; text-shadow: 0 1px 3px rgba(0,0,0,0.8);}
         .book-text b { color: var(--accent); }
         .book-text ul { padding-left: 20px; margin-top: 10px; }
         .book-text li { margin-bottom: 10px; }
         .book-controls { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; padding-top: 15px; border-top: 1px solid var(--border); }
-        .book-btn { background: rgba(255,255,255,0.1); border: 1px solid var(--border); color: #fff; padding: 10px 20px; border-radius: 12px; font-weight: bold; cursor: pointer; }
+        .book-btn { background: rgba(255,255,255,0.1); border: 1px solid var(--border); color: #fff; padding: 10px 20px; border-radius: 12px; font-weight: bold; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.5); text-shadow: 0 2px 4px rgba(0,0,0,0.9);}
         .book-btn:active { background: var(--accent); border-color: var(--accent); }
-        .book-page-num { font-family: monospace; font-size: 14px; font-weight: bold; color: var(--text-sub); }
+        .book-page-num { font-family: monospace; font-size: 14px; font-weight: bold; color: var(--text-sub); text-shadow: 0 2px 4px rgba(0,0,0,0.9);}
 
         /* === РАДАР === */
         .planet-wrap { position: relative; width: 180px; height: 180px; margin: 10px auto 30px auto; display: flex; justify-content: center; align-items: center; }
@@ -108,23 +128,26 @@
         .radar-ring { position: absolute; border: 2px solid var(--mint); border-radius: 50%; opacity: 0; animation: radarPing 3s ease-out infinite; }
         .r1 { width: 140px; height: 140px; animation-delay: 0s; } .r2 { width: 200px; height: 190px; animation-delay: 1.5s; }
         @keyframes radarPing { 0% { transform: scale(0.5); opacity: 0.8; } 100% { transform: scale(1.6); opacity: 0; } }
-        .loc-time-info { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 800; color: var(--text-sub); text-transform: uppercase; letter-spacing: 1px; margin-top: 8px; opacity: 0.9; }
+        .loc-time-info { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 800; color: var(--text-sub); text-transform: uppercase; letter-spacing: 1px; margin-top: 8px; opacity: 0.9; text-shadow: 0 2px 4px rgba(0,0,0,0.9);}
 
         /* === КОРЗИНА И ПРОЧЕЕ === */
-        .wish-tabs { display: flex; background: rgba(0,0,0,0.5); border-radius: 20px; padding: 6px; margin-bottom: 20px; }
-        .w-tab { flex: 1; text-align: center; padding: 14px; font-size: 11px; font-weight: 900; color: var(--text-sub); border-radius: 16px; cursor: pointer; font-family: 'Montserrat', sans-serif; text-transform: uppercase; transition: 0.3s; }
-        .w-tab.active { background: var(--accent); color: #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
-        .wish-item { display: flex; flex-direction: column; padding: 18px; background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 18px; margin-bottom: 12px; font-weight: 700; font-size: 14px; }
-        .wish-link { display: inline-flex; align-items: center; margin-top: 10px; color: #000; text-decoration: none; background: var(--mint); padding: 8px 16px; border-radius: 12px; font-size: 11px; font-weight: 900; }
-        .del-btn { color: #ff4757; font-size: 24px; font-weight: bold; background: rgba(255, 71, 87, 0.15); width: 35px; height: 35px; border-radius: 10px; display: flex; align-items: center; justify-content: center; cursor: pointer;}
+        .wish-tabs { display: flex; background: rgba(10,10,15,0.8); border-radius: 20px; padding: 6px; margin-bottom: 20px; box-shadow: inset 0 2px 10px rgba(0,0,0,0.8);}
+        .w-tab { flex: 1; text-align: center; padding: 14px; font-size: 11px; font-weight: 900; color: var(--text-sub); border-radius: 16px; cursor: pointer; font-family: 'Montserrat', sans-serif; text-transform: uppercase; transition: 0.3s; text-shadow: 0 2px 4px rgba(0,0,0,0.9);}
+        .w-tab.active { background: var(--accent); color: #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
+        .wish-item { display: flex; flex-direction: column; padding: 18px; background: rgba(10,10,15,0.6); border: 1px solid var(--border); border-radius: 18px; margin-bottom: 12px; font-weight: 700; font-size: 14px; text-shadow: 0 1px 3px rgba(0,0,0,0.8); box-shadow: inset 0 2px 5px rgba(0,0,0,0.5);}
+        .wish-link { display: inline-flex; align-items: center; margin-top: 10px; color: #000; text-decoration: none; background: var(--mint); padding: 8px 16px; border-radius: 12px; font-size: 11px; font-weight: 900; text-shadow: none; box-shadow: 0 4px 10px rgba(0,0,0,0.5);}
+        .del-btn { color: #ff4757; font-size: 24px; font-weight: bold; background: rgba(255, 71, 87, 0.15); width: 35px; height: 35px; border-radius: 10px; display: flex; align-items: center; justify-content: center; cursor: pointer; text-shadow: 0 2px 4px rgba(0,0,0,0.9);}
 
-        .bg-thumb { width: 100%; height: 85px; border-radius: 16px; background-size: cover; background-position: center; border: 2px solid transparent; transition: 0.2s; }
-        .bg-thumb.active { border-color: var(--mint); transform: scale(0.95); }
+        .bg-thumb { width: 100%; height: 85px; border-radius: 16px; background-size: cover; background-position: center; border: 2px solid transparent; transition: 0.2s; box-shadow: 0 5px 15px rgba(0,0,0,0.5);}
+        .bg-thumb.active { border-color: var(--mint); transform: scale(0.95); box-shadow: 0 0 15px var(--mint);}
         .bg-gallery { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
-        input { width: 100%; background: rgba(0,0,0,0.4); border: 1px solid var(--border); border-radius: 16px; padding: 18px; color: var(--text-main); margin: 5px 0 15px 0; box-sizing: border-box; outline: none; font-size: 15px; font-weight: 600; font-family: inherit;}
-        label { font-size: 10px; color: var(--text-sub); font-weight: 800; letter-spacing: 2px; text-transform: uppercase; display: block; margin-bottom: 5px; font-family: 'Montserrat', sans-serif;}
+        
+        input { width: 100%; background: rgba(10,10,15,0.8); border: 1px solid var(--border); border-radius: 16px; padding: 18px; color: var(--text-main); margin: 5px 0 15px 0; box-sizing: border-box; outline: none; font-size: 15px; font-weight: 600; font-family: inherit; box-shadow: inset 0 2px 10px rgba(0,0,0,0.8); text-shadow: 0 2px 4px rgba(0,0,0,0.9);}
+        label { font-size: 10px; color: var(--text-sub); font-weight: 800; letter-spacing: 2px; text-transform: uppercase; display: block; margin-bottom: 5px; font-family: 'Montserrat', sans-serif; text-shadow: 0 2px 4px rgba(0,0,0,0.9);}
+        
         .sync-wrapper { text-align: center; margin-top: auto; padding-top: 25px; padding-bottom: 10px; }
-        .btn-sync-small { background: var(--card-bg); border: 1px solid var(--mint); color: var(--mint); padding: 12px 26px; border-radius: 30px; font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; box-shadow: var(--card-shadow); transition: 0.2s; }
+        .btn-sync-small { background: var(--card-bg); border: 1px solid var(--mint); color: var(--mint); padding: 12px 26px; border-radius: 30px; font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.8); text-shadow: 0 2px 5px rgba(0,0,0,0.9); transition: 0.2s; }
+        .btn-sync-small:active { transform: scale(0.96); }
     </style>
 </head>
 <body>
@@ -138,7 +161,6 @@
         <div class="book-page-container">
             <h2 class="book-title" id="book-title">Заголовок</h2>
             <div class="book-text" id="book-content">Текст страницы...</div>
-            
             <div class="book-controls">
                 <button class="book-btn" onclick="prevPage()">◀ НАЗАД</button>
                 <div class="book-page-num" id="book-page-num">1/10</div>
@@ -171,12 +193,12 @@
         </div>
 
         <div id="locator" class="screen">
-            <span onclick="nav('home')" style="cursor:pointer; color:var(--accent); font-weight:900; margin-bottom:20px; display:inline-block;">← НАЗАД</span>
+            <span onclick="nav('home')" style="cursor:pointer; color:var(--accent); font-weight:900; margin-bottom:20px; display:inline-block; text-shadow: 0 2px 5px rgba(0,0,0,0.9);">← НАЗАД</span>
             <div class="card" style="text-align:center;">
-                <h3 style="margin:0; color:var(--mint); font-family: 'Montserrat', sans-serif;">ГЕО-РАДАР СВЯЗИ ❤️</h3>
+                <h3 style="margin:0; color:var(--mint); font-family: 'Montserrat', sans-serif; text-shadow: 0 2px 5px rgba(0,0,0,0.9);">ГЕО-РАДАР СВЯЗИ ❤️</h3>
                 <div class="planet-wrap"><div class="radar-ring r1"></div><div class="radar-ring r2"></div><div class="satellite s1"></div><div class="satellite s2"></div><div class="planet"></div></div>
-                <p id="loc-status" style="font-size:12px; font-weight:900; margin: 15px 0; min-height:25px; font-family: 'Montserrat', sans-serif; color: var(--mint); text-transform: uppercase;"></p>
-                <button class="btn" id="btn-loc" onclick="sendLocation()" style="background:var(--mint); color:#000; margin-bottom:12px;">📍 ОТПРАВИТЬ ГЕОМЕТКУ</button>
+                <p id="loc-status" style="font-size:12px; font-weight:900; margin: 15px 0; min-height:25px; font-family: 'Montserrat', sans-serif; color: var(--mint); text-transform: uppercase; text-shadow: 0 2px 5px rgba(0,0,0,0.9);"></p>
+                <button class="btn" id="btn-loc" onclick="sendLocation()" style="background:var(--mint); color:#000; margin-bottom:12px; text-shadow:none;">📍 ОТПРАВИТЬ ГЕОМЕТКУ</button>
                 <div style="display:flex; flex-direction:column; align-items:center;">
                     <button class="btn" onclick="calculateDistance()" style="background:rgba(255,255,255,0.1); border:1px solid var(--accent); color:#fff; margin-bottom:12px;">📡 СКАНЕР ДИСТАНЦИИ</button>
                     <button class="btn" onclick="viewPartnerLocation()" style="background:transparent; border:1px dashed var(--text-sub); color:var(--text-sub); margin-bottom:15px;">👀 ОТКРЫТЬ КАРТУ</button>
@@ -186,11 +208,11 @@
         </div>
 
         <div id="dmb" class="screen">
-            <span onclick="nav('home')" style="cursor:pointer; color:var(--accent); font-weight:900; margin-bottom:20px; display:inline-block;">← НАЗАД</span>
+            <span onclick="nav('home')" style="cursor:pointer; color:var(--accent); font-weight:900; margin-bottom:20px; display:inline-block; text-shadow: 0 2px 5px rgba(0,0,0,0.9);">← НАЗАД</span>
             
             <div id="setup" class="card">
-                <button class="btn" onclick="openBook()" style="margin-bottom: 25px; background: rgba(0,0,0,0.5); border: 1px solid var(--mint); color: var(--mint); box-shadow: 0 0 15px rgba(3, 218, 198, 0.2);">📚 АРМЕЙСКАЯ БАЗА ЗНАНИЙ</button>
-                <h3 style="margin:0 0 15px 0; font-family: 'Montserrat', sans-serif; text-align: center;">УСТАНОВКА ДАТ</h3>
+                <button class="btn-lib" onclick="openBook()">📚 АРМЕЙСКАЯ БАЗА ЗНАНИЙ</button>
+                <h3 style="margin:0 0 15px 0; font-family: 'Montserrat', sans-serif; text-align: center; text-shadow: 0 2px 5px rgba(0,0,0,0.9);">УСТАНОВКА ДАТ</h3>
                 <label>Дата призыва</label> <input type="date" id="ds">
                 <label>Дата дембеля</label> <input type="date" id="de">
                 <label>Дата присяги (необязательно)</label> <input type="date" id="dp">
@@ -198,13 +220,13 @@
             </div>
             
             <div id="view" style="display:none;">
-                <button class="btn" onclick="openBook()" style="margin-bottom: 15px; background: rgba(0,0,0,0.5); border: 1px solid var(--mint); color: var(--mint); box-shadow: 0 0 15px rgba(3, 218, 198, 0.2);">📚 АРМЕЙСКАЯ БАЗА ЗНАНИЙ</button>
+                <button class="btn-lib" onclick="openBook()">📚 АРМЕЙСКАЯ БАЗА ЗНАНИЙ</button>
 
                 <div class="card">
-                    <p style="text-align:center; font-size:10px; color:var(--text-sub); margin:0; font-weight:900; font-family: 'Montserrat', sans-serif;">ДО ДОМА ОСТАЛОСЬ</p>
+                    <p style="text-align:center; font-size:10px; color:var(--text-sub); margin:0; font-weight:900; font-family: 'Montserrat', sans-serif; text-shadow: 0 2px 4px rgba(0,0,0,0.9);">ДО ДОМА ОСТАЛОСЬ</p>
                     <div id="countdown"><span id="vd">0</span><small>д</small> <span id="vh">00</span><small>ч</small> <span id="vm">00</span><small>м</small> <span id="vs" class="neon">00</span></div>
                     <div class="progress"><div id="bar"></div></div>
-                    <div id="perc" style="text-align:center; font-size:14px; margin-top:8px; color:var(--mint); font-family:monospace; font-weight:bold; letter-spacing: 1px;">0.000000%</div>
+                    <div id="perc" style="text-align:center; font-family:monospace; font-weight:bold; letter-spacing: 1px; color: var(--mint);">0.000000%</div>
                 </div>
 
                 <div class="army-status-card" id="army-status-box">
@@ -223,20 +245,20 @@
                     <div class="m-card"><small>ЭКВАТОР</small><b id="v-eq">0 дн</b></div>
                     <div class="m-card" style="border-color: var(--accent);"><small style="color: var(--text-main);">ДО ПРИКАЗА</small><b id="v-ord" style="color: var(--accent);">0 дн</b></div>
                 </div>
-                <center><p style="font-size:11px; color:var(--text-sub); text-decoration:underline; cursor:pointer; margin-top: 25px;" onclick="localStorage.removeItem('s'); localStorage.removeItem('e'); localStorage.removeItem('p'); location.reload();">Сбросить даты</p></center>
+                <center><p style="font-size:11px; color:var(--text-sub); text-decoration:underline; cursor:pointer; margin-top: 25px; text-shadow: 0 2px 4px rgba(0,0,0,0.9);" onclick="localStorage.removeItem('s'); localStorage.removeItem('e'); localStorage.removeItem('p'); location.reload();">Сбросить даты</p></center>
             </div>
         </div>
 
         <div id="wish" class="screen">
-            <span onclick="nav('home')" style="cursor:pointer; color:var(--accent); font-weight:900; margin-bottom:20px; display:inline-block;">← НАЗАД</span>
+            <span onclick="nav('home')" style="cursor:pointer; color:var(--accent); font-weight:900; margin-bottom:20px; display:inline-block; text-shadow: 0 2px 5px rgba(0,0,0,0.9);">← НАЗАД</span>
             <div class="wish-tabs"><div class="w-tab active" id="tab-partner" onclick="switchW('partner')">Хочет половинка</div><div class="w-tab" id="tab-me" onclick="switchW('me')">Мои желания</div></div>
             <div class="card"><div id="wish-input-group" style="display:none; gap:10px; margin-bottom:20px;"><input type="text" id="wi" placeholder="Что подарить?" style="margin:0;"><button class="btn" onclick="addW()" style="width:auto; padding:0 25px; margin:0;">+</button></div><div id="wl"></div></div>
         </div>
 
         <div id="settings" class="screen">
-            <span onclick="nav('home')" style="cursor:pointer; color:var(--accent); font-weight:900; margin-bottom:20px; display:inline-block;">← НАЗАД</span>
+            <span onclick="nav('home')" style="cursor:pointer; color:var(--accent); font-weight:900; margin-bottom:20px; display:inline-block; text-shadow: 0 2px 5px rgba(0,0,0,0.9);">← НАЗАД</span>
             <div class="card">
-                <h3 style="margin:0; margin-bottom: 15px;">🎨 ВЫБОР ФОНА</h3>
+                <h3 style="margin:0; margin-bottom: 15px; text-shadow: 0 2px 5px rgba(0,0,0,0.9);">🎨 ВЫБОР ФОНА</h3>
                 <div class="bg-gallery">
                     <div class="bg-thumb" onclick="setBg('bg_1.jpg', this)" style="background-image:url('img/bg_1.jpg')"></div>
                     <div class="bg-thumb" onclick="setBg('bg_2.jpg', this)" style="background-image:url('img/bg_2.jpg')"></div>
@@ -330,7 +352,7 @@
 
         function viewPartnerLocation() { const lat = localStorage.getItem('plat'), lon = localStorage.getItem('plon'); if(!lat) { tg.showAlert("Геометки нет!"); } else { window.open(`https://yandex.ru/maps/?pt=${lon},${lat}&z=16&l=map`, '_blank'); } }
 
-        // === БАЗА ЗНАНИЙ ===
+        // === ОГРОМНАЯ БАЗА ЗНАНИЙ (10 БОЕЦ + 30 ЖДУЛЯ + 10 СОВЕТОВ) ===
         const bookData = {
             army: [
                 { title: "🎒 Что брать с собой в военкомат? (Гайд для новобранца)", text: "<b>Подготовка к отправке — это половина успеха.</b> Не тащи с собой дорогие вещи, огромные сумки и мамины пирожки на неделю. В распределительном пункте всё лишнее заставят выкинуть или отправить домой.<br><br><b>Что ОБЯЗАТЕЛЬНО нужно взять:</b><br><br><ul><li><b>Телефон «Тапик»:</b> Кнопочный телефон без камеры и выхода в интернет. Смартфон всё равно заберут в сейф и будут выдавать раз в неделю. Бери тот, что держит зарядку неделю (Nokia, Philips).</li><li><b>Рыльно-мыльное:</b> Зубная щетка в жестком футляре, кусок дешевого мыла в мыльнице, дешевая пена для бритья и упаковка одноразовых станков (лучше Gillette с синими ручками).</li><li><b>Нитки и Иголки:</b> Черные, белые и защитного цвета (хаки). Лайфхак: спрячь пару иголок в стержень шариковой ручки, чтобы не потерять.</li><li><b>Медицина:</b> Упаковка бактерицидных пластырей (берцы гарантированно сотрут ноги в кровь в первые дни). Очень выручит паста Теймурова для ног (от пота и запаха).</li><li><b>Часы:</b> Самые дешевые электронные часы на черном ремешке. Обязательно с подсветкой! В армии знать точное время — вопрос выживания, потому что опоздание на 1 минуту на построение карается всей ротой.</li></ul><br><b>Чего брать НЕ НУЖНО:</b> Скоропортящуюся еду, стеклянные бутылки, ножницы, дорогие бритвы, парфюм. Оставь гражданскую одежду самой простой, её всё равно упакуют в мешок и отправят домой." },
@@ -380,7 +402,7 @@
                 { title: "💡 Совет 1: Инвестируй в себя", text: "«Когда он ушел, первые две недели хотелось просто лежать и плакать. Но потом пришло понимание: этот год можно использовать как отпуск для саморазвития! Я записалась на курсы, начала бегать по утрам, занялась фигурой. Время полетело незаметно, а когда он вернулся, он просто обалдел от того, какой я стала. Девочки, вкладывайте это время в себя!»" },
                 { title: "💡 Совет 2: Письма — это база", text: "«Не ленитесь писать письма от руки! Бумажные письма там — огромная ценность. Мой служил там, где телефоны выдавали раз в две недели. Я купила пачку красивых конвертов и писала каждые 3 дня. Просто обо всем: как прошел день, какую смешную собаку видела. Вкладывала пакетики чая. Он привез эти письма домой затертые до дыр. Говорил, они пахли домом.»" },
                 { title: "💡 Совет 3: Без паники", text: "«Если он не звонит в воскресенье — это не значит, что он тебя разлюбил. Это значит, что рота в наряде, телефон сел или сержант забрал телефоны за косяк взвода. Дышите ровно. Учитесь доверять. Он позвонит, как только сможет!»" },
-                { title: "💡 Совет 4: Свекровь — союзник", text: "«Обязательно общайтесь с его мамой! Ей тоже безумно тяжело. Вместе ждать намного легче. Если он позвонил вам, а ей не успел — сразу напишите ей, успокойте. Это очень сблизит вас с его семьей, и после армии вы станете по-настоящему родными людьми.»" },
+                { title: "💡 Совет 4: Свекровь — союзник", text: "«Обязательно общайтесь с его мамой! Ей тоже безумно тяжело. Вместе ждать намного легче. Если он позвонил вам, а ей не успел — сразу напишите ей, успокойте. Это очень сблизит вас с его семье, и после армии вы станете по-настоящему родными людьми.»" },
                 { title: "💡 Совет 5: Экономь на дембель", text: "«Не тратьте деньги на ерунду. Копите. Дембельский праздник, подарок, торт и ваш первый совместный отпуск или поход в ресторан потребуют бюджета. Лучше откладывать понемногу весь год.»" },
                 { title: "💡 Совет 6: Секретность в соцсетях", text: "«Не вываливайте подробности его службы в социальные сети. Не пишите номер части, не выкладывайте его фото с оружием или техникой. Лишние глаза и языки могут создать ему огромные проблемы с командирами в части.»" },
                 { title: "💡 Совет 7: Сон и режим", text: "«Не сидите в телефоне до 3 ночи, ожидая его сообщения, если он в карауле. Высыпайтесь! Тебе нужны силы, чтобы оставаться красивой, бодрой и адекватной. Нервная и невыспавшаяся девушка — плохая поддержка для солдата.»" },
@@ -517,4 +539,4 @@
         setInterval(() => { if(localStorage.getItem('s')) tick(); }, 100);
     </script>
 </body>
-</html>a
+</html>
