@@ -6,51 +6,70 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
+    
     <title>MoZZaya Premium</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;900&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+    
     <style>
         :root { 
             --bg-fallback: #0d0e15; --card-bg: rgba(15, 15, 20, 0.88); --border: rgba(255, 255, 255, 0.25); 
             --text-main: #ffffff; --text-sub: #b0b3c6; --card-shadow: 0 15px 40px rgba(0, 0, 0, 0.95); 
-            --accent: #bb86fc; --mint: #03dac6; --flo-pink: #ff4d6d; --flo-teal: #1abc9c;
+            --accent: #bb86fc; --mint: #03dac6; 
+            --flo-pink: #ff4d6d; --flo-teal: #1abc9c;
         }
         body.theme-girl { --accent: #ff4785; --mint: #ff1493; }
-        body { background-color: var(--bg-fallback); background-size: cover; background-position: center; background-attachment: fixed; background-repeat: no-repeat; color: var(--text-main); font-family: 'Montserrat', sans-serif; margin: 0; display: flex; justify-content: center; min-height: 100vh; overflow-x: hidden; transition: 0.4s; user-select: none; -webkit-user-select: none; }
+
+        body { 
+            background-color: var(--bg-fallback); background-size: cover; background-position: center;
+            background-attachment: fixed; background-repeat: no-repeat; color: var(--text-main); 
+            font-family: 'Montserrat', sans-serif; margin: 0; display: flex; justify-content: center; 
+            min-height: 100vh; overflow-x: hidden; transition: 0.4s; user-select: none; -webkit-user-select: none;
+        }
+
         .app { width: 100%; max-width: 400px; padding: 20px 20px 30px 20px; box-sizing: border-box; display: flex; flex-direction: column; position: relative;}
         .screen { display: none; flex-direction: column; flex-grow: 1; }
         .screen.active { display: flex; animation: slideFade 0.3s ease-out; }
         @keyframes slideFade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         
-        .card { background: var(--card-bg); backdrop-filter: blur(25px); border: 1px solid var(--border); border-radius: 28px; padding: 22px; margin-bottom: 15px; box-shadow: var(--card-shadow); }
-        .edit-toggle { position: absolute; top: 25px; left: 25px; z-index: 10; width: 42px; height: 42px; border-radius: 14px; background: var(--card-bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 20px; cursor: pointer; transition: 0.2s; box-shadow: 0 5px 15px rgba(0,0,0,0.6); }
+        .card { background: var(--card-bg); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border: 1px solid var(--border); border-radius: 28px; padding: 22px; margin-bottom: 15px; box-shadow: var(--card-shadow); }
+
+        .edit-toggle { position: absolute; top: 25px; left: 25px; z-index: 10; width: 42px; height: 42px; border-radius: 14px; background: var(--card-bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 20px; cursor: pointer; backdrop-filter: blur(10px); transition: 0.2s; box-shadow: 0 5px 15px rgba(0,0,0,0.6); }
         .edit-toggle:active { transform: scale(0.9); }
+        
         .header-badge { background: var(--card-bg); border: 1px solid var(--border); border-radius: 35px; padding: 25px 15px; margin-bottom: 25px; display: flex; flex-direction: column; align-items: center; box-shadow: var(--card-shadow); backdrop-filter: blur(25px); }
         .profile-row { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 12px; }
         .avatar { width: 70px; height: 70px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--mint)); display: flex; justify-content: center; align-items: center; font-size: 26px; font-weight: bold; color: #fff; box-shadow: 0 8px 25px rgba(0,0,0,0.8); background-size: cover; background-position: center; border: 3px solid var(--border); }
-        #pair-names { font-size: 20px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; text-align: center; background: linear-gradient(90deg, #fff, var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 0; }
+        .heart-icon { font-size: 30px; animation: heartbeat 1.2s infinite; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.6)); }
+        @keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
+        
+        #pair-names { font-size: 20px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; text-align: center; background: linear-gradient(90deg, #fff, var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 0; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.8)); }
         
         .menu-item { display: flex; justify-content: space-between; align-items: center; font-weight: 800; font-size: 14px; padding: 22px; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: 0.1s; text-shadow: 0 2px 5px rgba(0,0,0,0.8); }
         .menu-item:active { transform: scale(0.98); }
-        .edit-mode .menu-item { border: 1px dashed var(--accent); background: rgba(0,0,0,0.5); }
-        
+        @keyframes shake { 0%, 100% { transform: rotate(0deg); } 25% { transform: rotate(-1.5deg); } 75% { transform: rotate(1.5deg); } }
+        .edit-mode .menu-item { animation: shake 0.35s infinite; border: 1px dashed var(--accent); background: rgba(0,0,0,0.5); }
+        .sortable-ghost { opacity: 0.2; transform: scale(0.95); }
+
         .btn { background: var(--accent); color: #fff; border: none; padding: 18px; border-radius: 20px; font-weight: 900; width: 100%; font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; box-shadow: 0 10px 25px rgba(0,0,0,0.7); transition: 0.2s; cursor: pointer; text-shadow: 0 2px 4px rgba(0,0,0,0.5); font-family: 'Montserrat', sans-serif;}
         .btn:active { transform: scale(0.96); }
-        .btn-lib { background: linear-gradient(135deg, rgba(20,20,25,0.95), rgba(30,30,40,0.95)); border: 2px solid var(--mint); color: var(--mint); padding: 16px 20px; border-radius: 22px; font-weight: 900; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; width: 100%; margin-bottom: 20px; cursor: pointer; box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 15px rgba(3, 218, 198, 0.2); }
 
-        /* FLO CALENDAR & UI */
+        .btn-lib { background: linear-gradient(135deg, rgba(20,20,25,0.95), rgba(30,30,40,0.95)); border: 2px solid var(--mint); color: var(--mint); padding: 16px 20px; border-radius: 22px; font-weight: 900; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; width: 100%; margin-bottom: 20px; cursor: pointer; box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 15px rgba(3, 218, 198, 0.2); text-shadow: 0 2px 5px rgba(0,0,0,0.9); }
+        .btn-lib:active { transform: scale(0.96); }
+
+        /* === FLO CALENDAR === */
         .flo-hero { text-align: center; margin-bottom: 20px; }
-        .flo-subtitle { font-size: 12px; font-weight: 700; color: var(--text-sub); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
+        .flo-subtitle { font-size: 12px; font-weight: 700; color: var(--text-sub); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; text-shadow: 0 2px 4px rgba(0,0,0,0.8);}
         .flo-main-text { font-size: 26px; font-weight: 900; color: #fff; line-height: 1.2; text-shadow: 0 4px 10px rgba(0,0,0,0.8); margin-bottom: 20px;}
         
         .flo-partner-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px;}
-        .f-card { border-radius: 20px; padding: 15px; position: relative; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.5);}
+        .f-card { border-radius: 20px; padding: 15px; position: relative; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.5); transition: 0.3s;}
         .fc-blue { background: linear-gradient(135deg, #1e3c72, #2a5298); border: 1px solid rgba(255,255,255,0.2);}
         .fc-pink { background: linear-gradient(135deg, #ff9a9e, #fecfef); border: 1px solid rgba(255,255,255,0.2); color: #000;}
         .f-card-badge { position: absolute; top: 0; right: 0; background: rgba(255,255,255,0.9); color: #000; font-size: 9px; font-weight: 900; padding: 3px 8px; border-bottom-left-radius: 10px;}
         .f-card-title { font-size: 16px; font-weight: 900; line-height: 1.2; margin-top: 10px;}
 
-        .cal-scroll-area { max-height: 500px; overflow-y: auto; padding-right: 5px; scroll-snap-type: y mandatory;}
+        .cal-scroll-area { max-height: 450px; overflow-y: auto; padding-right: 5px; scroll-snap-type: y mandatory;}
         .cal-scroll-area::-webkit-scrollbar { width: 5px; }
         .cal-scroll-area::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
         
@@ -62,11 +81,10 @@
         .cal-day-wrap { position: relative; width: 34px; height: 34px; margin: 0 auto; display: flex; align-items: center; justify-content: center; cursor: pointer; }
         .cal-day { font-size: 14px; font-weight: 700; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; border-radius: 50%; border: 2px solid transparent; transition: 0.2s; z-index: 2; position: relative;}
         
-        /* Стили календаря как во Flo */
         .fertile-text { color: var(--flo-teal); }
         .cal-period { background-color: var(--flo-pink); color: #fff; box-shadow: 0 0 10px rgba(255, 77, 109, 0.5); }
         .cal-pred-period { border-color: var(--flo-pink); border-style: dashed; color: var(--flo-pink); }
-        .cal-ovulation { border-color: var(--flo-teal); border-style: dotted; color: var(--flo-teal); }
+        .cal-ovulation { border-color: var(--flo-teal); border-style: dotted; color: var(--flo-teal); font-weight: 900;}
         .cal-today { background: rgba(255,255,255,0.2); font-weight: 900; }
         .cal-today::after { content: 'сегодня'; position: absolute; top: -14px; font-size: 8px; font-weight: 900; color: var(--text-main); text-transform: uppercase;}
 
@@ -76,7 +94,10 @@
         .log-btn { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1); padding: 8px 12px; border-radius: 12px; font-size: 13px; font-weight: 700; cursor: pointer; transition: 0.2s; color: var(--text-sub); }
         .log-btn.active { background: rgba(255, 77, 109, 0.2); border-color: var(--flo-pink); color: #fff; }
 
-        /* DMB & HOLIDAYS */
+        .btn-log-period { background: transparent; border: 2px dashed var(--flo-pink); color: var(--flo-pink); padding: 15px; border-radius: 20px; font-weight: 900; width: 100%; font-size: 13px; text-transform: uppercase; margin-bottom: 20px; cursor: pointer; transition: 0.2s;}
+        .btn-log-period:active { background: rgba(255, 77, 109, 0.2); }
+
+        /* === DMB === */
         #countdown { font-size: 40px; font-weight: 900; text-align: center; margin: 10px 0; display: flex; justify-content: center; align-items: baseline; gap: 4px; text-shadow: 0 4px 15px rgba(0,0,0,0.9); }
         #countdown small { font-size: 13px; color: var(--text-sub); font-weight: 800; }
         .neon { color: var(--mint); text-shadow: 0 0 15px var(--mint); }
@@ -98,8 +119,9 @@
         .m-card { background: rgba(10,10,15,0.85); text-align: center; padding: 18px 10px; border-radius: 18px; border: 1px solid rgba(255,255,255,0.15); }
         .m-card b { font-size: 20px; display: block; color: var(--mint); margin: 6px 0; }
         .m-card small { font-size: 10px; font-weight: 900; color: var(--text-sub); letter-spacing: 1px; text-transform: uppercase; }
+        .holiday-active { background: linear-gradient(135deg, rgba(3, 218, 198, 0.2), rgba(187, 134, 252, 0.2)) !important; border-color: var(--mint) !important; }
 
-        /* КНИГА */
+        /* === КНИГА === */
         #book-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: var(--bg-fallback); z-index: 999; padding: 20px; box-sizing: border-box; flex-direction: column; overflow: hidden; }
         .book-close { align-self: flex-end; font-size: 24px; color: var(--text-main); cursor: pointer; margin-bottom: 10px; font-weight: 900;}
         .book-tabs { display: flex; background: rgba(10,10,15,0.8); border-radius: 20px; padding: 6px; margin-bottom: 20px; gap: 4px; }
@@ -110,27 +132,35 @@
         .book-text { font-size: 14px; line-height: 1.6; flex-grow: 1; }
         .book-text b { color: var(--accent); }
         .book-text ul { padding-left: 20px; margin-top: 10px; }
+        .book-text li { margin-bottom: 10px; }
         .book-controls { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; padding-top: 15px; border-top: 1px solid var(--border); }
         .book-btn { background: rgba(255,255,255,0.1); border: 1px solid var(--border); color: #fff; padding: 10px 20px; border-radius: 12px; font-weight: bold; cursor: pointer;}
         
-        /* РАДАР */
+        /* === РАДАР === */
         .planet-wrap { position: relative; width: 180px; height: 180px; margin: 10px auto 30px auto; display: flex; justify-content: center; align-items: center; }
         .planet { font-size: 100px; line-height: 1; animation: float-spin 8s ease-in-out infinite; filter: drop-shadow(0 0 30px var(--mint)); position: relative; z-index: 2;}
         .planet::after { content: '🌍'; } 
         .satellite { position: absolute; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; filter: blur(1px) drop-shadow(0 0 5px var(--accent)); animation: orbit 4s linear infinite;}
+        .s1 { animation-duration: 5s; } .s2 { animation-duration: 7s; animation-delay: -2s; }
         @keyframes orbit { from { transform: rotate(0deg) translateX(90px) rotate(0deg); } to { transform: rotate(360deg) translateX(90px) rotate(-360deg); } }
         @keyframes float-spin { 0%, 100% { transform: translateY(0) rotate(-5deg); filter: drop-shadow(0 0 20px var(--mint)); } 50% { transform: translateY(-15px) rotate(5deg) scale(1.05); filter: drop-shadow(0 0 45px var(--mint)); } }
+        .radar-ring { position: absolute; border: 2px solid var(--mint); border-radius: 50%; opacity: 0; animation: radarPing 3s ease-out infinite; }
+        .r1 { width: 140px; height: 140px; animation-delay: 0s; } .r2 { width: 200px; height: 190px; animation-delay: 1.5s; }
+        @keyframes radarPing { 0% { transform: scale(0.5); opacity: 0.8; } 100% { transform: scale(1.6); opacity: 0; } }
+        .loc-time-info { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 800; color: var(--text-sub); text-transform: uppercase; letter-spacing: 1px; margin-top: 8px; opacity: 0.9;}
 
-        /* ВВОД */
+        /* === ВВОД И ФОНЫ === */
         .wish-tabs { display: flex; background: rgba(10,10,15,0.8); border-radius: 20px; padding: 6px; margin-bottom: 20px;}
         .w-tab { flex: 1; text-align: center; padding: 14px; font-size: 11px; font-weight: 900; color: var(--text-sub); border-radius: 16px; cursor: pointer; text-transform: uppercase; transition: 0.3s;}
         .w-tab.active { background: var(--accent); color: #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
         .wish-item { display: flex; flex-direction: column; padding: 18px; background: rgba(10,10,15,0.6); border: 1px solid var(--border); border-radius: 18px; margin-bottom: 12px; font-weight: 700; font-size: 14px;}
+        .wish-link { display: inline-flex; align-items: center; margin-top: 10px; color: #000; text-decoration: none; background: var(--mint); padding: 8px 16px; border-radius: 12px; font-size: 11px; font-weight: 900;}
         .del-btn { color: #ff4757; font-size: 24px; font-weight: bold; background: rgba(255, 71, 87, 0.15); width: 35px; height: 35px; border-radius: 10px; display: flex; align-items: center; justify-content: center; cursor: pointer;}
         
         input { width: 100%; background: rgba(10,10,15,0.8); border: 1px solid var(--border); border-radius: 16px; padding: 18px; color: var(--text-main); margin: 5px 0 15px 0; box-sizing: border-box; outline: none; font-size: 15px; font-weight: 600; font-family: inherit;}
         label { font-size: 10px; color: var(--text-sub); font-weight: 800; letter-spacing: 2px; text-transform: uppercase; display: block; margin-bottom: 5px;}
-        .btn-sync-small { background: var(--card-bg); border: 1px solid var(--mint); color: var(--mint); padding: 12px 26px; border-radius: 30px; font-size: 11px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: 0.2s; }
+        .sync-wrapper { text-align: center; margin-top: auto; padding-top: 25px; padding-bottom: 10px; }
+        .btn-sync-small { background: var(--card-bg); border: 1px solid var(--mint); color: var(--mint); padding: 12px 26px; border-radius: 30px; font-size: 11px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; transition: 0.2s; }
         
         .bg-thumb { width: 100%; height: 85px; border-radius: 16px; background-size: cover; background-position: center; border: 2px solid transparent; transition: 0.2s;}
         .bg-thumb.active { border-color: var(--mint); transform: scale(0.95); box-shadow: 0 0 15px var(--mint);}
@@ -138,7 +168,7 @@
     </style>
 </head>
 <body>
-    <!-- КНИГА ЗНАНИЙ -->
+    <!-- === КНИГА ЗНАНИЙ === -->
     <div id="book-modal">
         <div class="book-close" onclick="closeBook()">✖ ЗАКРЫТЬ</div>
         <div class="book-tabs">
@@ -160,7 +190,7 @@
     <div class="app" id="main-app">
         <div id="edit-btn" class="edit-toggle" onclick="toggleEdit()">✏️</div>
 
-        <!-- ГЛАВНАЯ -->
+        <!-- === ГЛАВНАЯ === -->
         <div id="home" class="screen active">
             <div class="header-badge">
                 <div class="profile-row"><div id="my-ava" class="avatar">Я</div><span class="heart-icon">❤️</span><div id="p-ava" class="avatar">?</div></div>
@@ -176,7 +206,7 @@
             <div style="text-align: center; margin-top: 20px;"><div class="btn-sync-small" onclick="syncAll()">🔄 СИНХРОНИЗИРОВАТЬ ДАННЫЕ</div></div>
         </div>
 
-        <!-- FLO -->
+        <!-- === FLO КАЛЕНДАРЬ === -->
         <div id="flo" class="screen">
             <span onclick="nav('home')" style="cursor:pointer; color:var(--accent); font-weight:900; margin-bottom:20px; display:inline-block;">← НАЗАД</span>
             
@@ -187,6 +217,7 @@
                 <button class="btn" onclick="saveFloSettings()" style="background:var(--flo-pink);">НАЧАТЬ</button>
             </div>
 
+            <!-- ВЬЮ ПАРНЯ -->
             <div id="flo-partner-view" style="display:none;">
                 <div class="flo-hero"><div class="flo-subtitle" id="flo-p-sub">Анализ цикла</div><div class="flo-main-text" id="flo-p-main">Загрузка...</div></div>
                 <div class="flo-partner-cards">
@@ -199,7 +230,10 @@
                 <div class="cal-scroll-area" id="cal-scroll-partner"></div>
             </div>
 
+            <!-- ВЬЮ ДЕВУШКИ -->
             <div id="flo-girl-view" style="display:none;">
+                <button class="btn-log-period" onclick="logPeriodToday()">🩸 ОТМЕТИТЬ НАЧАЛО ЦИКЛА СЕГОДНЯ</button>
+                
                 <div style="background: rgba(255, 77, 109, 0.1); border: 1px dashed var(--flo-pink); border-radius: 20px; padding: 15px; margin-bottom: 20px; text-align: center;">
                     <p style="font-size: 12px; color: #fff; font-weight: bold; margin: 0 0 10px 0;">Нажимай на дни в календаре, чтобы отметить реальные месячные.</p>
                     <p style="font-size: 10px; color: var(--text-sub); margin: 0;">Пунктир — это прогноз на основе твоих отметок.</p>
@@ -216,13 +250,14 @@
                         <div class="log-btn" data-val="💊 Тянет живот" onclick="toggleLog(this)">💊 Тянет живот</div>
                         <div class="log-btn" data-val="🛏 Хочу спать" onclick="toggleLog(this)">🛏 Хочу спать</div>
                         <div class="log-btn" data-val="🍕 Жор" onclick="toggleLog(this)">🍕 Жор</div>
+                        <div class="log-btn" data-val="❤️ Близость" onclick="toggleLog(this)">❤️ Близость</div>
                     </div>
                 </div>
             </div>
             <center><p style="font-size:11px; color:var(--text-sub); text-decoration:underline; cursor:pointer; margin-top:10px;" onclick="resetFloLocally()">Сбросить настройки календаря</p></center>
         </div>
 
-        <!-- DMB -->
+        <!-- === DMB ТАЙМЕР === -->
         <div id="dmb" class="screen">
             <span onclick="nav('home')" style="cursor:pointer; color:var(--accent); font-weight:900; margin-bottom:20px; display:inline-block;">← НАЗАД</span>
             <div id="setup" class="card">
@@ -240,7 +275,7 @@
                     <div id="countdown"><span id="vd">0</span><small>д</small> <span id="vh">00</span><small>ч</small> <span id="vm">00</span><small>м</small> <span id="vs" class="neon">00</span></div>
                     <div class="progress"><div id="bar"></div></div>
                 </div>
-                <div class="army-status-card" id="army-status-box"><div class="army-rank" id="army-rank">ЗАПАХ</div></div>
+                <div class="army-status-card" id="army-status-box"><div class="army-rank" id="army-rank">ЗАПАХ</div><div class="army-msg" id="army-msg">Служба только началась!</div></div>
                 <div class="weeks-container"><div class="weeks-title">52 НЕДЕЛИ СЛУЖБЫ</div><div class="weeks-grid" id="weeks-grid"></div></div>
                 <div class="milestones">
                     <div class="m-card" id="card-oath" style="display:none; grid-column: span 2;"><small>ПРИСЯГА</small><b id="v-oath">0 дней</b></div>
@@ -252,7 +287,7 @@
             </div>
         </div>
 
-        <!-- LOCATOR -->
+        <!-- === ЛОКАТОР === -->
         <div id="locator" class="screen">
             <span onclick="nav('home')" style="cursor:pointer; color:var(--accent); font-weight:900; margin-bottom:20px; display:inline-block;">← НАЗАД</span>
             <div class="card" style="text-align:center;">
@@ -260,17 +295,22 @@
                 <div class="planet-wrap"><div class="radar-ring r1"></div><div class="radar-ring r2"></div><div class="satellite s1"></div><div class="satellite s2"></div><div class="planet"></div></div>
                 <p id="loc-status" style="font-size:12px; font-weight:900; margin: 15px 0; min-height:25px; color: var(--mint); text-transform: uppercase;"></p>
                 <button class="btn" id="btn-loc" onclick="sendLocation()" style="background:var(--mint); color:#000; margin-bottom:12px;">📍 ОТПРАВИТЬ ГЕОМЕТКУ</button>
+                <div style="display:flex; flex-direction:column; align-items:center;">
+                    <button class="btn" onclick="calculateDistance()" style="background:rgba(255,255,255,0.1); border:1px solid var(--accent); color:#fff; margin-bottom:12px;">📡 СКАНЕР ДИСТАНЦИИ</button>
+                    <button class="btn" onclick="viewPartnerLocation()" style="background:transparent; border:1px dashed var(--text-sub); color:var(--text-sub); margin-bottom:15px;">👀 ОТКРЫТЬ КАРТУ</button>
+                    <div id="p-last-time" class="loc-time-info"></div>
+                </div>
             </div>
         </div>
 
-        <!-- WISH -->
+        <!-- === КОРЗИНА === -->
         <div id="wish" class="screen">
             <span onclick="nav('home')" style="cursor:pointer; color:var(--accent); font-weight:900; margin-bottom:20px; display:inline-block;">← НАЗАД</span>
             <div class="wish-tabs"><div class="w-tab active" id="tab-partner" onclick="switchW('partner')">Хочет половинка</div><div class="w-tab" id="tab-me" onclick="switchW('me')">Мои желания</div></div>
             <div class="card"><div id="wish-input-group" style="display:none; gap:10px; margin-bottom:20px;"><input type="text" id="wi" placeholder="Что подарить?" style="margin:0;"><button class="btn" onclick="addW()" style="width:auto; padding:0 25px; margin:0;">+</button></div><div id="wl"></div></div>
         </div>
 
-        <!-- SETTINGS -->
+        <!-- === ФОНЫ === -->
         <div id="settings" class="screen">
             <span onclick="nav('home')" style="cursor:pointer; color:var(--accent); font-weight:900; margin-bottom:20px; display:inline-block;">← НАЗАД</span>
             <div class="card">
@@ -279,9 +319,11 @@
                     <div class="bg-thumb" onclick="setBg('bg_1.jpg', this)" style="background-image:url('img/bg_1.jpg')"></div>
                     <div class="bg-thumb" onclick="setBg('bg_2.jpg', this)" style="background-image:url('img/bg_2.jpg')"></div>
                     <div class="bg-thumb" onclick="setBg('bg_3.jpg', this)" style="background-image:url('img/bg_3.jpg')"></div>
+                    <div class="bg-thumb" onclick="setBg('bg_4.jpg', this)" style="background-image:url('img/bg_4.jpg')"></div>
                     <div class="bg-thumb" onclick="setBg('bg_boy_default.jpg', this)" style="background-image:url('img/bg_boy_default.jpg')"></div>
                     <div class="bg-thumb" onclick="setBg('bg_girl_default.jpg', this)" style="background-image:url('img/bg_girl_default.jpg')"></div>
                 </div>
+                <button class="btn" onclick="resetBg()" style="background:transparent; border:1px solid var(--text-sub); color:var(--text-sub); margin-top:20px; font-size:11px;">Сбросить на стандарт</button>
             </div>
         </div>
     </div>
@@ -291,22 +333,17 @@
     <script>
         let tg = window.Telegram.WebApp; tg.expand(); tg.headerColor = '#0d0e15';
         const params = new URLSearchParams(window.location.search);
+        
         ['role', 'pn', 'pp', 'plat', 'plon', 'pt', 's', 'e', 'p'].forEach(p => { if (params.has(p)) localStorage.setItem(p, params.get(p)); });
         
         const role = localStorage.getItem('role') || 'boy';
         document.body.classList.toggle('theme-girl', role === 'girl');
 
-        // Глобальный Flo Объект
-        // actualPeriods - массив строк 'YYYY-MM-DD', которые кликнула девушка
+        // ИНИЦИАЛИЗАЦИЯ ДАННЫХ
         let floData = { cycle: 28, len: 5, actualPeriods: [], logs: {} }; 
         try { 
             let lsFlo = JSON.parse(localStorage.getItem('flo'));
-            if(lsFlo) { 
-                floData.cycle = lsFlo.cycle || 28; 
-                floData.len = lsFlo.len || 5; 
-                floData.actualPeriods = lsFlo.actualPeriods || [];
-                floData.logs = lsFlo.logs || {}; 
-            }
+            if(lsFlo) { floData.cycle = lsFlo.cycle||28; floData.len = lsFlo.len||5; floData.actualPeriods = lsFlo.actualPeriods||[]; floData.logs = lsFlo.logs||{}; }
             else if (params.has('flo')) {
                 let fd = JSON.parse(decodeURIComponent(params.get('flo'))); 
                 floData = Object.assign(floData, fd);
@@ -314,7 +351,9 @@
                 localStorage.setItem('flo', JSON.stringify(floData));
             }
         } catch(e) {}
+        if (!floData.logs) floData.logs = {};
 
+        // ГЕНЕРАЦИЯ СЕТКИ 52 НЕДЕЛЬ
         const grid = document.getElementById('weeks-grid');
         if(grid) { grid.innerHTML = ''; for(let i=0; i<52; i++) { const box = document.createElement('div'); box.className = 'week-box'; box.id = 'week-' + i; grid.appendChild(box); } }
 
@@ -329,6 +368,7 @@
         if (pPhoto && pPhoto !== "" && pPhoto !== "None") { pAva.style.backgroundImage = `url('${pPhoto}')`; pAva.innerText = ""; } else { pAva.innerText = "❤️"; }
         document.getElementById('pair-names').innerText = `${myData?.first_name || 'Я'} ❤️ ${pNick}`;
 
+        // МЕНЮ И НАВИГАЦИЯ
         const menuContainer = document.getElementById('sortable-menu'); let sortableInstance = null, isEditMode = false;
         function toggleEdit() {
             const btn = document.getElementById('edit-btn'); isEditMode = !isEditMode;
@@ -340,20 +380,28 @@
 
         function nav(id) { 
             if (isEditMode) return; 
-            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active')); document.getElementById(id).classList.add('active'); 
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active')); 
+            document.getElementById(id).classList.add('active'); 
             document.getElementById('edit-btn').style.display = (id === 'home') ? 'flex' : 'none'; 
-            if(id === 'dmb') checkDMB(); if(id === 'wish') renderW(); if(id === 'flo') initFlo();
+            
+            // Вызов нужной функции при открытии экрана
+            if(id === 'locator') updatePartnerTime(); 
+            if(id === 'dmb') checkDMB(); 
+            if(id === 'wish') renderW(); 
+            if(id === 'flo') initFlo();
         }
 
-        // === FLO УМНЫЙ АЛГОРИТМ ===
-        function getTodayStr() { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; }
-        function diffDaysStr(d1Str, d2Str) {
-            const d1 = new Date(d1Str); const d2 = new Date(d2Str);
-            return Math.floor((d2 - d1) / (1000 * 60 * 60 * 24));
+        // === БЕЗОПАСНАЯ РАЗНИЦА В ДНЯХ ===
+        function diffDays(d1, d2) {
+            const u1 = Date.UTC(d1.getFullYear(), d1.getMonth(), d1.getDate());
+            const u2 = Date.UTC(d2.getFullYear(), d2.getMonth(), d2.getDate());
+            return Math.floor((u2 - u1) / (1000 * 60 * 60 * 24));
         }
+
+        // === FLO ===
+        function getTodayStr() { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; }
 
         function initFlo() {
-            // Если массив пустой, требуем настройку
             if (floData.actualPeriods.length === 0) {
                 if (role === 'girl') { document.getElementById('flo-setup').style.display = 'block'; document.getElementById('flo-girl-view').style.display = 'none'; } 
                 else { document.getElementById('flo-partner-view').style.display = 'block'; document.getElementById('flo-p-main').innerText = "Половинка еще не настроила календарь 🌸"; document.getElementById('flo-p-sub').innerText = "Ждем данных"; }
@@ -377,7 +425,6 @@
             const len = parseInt(document.getElementById('flo-len').value) || 5;
             floData.cycle = cycle; floData.len = len;
             
-            // Если девушка только начала, берем дату из input, добавляем ее и следующие len-1 дней в actual
             const start = document.getElementById('flo-start').value;
             if(start) {
                 const sDate = new Date(start);
@@ -388,7 +435,6 @@
                 }
                 floData.actualPeriods.sort();
             }
-            
             localStorage.setItem('flo', JSON.stringify(floData)); initFlo(); syncAll();
         }
 
@@ -398,9 +444,21 @@
             initFlo(); syncAll(); tg.HapticFeedback.notificationOccurred('success');
         }
 
-        // КЛИК ПО ДНЮ В КАЛЕНДАРЕ (Отметка месячных)
+        function logPeriodToday() {
+            const tStr = getTodayStr();
+            const sDate = new Date();
+            for(let i=0; i<floData.len; i++) {
+                const nextD = new Date(sDate); nextD.setDate(sDate.getDate() + i);
+                const nStr = `${nextD.getFullYear()}-${String(nextD.getMonth()+1).padStart(2,'0')}-${String(nextD.getDate()).padStart(2,'0')}`;
+                if(!floData.actualPeriods.includes(nStr)) floData.actualPeriods.push(nStr);
+            }
+            floData.actualPeriods.sort();
+            localStorage.setItem('flo', JSON.stringify(floData));
+            initFlo(); syncAll(); tg.HapticFeedback.notificationOccurred('success');
+        }
+
         function togglePeriodDay(dateStr) {
-            if (role !== 'girl') return; // Только девушка может менять
+            if (role !== 'girl') return;
             const idx = floData.actualPeriods.indexOf(dateStr);
             if (idx > -1) floData.actualPeriods.splice(idx, 1);
             else floData.actualPeriods.push(dateStr);
@@ -411,7 +469,6 @@
             syncAll(); tg.HapticFeedback.impactOccurred('light');
         }
 
-        // КЛИК ПО СИМПТОМУ
         function toggleLog(btn) {
             const today = getTodayStr(), val = btn.getAttribute('data-val');
             if (!floData.logs[today]) floData.logs[today] = [];
@@ -425,17 +482,14 @@
             document.querySelectorAll('.log-btn').forEach(btn => { btn.classList.toggle('active', log.includes(btn.getAttribute('data-val'))); });
         }
 
-        // РЕНДЕР БЕСКОНЕЧНОГО КАЛЕНДАРЯ
         function renderMultiCalendar(containerId) {
             const container = document.getElementById(containerId);
             container.innerHTML = '';
             const now = new Date();
             const monthNames = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"];
 
-            // Находим базу для прогнозов: самый поздний реальный день из actualPeriods
             let latestActualDate = null;
             if (floData.actualPeriods.length > 0) {
-                // Самая последняя дата в массиве
                 latestActualDate = new Date(floData.actualPeriods[floData.actualPeriods.length - 1]);
             }
 
@@ -458,62 +512,49 @@
                     const dateStr = `${iterDate.getFullYear()}-${String(iterDate.getMonth()+1).padStart(2,'0')}-${String(iterDate.getDate()).padStart(2,'0')}`;
                     
                     let classes = "cal-day"; 
-                    let extraHTML = "";
-                    
                     if (dateStr === getTodayStr()) classes += " cal-today";
 
-                    // Проверяем, отмечен ли этот день вручную
                     if (floData.actualPeriods.includes(dateStr)) {
                         classes += " cal-period";
                     } 
-                    // Если не отмечен вручную, пытаемся предсказать (если дата больше последней отмеченной)
                     else if (latestActualDate && iterDate > latestActualDate) {
-                        const diffDays = Math.floor((iterDate - latestActualDate) / (1000 * 60 * 60 * 24));
-                        const dayOfCycle = (diffDays % floData.cycle) + 1;
+                        const dfDays = diffDays(latestActualDate, iterDate);
+                        const dayOfCycle = (dfDays % floData.cycle) + 1;
                         
-                        // Прогноз месячных (пунктирный розовый кружок)
                         if (dayOfCycle >= 1 && dayOfCycle <= floData.len) {
                             classes += " cal-pred-period";
                         } 
-                        // Прогноз овуляции (пунктирный бирюзовый)
                         else if (dayOfCycle === floData.cycle - 14) {
                             classes += " cal-ovulation";
                         }
-                        // Фертильное окно (просто бирюзовый текст)
                         else if (dayOfCycle >= floData.cycle - 18 && dayOfCycle <= floData.cycle - 13) {
                             classes += " fertile-text";
                         }
                     }
-                    
                     monthHtml += `<div class="cal-day-wrap" onclick="togglePeriodDay('${dateStr}')"><div class="${classes}">${d}</div></div>`;
                 }
                 monthHtml += `</div></div>`;
                 container.innerHTML += monthHtml;
             }
 
-            // Автоскролл к текущему месяцу
             setTimeout(() => {
                 const todayEl = container.querySelector('.cal-today');
                 if(todayEl) todayEl.scrollIntoView({ block: 'center', behavior: 'smooth' });
             }, 100);
         }
 
-        // ПАНЕЛЬ ПАРНЯ
         function renderPartnerView() {
             if (floData.actualPeriods.length === 0) return;
             
             const now = new Date();
-            // Ищем последнюю известную дату начала цикла, чтобы от нее считать день цикла
-            // Упрощенный поиск: берем самую позднюю дату из отмеченных
             const latestActualDate = new Date(floData.actualPeriods[floData.actualPeriods.length - 1]);
-            const dfDays = Math.floor((now - latestActualDate) / (1000 * 60 * 60 * 24));
+            const dfDays = diffDays(latestActualDate, now);
             
             const currentDay = dfDays >= 0 ? (dfDays % floData.cycle) + 1 : 0; 
             const daysUntilNext = floData.cycle - currentDay + 1;
 
             const mainText = document.getElementById('flo-p-main'), subText = document.getElementById('flo-p-sub'), fcDay = document.getElementById('fc-day'), fcAdvice = document.getElementById('fc-advice');
             
-            // Если сегодня отмечен как месячные
             if (floData.actualPeriods.includes(getTodayStr())) { 
                 subText.innerText = "У неё эти дни"; mainText.innerText = "Будь особенно заботлив"; fcDay.innerText = `Месячные`; fcAdvice.innerText = "Купи шоколад"; 
             } 
@@ -531,10 +572,77 @@
             if (log && log.length > 0) { logBox.style.display = 'block'; document.getElementById('p-log-text').innerText = log.join(', '); } else { logBox.style.display = 'none'; }
         }
 
-        // === DMB ===
+        // === ЛОКАТОР ===
+        function updatePartnerTime() {
+            const pt = parseInt(localStorage.getItem('pt')), el = document.getElementById('p-last-time');
+            if(!pt || isNaN(pt)) { el.innerText = "Локацией еще не делились 💔"; return; }
+            const diff = Math.floor((Date.now() / 1000) - pt);
+            if(diff < 60) el.innerText = "ОБНОВЛЕНО ТОЛЬКО ЧТО 📍"; else if(diff < 3600) el.innerText = `БЫЛ(А) В СЕТИ ${Math.floor(diff/60)} МИН. НАЗАД`; else el.innerText = `БЫЛ(А) В СЕТИ ${Math.floor(diff/3600)} Ч. НАЗАД`;
+        }
+
+        function sendLocation() { 
+            const btn = document.getElementById('btn-loc'), status = document.getElementById('loc-status');
+            btn.disabled = true; status.innerText = "📡 СВЯЗЬ СО СПУТНИКОМ...";
+            navigator.geolocation.getCurrentPosition((pos) => { 
+                status.innerText = "🛰 КООРДИНАТЫ ПОЛУЧЕНЫ!";
+                setTimeout(() => { status.innerText = "💖 ПЕРЕДАЮ ПОЛОВИНКЕ...";
+                    try { tg.sendData(JSON.stringify({action: "checkin", lat: pos.coords.latitude, lon: pos.coords.longitude})); status.innerText = "✅ УСПЕШНО ДОСТАВЛЕНО!"; setTimeout(() => { tg.close(); }, 1200);
+                    } catch(e) { btn.disabled = false; status.innerText = "❌ ОШИБКА ОТПРАВКИ!"; }
+                }, 800);
+            }, () => { btn.disabled = false; status.innerText = "❌ ВКЛЮЧИ GPS В ТЕЛЕФОНЕ!"; status.style.color = "#ff4757"; }, { enableHighAccuracy: true }); 
+        }
+        
+        function calculateDistance() {
+            const status = document.getElementById('loc-status'), plat = parseFloat(localStorage.getItem('plat')), plon = parseFloat(localStorage.getItem('plon'));
+            if(!plat || !plon || isNaN(plat)) { status.innerText = "ПОЛОВИНКА ЕЩЕ НЕ ОТПРАВЛЯЛА ГЕО!"; status.style.color = "#ff4757"; return; }
+            status.innerText = "📡 СКАНИРОВАНИЕ ДИСТАНЦИИ..."; status.style.color = "var(--mint)";
+            navigator.geolocation.getCurrentPosition((pos) => { 
+                const R = 6371; const dLat = (pos.coords.latitude - plat) * Math.PI / 180; const dLon = (pos.coords.longitude - plon) * Math.PI / 180;
+                const a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(plat * Math.PI / 180) * Math.cos(pos.coords.latitude * Math.PI / 180) * Math.sin(dLon/2) * Math.sin(dLon/2);
+                const d = R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+                status.innerText = `МЕЖДУ ВАМИ ${d < 1 ? Math.round(d*1000)+' МЕТРОВ' : d.toFixed(1)+' КМ'} 💜`; tg.HapticFeedback.notificationOccurred('success');
+            }, () => { status.innerText = "❌ РАЗРЕШИ ДОСТУП К ГЕОЛОКАЦИИ!"; status.style.color = "#ff4757"; }, { enableHighAccuracy: true }); 
+        }
+
+        function viewPartnerLocation() { const lat = localStorage.getItem('plat'), lon = localStorage.getItem('plon'); if(!lat) { tg.showAlert("Геометки нет!"); } else { window.open(`https://yandex.ru/maps/?pt=${lon},${lat}&z=16&l=map`, '_blank'); } }
+
+        // === КОРЗИНА ЖЕЛАНИЙ ===
+        let currentWTab = 'partner';
+        function switchW(t) { 
+            currentWTab = t; 
+            document.getElementById('tab-partner').classList.toggle('active', t === 'partner'); 
+            document.getElementById('tab-me').classList.toggle('active', t === 'me'); 
+            document.getElementById('wish-input-group').style.display = t === 'me' ? 'flex' : 'none'; 
+            renderW(); 
+        }
+        function renderW() {
+            const list = document.getElementById('wl'), pr = role === 'girl' ? 'boy' : 'girl';
+            let wData = { boy: [], girl: [] }; try { wData = JSON.parse(localStorage.getItem('w')); } catch(e) {}
+            const activeList = currentWTab === 'me' ? wData[role] : wData[pr];
+            if (!activeList || activeList.length === 0) { list.innerHTML = `<p style="text-align:center; color:var(--text-sub); margin-top:30px; font-size:12px;">Пусто...</p>`; return; }
+            list.innerHTML = activeList.map((w, i) => `<div class="wish-item"><div style="display:flex; justify-content:space-between; align-items:flex-start;"><span style="word-break: break-word; line-height: 1.5;">${w.replace(/(https?:\/\/[^\s]+)/g, '<br><a href="$1" target="_blank" class="wish-link">🔗 ОТКРЫТЬ ССЫЛКУ</a>')}</span>${currentWTab === 'me' ? `<span class="del-btn" onclick="delW(${i})">×</span>` : ''}</div></div>`).join('');
+        }
+        function addW() { 
+            const i = document.getElementById('wi'); if(!i.value.trim()) return; 
+            let wData = { boy: [], girl: [] }; try { wData = JSON.parse(localStorage.getItem('w')) || { boy: [], girl: [] }; } catch(e) {} 
+            if(!wData[role]) wData[role] = []; wData[role].push(i.value.trim()); i.value=''; 
+            localStorage.setItem('w', JSON.stringify(wData)); renderW(); 
+        }
+        function delW(i) { 
+            let wData = { boy: [], girl: [] }; try { wData = JSON.parse(localStorage.getItem('w')) || { boy: [], girl: [] }; } catch(e) {} 
+            wData[role].splice(i, 1); localStorage.setItem('w', JSON.stringify(wData)); renderW(); 
+        }
+
+        // === DMB ТАЙМЕР И ПРАЗДНИКИ ===
         const holidays = [
-            { date: "02-23", name: "День защитника Отечества" }, { date: "05-09", name: "День Победы" }, { date: "08-02", name: "День ВДВ" },
-            { date: "09-08", name: "День танкиста" }, { date: "10-24", name: "День спецназа" }, { date: "11-19", name: "День РВиА" }, { date: "12-17", name: "День РВСН" }
+            { date: "02-23", name: "День защитника Отечества" }, { date: "02-27", name: "День ССО" }, { date: "03-19", name: "День моряка-подводника" },
+            { date: "03-27", name: "День войск нацгвардии" }, { date: "04-08", name: "День военных комиссариатов" }, { date: "04-15", name: "День специалиста по РЭБ" },
+            { date: "05-07", name: "День связиста" }, { date: "05-09", name: "День Победы" }, { date: "05-28", name: "День пограничника" },
+            { date: "05-29", name: "День военного автомобилиста" }, { date: "08-02", name: "День ВДВ" }, { date: "08-06", name: "День Железнодорожных войск" },
+            { date: "08-12", name: "День ВВС" }, { date: "09-02", name: "День Российской гвардии" }, { date: "09-08", name: "День танкиста" },
+            { date: "10-01", name: "День Сухопутных войск" }, { date: "10-04", name: "День Космических войск" }, { date: "10-24", name: "День спецназа" },
+            { date: "11-05", name: "День военного разведчика" }, { date: "11-19", name: "День ракетных войск и артиллерии" }, { date: "11-27", name: "День морской пехоты" },
+            { date: "12-17", name: "День РВСН" }
         ];
 
         function getNextHoliday() {
@@ -542,8 +650,8 @@
             for (let h of holidays) {
                 let holDate = new Date(`${year}-${h.date}T00:00:00`);
                 if (holDate < now && holDate.toDateString() !== now.toDateString()) holDate = new Date(`${year + 1}-${h.date}T00:00:00`);
-                const diff = Math.floor((holDate - now) / (1000 * 60 * 60 * 24));
-                if (holDate.toDateString() === now.toDateString()) return { name: h.name, daysLeft: 0, isToday: true };
+                const diff = diffDays(now, holDate);
+                if (diff === 0) return { name: h.name, daysLeft: 0, isToday: true };
                 if (diff > 0 && diff < minDiff) { minDiff = diff; nextHol = { name: h.name, daysLeft: diff, isToday: false }; }
             }
             return nextHol;
@@ -565,38 +673,120 @@
             checkDMB(); syncAll(); tg.HapticFeedback.notificationOccurred('success');
         }
 
+        function updateArmyStatus(passedDays, leftDays) {
+            const rankEl = document.getElementById('army-rank'), msgEl = document.getElementById('army-msg'), boxEl = document.getElementById('army-status-box');
+            if (leftDays <= 10 && leftDays > 0) { rankEl.innerText = "КОСМОС 🚀"; rankEl.style.color = "#ff4757"; msgEl.innerText = role === 'girl' ? `Готовься встречать! Осталось дней: ${leftDays}` : `Пошел обратный отсчет! Дней до дома: ${leftDays}`; boxEl.style.borderStyle = "solid"; boxEl.style.borderColor = "#ff4757"; } 
+            else if (leftDays <= 0) { rankEl.innerText = "ДЕМБЕЛЬ 🎉"; rankEl.style.color = "var(--mint)"; msgEl.innerText = "Служба окончена! Свобода!"; boxEl.style.borderColor = "var(--mint)"; } 
+            else if (passedDays < 30) { rankEl.innerText = "ЗАПАХ 🟢"; msgEl.innerText = role === 'girl' ? "Самое начало пути. Ему очень нужна твоя поддержка!" : "Служба только началась. Держись, солдат!"; } 
+            else if (passedDays < 180) { rankEl.innerText = "ДУХ 🪖"; msgEl.innerText = role === 'girl' ? "Он уже привык к распорядку. Ждите экватор!" : "Учебка позади. Ты втягиваешься в ритм."; } 
+            else if (leftDays > 100) { rankEl.innerText = "СЛОН / ЧЕРПАК 🐘"; msgEl.innerText = role === 'girl' ? "Половина пройдена! Он уже опытный боец." : "Экватор взят! Теперь время пойдет быстрее."; } 
+            else { rankEl.innerText = "ДЕД 👑"; msgEl.innerText = role === 'girl' ? "Считаем дни до приказа! Скоро он будет дома." : "Приказ близко. Финишная прямая!"; }
+        }
+
         function tick() {
             const startStr = localStorage.getItem('s'), endStr = localStorage.getItem('e'), oathStr = localStorage.getItem('p');
             if(!startStr || !endStr) return;
             const start = new Date(startStr), end = new Date(endStr), now = new Date();
-            const totalDays = Math.floor((end - start) / (1000 * 60 * 60 * 24));
-            const passedDays = Math.max(0, Math.min(Math.floor((now - start) / (1000 * 60 * 60 * 24)), totalDays));
+            
+            const totalDays = diffDays(start, end);
+            const passedDays = Math.max(0, Math.min(diffDays(start, now), totalDays));
             const leftDays = Math.max(0, totalDays - passedDays);
+            
+            const totalMs = end.getTime() - start.getTime();
+            const leftMs = Math.max(0, end.getTime() - now.getTime());
             
             const p = (passedDays / totalDays) * 100;
             document.getElementById('bar').style.width = p + '%'; document.getElementById('perc').innerText = p.toFixed(6) + '%';
+            
             document.getElementById('vd').innerText = leftDays; 
+            document.getElementById('vh').innerText = Math.floor((leftMs % 86400000) / 3600000).toString().padStart(2, '0'); 
+            document.getElementById('vm').innerText = Math.floor((leftMs % 3600000) / 60000).toString().padStart(2, '0'); 
+            document.getElementById('vs').innerText = Math.floor((leftMs % 60000) / 1000).toString().padStart(2, '0');
             
             const cw = Math.floor(passedDays / (totalDays / 52));
             for(let i=0; i<52; i++) { const box = document.getElementById('week-' + i); if(box) box.className = i < cw ? 'week-box filled' : (i === cw ? 'week-box current' : 'week-box'); }
             
+            const eqDays = Math.max(0, Math.floor(totalDays/2) - passedDays); document.getElementById('v-eq').innerText = eqDays > 0 ? eqDays + ' дн' : 'Пройден!';
+            const ordDays = Math.max(0, leftDays - 100); document.getElementById('v-ord').innerText = ordDays > 0 ? ordDays + ' дн' : 'Вышел!';
+            if (oathStr) { document.getElementById('card-oath').style.display = 'block'; const oLeft = diffDays(now, new Date(oathStr)); document.getElementById('v-oath').innerText = oLeft > 0 ? oLeft + ' дн' : 'Пройдена!'; }
+
+            updateArmyStatus(passedDays, leftDays);
+
             const hol = getNextHoliday(); const holCard = document.getElementById('holiday-card');
             if (hol) {
                 holCard.style.display = 'block';
-                if (hol.isToday) { document.getElementById('hol-name').innerText = "⭐ СЕГОДНЯ ПРАЗДНИК! ⭐"; document.getElementById('hol-val').innerText = hol.name; holCard.classList.add('holiday-active'); } 
-                else { document.getElementById('hol-name').innerText = `БЛИЖАЙШИЙ ПРАЗДНИК: ${hol.name}`; document.getElementById('hol-val').innerText = `через ${hol.daysLeft} дн`; holCard.classList.remove('holiday-active'); }
-            }
+                if (hol.isToday) { document.getElementById('hol-name').innerText = "⭐ СЕГОДНЯ ПРАЗДНИК! ⭐"; document.getElementById('hol-name').style.color = "#ff4757"; document.getElementById('hol-val').innerText = hol.name; holCard.classList.add('holiday-active'); } 
+                else { document.getElementById('hol-name').innerText = `БЛИЖАЙШИЙ ПРАЗДНИК: ${hol.name}`; document.getElementById('hol-name').style.color = "var(--text-sub)"; document.getElementById('hol-val').innerText = `через ${hol.daysLeft} дн`; holCard.classList.remove('holiday-active'); }
+            } else { holCard.style.display = 'none'; }
         }
 
-        // === КНИГА ЗНАНИЙ (Сократил для демо, вставь свои полные тексты) ===
-        const bookData = { army: [{title: "Гайд", text: "Текст"}], girl: [{title: "Совет", text: "Текст"}], advice: [{title: "Идея", text: "Текст"}] };
+        // === КНИГА ЗНАНИЙ ===
+        const bookData = {
+            army: [
+                { title: "🎒 Что брать в военкомат? (Гайд)", text: "<b>Бери только самое дешевое и нужное.</b><br><br><ul><li><b>Телефон «Тапик»:</b> Кнопочный телефон без камеры.</li><li><b>Рыльно-мыльное:</b> Щетка в футляре, мыло, пена, станки.</li><li><b>Нитки и Иголки:</b> Черные, белые, хаки. Прячь иголки в ручку.</li><li><b>Медицина:</b> Много пластырей (берцы сотрут ноги), паста Теймурова.</li><li><b>Часы:</b> Дешевые электронные с подсветкой. Опоздание карается всей ротой.</li></ul><br><b>НЕ НУЖНО:</b> Скоропортящуюся еду, стекло, ножницы." },
+                { title: "🪖 КМБ: Выживание в первый месяц", text: "<b>КМБ — самый сложный психологический этап.</b><br>Будут учить заправлять кровать по ниточке, ходить строем и петь. Огневой подготовки мало, физической — максимум.<br><br><b>Совет: НЕ ВЫДЕЛЯЙСЯ.</b><br>«Инициатива наказуема». Не спорь. Задача — слиться с коллективом, делать всё быстро и четко. Если косячишь ты — отжимается вся рота. Этот прессинг временный." },
+                { title: "⏰ Распорядок дня", text: "<b>Стандартный распорядок:</b><br><ul><li><b>06:00 — Подъем.</b> 45 секунд, чтобы вскочить.</li><li><b>06:10 — УФЗ (Зарядка).</b> Бег, турники.</li><li><b>07:00 — Туалет, койки.</b></li><li><b>08:00 — Завтрак.</b></li><li><b>09:00 — Утренний развод на плацу.</b></li><li><b>10:00 - 14:00 — Занятия / Рабочки.</b></li><li><b>14:00 — Обед.</b></li><li><b>19:00 — Ужин.</b></li><li><b>21:00 — Просмотр новостей («Время»).</b></li><li><b>21:30 — Вечерняя поверка.</b></li><li><b>22:00 — Отбой.</b></li></ul>" },
+                { title: "🗣 Армейский сленг ч.1", text: "<ul><li><b>Дух (Бесплотный)</b> — солдат до присяги. Нет прав.</li><li><b>Дух</b> — солдат до полугода службы. Тяжелая работа.</li><li><b>Слон (Фазан/Черпак)</b> — отслуживший полгода. Жизнь легче.</li><li><b>Дед</b> — до приказа менее 100 дней. Авторитет.</li><li><b>Дембель</b> — солдат после Приказа МО РФ.</li><li><b>Шакал</b> — офицер/прапорщик с плохим отношением (не говори вслух).</li><li><b>Контрабас</b> — контрактник.</li></ul>" },
+                { title: "🧹 Армейский сленг ч.2", text: "<ul><li><b>ПХД (Парково-хозяйственный день)</b> — суббота. Пенная вечеринка с мылом на полу.</li><li><b>Взлётка</b> — центральный коридор казармы.</li><li><b>Располога</b> — спальное помещение (шконки).</li><li><b>Каптёрка</b> — комната хранения личных вещей и формы.</li><li><b>ЧИПОК</b> — магазин-кафе на территории части.</li><li><b>Кантик</b> — идеально ровный прямой угол (на кровати, на снегу).</li><li><b>Рожать</b> — достать что-либо во что бы то ни стало.</li></ul>" },
+                { title: "🪂 ВДВ и Спецназ", text: "<b>ВДВ (Крылатая пехота)</b><br>Девиз: «Никто, кроме нас!». Феноменальная выносливость, марш-броски по 10-15 км с выкладкой, прыжки из Ил-76 и Ан-2. Голубой берет нужно заслужить.<br><br><b>Спецназ (ГРУ)</b><br>Девиз: «Выше нас только звёзды». Элита разведки. Скрытность, тактика, стрельбы из всех видов оружия. Срочники попадают редко (нужна категория А1)." },
+                { title: "⚓ ВМФ и ВКС", text: "<b>ВМФ (Флот)</b><br>Девиз: «С нами Бог и Андреевский флаг!» Корабли и Морпехи. Язык: камбуз, гальюн, кубрик, трап. Морпехи — элита: «Там, где мы, там — победа!».<br><br><b>ВКС (Космические Силы)</b><br>Девиз: «Всё выше и выше!» Срочники не летают. Обслуживание аэродромов, радары, ПВО. Физо меньше, но нужно техническое мышление и много караулов." },
+                { title: "🚀 РВСН и Мотострелки", text: "<b>РВСН (Ракетные Войска)</b><br>Девиз: «После нас — тишина.» Ядерный щит. Высочайшая секретность. Боевые Дежурства (БД) под землей или с комплексами «Ярс». Дисциплина жесткая.<br><br><b>Сухопутные (Мотострелки/Танкисты)</b><br>«Царица полей». Самый массовый род. Полигоны, стрельбы, вождение БМП/БТР, рытье окопов. Полевая романтика, запах пороха и грязь." },
+                { title: "💂‍♂️ Наряды и Караул", text: "<b>Виды нарядов:</b><br><ul><li><b>Дневальный по роте:</b> Стоит на «тумбочке». Следит за порядком, подает команды. Спят 4 часа.</li><li><b>Дежурный по роте:</b> Сержант. Руководит дневальными.</li><li><b>Караул (Гарнизонный):</b> Вооруженная охрана складов. ОЧЕНЬ серьезно. Спать на посту — уголовка. У часового боевые патроны.</li><li><b>Наряд по столовой:</b> Чистка тонн картошки, мытье огромных котлов.</li></ul>" },
+                { title: "🧠 Психология выживания", text: "<b>1. Коллектив важнее всего.</b> В армии нет «Я», есть «МЫ». Никогда не воруй у своих и не стучи. Помогай товарищам.<br><b>2. Психологическая броня.</b> На тебя будут кричать. Они кричат на «солдата», чтобы приучить к подчинению. Не дерзи, выдохни, выполни приказ.<br><b>3. Не забывай о доме.</b> Связь с девушкой и родными — это твои силы. Пиши бумажные письма. Они возвращают в реальность." }
+            ],
+            girl: [
+                { title: "❤️ 1. Первый день", text: "Этот день нужно просто пережить. Разреши себе плакать в подушку, съесть ведро мороженого и пересматривать видео. Завтра утром ты берешь себя в руки. Ему там в тысячу раз тяжелее и страшнее, чем тебе. Ему нужна твоя уверенность." },
+                { title: "📞 2. Телефонные звонки", text: "Смартфоны под запретом. Кнопочные выдают в воскресенье на 15 минут. <b>Держи лицо.</b> Не рыдай в трубку со словами «забери меня». Рассказывай смешные истории про общих друзей, про кота." },
+                { title: "🚫 3. О чем молчать", text: "Никогда не рассказывай о: 1. Бытовых проблемах (сломался кран). 2. Ссорах с подругами. 3. Мужском внимании (фраза «ко мне подошли знакомиться» включит у него дикую паранойю)." },
+                { title: "💌 4. Бумажные письма", text: "В армии письмо — это высшая ценность. Пиши много и часто. Вложи распечатанные фотографии. Попшикай письмо духами. Оставь след от помады. Он будет перечитывать его каждую ночь с фонариком." },
+                { title: "📦 5. Идеальная посылка", text: "Посылка общая, он будет делиться. <b>Класть:</b> Сгущенку (в мягких пакетах), Сникерсы, леденцы, печенье, толстые черные носки, пластыри, пасту Теймурова, одноразовые бритвы, сырокопченую колбасу." },
+                { title: "❌ 6. Что НЕ класть", text: "Посылки вскрывают офицеры. <b>Запрещено:</b> 1. Алкоголь. 2. Скоропорт: фрукты, домашние пирожки, вареную колбасу. 3. Ножницы, ножи. 4. Таблетки (кроме пластырей и мазей)." },
+                { title: "🤯 7. Синдром 'Почему не в сети?'", text: "Обещал позвонить, а уже вечер? В армии 1000 причин: рота накосячила, он в наряде, телефон сел (а розеток всего 3 на 100 человек). Доверяй. Позвонит, как только сможет." },
+                { title: "🎖 8. Присяга", text: "Присяга — через месяц после призыва. Это первый раз, когда вы увидитесь! Бронируй жилье заранее. Наготовь домашней еды (котлеты, отбивные). Оденься красиво, но удобно." },
+                { title: "🫂 9. Поведение на присяге", text: "Он похудел, обрит наголо, синяки от автомата. <b>НИ В КОЕМ СЛУЧАЕ</b> не причитай 'бедный мой'. Обними, скажи, что гордишься. В увольнительном просто корми его и дари ласку." },
+                { title: "📆 10. Как занять себя", text: "Время тянется медленно только тогда, когда ты ничего не делаешь. Составь жесткий график. Спортзал, права, подработка. Сделай так, чтобы вечером падать в кровать без сил." },
+                { title: "🤫 11. Ревность", text: "Любая фотка из клуба вызывает взрыв паранойи. Будь мудрее. Если идешь гулять — предупреди, пришли смешное фото. Дай ему уверенность, что он единственный." },
+                { title: "🤝 12. Его мама", text: "Его маме так же тяжело. Не конкурируйте! Звони ей раз в неделю. Если он позвонил тебе, а ей не успел — сразу напиши ей. Совместное ожидание сближает." },
+                { title: "🎁 13. Сюрпризы издалека", text: "Узнай точный адрес КПП. Во многих городах работают Яндекс.Еда или Деливери. В День рождения закажи ему пиццу прямо к воротам части! Это произведет фурор." },
+                { title: "🌗 14. Экватор (Полгода)", text: "Важнейший рубеж. Вы «заканчиваете» служить. Он переходит из «Духа» в «Слона». Физический прессинг спадает. Начните обсуждать, что будете делать, когда он вернется." },
+                { title: "✂️ 15. Сто дней до приказа", text: "Приказ выходит дважды в год: 27 марта и 27 сентября. За 100 дней 'деды' иногда бреют голову и отдают масло 'молодым'. Начинай готовить дембельский альбом!" },
+                { title: "🚀 16. Космос", text: "Последние 10 дней до дембеля. Самое тягучее время. В роте принято считать: «Десять! Девять! Восемь!». Твоя задача — готовиться: шарики, торт, плакаты." },
+                { title: "🧠 17. Он изменится", text: "Армия меняет психику. Он вернется более жестким, молчаливым. Это защитный панцирь. Не говори «Я тебя не узнаю». Окружи лаской, и панцирь растает." },
+                { title: "🏠 18. Адаптация дома", text: "Шок свободы. Он будет просыпаться в 6 утра, его будут бесить толпы в ТЦ. Не тащи его по клубам. Дай неделю отлежаться на диване." },
+                { title: "🎉 19. Встреча дембеля", text: "Узнай, в чем он приедет: 'парадка' или 'гражданка'. Закажи бенто-торт. Договорись с друзьями встречать на перроне. Прыжок ему на шею — обязателен!" },
+                { title: "📖 20. Дембельский альбом", text: "Сделай альбом сама! Распечатай скрины переписок, скрины с видеозвонков, вклей билеты с присяги. Напиши трогательные комментарии." },
+                { title: "💅 21. Твоя жизнь", text: "Ожидание — это не тюрьма. Встречайся с подругами, ходи в кино. Парню приятнее смотреть на фото счастливой девушки, чем на заплаканную страдалицу." },
+                { title: "🏥 22. Госпиталь", text: "В армии болеют все. Если он в госпитале — не паникуй! В армии это санаторий. Там тепло, нормальная еда и часто выдают телефоны." },
+                { title: "📱 23. Социальные сети", text: "Твой профиль — его окно в мир. Делай милые подписи «Жду моего 🪖❤️». Для него это публичное признание твоей верности." },
+                { title: "🏃‍♂️ 24. Увальнительные", text: "Временный выход за пределы части. Если отпустили — снимите квартиру. САМОЕ ВАЖНОЕ: верните его на КПП за 15 минут до назначенного времени." },
+                { title: "🍕 25. Армейский голод", text: "Первый месяц дома он будет есть всё. Парень будет сметать по 3 тарелки борща. Просто держи холодильник полным." },
+                { title: "💼 26. Учебка vs Боевая", text: "Первые 3-5 месяцев — «Учебка» (жесткий устав). Затем «Боевая часть». Там служба обычно идет спокойнее, телефон достать проще." },
+                { title: "🗣 27. Мат", text: "Он впитает эту культуру. Не падай в обморок, если по возвращении будет проскакивать мат. Мягко напоминай: «Ты дома»." },
+                { title: "💸 28. Финансы", text: "Платят копейки. Они уходят на пену, нитки и сникерсы. Не жди подарков из армии. Будь готова подкидывать ему по 500 рублей." },
+                { title: "🔮 29. Стройте планы", text: "Обсуждайте первый день после дембеля. Куда поедете отдыхать? Планирование светлого будущего помогает пережить армейское настоящее." },
+                { title: "👑 30. Ты — героиня", text: "Дождаться парня — это Поступок. Вы пройдете огромную проверку на прочность. Этот год стоил каждой секунды. Всё будет хорошо!" }
+            ],
+            advice: [
+                { title: "💡 Совет 1: Саморазвитие", text: "«Когда он ушел, хотелось плакать. Потом я поняла: этот год — отпуск для саморазвития! Записалась на курсы, начала бегать. Когда он вернулся, обалдел от того, какой я стала. Вкладывайте время в себя!»" },
+                { title: "💡 Совет 2: Письма", text: "«Не ленитесь писать письма от руки! Мой служил там, где телефоны выдавали раз в 2 недели. Я писала каждые 3 дня обо всем, вкладывала чай. Он привез эти письма затертые до дыр. Говорил, они пахли домом.»" },
+                { title: "💡 Совет 3: Без паники", text: "«Не звонит в воскресенье? Это не значит, что разлюбил. Рота в наряде, телефон сел или сержант забрал телефоны за косяк. Дышите ровно. Позвонит, как только сможет!»" },
+                { title: "💡 Совет 4: Свекровь", text: "«Общайтесь с его мамой! Ей тоже тяжело. Если позвонил вам, а ей не успел — напишите ей, успокойте. Это сблизит вас с его семьей, станете родными людьми.»" },
+                { title: "💡 Совет 5: Экономь", text: "«Копите деньги. Дембельский праздник, торт, ваш первый совместный поход в ресторан потребуют бюджета. Лучше откладывать понемногу весь год.»" },
+                { title: "💡 Совет 6: Секретность", text: "«Не вываливайте подробности службы в соцсети. Не пишите номер части, не выкладывайте его фото с оружием. Лишние глаза создадут ему проблемы с командирами.»" },
+                { title: "💡 Совет 7: Режим", text: "«Не сидите в телефоне до 3 ночи, ожидая сообщения. Высыпайтесь! Нервная и невыспавшаяся девушка — плохая поддержка для солдата.»" },
+                { title: "💡 Совет 8: Мелочи в посылке", text: "«Сгущенка — хорошо, но маленькое письмо, спрятанное под обертку шоколадки, или смешная распечатанная мем-фотка — это просто бесценно для его настроения.»" },
+                { title: "💡 Совет 9: Планы", text: "«Постоянно обсуждайте, что сделаете ПЕРВЫМ делом, когда он сойдет с перрона. Мечтайте о поездке, ремонте. Это дает им силы служить дальше.»" },
+                { title: "💡 Совет 10: Гордость", text: "«Никогда не стыдитесь, что парень в армии. Это достойный путь. Гордитесь им, говорите ему об этом. И он будет чувствовать себя супер-героем даже на чистке картошки!»" }
+            ]
+        };
+
         let currentBook = 'army', currentPage = 0;
-        function openBook() { document.getElementById('book-modal').style.display = 'flex'; renderPage(); }
+        function openBook() { document.getElementById('book-modal').style.display = 'flex'; renderPage(); tg.HapticFeedback.impactOccurred('medium'); }
         function closeBook() { document.getElementById('book-modal').style.display = 'none'; }
-        function switchBook(t) { currentBook = t; currentPage = 0; ['army','girl','advice'].forEach(v => document.getElementById('book-tab-'+v).classList.toggle('active', v===t)); renderPage(); }
-        function renderPage() { const p = bookData[currentBook]; document.getElementById('book-title').innerText = p[currentPage].title; document.getElementById('book-content').innerHTML = p[currentPage].text; }
-        function nextPage() { if (currentPage < bookData[currentBook].length - 1) { currentPage++; renderPage(); } }
-        function prevPage() { if (currentPage > 0) { currentPage--; renderPage(); } }
+        function switchBook(t) { currentBook = t; currentPage = 0; ['army','girl','advice'].forEach(v => document.getElementById('book-tab-'+v).classList.toggle('active', v===t)); renderPage(); tg.HapticFeedback.impactOccurred('light'); }
+        function renderPage() { const p = bookData[currentBook]; document.getElementById('book-title').innerText = p[currentPage].title; document.getElementById('book-content').innerHTML = p[currentPage].text; document.getElementById('book-page-num').innerText = `${currentPage + 1} / ${p.length}`; document.querySelector('.book-page-container').scrollTop = 0; }
+        function nextPage() { if (currentPage < bookData[currentBook].length - 1) { currentPage++; renderPage(); tg.HapticFeedback.impactOccurred('light'); } }
+        function prevPage() { if (currentPage > 0) { currentPage--; renderPage(); tg.HapticFeedback.impactOccurred('light'); } }
 
         function syncAll() { 
             let wData = { boy: [], girl: [] }; try { wData = JSON.parse(localStorage.getItem('w')) || { boy: [], girl: [] }; } catch(e) {}
